@@ -5,7 +5,7 @@ if(!isset($_SESSION))
     session_start(); 
 } 
 // error_reporting(E_ALL & ~E_NOTICE);
-$db = mysqli_connect('localhost', 'root', '', 'BIP');
+$db = mysqli_connect('3.27.67.148', 'bip_root', 'Eric137456', 'bip_BIP');
 // Check connection
 if (!$db) {
     die("Connection failed: " . mysqli_connect_error());

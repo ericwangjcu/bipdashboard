@@ -1,6 +1,6 @@
 <?php 
     session_start(); 
-    $db = mysqli_connect('localhost', 'root', '', 'BIP');
+    $db = mysqli_connect('3.27.67.148', 'bip_root', 'Eric137456', 'bip_BIP');
     if (!$db) {
         die("Connection failed: " . mysqli_connect_error());
     }
