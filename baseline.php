@@ -1046,6 +1046,9 @@
                         case "BIP":
                             subset = setvalues;
                             break;
+                        case "SRA":
+                            subset = setvalues;
+                            break;             
                         case "FARMACIST":
                             for (let i=0;i<setvalues.length;i++){                             
                                 var nameArr = setvalues[i][2].split('_');

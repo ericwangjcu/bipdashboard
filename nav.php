@@ -58,13 +58,15 @@
 				<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
 					<img src=
 					<?php 
-						if($_SESSION['role'] == 0){	
-							echo "man.png";
-						}
-						else
-						{
-							echo "farmer.png";
-						}
+					    
+					   echo "{$_SESSION['username']}.png";
+				// 		if($_SESSION['role'] == 0){	
+				// 			echo "man.png";
+				// 		}
+				// 		else
+				// 		{
+				// 			echo "farmer.png";
+				// 		}
 					?>                                
 					class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-light">
 					<?php 

@@ -208,6 +208,9 @@
             case "BIP":
                 subset = setvalues;
                 break;
+            case "SRA":
+                subset = setvalues;
+                break;             
             case "FARMACIST":
                 findsubset("FARMACIST");
                 break;
@@ -523,6 +526,9 @@
                         case "BIP":
                             subset = setvalues;
                             break;
+                        case "SRA":
+                            subset = setvalues;
+                            break;                            
                         case "FARMACIST":
                             findsubset("FARMACIST");
                             break;
