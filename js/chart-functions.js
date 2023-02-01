@@ -661,82 +661,6 @@ function createline(c, x, y, xname, yname, yunits, s){
       
     
 };
-function createcomparison(c, x,xname, y, yname, z, zname, n, s, ss){    
-    Highcharts.chart(c, {
-
-        chart: {
-            type: 'boxplot',
-            style: {
-                fontFamily: 'Poppins'
-            },   
-            height: ss, 
-        },
-    
-        title: {
-            text: s
-        },
-    
-        legend: {
-            enabled: false
-        },
-    
-        xAxis: {
-            categories: [s],
-            labels: {
-                style: {
-                    fontSize: '16px'
-                },
-                enabled: false
-            } 
-        },
-    
-        yAxis: {
-            title: {
-                text: n,style: {
-                    fontSize: '16px'
-                }
-            },labels: {
-                style: {
-                    fontSize: '16px'
-                }
-            } 
-        },
-        plotOptions: {
-            boxplot: {
-                lineWidth: 3,
-            },
-        },        
-        series: [{
-            name: xname,
-            data: [
-                x
-            ],
-            animation: false
-        },{
-            name: yname,
-            data: [
-                y
-            ],
-            animation: false
-        },{
-            name: zname,
-            data: [
-                z
-            ],
-            animation: false
-        }],
-        exporting: {
-            enabled: false
-        },
-        credits: {
-            enabled: false
-        },
-        legend: {
-            enabled: true
-        }
-    
-    });
-};
 function createnewcomparison(c,x,y,yname,yunits,height){  
     var seriesdata = [];
     for (let i=0; i<x.length;i++){
@@ -930,6 +854,37 @@ function createstackedbars(c,x,y,ss){
         legend: {
             enabled: true
         },
+        
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    yAxis: {
+                        labels: {
+                            enabled: true
+                        },
+                        title:{
+                            text: null
+                        }
+                    },
+                    plotOptions: {
+                        series: {
+                            borderWidth: 0,
+                            pointWidth: 12,
+                        }
+                    },
+                    xAxis: {
+                        labels: {
+                            style: {
+                                fontSize: '10px'
+                            }
+                        } 
+                    },
+                }
+            }]
+        }
     });
 
 }
