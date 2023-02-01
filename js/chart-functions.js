@@ -238,6 +238,9 @@ function createpiechart(c, d, e ,f, t,s){
                 maxWidth: 700
             },
             chartOptions: {
+                chart:{
+                    height: 1.5*s
+                },
                 legend: {
                     enabled: true,
                     layout: 'center',
