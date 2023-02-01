@@ -1,22 +1,74 @@
-
 var pieColors = (function () {
     var colors = [],
         base = Highcharts.getOptions().colors[7],
         i;
 
     for (i = 6; i > 0; i -= 1) {
-        // Start out with a darkened base color (negative brighten), and end
-        // up with a much brighter color
-        colors.push(Highcharts.color(base).brighten((i - 4) / 6).get());
+       colors.push(Highcharts.color(base).brighten((i - 4) / 6).get());
     }
     return colors;
-}());    
+});    
 
+// Highcharts.setOptions({
+//     colors: ['#F66D44', '#FEAE65', '#E6F69D', '#AADEA7', '#64C2A6', '#2D87BB', '#7982B9', '#A5C1DC', '#E9F6FA']
+// });
+// Highcharts.setOptions({
+//     colors: ['#003F5C', '#58508D', '#BC5090', '#FF6361', '#FFA600', '#F66D44', '#FEAE65', '#E6F69D', '#AADEA7']
+// });
+function createtreemap(c, d, e ,f, t,s){
+    var counts = {};
+    for (const num of d) {
+      counts[num] = counts[num] ? counts[num] + 1 : 1;
+    }    
+    const iterator = Object.keys(counts);      
+  
+    var dataset = [];
+    var index = 0;
+    for (const key of iterator) {
+        dataset[index] = {name: key,
+                value: counts[key],
+                color: Highcharts.getOptions().colors[index]};
+        index++;
+
+    }  
+
+    Highcharts.chart(c, {
+        series: [{
+            type: 'treemap',
+            data: dataset
+        }],
+        title: {
+            text: ''
+        },
+        legend: {
+            enabled: true
+        },
+        plotOptions: {
+            treemap: {
+                dataLabels: {
+                    formatter: function () {
+                        return '<b>Name : ' + this.point.name + '</b> ' +
+                            '<br/>' +
+                            '<b>Value :' + this.point.value + '</b> ' +
+                            '<br/>';
+                    },
+                    color: 'white',
+                    style:{
+                        fontSize: '20px',
+                      },
+                },
+            }
+        },
+        exporting: {
+            enabled: false
+        },
+        credits: {
+            enabled: false
+        },
+    });
+
+}
 function createpiechart(c, d, e ,f, t,s){
-
-    // Make monochrome colors
-
-
     var counts = {};
     for (const num of d) {
       counts[num] = counts[num] ? counts[num] + 1 : 1;
@@ -80,17 +132,14 @@ function createpiechart(c, d, e ,f, t,s){
       index ++;
     }  
     
-  
-  
     new Highcharts.chart(c, {
     chart: {
         type: 'pie',
-      height: s,
-      style: {
-        fontFamily: 'Poppins'
+        height: s,
+        style: {
+            fontFamily: 'Poppins'
     },      
-        // marginLeft: -50,
-        // margin: [0,160,0,0]
+        
     },
     title: {
         text: "",
@@ -98,9 +147,9 @@ function createpiechart(c, d, e ,f, t,s){
           fontSize: '16px'
         }
     },
-    // tooltip: {
-    //     pointFormat: '{series.name}: <b>{point.percentage:.1f}%, {point.y}</b>'
-    // },  
+    
+    
+    
     accessibility: {
         point: {
             valueSuffix: '%'
@@ -110,25 +159,15 @@ function createpiechart(c, d, e ,f, t,s){
         pie: {
             allowPointSelect: true,
             cursor: 'pointer',
-            // size: 500,
-
+            borderWidth: 8,
+			borderColor: '#fff',            
             dataLabels: {
                 enabled: true,
-                //borderRadius: 8,
-                //backgroundColor: 'rgba(252, 255, 197, 0.7)',
-                //shadow: true,               
-                //format: '{point.name}:<br>{point.percentage:.1f} %<br>Count: {point.y}',
                 formatter: function(){
                     var sn = this.point.name.length > 10 ? this.point.name.substring(0, 10) + '..' : this.point.name;
                     return String(sn + "<br>" + this.point.percentage.toFixed(0) + "%" + "<br>" + text2 + ": " + this.point.y);
-                    // for (let i=0;i<loc.length;i++){
-                    //     if (this.point.index == loc[i]){
-                    //         return String(anno[i]);
-                    //     }
-                    // }
-
                 },
-                //distance: 10,
+                
                 style:{
                   fontSize: '14px',
                   fontWeight: 'thin',
@@ -138,28 +177,10 @@ function createpiechart(c, d, e ,f, t,s){
         },
         series: {
             colorByPoint: true,
-            //colors: pieColors,
             animation: false
         }
     },
-    // legend: {
-    //     // align: 'right',
-    //     // verticalAlign: 'middle',
-    //     // layout: 'vertical',
-    //     // x: 0,
-    //     // y: 0,        
-    //     enabled: true,
-    //     useHTML: true,
-    //     labelFormatter: function() {
-    //         // console.log(this);
-    //         var shortname = this.name.length > 10 ? this.name.substring(0, 10) + '...' : this.name;
-    //         return  shortname + " " + t + ":" + (this.y * 100 / this.total).toFixed(0) + "%  Total:" + this.y;
-    //     },
-    //     itemStyle:{
-    //         fontSize: "16px",
-    //         fontWeight: 'thin',
-    //     },
-    // },
+   
     legend: {
         layout: 'vertical',
         verticalAlign: 'middle',
@@ -194,7 +215,7 @@ function createpiechart(c, d, e ,f, t,s){
       },{
         name: t,
         minPointSize: 10,
-        innerSize: '50%',
+        innerSize: '60%',
         zMin: 0, 
         keys: ['name', 'y', 'z', 'id'],
         data: dataset
@@ -204,7 +225,7 @@ function createpiechart(c, d, e ,f, t,s){
           name: "Total",
           y: d.length,
         }, ]
-      },],
+      }],
     credits: {
       enabled: false
       },
@@ -214,17 +235,34 @@ function createpiechart(c, d, e ,f, t,s){
       responsive: {
         rules: [{
             condition: {
-                maxWidth: 600
+                maxWidth: 700
             },
             chartOptions: {
-                chart:{
-                    height: 1.2*s,
-                },
                 legend: {
-                    align: 'center',
+                    enabled: false,
+                    layout: 'center',
                     verticalAlign: 'bottom',
-                    layout: 'horizontal'
-                },
+                    align: 'left',
+                    symbolRadius: 2,
+                    useHTML: true,
+                    labelFormatter: function() {
+                      var shortname = this.name.length > 10 ? this.name.substring(0, 10) + '..' : this.name;
+                      if (this.name === t) {
+                        return `<span style="min-width: 200px; display:inline-block; border-bottom: 1px solid #b2b2b2;">
+                                    <span style="float:left; font-size:16px;">${this.name}</span></span>
+                                <span style="min-width: 80px; display:inline-block; border-bottom: 1px solid #b2b2b2;">
+                                    <span style="float:left; font-size:16px;">${text1}</span>
+                                    <span style="float:right; font-size:16px;">%</span>
+                                </span>`
+                      }
+                      return `<span style="min-width: 200px; display:inline-block; border-bottom: 1px solid #ccc;">
+                      <span style="float:left; font-size:16px; font-weight:normal" >${shortname}</span></span>
+                      <span style="min-width: 80px; display:inline-block; border-bottom: 1px solid #ccc;">
+                      <span style="float:left; font-size:16px;">${this.y}</span>
+                      <span style="float:right; font-size:16px;">${(this.y * 100 / this.total).toFixed(0)}</span>
+                      </span>`
+                    }
+                  },
                 yAxis: {
                     labels: {
                         align: 'left',
@@ -233,6 +271,31 @@ function createpiechart(c, d, e ,f, t,s){
                     },
                     title: {
                         text: null
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        borderWidth: 8,
+                        borderColor: '#fff',            
+                        dataLabels: {
+                            enabled: true,
+                            formatter: function(){
+                                var sn = this.point.name.length > 10 ? this.point.name.substring(0, 10) + '..' : this.point.name;
+                                return String(sn + "<br>" + this.point.percentage.toFixed(0) + "%" + "<br>" + text2 + ": " + this.point.y);
+                            },
+                            
+                            style:{
+                              fontSize: '10px',
+                              fontWeight: 'thin',
+                            },
+                        },
+                        showInLegend: true,
+                    },
+                    series: {
+                        colorByPoint: true,
+                        animation: false
                     }
                 },
                 subtitle: {
@@ -249,7 +312,7 @@ function createpiechart(c, d, e ,f, t,s){
   
   };
 function createbasicbar(c, d, e, f, t, xt, s, dist){
-    // console.log(d);
+    
     var m1 = Math.max.apply(Math, d);
     var m2 = Math.min.apply(Math, d);
     var range = m1 - m2;
@@ -408,16 +471,14 @@ function createbasicbar(c, d, e, f, t, xt, s, dist){
                 pointWidth: 50,
                 dataLabels: {
                     enabled: true,
-                    // borderRadius: 8,
-                    // backgroundColor: 'rgba(252, 255, 197, 0.7)',
                     shadow: true,                       
                     style: {
                         fontSize: '16px',
                         fontWeight: 'thin',
                     },
                     formatter: function(){
-                        //console.log(loc);
-                        //console.log(this.point.index);
+                        
+                        
                         if (loc.length > 0){
                             for (let i=0;i<loc.length;i++){
                                 if (this.point.index == loc[i]){
@@ -439,7 +500,7 @@ function createbasicbar(c, d, e, f, t, xt, s, dist){
         },
         series: [{
             colorByPoint: true,
-            //colors: pieColors,            
+            
             name: '',
             keys: ['y', 'id'],
             data: count.map((v, i) => ([v, String(i)]))               
@@ -448,79 +509,52 @@ function createbasicbar(c, d, e, f, t, xt, s, dist){
             type:'spline',
             visible: true,
             data:  count
-            //color: 'rgba(204,204,255,.85)'
+            
         }],
         exporting: {
             enabled: false
         },
         credits: {
             enabled: false
-            },
-
-    });
-};
-function createhistogram(c, data, header){
-
-    var d = [];
-    var ind = 0;
-    for (let j = 0; j < data.length; j++){
-        if (data[j] !== undefined)
-        {
-            d[ind] = Number(data[j]);
-            ind ++;
-        }
-    }
-    // console.log(d);
-
-    Highcharts.chart(c, {
-        title: {
-            text: ''
         },
-    
-        xAxis: [{
-            title: { text: header },
-            alignTicks: true
-        }, {
-            title: { text: 'Count' },
-            alignTicks: true,
-            opposite: true
-        }],
-    
-        yAxis: [{
-            title: { text: header }
-        }, {
-            title: { text: 'Count' },
-            opposite: true
-        }],
-    
-        plotOptions: {
-            histogram: {
-                accessibility: {
-                    point: {
-                        valueDescriptionFormat: '{index}. {point.x:.3f} to {point.x2:.3f}, {point.y}.'
-                    }
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    title: {
+                        text: null,
+                    },
+                    yAxis: {
+                        labels: {
+                            enabled: false
+                        },
+                        title: {
+                            text: null,
+                        }
+                    },
+                    plotOptions: {
+                        series: {
+                            borderWidth: 0,
+                            pointWidth: 12,
+                        }
+                    },
+                    xAxis: {
+                        labels: {
+                            style: {
+                                fontSize: '10px'
+                            }
+                        },
+                        title: {
+                            text: null
+                        },      
+                    },
                 }
-            }
-        },
-    
-        series: [{
-            name: 'Count',
-            type: 'histogram',
-            xAxis: 1,
-            yAxis: 1,
-            baseSeries: 's1',
-            zIndex: -1
-        }, {
-            name: header,
-            type: 'scatter',
-            data: d,
-            id: 's1',
-            marker: {
-                radius: 1.5
-            }
-        }]
+            }]
+        }
+
     });
-  
 };
 function createline(c, x, y, xname, yname, yunits, s){
 
@@ -547,7 +581,7 @@ function createline(c, x, y, xname, yname, yunits, s){
         meanX = jStat(arrHeight).mean();
         b = r * (sy / sx);
         a = meanY - meanX * b;
-        //Set up a line
+        
         let y1, y2, x1, x2;
         x1 = jStat.min(arrHeight);
         x2 = jStat.max(arrHeight);
