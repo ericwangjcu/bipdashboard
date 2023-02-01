@@ -530,6 +530,9 @@ function createbasicbar(c, d, e, f, t, xt, s, dist){
                     yAxis: {
                         labels: {
                             enabled: true
+                        },
+                        title:{
+                            text: null
                         }
                     },
                     plotOptions: {
@@ -732,6 +735,39 @@ function createcomparison(c, x,xname, y, yname, z, zname, n, s, ss){
         legend: {
             enabled: true
         },
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    title: {
+                        text: null,
+                    },
+                    yAxis: {
+                        labels: {
+                            enabled: true
+                        },
+                        title:{
+                            text: null
+                        }
+                    },
+                    plotOptions: {
+                        series: {
+                            borderWidth: 0,
+                            pointWidth: 12,
+                        }
+                    },
+                    xAxis: {
+                        labels: {
+                            style: {
+                                fontSize: '10px'
+                            }
+                        } 
+                    },
+                }
+            }]
+        }
     
     });
 };

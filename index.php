@@ -89,7 +89,7 @@
     }
     function addcard(header,size, number){
         const newDiv1 = document.createElement("div");
-        newDiv1.className = "col-12 col-md-12" + " col-xl-" + size;  
+        newDiv1.className = "col-12 col-md-12 col-sm-12" + " col-xl-" + size;  
         
         if (number > 1){
             addtext(header);
