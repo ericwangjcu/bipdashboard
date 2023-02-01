@@ -279,7 +279,7 @@ function createpiechart(c, d, e ,f, t,s){
                         cursor: 'pointer',
                         borderWidth: 8,
                         borderColor: '#fff',    
-                        center: [100,0],  
+                        center: [120,60],  
                         dataLabels: {
                             enabled: false,
                             formatter: function(){
