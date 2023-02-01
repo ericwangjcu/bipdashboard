@@ -279,7 +279,6 @@ function createpiechart(c, d, e ,f, t,s){
                         cursor: 'pointer',
                         borderWidth: 8,
                         borderColor: '#fff',    
-                        center: [135,110],  
                         dataLabels: {
                             enabled: false,
                             formatter: function(){
@@ -812,9 +811,6 @@ function createnewcomparison(c,x,y,yname,yunits,height){
                     maxWidth: 500
                 },
                 chartOptions: {
-                    title: {
-                        text: null,
-                    },
                     yAxis: {
                         labels: {
                             enabled: true
