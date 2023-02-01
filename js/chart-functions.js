@@ -238,14 +238,14 @@ function createpiechart(c, d, e ,f, t,s){
                 maxWidth: 700
             },
             chartOptions: {
-                chart:{
-                    height: 1.5*s
-                },
+                // chart:{
+                //     height: 1.5*s
+                // },
                 legend: {
                     enabled: true,
                     layout: 'center',
                     verticalAlign: 'bottom',
-                    align: 'left',
+                    align: 'center',
                     symbolRadius: 2,
                     useHTML: true,
                     labelFormatter: function() {
