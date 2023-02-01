@@ -239,7 +239,7 @@ function createpiechart(c, d, e ,f, t,s){
             },
             chartOptions: {
                 legend: {
-                    enabled: false,
+                    enabled: true,
                     layout: 'center',
                     verticalAlign: 'bottom',
                     align: 'left',
