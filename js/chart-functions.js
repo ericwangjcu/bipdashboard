@@ -280,7 +280,7 @@ function createpiechart(c, d, e ,f, t,s){
                         borderWidth: 8,
                         borderColor: '#fff',            
                         dataLabels: {
-                            enabled: true,
+                            enabled: false,
                             formatter: function(){
                                 var sn = this.point.name.length > 10 ? this.point.name.substring(0, 10) + '..' : this.point.name;
                                 return String(sn + "<br>" + this.point.percentage.toFixed(0) + "%" + "<br>" + text2 + ": " + this.point.y);
