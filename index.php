@@ -89,7 +89,7 @@
     }
     function addcard(header,size, number){
         const newDiv1 = document.createElement("div");
-        newDiv1.className = "col-12 col-md-12 col-sm-12" + " col-xl-" + size;  
+        newDiv1.className = "col-12 col-sm-12 col-md" + size + " col-xl-" + size;  
         
         if (number > 1){
             addtext(header);
@@ -102,7 +102,7 @@
 
         for (let i=0;i<number;i++){
             const newDiv2 = document.createElement("div");
-            newDiv2.className = "col-12 col-sm-" + size * 2 + " col-md" + size + " col-xl-" + size; 
+            newDiv2.className = "col-12 col-sm-12 col-md" + size + " col-xl-" + size; 
 
             const card = document.createElement("div");
             card.className = "card";
