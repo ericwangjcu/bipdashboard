@@ -278,7 +278,8 @@ function createpiechart(c, d, e ,f, t,s){
                         allowPointSelect: true,
                         cursor: 'pointer',
                         borderWidth: 8,
-                        borderColor: '#fff',            
+                        borderColor: '#fff',    
+                        center: [100,0],  
                         dataLabels: {
                             enabled: false,
                             formatter: function(){
@@ -528,10 +529,7 @@ function createbasicbar(c, d, e, f, t, xt, s, dist){
                     },
                     yAxis: {
                         labels: {
-                            enabled: false
-                        },
-                        title: {
-                            text: null,
+                            enabled: true
                         }
                     },
                     plotOptions: {
@@ -545,10 +543,7 @@ function createbasicbar(c, d, e, f, t, xt, s, dist){
                             style: {
                                 fontSize: '10px'
                             }
-                        },
-                        title: {
-                            text: null
-                        },      
+                        } 
                     },
                 }
             }]
