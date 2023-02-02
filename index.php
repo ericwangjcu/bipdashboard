@@ -353,7 +353,7 @@
     }
     function addstatcard(header, value, text){
         const newDiv1 = document.createElement("div");
-        newDiv1.className = "col-4 col-xl-4 col-md-12 col-sm-12";
+        newDiv1.className = "col-xl-6 col-md-12 col-sm-12";
         newDiv1.id = header;
 
         const card1 = document.createElement("div");
