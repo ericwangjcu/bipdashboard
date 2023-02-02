@@ -91,9 +91,9 @@
         const newDiv1 = document.createElement("div");
         newDiv1.className = "col-12 col-sm-12 col-md" + size + " col-xl-" + size;  
         
-        if (number > 1){
-            addtext(header);
-        }
+        // if (number > 1){
+        addtext(header);
+        // }
 
         const newDiv0 = document.createElement("div");
         newDiv0.className = "row"; 
