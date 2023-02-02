@@ -74,8 +74,7 @@
 			}
 </style>
 </head>
-<script src="js/app.js"></script>
-<script src="js/datatables.js"></script>
+
 
 
 

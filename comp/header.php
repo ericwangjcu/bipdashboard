@@ -46,6 +46,9 @@
 <script src="https://code.highcharts.com/modules/coloraxis.js"></script>
 <script src="js/chart-functions.js"></script> 
 <script src="js/card-functions.js"></script>
+
+<script src="js/app.js"></script>
+<script src="js/datatables.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
 
 <style>
