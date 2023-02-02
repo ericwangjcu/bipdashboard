@@ -468,8 +468,7 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        conosle.log("loaded");
-        // Datatables Responsive
+       // Datatables Responsive
         $("#datatables-reponsive").DataTable({
             responsive: true,
         });			
