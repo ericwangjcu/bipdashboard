@@ -1,12 +1,10 @@
+<?php include('comp/userauth.php') ?>
 <!DOCTYPE html>
 <html lang="en">
-<?php include('getfarms.php') ?>
-
+<?php include('server/getfarms.php') ?>
 <head>
-<?php include('header.php')?>
+<?php include('comp/header.php')?>
 <script src="https://unpkg.com/read-excel-file@5.x/bundle/read-excel-file.min.js"></script>
-<!-- <script src="./read-excel-file_files/prism.js.download"></script>
-<script src="./read-excel-file_files/promise-polyfill.min.js.download"></script> -->
 <style>
     #input
     {
@@ -291,7 +289,7 @@
     
 
 		<div class="main">
-        <?php include('nav.php')?>
+        <?php include('comp/nav.php')?>
 
 			<main class="content">
 				<div class="container-fluid p-0">
@@ -379,44 +377,6 @@
 
             <div class="row">
             <h1 class="h3 mb-3" style="display:none" id="head""><strong>Property</strong> Information</h1>
-            <!-- <div class="col-12 col-lg-12 col-xxl-12 d-flex">
-                <div class="card flex-fill">
-                    <table class="table table-hover my-0  table-striped" id="propertytable" style="display:none">
-                        <thead>
-                            <tr>
-                              <th>Owner</th>
-                              <th>Farm Productivity Group</th>
-                              <th>Farm No.</th>
-                              <th>Property Size</th>
-                              <th>Lat. Long.</th>
-                              <th>Water Supply Authority</th>
-                              <th>Water Source</th>
-                            </tr>
-                        </thead>
-                    </table>                
-                </div>
-            </div> -->
-
-            <!-- <div class="col-12 col-lg-12 col-xxl-12 d-flex">
-                <div class="card flex-fill">
-                    <table class="table table-hover my-0  table-striped" id="pumptable" style="display:none">
-                        <thead>
-                            <tr>
-                              <th>Pump Name</th>
-                              <th>Pump Make</th>
-                              <th>Motor Make</th>
-                              <th>Motor KW</th>
-                              <th>Pump Type</th>
-                              <th>Water Source</th>
-                              <th>VFD</th>
-                              <th>Flow Rate</th>
-                              <th>Tariff</th>
-                              <th>NMI</th>
-                            </tr>
-                        </thead>
-                    </table>      
-                </div>
-            </div> -->
 
             <div class="col-12 col-lg-12 col-xxl-12 d-flex">
                 <div class="card flex-fill">
@@ -495,7 +455,7 @@
 				</div>
 			</main>
 
-            <?php include('footer.php')?>
+            <?php include('comp/footer.php')?>
 		</div>
 	</div>
 

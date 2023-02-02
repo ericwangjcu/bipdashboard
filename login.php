@@ -1,4 +1,4 @@
-<?php include('server.php') ?>
+<?php include('server/user.php') ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +21,7 @@
 
 	<style>
 	body  {
-	background-image: url("welcome.jpg");
+	background-image: url("img/welcome.jpg");
 	background-color: #ffffff;
 	background-repeat: no-repeat;
 	}
@@ -31,42 +31,39 @@
 
 <body>
 <main >
-		<div class="container d-flex flex-column">
-			<div class="row vh-100">
-				<div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
-					<div class="d-table-cell align-middle">			
-						<div class="text-center mt-4">
-						<img src="logo_W.png" width=80% />
-							<h1  style="color:white"></h1>
-							<br/>
-						</div>
-						<div class="card">
-							<div class="card-body">
-								<div class="m-sm-4">	 
-									<form method="post" action="login.php">
-										<?php include('errors.php'); ?>
-										<div class="mb-3">
-											<label class="form-label">Username</label>
-											<input class="form-control form-control-lg" type="text" name="username" placeholder="Enter your username" />
-										</div>		
-										<div class="mb-3">
-											<label class="form-label">Password</label>
-											<input class="form-control form-control-lg" type="password" name="password" placeholder="Enter your password" />
-										</div>												
-										<div class="text-center mt-3">
-											<button type="submit" class="btn btn-lg btn-primary" name="login_user">Login</button>
-										</div>
-										<!-- <p>
-											Not yet a member? <a href="register.php">Sign up</a>
-										</p> -->
-									</form>
-								</div>
+	<div class="container d-flex flex-column">
+		<div class="row vh-100">
+			<div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
+				<div class="d-table-cell align-middle">			
+					<div class="text-center mt-4">
+					<img src="img/logo_W.png" width=80% />
+						<h1  style="color:white"></h1>
+						<br/>
+					</div>
+					<div class="card">
+						<div class="card-body">
+							<div class="m-sm-4">	 
+								<form method="post" action="login.php">
+									<?php include('errors.php'); ?>
+									<div class="mb-3">
+										<label class="form-label">Username</label>
+										<input class="form-control form-control-lg" type="text" name="username" placeholder="Enter your username" />
+									</div>		
+									<div class="mb-3">
+										<label class="form-label">Password</label>
+										<input class="form-control form-control-lg" type="password" name="password" placeholder="Enter your password" />
+									</div>												
+									<div class="text-center mt-3">
+										<button type="submit" class="btn btn-lg btn-primary" name="login_user">Login</button>
+									</div>
+								</form>
 							</div>
 						</div>
-					<!-- </div>
+					</div>
 				</div>
 			</div>
 		</div>
-	</main> -->
+	</div>
+</main>
 </body>
 </html>
