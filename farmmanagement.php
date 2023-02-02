@@ -76,6 +76,18 @@
 </head>
 <script src="js/app.js"></script>
 <script src="js/datatables.js"></script>
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Datatables Responsive
+        $("#datatables-reponsive").DataTable({
+            responsive: true,
+        });			
+    });
+</script>	
+
 <script>
     function addElement (id, text, dv, tt, ss, index, interval) {
         const newDiv1 = document.createElement("div");
@@ -459,25 +471,6 @@
 		</div>
 	</div>
 
-
-
-	<script>
-		document.addEventListener("DOMContentLoaded", function() {
-			// Datatables Responsive
-			$("#datatables-reponsive").DataTable({
-				responsive: true,
-			});
-			$("#datatables-reponsive1").DataTable({
-				responsive: true
-			});	
-			$("#datatables-reponsive2").DataTable({
-				responsive: true
-			});	
-			$("#datatables-reponsive3").DataTable({
-				responsive: true
-			});					
-		});
-	</script>	
 
 </body>
 
