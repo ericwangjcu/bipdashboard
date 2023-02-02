@@ -1,4 +1,4 @@
-<?php include('server.php') ?>
+<?php include('server/user.php') ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +21,7 @@
 
 	<style>
 	body  {
-	background-image: url("welcome.jpg");
+	background-image: url("comp/welcome.jpg");
 	background-color: #cccccc;
 	}
 </style>	
