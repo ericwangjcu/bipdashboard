@@ -74,7 +74,8 @@
 			}
 </style>
 </head>
-
+<script src="js/app.js"></script>
+<script src="js/datatables.js"></script>
 <script>
     function addElement (id, text, dv, tt, ss, index, interval) {
         const newDiv1 = document.createElement("div");
@@ -458,8 +459,7 @@
 		</div>
 	</div>
 
-	<script src="js/app.js"></script>
-    <script src="js/datatables.js"></script>
+
 
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {
@@ -478,14 +478,6 @@
 			});					
 		});
 	</script>	
-    <script>
-        $(function () {
-            $('nav li a').filter(function () {
-                return this.href === location.href;
-            }).addClass('active');
-        });
-    </script>
-
 
 </body>
 

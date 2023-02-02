@@ -3,32 +3,8 @@
 <html lang="en">
     <head>
         <?php include('comp/header.php')?>
-        <style>
-            .form-check-lg {
-            font-size: 150%;
-            }
-
-            .offcanvas {
-            width: 60%;
-            background: #f5f7fb;
-            }
-            .modal {
-                position: fixed;
-                width: 100%;
-                height: 100%;
-                top: 0;
-                left: 0;
-                background: rgb(0 0 0 / 70%);
-            }
-
-            .modal .chart {
-                height: 90%;
-                width: 90%;
-                max-width: none;
-            }
-        </style>
-    </head>
-
+    </head>  
+    
     <body>
         <div class="wrapper">   
             <div class="main">
@@ -49,6 +25,9 @@
                 
                 <main class="content">  
                     <div class="row">
+                        <script>
+                        createinfocard("", "text", "link", "image");
+                        </script>
                         <div class="col-12 col-md-12 col-lg-3 d-flex align-items-stretch">
                             <div class="card">
                                 <img class="card-img-top" src="img/baseline.png" alt="Unsplash">
@@ -65,15 +44,14 @@
                         <div class="col-12 col-md-12 col-lg-3 d-flex align-items-stretch">
                             <div class="card">
                                 <img class="card-img-top" src="img/dataanalytics.png" alt="Unsplash">
-                                    <div class="card-header">
-                                    <h2 class="mb-0">Data Analytics</h2>
-                                </div>
+                                <h2 class="card-header mb-0">Data Analytics</h2>
                                 <div class="card-body">
                                     <p class="card-text h4">View the comparison and patterns of the irrigation information on all BIP farms.</p>
                                 </div>
                                 <a href="datanalytics.php" class="btn btn-primary">View analytics</a>
                             </div>
                         </div>
+
                         <div class="col-12 col-md-12 col-lg-3 d-flex align-items-stretch">
                             <div class="card">
                                 <img class="card-img-top" src="img/benchmark.png" alt="Unsplash">
@@ -86,6 +64,7 @@
                                 <a href="benchmark.php" class="btn btn-primary btn-lg">View benchmark</a>
                             </div>
                         </div>
+
                         <div class="col-12 col-md-12 col-lg-3 d-flex align-items-stretch">
                             <div class="card">
                                 <img class="card-img-top" src="img/data.png" alt="Unsplash">
@@ -98,10 +77,13 @@
                                 <a href="farmmanagement.php" class="btn btn-primary btn-lg">View raw baseline data</a>
                             </div>
                         </div>
+
                         <hr />
                         <div class="text-center my-4">
                             <h1 class="card-text h1 text-danger">Frequently asked questions</h1>
                         </div>
+
+
                         <div class="row">
                             <div class="col-md-5 col-sm-6 ms-auto d-flex align-items-stretch">
                                 <div class="card">
