@@ -76,17 +76,6 @@
 </head>
 
 
-
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Datatables Responsive
-        $("#datatables-reponsive").DataTable({
-            responsive: true,
-        });			
-    });
-</script>	
-
 <script>
     function addElement (id, text, dv, tt, ss, index, interval) {
         const newDiv1 = document.createElement("div");
@@ -472,5 +461,18 @@
 
 
 </body>
+<script src="js/app.js"></script>
+<script src="js/datatables.js"></script>
 
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        conosle.log("loaded");
+        // Datatables Responsive
+        $("#datatables-reponsive").DataTable({
+            responsive: true,
+        });			
+    });
+</script>	
 </html>
