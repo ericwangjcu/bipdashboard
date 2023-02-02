@@ -21,13 +21,13 @@
 				<a class="nav-link text-white" href="index.php">Dashboard</a>
 			</li>				
 			<li class="nav-item">
-				<a class="nav-link text-white" href="datanalytics.php">Data Analytics</a>
+				<a class="nav-link text-white" href="datanalytics.php">Analytics</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link text-white" href="benchmark.php">Benchmark</a>
 			</li>	
 			<li class="nav-item">
-				<a class="nav-link text-white" href="farmmanagement.php">Baseline</a>
+				<a class="nav-link text-white" href="farmmanagement.php">Data</a>
 			</li>					
 
 		</ul>
