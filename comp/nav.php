@@ -15,6 +15,9 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 		<ul class="navbar-nav ">
 			<li class="nav-item">
+				<a class="nav-link text-white" href="home.php">Home</a>
+			</li>		
+			<li class="nav-item">
 				<a class="nav-link text-white" href="index.php">Dashboard</a>
 			</li>				
 			<li class="nav-item">

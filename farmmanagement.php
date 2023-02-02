@@ -454,22 +454,18 @@
         </div>             
 				</div>
 			</main>
-
             <?php include('comp/footer.php')?>
 		</div>
 	</div>
 
 	<script src="js/app.js"></script>
-  <script src="js/datatables.js"></script>
+    <script src="js/datatables.js"></script>
+
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {
 			// Datatables Responsive
 			$("#datatables-reponsive").DataTable({
 				responsive: true,
-                // searching: false,
-                // "pageLength": 20,
-                // "info": false,
-                // "lengthChange": false,
 			});
 			$("#datatables-reponsive1").DataTable({
 				responsive: true
@@ -482,13 +478,13 @@
 			});					
 		});
 	</script>	
-  <script>
-    $(function () {
-        $('nav li a').filter(function () {
-            return this.href === location.href;
-        }).addClass('active');
-    });
-</script>
+    <script>
+        $(function () {
+            $('nav li a').filter(function () {
+                return this.href === location.href;
+            }).addClass('active');
+        });
+    </script>
 
 
 </body>
