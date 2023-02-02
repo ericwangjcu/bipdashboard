@@ -669,6 +669,7 @@ function createnewcomparison(c,x,y,yname,yunits,height){
     for (let i=0; i<x.length;i++){
         seriesdata[i] = {
             name: x[i],
+            pointWidth: 50,
             data: [
                 y[i]
             ],
