@@ -4,7 +4,6 @@
     <head>
         <?php include('comp/header.php')?>
     </head>  
-    
     <body>
         <div class="wrapper">   
             <div class="main">
@@ -171,6 +170,8 @@
                                 </div>
                             </div>
                         </div>
+
+
                         <div class="row">
                             <div class="col-md-10 col-sm-10 mx-auto">
                                 <div class="card">

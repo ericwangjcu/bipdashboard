@@ -1,3 +1,10 @@
+<style>
+    .img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    }
+</style>
 <footer class="footer">
     <div class="container-fluid">
         <div class="row text-muted">
@@ -9,7 +16,7 @@
                 </br>
                 
                 <div class=" mx-auto d-flex justify-content-center align-items-center h-60">
-                    <img src="img/partner.jpg" class="img-responsive" alt="Responsive image" height="120">
+                    <img src="img/partner.jpg" class="img" alt="Responsive image" height="100">
                 </div>
                 </br>
                 </br>

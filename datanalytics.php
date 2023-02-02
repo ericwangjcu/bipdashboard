@@ -630,20 +630,7 @@
             adddashboarditem(33);
             adddashboarditem(34);
             adddashboarditem(35);
-            
-                
-            // for (let i=1;i<33;i++){
-            //     if(i == 5 && dashboardshown[i] == 1){
-            //         addtext("Baseline");
-            //     }
-            //     if(i == 19 && dashboardshown[i] == 1){
-            //         addtext("Irrigation");
-            //     } 
-            //     if(i == 27 && dashboardshown[i] == 1){
-            //         addtext("Energy & Cost");
-            //     }                                             
-            //     adddashboarditem(i);
-            // }        
+ 
                
 		});
 

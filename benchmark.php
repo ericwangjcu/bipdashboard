@@ -29,12 +29,7 @@
         newDiv4.className = "row";
 
         const col = document.createElement("div");
-        col.className = "col-2";
-
-        
-        
-        
-        
+        col.className = "col-xl-2 col-md-4 col-sm-12";
 
         for (let i=0;i<1;i++){            
            
@@ -121,6 +116,7 @@
                 badge.className = "badge rounded-pill bg-danger";
             }           
             badge.innerText = score[i];
+
             if (i > 0){
                 mb.appendChild(badge);
                 colauto.appendChild(mb);
@@ -141,7 +137,7 @@
         newDiv4.appendChild(col);    
 
         const col1 = document.createElement("div");
-        col1.className = "col-5"; 
+        col1.className = "col-xl-5 col-md-8 col-sm-12 ";
         var row1 = document.createElement("div");   
         row1.className = "row";
 
@@ -151,7 +147,7 @@
         row1.appendChild(textrow);   
 
         const col1_1 = document.createElement("div");
-        col1_1.className = "col-6";  
+        col1_1.className = "col-xl-6  col-md-6 col-sm-12 ";
 
         for (let i=5;i<8;i++){  
       
@@ -204,7 +200,7 @@
         } 
         row1.appendChild(col1_1); 
         const col1_2 = document.createElement("div");
-        col1_2.className = "col-6";     
+        col1_2.className = "col-l-6  col-md-6 col-sm-12 ";
         
 
         for (let i=8;i<11;i++){         
@@ -260,7 +256,7 @@
         newDiv4.appendChild(col1);    
 
         const col3 = document.createElement("div");
-        col3.className = "col-5";      
+        col3.className = "col-xl-5 col-md-8 col-sm-12 ";
         row1 = document.createElement("div");   
         row1.className = "row";
 
@@ -269,7 +265,7 @@
         textrow.innerText = "Energy & Cost"; 
         row1.appendChild(textrow);      
         const col2_1 = document.createElement("div");
-        col2_1.className = "col-6"; 
+        col2_1.className = "col-xl-6  col-md-6 col-sm-12 ";
 
         for (let i=11;i<14;i++){     
             const card = document.createElement("div");
@@ -321,7 +317,7 @@
         } 
         row1.appendChild(col2_1);
         const col2_2 = document.createElement("div");
-        col2_2.className = "col-6";  
+        col2_2.className = "col-xl-6  col-md-6 col-sm-12 ";
         for (let i=14;i<infor.length;i++){     
             const card = document.createElement("div");
             card.className = "card";
@@ -1110,18 +1106,18 @@
                         }  
 
                         createnewcard(farminfor,infor,score);
-                        for (let j=0;j<subset.length;j++){
-                            if (subset[j][2] == farminfor[0]){
-                                setinfor[0] = subset[j][5];
-                                setinfor[1] = subset[j][14];
-                                setinfor[2] = subset[j][9];
-                                setinfor[3] = subset[j][10];
-                                setinfor[4] = subset[j][23];
-                                setinfor[5] = subset[j][28];
-                                setinfor[6] = subset[j][33];
-                                createchildcard(setinfor,setn,farminfor[0]);
-                            }
-                        }
+                        // for (let j=0;j<subset.length;j++){
+                        //     if (subset[j][2] == farminfor[0]){
+                        //         setinfor[0] = subset[j][5];
+                        //         setinfor[1] = subset[j][14];
+                        //         setinfor[2] = subset[j][9];
+                        //         setinfor[3] = subset[j][10];
+                        //         setinfor[4] = subset[j][23];
+                        //         setinfor[5] = subset[j][28];
+                        //         setinfor[6] = subset[j][33];
+                        //         createchildcard(setinfor,setn,farminfor[0]);
+                        //     }
+                        // }
 
                     }
                     
