@@ -107,12 +107,12 @@
             const card = document.createElement("div");
             card.className = "card";
 
-            if (number <= 1){
-                const cardjeader = document.createElement("div");
-                cardjeader.className = "card-header h3";
-                cardjeader.innerText = header;
-                card.appendChild(cardjeader);
-            }
+            // if (number <= 1){
+            //     const cardjeader = document.createElement("div");
+            //     cardjeader.className = "card-header h3";
+            //     cardjeader.innerText = header;
+            //     card.appendChild(cardjeader);
+            // }
 
 
             const cardbody = document.createElement("div");
