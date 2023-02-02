@@ -58,7 +58,7 @@
                                 <div class="card-body">
                                     <p class="card-text h4">View the aggregated information collated on all BIP farms, such as soil, crop, area, row spacing.</p>
                                 </div>
-                                <a href="index.php" class="btn btn-primary btn-lg">View Baseline</a>
+                                <a href="index.php" class="btn btn-primary btn-lg">View dashboard</a>
                             </div>
                         </div>
                         
@@ -71,7 +71,7 @@
                                 <div class="card-body">
                                     <p class="card-text h4">View the comparison and patterns of the irrigation information on all BIP farms.</p>
                                 </div>
-                                <a href="datanalytics.php" class="btn btn-primary">View data analytics</a>
+                                <a href="datanalytics.php" class="btn btn-primary">View analytics</a>
                             </div>
                         </div>
                         <div class="col-12 col-md-12 col-lg-3 d-flex align-items-stretch">
@@ -83,7 +83,7 @@
                                 <div class="card-body">
                                     <p class="card-text h4">Benchmark the irrigation of indiviudal farm.</p>
                                 </div>
-                                <a href="benchmark.php" class="btn btn-primary btn-lg">View Benchmark</a>
+                                <a href="benchmark.php" class="btn btn-primary btn-lg">View benchmark</a>
                             </div>
                         </div>
                         <div class="col-12 col-md-12 col-lg-3 d-flex align-items-stretch">
