@@ -34,7 +34,7 @@
         for (let i=0;i<1;i++){            
            
             const card = document.createElement("div");
-            card.className = "card";
+            card.className = "card ";
             const cardbody = document.createElement("div");
             cardbody.className = "card-body";
             const row = document.createElement("div");

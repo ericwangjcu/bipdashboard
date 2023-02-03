@@ -9,12 +9,7 @@ var pieColors = (function () {
     return colors;
 });    
 
-// Highcharts.setOptions({
-//     colors: ['#F66D44', '#FEAE65', '#E6F69D', '#AADEA7', '#64C2A6', '#2D87BB', '#7982B9', '#A5C1DC', '#E9F6FA']
-// });
-// Highcharts.setOptions({
-//     colors: ['#003F5C', '#58508D', '#BC5090', '#FF6361', '#FFA600', '#F66D44', '#FEAE65', '#E6F69D', '#AADEA7']
-// });
+
 function createtreemap(c, d, e ,f, t,s){
     var counts = {};
     for (const num of d) {
@@ -67,6 +62,257 @@ function createtreemap(c, d, e ,f, t,s){
         },
     });
 
+};
+function createnestedpiechart(c, d, d1, e ,f, f1, t,s){
+    var counts = {};
+    for (const num of d) {
+      counts[num] = counts[num] ? counts[num] + 1 : 1;
+    }    
+    const iterator = Object.keys(counts);  
+
+    var counts1 = {};
+    for (const num of d1) {
+      counts1[num] = counts1[num] ? counts1[num] + 1 : 1;
+    }    
+    const iterator1 = Object.keys(counts1);  
+
+
+    var dataset = [];
+    var dataset1 = [];
+    var index = 0;
+    var index1 = 0;
+    var text1 = "CNT";
+    var text2 = "Count"
+    for (const key of iterator) {
+        dataset[index] = {name: key + ": " + f,
+                y: counts[key],
+                z: 80,
+                id: index.toString()};
+        index ++;
+    }
+    for (const key of iterator1) {
+        dataset1[index1] = {name: key + ": " + f1,
+                y: counts1[key],
+                z: 80,
+                id: index1.toString()};
+        index1 ++;
+    }
+  
+    new Highcharts.chart(c, {
+        chart: {
+            type: 'pie',
+            height: s,
+            style: {
+                fontFamily: 'Poppins'
+        },      
+            
+        },
+        title: {
+            text: "",
+            style:{
+              fontSize: '16px'
+            }
+        },
+
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                borderWidth: 8,
+                borderColor: '#fff',            
+                dataLabels: {
+                    enabled: true,
+                    formatter: function(){
+                        var sn = this.point.name.length > 10 ? this.point.name.substring(0, 10) + '..' : this.point.name;
+                        return String(sn + "<br>" + this.point.percentage.toFixed(0) + "%" + "<br>" + text2 + ": " + this.point.y);
+                    },
+                    
+                    style:{
+                    fontSize: '14px',
+                    fontWeight: 'thin',
+                    },
+                },
+                showInLegend: true,
+            },
+            series: {
+                colorByPoint: true,
+                animation: false
+            }
+        },   
+        
+        
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        }, 
+     
+        legend: {
+            layout: 'vertical',
+            verticalAlign: 'middle',
+            align: 'right',
+            symbolRadius: 2,
+            useHTML: true,
+            labelFormatter: function() {
+              var shortname = this.name.length > 12 ? this.name.substring(0, 12) + '..' : this.name;
+              if (this.name === t) {
+                return `<span style="min-width: 200px; display:inline-block; border-bottom: 1px solid #b2b2b2;">
+                            <span style="float:left; font-size:16px;">${this.name}</span></span>
+                        <span style="min-width: 80px; display:inline-block; border-bottom: 1px solid #b2b2b2;">
+                            <span style="float:left; font-size:16px;">${text1}</span>
+                            <span style="float:right; font-size:16px;">%</span>
+                        </span>`
+              }
+              if (this.name === "skip") {
+                return `</br></br>`
+              }
+              return `<span style="min-width: 200px; display:inline-block; border-bottom: 1px solid #ccc;">
+              <span style="float:left; font-size:16px; font-weight:normal" >${shortname}</span></span>
+              <span style="min-width: 80px; display:inline-block; border-bottom: 1px solid #ccc;">
+              <span style="float:left; font-size:16px;">${this.y}</span>
+              <span style="float:right; font-size:16px;">${(this.y * 100 / this.total).toFixed(0)}</span>
+              </span>`
+            }
+          },          
+        series: [{
+            center: [10000, 10000],
+            data: [{
+              name: t,
+              y: 0,
+            }, ]
+          },{
+            name: f,
+            minPointSize: 10,
+            size: '100%',
+            innerSize: '70%',
+            zMin: 0, 
+            keys: ['name', 'y', 'z', 'id'],
+            data: dataset,
+            dataLabels: {
+                alignTo: 'fixedOffset'
+            }
+        },{
+            center: [10000, 10000],
+            data: [{
+              name: "Total",
+              y: d.length,
+            }, ]
+          },{
+            center: [10000, 10000],
+            data: [{
+              name: "skip",
+              y: 1,
+            },],
+            colors: ["#FFFFFF"],
+        },{
+            name: f1,
+            minPointSize: 10,
+            size: '65%',
+            innerSize: '55%',
+            zMin: 0, 
+            keys: ['name', 'y', 'z', 'id'],
+            data: dataset1,
+            colors: ["#81CACF", "#E98841", "#E3D830", "#A6C46F",
+            "#894C7B", "#BA9765", "#7F7F7F", "#C3C3C3"],
+            dataLabels: {
+                alignTo: 'connectors'
+            }
+        },{
+            center: [10000, 10000],
+            data: [{
+              name: "Total",
+              y: d1.length,
+            }, ]
+          }],
+        credits: {
+          enabled: false
+        },
+        exporting: {
+              enabled: false
+        },
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 700
+                },
+                chartOptions: {
+                    // chart:{
+                    //     height: 1.5*s
+                    // },
+                    legend: {
+                        enabled: true,
+                        layout: 'center',
+                        verticalAlign: 'bottom',
+                        align: 'center',
+                        symbolRadius: 2,
+                        useHTML: true,
+                        labelFormatter: function() {
+                          var shortname = this.name.length > 10 ? this.name.substring(0, 10) + '..' : this.name;
+                          if (this.name === t) {
+                            return `<span style="min-width: 200px; display:inline-block; border-bottom: 1px solid #b2b2b2;">
+                                        <span style="float:left; font-size:16px;">${this.name}</span></span>
+                                    <span style="min-width: 80px; display:inline-block; border-bottom: 1px solid #b2b2b2;">
+                                        <span style="float:left; font-size:16px;">${text1}</span>
+                                        <span style="float:right; font-size:16px;">%</span>
+                                    </span>`
+                          }
+                          if (this.name === "skip") {
+                            return `</br></br>`
+                          }
+                          return `<span style="min-width: 200px; display:inline-block; border-bottom: 1px solid #ccc;">
+                          <span style="float:left; font-size:16px; font-weight:normal" >${shortname}</span></span>
+                          <span style="min-width: 80px; display:inline-block; border-bottom: 1px solid #ccc;">
+                          <span style="float:left; font-size:16px;">${this.y}</span>
+                          <span style="float:right; font-size:16px;">${(this.y * 100 / this.total).toFixed(0)}</span>
+                          </span>`
+                        }
+                      },
+                    yAxis: {
+                        labels: {
+                            align: 'left',
+                            x: 0,
+                            y: -5
+                        },
+                        title: {
+                            text: null
+                        }
+                    },
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            borderWidth: 8,
+                            borderColor: '#fff',    
+                            dataLabels: {
+                                enabled: false,
+                                formatter: function(){
+                                    var sn = this.point.name.length > 10 ? this.point.name.substring(0, 10) + '..' : this.point.name;
+                                    return String(sn + "<br>" + this.point.percentage.toFixed(0) + "%" + "<br>" + text2 + ": " + this.point.y);
+                                },
+                                
+                                style:{
+                                  fontSize: '10px',
+                                  fontWeight: 'thin',
+                                },
+                            },
+                            showInLegend: true,
+                        },
+                        series: {
+                            colorByPoint: true,
+                            animation: false
+                        }
+                    },
+                    subtitle: {
+                        text: null
+                    },
+                    credits: {
+                        enabled: false
+                    }
+                }
+            }]
+        }
+    }
+    )    
 }
 function createpiechart(c, d, e ,f, t,s){
     var counts = {};
@@ -148,8 +394,7 @@ function createpiechart(c, d, e ,f, t,s){
         }
     },
     
-    
-    
+ 
     accessibility: {
         point: {
             valueSuffix: '%'
@@ -766,7 +1011,7 @@ function createnewcomparison(c,x,y,yname,yunits,height){
     
     });
 };
-function createstackedbars(c,x,y,ss){
+function createstackedbars(c,x,y,t,ss){
     var counts = {};
     for (const num of x) {
         counts[num] = counts[num] ? counts[num] + 1 : 1;
@@ -809,7 +1054,7 @@ function createstackedbars(c,x,y,ss){
             height: ss,     
         },
         title: {
-            text: "",
+            text: t,
         },
         xAxis: {
             categories: iterator1,

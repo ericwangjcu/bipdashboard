@@ -34,6 +34,58 @@
 
 
 <script>   
+    function addgroup(header,size,cards){
+        const newDiv1 = document.createElement("div");
+        newDiv1.className = "col-12 col-md-12" + " col-xl-" + size + " d-flex align-items-stretch";
+        newDiv1.id = header;
+
+        const newDiv0 = document.createElement("div");
+        newDiv0.className = "row";
+
+        for (let i=0;i<cards.length;i++){
+            const card1 = document.createElement("div");
+            card1.className = "card";        
+            const cardheader1 = document.createElement("div");
+            cardheader1.className = "card-header h1";
+            cardheader1.innerText = cards[i];
+            card1.appendChild(cardheader1);
+
+            const cardbody = document.createElement("div");
+            cardbody.className = "card-body";
+
+            const container = document.createElement("div");
+            container.id = header + cards[i] + "body";
+
+            cardbody.appendChild(container);
+            card1.appendChild(cardbody);
+            newDiv0.appendChild(card1);
+        }
+        newDiv1.appendChild(newDiv0);
+
+        const currentDiv = document.getElementById("head");
+        let parentDiv = currentDiv.parentNode
+
+        parentDiv.insertBefore(newDiv1, currentDiv);        
+    }  
+    function createcard(header, value, text){
+        const currentDiv = document.getElementById(header);
+        let parentDiv = currentDiv.parentNode
+
+		let col6 = document.createElement('h1');
+		let col8 = document.createElement('span');
+        col8.className = 'h1 text-primary mt-2 mb-0';
+		col8.innerText = value;
+		let col9 = document.createElement('span');
+		col9.className = 'h1 text-muted mt-2 mb-0';
+		col9.innerText = "            " + text;
+		
+		
+		
+		col6.appendChild(col8);
+		col6.appendChild(col9);
+		
+        parentDiv.insertBefore(col6, currentDiv);  
+	};	
     function addElement (id, text, dv, tt, ss, index, interval,number) {
         const newDiv1 = document.createElement("div");
         newDiv1.className = "form-check form-switch form-check-lg";
@@ -318,8 +370,8 @@
             ["L/S","mm","%","KWh/ML","KWh/h","$/ML"]);
         } 
         if (type == 5){
-            createpiechart(header + "body0", data, tempdata,"Sets",short,500);
-            createpiechart(header + "body1", data1, tempdata,"Farms",short,500);
+            createnestedpiechart(header + "body0", data,  data1, tempdata,"Sets","Farms",short,500);
+
         }  
         if (type == 6){
             var x = [];
@@ -339,7 +391,7 @@
                 }
             }  
                                          
-            createstackedbars(header + "body0",x,y,500);
+            createstackedbars(header + "body0",x,y,setarray[14],500);
             var y = [];
             ind = 0;
             for (let i = 0; i < subset.length; i++) {
@@ -348,7 +400,7 @@
                     ind ++;                
                 }
             }        
-            createstackedbars(header + "body1",x,y,500);
+            createstackedbars(header + "body1",x,y, setarray[15],500);
         }                        
     }
     function addstatcard(header, value, text){
@@ -533,12 +585,10 @@
                             }).toFixed(0);
 
                         cards=["No. of Farms", "No. of Sets", "Total Area"];
-                        
+                        addgroup("test",3, cards);
                         for (let i=0;i<3;i++){
-                            
-                            addstatcard(cards[i], value[i],units[i])
+                            createcard("test" + cards[i] +"body",value[i],units[i]); 
                         }  
-
                     </script>
                 </div>                 
                 <div class="container-fluid p-0">
@@ -570,8 +620,8 @@
                                                     "Energy per Hour (kWh/h)","Energy Cost ($/kWh)","Energy Cost per ML ($/ML)","Energy Cost per Irrigation ($/ha/ML)","Area vs Irrigation", "Irrigation vs District","Irrigation vs Water Supply","District vs Water Supply"];
                                                     types = [5,2,2,2,2,0,0,0,0,0,1,1,0,1,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,1,2,3,4,6];
                                                     intervals = [0,2,2,2,2,0,0,0,0,0,10,100,0,1,0,0,0,10,0,10,1,2,1,20,1,10,10,100,20,10,0,10,5,0,0,0,0];
-                                                    gridsizes = [12,2,2,2,2,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,12,12,12,12];
-                                                    number = [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6,6,2];
+                                                    gridsizes = [9,2,2,2,2,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,12,12,12,12];
+                                                    number = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6,6,2];
                                                     newunits = ["","","","","","","","","","","","m","m","ha","","","","KW","","L/S","L/S/Cup","hrs","ML","mm","","mm","%","KWH","kWh/ML","kWh/h","$/kWh","$/ML","$/ha/ML",""];
                                                     
                                                     for (let i=0;i<33;i++){
@@ -630,7 +680,20 @@
             adddashboarditem(33);
             adddashboarditem(34);
             adddashboarditem(35);
- 
+            
+                
+            // for (let i=1;i<33;i++){
+            //     if(i == 5 && dashboardshown[i] == 1){
+            //         addtext("Baseline");
+            //     }
+            //     if(i == 19 && dashboardshown[i] == 1){
+            //         addtext("Irrigation");
+            //     } 
+            //     if(i == 27 && dashboardshown[i] == 1){
+            //         addtext("Energy & Cost");
+            //     }                                             
+            //     adddashboarditem(i);
+            // }        
                
 		});
 
