@@ -8,384 +8,13 @@
 </head>
 
 <script>   
-    function createscorecard(farminfo,infor,score){
-        const currentDiv = document.getElementById("item");
-        let parentDiv = currentDiv.parentNode
-
-        const newDiv1 = document.createElement("div");
-        newDiv1.className = "card border border-dark  bg-light  mb-3 bg-light";
-        
-        const newDiv2 = document.createElement("div");
-        newDiv2.setAttribute('data-toggle',"collapse");
-        newDiv2.setAttribute('data-target',"#" + farminfo[0]);
-        newDiv2.setAttribute('aria-expanded',"false");
-        newDiv2.setAttribute('aria-controls',farminfo[0]);
-
-        
-        const newDiv3 = document.createElement("div");
-        newDiv3.className = "card-body"; 
-
-        const newDiv4 = document.createElement("div");
-        newDiv4.className = "row";
-
-        const col = document.createElement("div");
-        col.className = "col-xl-2 col-md-4 col-sm-12";
-
-        for (let i=0;i<1;i++){            
-           
-            const card = document.createElement("div");
-            card.className = "card ";
-            const cardbody = document.createElement("div");
-            cardbody.className = "card-body";
-            const row = document.createElement("div");
-            row.className = "row";
-            const titlecol = document.createElement("div");
-            titlecol.className = "col";
-            const title = document.createElement("div");
-            title.className = "card-title";
-            title.innerText = infor[i];  
-            titlecol.appendChild(title);
-            row.appendChild(titlecol);          
-
-            cardbody.appendChild(row);
-
-            const text = document.createElement("h1");
-            text.innerText = farminfo[i];
-            cardbody.appendChild(text);
-
-            var mb = document.createElement("div");
-            mb.className = "mt-4 mb-0";
-            var name = document.createElement("span");
-            name.className = "h3 text-muted";
-            name.innerText = infor[1] + ":";       
-            var value = document.createElement("span");
-            value.className = "h3 text-primary";
-            value.innerText = farminfo[1]; 
-            mb.appendChild(name);   
-            mb.appendChild(value);         
-            cardbody.appendChild(mb);
-
-            
-
-            mb = document.createElement("div");
-            mb.className = "mt-4 mb-0";
-            name = document.createElement("span");
-            name.className = "h3 text-muted";
-            name.innerText = infor[2] + ":";       
-            value = document.createElement("span");
-            value.className = "h3 text-primary";
-            value.innerText = farminfo[2]; 
-            mb.appendChild(name);   
-            mb.appendChild(value);         
-            cardbody.appendChild(mb);
-
-            card.appendChild(cardbody);
-            col.appendChild(card);
-        } 
-
-        for (let i=3;i<5;i++){            
-            
-            
-            const card = document.createElement("div");
-            card.className = "card h";
-            const cardbody = document.createElement("div");
-            cardbody.className = "card-body";
-            const row = document.createElement("div");
-            row.className = "row";
-            const titlecol = document.createElement("div");
-            titlecol.className = "col";
-            const title = document.createElement("div");
-            title.className = "card-title";
-            title.innerText = infor[i];  
-            titlecol.appendChild(title);
-            row.appendChild(titlecol);
-
-
-            const colauto = document.createElement("div");
-            colauto.className = "col-auto";
-            const mb = document.createElement("div");
-            mb.className = "h1";
-            const badge = document.createElement("span");
-            if (score[i] < 100){
-                badge.className = "badge rounded-pill bg-success";
-            }
-            if (score[i] < 66){
-                badge.className = "badge rounded-pill bg-warning ";
-            } 
-            if (score[i] < 33){
-                badge.className = "badge rounded-pill bg-danger";
-            }           
-            badge.innerText = score[i];
-
-            if (i > 0){
-                mb.appendChild(badge);
-                colauto.appendChild(mb);
-                row.appendChild(colauto);
-            }
-            
-
-            cardbody.appendChild(row);
-
-            const text = document.createElement("h1");
-            text.innerText = farminfo[i];
-            cardbody.appendChild(text);
-
-
-            card.appendChild(cardbody);
-            col.appendChild(card);
-        }       
-        newDiv4.appendChild(col);    
-
-        const col1 = document.createElement("div");
-        col1.className = "col-xl-5 col-md-8 col-sm-12 ";
-        var row1 = document.createElement("div");   
-        row1.className = "row";
-
-        textrow = document.createElement("div");   
-        textrow.className = "col-12 h2 mt-4 mb-4";
-        textrow.innerText = "Water"; 
-        row1.appendChild(textrow);   
-
-        const col1_1 = document.createElement("div");
-        col1_1.className = "col-xl-6  col-md-6 col-sm-12 ";
-
-        for (let i=5;i<8;i++){  
-      
-            const card = document.createElement("div");
-            card.className = "card";
-            const cardbody = document.createElement("div");
-            cardbody.className = "card-body";
-            const row = document.createElement("div");
-            row.className = "row";
-            const titlecol = document.createElement("div");
-            titlecol.className = "col";
-            const title = document.createElement("div");
-            title.className = "card-title";
-            title.innerText = infor[i];  
-            titlecol.appendChild(title);
-            row.appendChild(titlecol);
-
-
-            const colauto = document.createElement("div");
-            colauto.className = "col-auto";
-            const mb = document.createElement("div");
-            mb.className = "h1";
-            const badge = document.createElement("span");
-            if (score[i] < 100){
-                badge.className = "badge rounded-pill bg-success";
-            }
-            if (score[i] < 66){
-                badge.className = "badge rounded-pill bg-warning ";
-            } 
-            if (score[i] < 33){
-                badge.className = "badge rounded-pill bg-danger";
-            }           
-            badge.innerText = score[i];
-            if (i > 0){
-                mb.appendChild(badge);
-                colauto.appendChild(mb);
-                row.appendChild(colauto);
-            }
-            
-
-            cardbody.appendChild(row);
-
-            const text = document.createElement("h1");
-            text.innerText = farminfo[i];
-            cardbody.appendChild(text);
-
-
-            card.appendChild(cardbody);
-            col1_1.appendChild(card);  
-        } 
-        row1.appendChild(col1_1); 
-        const col1_2 = document.createElement("div");
-        col1_2.className = "col-l-6  col-md-6 col-sm-12 ";
-        
-
-        for (let i=8;i<11;i++){         
-            const card = document.createElement("div");
-            card.className = "card";
-            const cardbody = document.createElement("div");
-            cardbody.className = "card-body";
-            const row = document.createElement("div");
-            row.className = "row";
-            const titlecol = document.createElement("div");
-            titlecol.className = "col";
-            const title = document.createElement("div");
-            title.className = "card-title";
-            title.innerText = infor[i];  
-            titlecol.appendChild(title);
-            row.appendChild(titlecol);
-
-
-            const colauto = document.createElement("div");
-            colauto.className = "col-auto";
-            const mb = document.createElement("div");
-            mb.className = "h1";
-            const badge = document.createElement("span");
-            if (score[i] < 100){
-                badge.className = "badge rounded-pill bg-success";
-            }
-            if (score[i] < 66){
-                badge.className = "badge rounded-pill bg-warning ";
-            } 
-            if (score[i] < 33){
-                badge.className = "badge rounded-pill bg-danger";
-            }           
-            badge.innerText = score[i];
-            if (i > 0){
-                mb.appendChild(badge);
-                colauto.appendChild(mb);
-                row.appendChild(colauto);
-            }
-            
-
-            cardbody.appendChild(row);
-
-            const text = document.createElement("h1");
-            text.innerText = farminfo[i];
-            cardbody.appendChild(text);
-
-
-            card.appendChild(cardbody);
-            col1_2.appendChild(card);  
-        }         
-        row1.appendChild(col1_2);
-        col1.appendChild(row1);
-        newDiv4.appendChild(col1);    
-
-        const col3 = document.createElement("div");
-        col3.className = "col-xl-5 col-md-8 col-sm-12 ";
-        row1 = document.createElement("div");   
-        row1.className = "row";
-
-        textrow = document.createElement("div");   
-        textrow.className = "col-12 h2 mt-4 mb-4";
-        textrow.innerText = "Energy & Cost"; 
-        row1.appendChild(textrow);      
-        const col2_1 = document.createElement("div");
-        col2_1.className = "col-xl-6  col-md-6 col-sm-12 ";
-
-        for (let i=11;i<14;i++){     
-            const card = document.createElement("div");
-            card.className = "card";
-            const cardbody = document.createElement("div");
-            cardbody.className = "card-body";
-            const row = document.createElement("div");
-            row.className = "row";
-            const titlecol = document.createElement("div");
-            titlecol.className = "col";
-            const title = document.createElement("div");
-            title.className = "card-title";
-            title.innerText = infor[i];  
-            titlecol.appendChild(title);
-            row.appendChild(titlecol);
-
-
-            const colauto = document.createElement("div");
-            colauto.className = "col-auto";
-            const mb = document.createElement("div");
-            mb.className = "h1";
-            const badge = document.createElement("span");
-            if (score[i] < 100){
-                badge.className = "badge rounded-pill bg-success";
-            }
-            if (score[i] < 66){
-                badge.className = "badge rounded-pill bg-warning ";
-            } 
-            if (score[i] < 33){
-                badge.className = "badge rounded-pill bg-danger";
-            }           
-            badge.innerText = score[i];
-            if (i > 0){
-                mb.appendChild(badge);
-                colauto.appendChild(mb);
-                row.appendChild(colauto);
-            }
-            
-
-            cardbody.appendChild(row);
-
-            const text = document.createElement("h1");
-            text.innerText = farminfo[i];
-            cardbody.appendChild(text);
-
-
-            card.appendChild(cardbody);
-            col2_1.appendChild(card);  
-        } 
-        row1.appendChild(col2_1);
-        const col2_2 = document.createElement("div");
-        col2_2.className = "col-xl-6  col-md-6 col-sm-12 ";
-        for (let i=14;i<infor.length;i++){     
-            const card = document.createElement("div");
-            card.className = "card";
-            const cardbody = document.createElement("div");
-            cardbody.className = "card-body";
-            const row = document.createElement("div");
-            row.className = "row";
-            const titlecol = document.createElement("div");
-            titlecol.className = "col";
-            const title = document.createElement("div");
-            title.className = "card-title";
-            title.innerText = infor[i];  
-            titlecol.appendChild(title);
-            row.appendChild(titlecol);
-
-
-            const colauto = document.createElement("div");
-            colauto.className = "col-auto";
-            const mb = document.createElement("div");
-            mb.className = "h1";
-            const badge = document.createElement("span");
-            if (score[i] < 100){
-                badge.className = "badge rounded-pill bg-success";
-            }
-            if (score[i] < 66){
-                badge.className = "badge rounded-pill bg-warning ";
-            } 
-            if (score[i] < 33){
-                badge.className = "badge rounded-pill bg-danger";
-            }           
-            badge.innerText = score[i];
-            if (i > 0){
-                mb.appendChild(badge);
-                colauto.appendChild(mb);
-                row.appendChild(colauto);
-            }
-            
-
-            cardbody.appendChild(row);
-
-            const text = document.createElement("h1");
-            text.innerText = farminfo[i];
-            cardbody.appendChild(text);
-
-
-            card.appendChild(cardbody);
-            col2_2.appendChild(card);  
-        }         
-        row1.appendChild(col2_2);
-        col3.appendChild(row1);
-        newDiv4.appendChild(col3);           
-
-        newDiv3.appendChild(newDiv4);    
-        newDiv2.appendChild(newDiv3);
-        newDiv1.appendChild(newDiv2);
-        parentDiv.insertBefore(newDiv1, currentDiv); 
-
-    }   
     function createparentcard(farminfo,infor,score){
         const currentDiv = document.getElementById("item");
         let parentDiv = currentDiv.parentNode
 
         const newDiv1 = document.createElement("div");
-        newDiv1.className = "card border border-dark  bg-light  mb-3 bg-light";
-        const cardjeader = document.createElement("div");
-        cardjeader.className = "card-header h3";
-        cardjeader.innerText = farminfo[0];
-        newDiv1.appendChild(cardjeader);    
+        newDiv1.className = "card bg-light  mb-3  mt-3";
+
 
         const newDiv2 = document.createElement("div");
         newDiv2.setAttribute('data-toggle',"collapse");
@@ -396,381 +25,79 @@
         
         const newDiv3 = document.createElement("div");
         newDiv3.className = "card-body"; 
-        newDiv3.id  = farminfo[0];
+        const cardjeader = document.createElement("h1");
+        cardjeader.className = "card-title h1";
+        cardjeader.innerText = farminfo[0];
+        newDiv3.appendChild(cardjeader);
 
+        const newDiv4 = document.createElement("container");
+        const newDiv5 = document.createElement("div");
+        newDiv5.className = "row";
+
+        for (let i=1;i<farminfo.length;i++){   
+            if (i==1 || i==2 || i==6 || i ==7 || i== 11 || i== 12){         
+                const col = document.createElement("div");
+                col.className = "col-xl-2 col-md-4 col-sm-12  d-flex align-items-stretch";            
+                
+                const card = document.createElement("div");
+                card.className = "card  w-100";
+                const cardbody = document.createElement("div");
+                cardbody.className = "card-body";
+
+                const row = document.createElement("div");
+                row.className = "row";
+                const titlecol = document.createElement("div");
+                titlecol.className = "col";
+
+                const title = document.createElement("div");
+                title.className = "card-title";
+                title.innerText = infor[i];  
+                cardbody.appendChild(title);
+
+                const text = document.createElement("h3");
+                text.className = "mt-2";
+                text.innerText = farminfo[i];
+                titlecol.appendChild(text);
+                row.appendChild(titlecol);
+                
+                const colauto = document.createElement("div");
+                colauto.className = "col-auto";
+                const mb = document.createElement("div");
+                mb.className = "h1";
+                const badge = document.createElement("span");
+
+
+                if (score[i] < 100){
+                badge.className = "badge rounded-pill bg-success";
+                }
+                if (score[i] < 66){
+                    badge.className = "badge rounded-pill bg-warning ";
+                } 
+                if (score[i] < 33){
+                    badge.className = "badge rounded-pill bg-danger";
+                }           
+                badge.innerText = score[i];
+                mb.appendChild(badge);
+                colauto.appendChild(mb);
+                row.appendChild(colauto);
+                
+
+                cardbody.appendChild(row);
+
+                card.appendChild(cardbody);
+                col.appendChild(card);
+                newDiv5.appendChild(col); 
+            }
+        }     
+        newDiv4.appendChild(newDiv5);
+           
+
+        newDiv3.appendChild(newDiv4);
         newDiv2.appendChild(newDiv3);
         newDiv1.appendChild(newDiv2);
         parentDiv.insertBefore(newDiv1, currentDiv); 
 
     }   
-    function createnewcard(farminfo,infor,score){
-        const currentDiv = document.getElementById("item");
-        let parentDiv = currentDiv.parentNode
-
-        const newDiv1 = document.createElement("div");
-        newDiv1.className = "card border border-dark  bg-light  mb-3 bg-light";
-        
-        const newDiv2 = document.createElement("div");
-        newDiv2.setAttribute('data-toggle',"collapse");
-        newDiv2.setAttribute('data-target',"#" + farminfo[0]);
-        newDiv2.setAttribute('aria-expanded',"false");
-        newDiv2.setAttribute('aria-controls',farminfo[0]);
-
-        
-        const newDiv3 = document.createElement("div");
-        newDiv3.className = "card-body"; 
-
-        const newDiv4 = document.createElement("div");
-        newDiv4.className = "row";
-
-        const col = document.createElement("div");
-        col.className = "col-xl-2 col-md-4 col-sm-12";
-
-        for (let i=0;i<1;i++){            
-           
-            const card = document.createElement("div");
-            card.className = "card ";
-            const cardbody = document.createElement("div");
-            cardbody.className = "card-body";
-            const row = document.createElement("div");
-            row.className = "row";
-            const titlecol = document.createElement("div");
-            titlecol.className = "col";
-            const title = document.createElement("div");
-            title.className = "card-title";
-            title.innerText = infor[i];  
-            titlecol.appendChild(title);
-            row.appendChild(titlecol);          
-
-            cardbody.appendChild(row);
-
-            const text = document.createElement("h1");
-            text.innerText = farminfo[i];
-            cardbody.appendChild(text);
-
-            var mb = document.createElement("div");
-            mb.className = "mt-4 mb-0";
-            var name = document.createElement("span");
-            name.className = "h3 text-muted";
-            name.innerText = infor[1] + ":";       
-            var value = document.createElement("span");
-            value.className = "h3 text-primary";
-            value.innerText = farminfo[1]; 
-            mb.appendChild(name);   
-            mb.appendChild(value);         
-            cardbody.appendChild(mb);
-
-            
-
-            mb = document.createElement("div");
-            mb.className = "mt-4 mb-0";
-            name = document.createElement("span");
-            name.className = "h3 text-muted";
-            name.innerText = infor[2] + ":";       
-            value = document.createElement("span");
-            value.className = "h3 text-primary";
-            value.innerText = farminfo[2]; 
-            mb.appendChild(name);   
-            mb.appendChild(value);         
-            cardbody.appendChild(mb);
-
-            card.appendChild(cardbody);
-            col.appendChild(card);
-        } 
-
-        for (let i=3;i<5;i++){            
-            
-            
-            const card = document.createElement("div");
-            card.className = "card h";
-            const cardbody = document.createElement("div");
-            cardbody.className = "card-body";
-            const row = document.createElement("div");
-            row.className = "row";
-            const titlecol = document.createElement("div");
-            titlecol.className = "col";
-            const title = document.createElement("div");
-            title.className = "card-title";
-            title.innerText = infor[i];  
-            titlecol.appendChild(title);
-            row.appendChild(titlecol);
-
-
-            const colauto = document.createElement("div");
-            colauto.className = "col-auto";
-            const mb = document.createElement("div");
-            mb.className = "h1";
-            const badge = document.createElement("span");
-            if (score[i] < 100){
-                badge.className = "badge rounded-pill bg-success";
-            }
-            if (score[i] < 66){
-                badge.className = "badge rounded-pill bg-warning ";
-            } 
-            if (score[i] < 33){
-                badge.className = "badge rounded-pill bg-danger";
-            }           
-            badge.innerText = score[i];
-
-            if (i > 0){
-                mb.appendChild(badge);
-                colauto.appendChild(mb);
-                row.appendChild(colauto);
-            }
-            
-
-            cardbody.appendChild(row);
-
-            const text = document.createElement("h1");
-            text.innerText = farminfo[i];
-            cardbody.appendChild(text);
-
-
-            card.appendChild(cardbody);
-            col.appendChild(card);
-        }       
-        newDiv4.appendChild(col);    
-
-        const col1 = document.createElement("div");
-        col1.className = "col-xl-5 col-md-8 col-sm-12 ";
-        var row1 = document.createElement("div");   
-        row1.className = "row";
-
-        textrow = document.createElement("div");   
-        textrow.className = "col-12 h2 mt-4 mb-4";
-        textrow.innerText = "Water"; 
-        row1.appendChild(textrow);   
-
-        const col1_1 = document.createElement("div");
-        col1_1.className = "col-xl-6  col-md-6 col-sm-12 ";
-
-        for (let i=5;i<8;i++){  
-      
-            const card = document.createElement("div");
-            card.className = "card";
-            const cardbody = document.createElement("div");
-            cardbody.className = "card-body";
-            const row = document.createElement("div");
-            row.className = "row";
-            const titlecol = document.createElement("div");
-            titlecol.className = "col";
-            const title = document.createElement("div");
-            title.className = "card-title";
-            title.innerText = infor[i];  
-            titlecol.appendChild(title);
-            row.appendChild(titlecol);
-
-
-            const colauto = document.createElement("div");
-            colauto.className = "col-auto";
-            const mb = document.createElement("div");
-            mb.className = "h1";
-            const badge = document.createElement("span");
-            if (score[i] < 100){
-                badge.className = "badge rounded-pill bg-success";
-            }
-            if (score[i] < 66){
-                badge.className = "badge rounded-pill bg-warning ";
-            } 
-            if (score[i] < 33){
-                badge.className = "badge rounded-pill bg-danger";
-            }           
-            badge.innerText = score[i];
-            if (i > 0){
-                mb.appendChild(badge);
-                colauto.appendChild(mb);
-                row.appendChild(colauto);
-            }
-            
-
-            cardbody.appendChild(row);
-
-            const text = document.createElement("h1");
-            text.innerText = farminfo[i];
-            cardbody.appendChild(text);
-
-
-            card.appendChild(cardbody);
-            col1_1.appendChild(card);  
-        } 
-        row1.appendChild(col1_1); 
-        const col1_2 = document.createElement("div");
-        col1_2.className = "col-l-6  col-md-6 col-sm-12 ";
-        
-
-        for (let i=8;i<11;i++){         
-            const card = document.createElement("div");
-            card.className = "card";
-            const cardbody = document.createElement("div");
-            cardbody.className = "card-body";
-            const row = document.createElement("div");
-            row.className = "row";
-            const titlecol = document.createElement("div");
-            titlecol.className = "col";
-            const title = document.createElement("div");
-            title.className = "card-title";
-            title.innerText = infor[i];  
-            titlecol.appendChild(title);
-            row.appendChild(titlecol);
-
-
-            const colauto = document.createElement("div");
-            colauto.className = "col-auto";
-            const mb = document.createElement("div");
-            mb.className = "h1";
-            const badge = document.createElement("span");
-            if (score[i] < 100){
-                badge.className = "badge rounded-pill bg-success";
-            }
-            if (score[i] < 66){
-                badge.className = "badge rounded-pill bg-warning ";
-            } 
-            if (score[i] < 33){
-                badge.className = "badge rounded-pill bg-danger";
-            }           
-            badge.innerText = score[i];
-            if (i > 0){
-                mb.appendChild(badge);
-                colauto.appendChild(mb);
-                row.appendChild(colauto);
-            }
-            
-
-            cardbody.appendChild(row);
-
-            const text = document.createElement("h1");
-            text.innerText = farminfo[i];
-            cardbody.appendChild(text);
-
-
-            card.appendChild(cardbody);
-            col1_2.appendChild(card);  
-        }         
-        row1.appendChild(col1_2);
-        col1.appendChild(row1);
-        newDiv4.appendChild(col1);    
-
-        const col3 = document.createElement("div");
-        col3.className = "col-xl-5 col-md-8 col-sm-12 ";
-        row1 = document.createElement("div");   
-        row1.className = "row";
-
-        textrow = document.createElement("div");   
-        textrow.className = "col-12 h2 mt-4 mb-4";
-        textrow.innerText = "Energy & Cost"; 
-        row1.appendChild(textrow);      
-        const col2_1 = document.createElement("div");
-        col2_1.className = "col-xl-6  col-md-6 col-sm-12 ";
-
-        for (let i=11;i<14;i++){     
-            const card = document.createElement("div");
-            card.className = "card";
-            const cardbody = document.createElement("div");
-            cardbody.className = "card-body";
-            const row = document.createElement("div");
-            row.className = "row";
-            const titlecol = document.createElement("div");
-            titlecol.className = "col";
-            const title = document.createElement("div");
-            title.className = "card-title";
-            title.innerText = infor[i];  
-            titlecol.appendChild(title);
-            row.appendChild(titlecol);
-
-
-            const colauto = document.createElement("div");
-            colauto.className = "col-auto";
-            const mb = document.createElement("div");
-            mb.className = "h1";
-            const badge = document.createElement("span");
-            if (score[i] < 100){
-                badge.className = "badge rounded-pill bg-success";
-            }
-            if (score[i] < 66){
-                badge.className = "badge rounded-pill bg-warning ";
-            } 
-            if (score[i] < 33){
-                badge.className = "badge rounded-pill bg-danger";
-            }           
-            badge.innerText = score[i];
-            if (i > 0){
-                mb.appendChild(badge);
-                colauto.appendChild(mb);
-                row.appendChild(colauto);
-            }
-            
-
-            cardbody.appendChild(row);
-
-            const text = document.createElement("h1");
-            text.innerText = farminfo[i];
-            cardbody.appendChild(text);
-
-
-            card.appendChild(cardbody);
-            col2_1.appendChild(card);  
-        } 
-        row1.appendChild(col2_1);
-        const col2_2 = document.createElement("div");
-        col2_2.className = "col-xl-6  col-md-6 col-sm-12 ";
-        for (let i=14;i<infor.length;i++){     
-            const card = document.createElement("div");
-            card.className = "card";
-            const cardbody = document.createElement("div");
-            cardbody.className = "card-body";
-            const row = document.createElement("div");
-            row.className = "row";
-            const titlecol = document.createElement("div");
-            titlecol.className = "col";
-            const title = document.createElement("div");
-            title.className = "card-title";
-            title.innerText = infor[i];  
-            titlecol.appendChild(title);
-            row.appendChild(titlecol);
-
-
-            const colauto = document.createElement("div");
-            colauto.className = "col-auto";
-            const mb = document.createElement("div");
-            mb.className = "h1";
-            const badge = document.createElement("span");
-            if (score[i] < 100){
-                badge.className = "badge rounded-pill bg-success";
-            }
-            if (score[i] < 66){
-                badge.className = "badge rounded-pill bg-warning ";
-            } 
-            if (score[i] < 33){
-                badge.className = "badge rounded-pill bg-danger";
-            }           
-            badge.innerText = score[i];
-            if (i > 0){
-                mb.appendChild(badge);
-                colauto.appendChild(mb);
-                row.appendChild(colauto);
-            }
-            
-
-            cardbody.appendChild(row);
-
-            const text = document.createElement("h1");
-            text.innerText = farminfo[i];
-            cardbody.appendChild(text);
-
-
-            card.appendChild(cardbody);
-            col2_2.appendChild(card);  
-        }         
-        row1.appendChild(col2_2);
-        col3.appendChild(row1);
-        newDiv4.appendChild(col3);           
-
-        newDiv3.appendChild(newDiv4);    
-        newDiv2.appendChild(newDiv3);
-        newDiv1.appendChild(newDiv2);
-        parentDiv.insertBefore(newDiv1, currentDiv); 
-
-    }
     function createchildcard(set,infor,id){
         const currentDiv = document.getElementById("item");
         let parentDiv = currentDiv.parentNode
@@ -1018,17 +345,15 @@
                             
                             sortarray = newarray.sort(function(a, b){return a - b});
                             
-                            console.log(sortarray);
+                            // console.log(sortarray);
                             let index = sortarray.indexOf(Number(farminfor[j]));
                             
                             
                             score[j] = ((index + 1) * 100 / newarray.length).toFixed(0);
                         }  
 
-                        for (let j=1;j<farminfor.length;j++){
-                            createparentcard(farminfor[j],infor[j],score[j]);
-                        }
-                        // createnewcard(farminfor,infor,score);
+                        createparentcard(farminfor,infor,score);
+
                         // for (let j=0;j<subset.length;j++){
                         //     if (subset[j][2] == farminfor[0]){
                         //         setinfor[0] = subset[j][5];
