@@ -384,7 +384,7 @@
         newDiv1.className = "card border border-dark  bg-light  mb-3 bg-light";
         const cardjeader = document.createElement("div");
         cardjeader.className = "card-header h3";
-        cardjeader.innerText = farminfo[1];
+        cardjeader.innerText = farminfo[0];
         newDiv1.appendChild(cardjeader);    
 
         const newDiv2 = document.createElement("div");
@@ -396,7 +396,7 @@
         
         const newDiv3 = document.createElement("div");
         newDiv3.className = "card-body"; 
-        newDiv3.id  = farminfo[1];
+        newDiv3.id  = farminfo[0];
 
         newDiv2.appendChild(newDiv3);
         newDiv1.appendChild(newDiv2);
