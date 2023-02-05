@@ -376,86 +376,13 @@
         parentDiv.insertBefore(newDiv1, currentDiv); 
 
     }
-    function createcard(farminfo,infor){
-        const currentDiv = document.getElementById("item");
-        let parentDiv = currentDiv.parentNode
-
-        const newDiv1 = document.createElement("div");
-        newDiv1.className = "card";
-        
-        const newDiv2 = document.createElement("div");
-        newDiv2.setAttribute('data-toggle',"collapse");
-        newDiv2.setAttribute('data-target',"#" + farminfo[0]);
-        newDiv2.setAttribute('aria-expanded',"false");
-        newDiv2.setAttribute('aria-controls',farminfo[0]);
-
-        
-        const newDiv3 = document.createElement("div");
-        newDiv3.className = "card-body"; 
-        
-
-        const newDiv10 = document.createElement("div");
-        newDiv10.className = "row";
-
-        for (let i=0;i<infor.length;i++){
-            
-            const newDiv6 = document.createElement("div");
-            newDiv6.className = "col-2";
-
-            const newDiv7 = document.createElement("h5");
-            newDiv7.className = "card-title";
-            newDiv7.innerText = infor[i];  
-            
-            newDiv6.appendChild(newDiv7);
-            newDiv10.appendChild(newDiv6);         
-        } 
-
-
-
-        for (let i=0;i<farminfo.length;i++){
-            
-            const newDiv4 = document.createElement("div");
-            newDiv4.className = "col-2";
-
-            if (i > 2){
-                const newDiv5 = document.createElement("h2");
-                
-                const newDiv7 = document.createElement("span");
-                newDiv7.className = "badge badge-primary-light";
-                newDiv7.innerText = farminfo[i];
-                newDiv5.appendChild(newDiv7);
-                newDiv4.appendChild(newDiv5);
-            }
-            else{
-                const newDiv5 = document.createElement("h2");
-                newDiv5.className = "mt-1 mb-2";
-                newDiv5.innerText = farminfo[i];
-                newDiv4.appendChild(newDiv5);
-            }
-
-            newDiv10.appendChild(newDiv4);       
-        } 
-
-        newDiv3.appendChild(newDiv10);
-        newDiv2.appendChild(newDiv3);
-        newDiv1.appendChild(newDiv2);
-        parentDiv.insertBefore(newDiv1, currentDiv); 
-    }
     function createchildcard(set,infor,id){
         const currentDiv = document.getElementById("item");
         let parentDiv = currentDiv.parentNode
 
-
-
         const newDiv4 = document.createElement("div");
         newDiv4.className = "collapse"; 
         newDiv4.id = id; 
-        
-        
-        
-        
-        
-             
         const newDiv1 = document.createElement("div");
         newDiv1.className = "card";
 
@@ -464,15 +391,12 @@
         const newDiv52 = document.createElement("div");
         newDiv52.className = "row";
 
-
         const newDiv51 = document.createElement("div");
         newDiv51.className = "col-10"; 
 
-        
         const newDiv3 = document.createElement("div");
         newDiv3.className = "row";
         
-
         for (let i=0;i<infor.length;i++){
             
             const newDiv6 = document.createElement("div");
@@ -546,411 +470,12 @@
         newDiv4.appendChild(newDiv1);
         parentDiv.insertBefore(newDiv4, currentDiv); 
     }
-    function creategrandchildcard(id,text){
-        const currentDiv = document.getElementById("item");
-        let parentDiv = currentDiv.parentNode
-
-
-        const newDiv6 = document.createElement("div");
-        newDiv6.className = "collapse"; 
-        newDiv6.id = id; 
-
-        const newDiv1 = document.createElement("div");
-        newDiv1.className = "card";
-
-        const newDiv7 = document.createElement("div");
-        newDiv7.className = "card-body"; 
-        
-
-        const newDiv11 = document.createElement("div");
-        newDiv11.className = "row";
-
-        const newDiv8 = document.createElement("div");
-        newDiv8.className = "col-2";
-        newDiv8.id = id + "list"; 
-
-        const newDiv9 = document.createElement("div");
-        newDiv9.className = "col-10";
-        newDiv9.id = id + "chart1"; 
-
-        
-        
-        
-
-        newDiv11.appendChild(newDiv8);
-        newDiv11.appendChild(newDiv9);
-        
-        newDiv7.appendChild(newDiv11);
-        newDiv1.appendChild(newDiv7);
-        newDiv6.appendChild(newDiv1);
-
-        parentDiv.insertBefore(newDiv6, currentDiv); 
-    }
-    function updateirrigation(startdate,f, b){
-
-
-        var oldrecord = JSON.parse($.ajax({
-                url: 'getsetdata.php',
-                type: 'post',
-                data: {farm: f, block: b},
-                dataType: 'html',
-                context: document.body,
-                global: false,
-                async:false,								
-                success: function(response){
-                    return response;
-                }
-            }).responseText);	
-            
-
-            var irrigationdate = [];
-            var irrigationstart = [];
-            var irrigationend = [];
-            var irrigationevent =[];
-            
-
-            for (let i=0;i<oldrecord.length;i++)
-            {
-                irrigationevent[i] =[];
-
-                irrigationdate[i] = oldrecord[i][2].substring(0, 10);
-                irrigationstart[i] = oldrecord[i][2];
-                irrigationend[i] = oldrecord[i][3];
-
-                irrigationevent[i][0] =irrigationstart[i];
-                irrigationevent[i][1] =irrigationend[i];
-
-            }	
-
-            var irrigationdatenew = [];
-            var irrigationarray = [];
-            var irrigationarraytable = [];
-            var index = 1;
-            irrigationdatenew[0] = irrigationdate[0];
-            for (let i=1;i<irrigationdate.length;i++)
-            {
-                if (irrigationdate[i] != irrigationdatenew[index-1])
-                {
-                    irrigationdatenew[index] = irrigationdate[i];
-                    index ++;
-                }
-                
-            }
-
-
-            
-            
-            
-            
-
-            createirrigationbar('irrigationbar',irrigationdatenew,irrigationstart,irrigationend);
-
-            var element = document.getElementById("datatables-reponsive12");
-            if (element != null){
-                document.getElementById("irrigationevent").remove();
-            }
-            
-
-            createtable("irrigationevent", ["Start Time","End Time"], irrigationevent,"datatables-reponsive12",0); 	
-            if ( $.fn.dataTable.isDataTable( '#datatables-reponsive12' ) ) {
-                table = $('#datatables-reponsive12').DataTable();
-            }
-            else {
-                table = $('#datatables-reponsive12').DataTable( {
-                    responsive: true
-                } );
-            }
-            
-            
-            
-            
-            
-
-            for (let y = 0;y < irrigationdatenew.length; y++)
-            {
-                irrigationarray[y] = 0;
-                irrigationarraytable[y] = [];
-                for (let z = 0;z < irrigationstart.length; z++)
-                {
-                    
-                    if (irrigationstart[z].substring(0,10) == irrigationdatenew[y])
-                    {
-                        if (irrigationstart[z].substring(0,10) == irrigationend[z].substring(0,10)){
-                            irrigationarray[y] += new Date("01/01/2018 " + irrigationend[z].substring(11,13) + ":" + irrigationend[z].substring(14,16)).getHours() - 
-                                new Date("01/01/2018 " + irrigationstart[z].substring(11,13) + ":" + irrigationstart[z].substring(14,16)).getHours();
-                            
-                        }else{
-                            irrigationarray[y] += new Date("01/01/2018 " + "23:59").getHours() - 
-                                new Date("01/01/2018 " + irrigationstart[z].substring(11,13) + ":" + irrigationstart[z].substring(14,16)).getHours();
-                            irrigationarray[y+1] += new Date("01/01/2018 " + irrigationend[z].substring(11,13) + ":" + irrigationend[z].substring(14,16)).getHours() - 
-                            new Date("01/01/2018 " + "00:00").getHours();           
-                        }
-
-                    }
-                }
-                irrigationarraytable[y][0] = [];
-
-            }
-
-            for (let y = 0;y < irrigationdatenew.length; y++)
-            {
-                irrigationarraytable[y] = [];
-                irrigationarraytable[y][0] = irrigationdatenew[y];
-                irrigationarraytable[y][1] = irrigationarray[y];
-                irrigationarraytable[y][2] = irrigationarray[y];
-            }
-
-
-            
-            
-
-            var element = document.getElementById("datatables-irrigationamounttable");
-            if (element != null){
-                document.getElementById("irrigationamounttable").remove();
-            }           
-
-            createtable("irrigationamounttable", ["Date","Duration", "Amount"], irrigationarraytable,"datatables-irrigationamounttable",0); 	
-            if ( $.fn.dataTable.isDataTable( '#datatables-irrigationamounttable' ) ) {
-                table = $('#datatables-irrigationamounttable').DataTable();
-            }
-            else {
-                table = $('#datatables-irrigationamounttable').DataTable( {
-                    responsive: true
-                } );
-            }
-
-            createtimecolumn('irrigationamount',irrigationdatenew,irrigationarray,irrigationdatenew.length,"",580,1);
-
-
-            var startdate = new Date(startdate);
-            var today = new Date();
-            
-            function addDays(date, days) {
-                var result = new Date(date);
-                result.setDate(result.getDate() + days);
-                return result;
-            }
-
-            
-            var harvestdate = Date.parse((startdate.getFullYear()+1) + "-" + (startdate.getMonth()+2) + "-" + startdate.getDate());
-            if (today < harvestdate){
-                var enddate = today;
-            }else{
-                var enddate = harvestdate;
-            }
-            
-
-
-            var dryoffdate = addDays(harvestdate, -42);
-            var text = "Dryoff: " + dryoffdate.getDate()  + "-" + (dryoffdate.getMonth()+1) + "-" + dryoffdate.getFullYear();
-
-            var datearray = [];
-            var datenumber = startdate;
-            var index = 0;
-            while (datenumber < enddate){
-                datenumber = addDays(startdate, index+1);
-                
-                datearray[index] = datenumber.getFullYear()  + "-" + String(datenumber.getMonth()+1).padStart(2, "0") + "-" + String(datenumber.getDate()).padStart(2, "0");
-                index ++;
-            }
-
-
-            
-
-            var s = String(datearray[0]);
-            var e = String(datearray[datearray.length-1]);
-            console.log(s);	
-            console.log(e);						
-
-
-            function loadirrigweb(){
-
-                var oldrecord = JSON.parse($.ajax({
-                    url: 'IrrigWeb.php',
-                    type: 'post',
-                    data: {start: s, end: e, farm: f, block: b, call: "rainfall"},
-                    dataType: 'html',
-                    context: document.body,
-                    global: false,
-                    async:false,								
-                    success: function(response){
-                        return response;
-                    }
-                }).responseText);	
-                console.log(oldrecord);	
-                console.log(oldrecord.Message);						
-
-                var irrigwebdatearray = [];
-                var rainarray = [];
-                var SWD = [];
-                var threshhold = [];
-                var irrigationarray = [];
-
-
-                if (oldrecord.Message == "Ok")
-                {
-                    for (let i=0;i<oldrecord.Data.length;i++)
-                    {
-                        irrigwebdatearray[i] = oldrecord.Data[i].GraphDate;
-                        irrigationarray[i] = oldrecord.Data[i].NetApp;
-                        rainarray[i] = oldrecord.Data[i].CumRain;
-                        SWD[i] = oldrecord.Data[i].SoilDef;
-                        threshhold[i] = -40;
-                    }	
-                    if (today < harvestdate)
-                    {
-                        createmixedbars('swdchart',irrigationarray,rainarray,datearray,datearray.length,"",610,threshhold,SWD);
-                        
-                    }else{
-                        createmixedbars('swdchart',irrigationarray,rainarray,datearray,datearray.length - 42,text,610,threshhold,SWD);
-                        
-                    }	
-
-                }else{
-                    document.getElementById("swdchart").innerText = "No Data for this block found on IrrigWeb!";
-                    
-                }
-
-
-                }
-
-
-            loadirrigweb();		
-
-    }	
-    function createtable(header, head, row, name, offset){
-        const currentDiv = document.getElementById(header);
-        let parentDiv = currentDiv.parentNode
-
-        const tbl = document.createElement('table');
-        tbl .className = "table table-striped";   
-        tbl .id = name;
-        tbl .style = "width:100%";
-
-        const thead = document.createElement('thead');
-        
-        const tr = document.createElement('tr');
-        for (let i=0;i<head.length-offset;i++){
-            const th = document.createElement('th');
-            th.appendChild(document.createTextNode(head[i]));
-            tr.appendChild(th);
-        }
-
-        thead.appendChild(tr);
-        tbl.appendChild(thead);
-
-        const tbody = document.createElement('tbody');    
-        for (let i=0;i<row.length;i++){
-            const tr = document.createElement('tr');
-            for (let j=0;j<row[i].length-offset;j++){
-                const td = document.createElement('td');
-                
-                
-                
-                
-                
-                
-                
-                
-                td.appendChild(document.createTextNode(row[i][j]));       
-                tr.appendChild(td);
-            }
-            tbody.appendChild(tr);
-        }          
-        tbl.appendChild(tbody);
-
-        parentDiv.insertBefore(tbl, currentDiv);  
-    }
 </script>
 <body>
 	<div class="wrapper">  
 		<div class="main">
         <?php include('comp/nav.php')?>
 			<main class="content">
-                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-                    <div class="offcanvas-header">
-                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    </div>
-                    <div class="offcanvas-body">
-                            <div class="row">   
-                            <div class="col-4">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            Total Irrigation Amount
-                                        </div>
-                                    </div>                            
-                                </div>
-                                <div class="col-4">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            Total Irrigation Duration
-                                        </div>
-                                    </div>                            
-                                </div>  
-                                <div class="col-4">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            Total Engery Cost
-                                        </div>
-                                    </div>                            
-                                </div>                          
-                                <div class="col-12">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h4 >Irrigation Event</h4>
-                                        </div>	
-                                        <div class="card-body">
-                                            <div class="row"> 
-                                                <div class="col-4">
-                                                    <div id="irrigationevent"></div>
-                                                </div>  
-                                                <div class="col-8">
-                                                    <div id="irrigationbar"></div>
-                                                </div> 
-                                            </div>
-                                            
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h4 >Irrigation Amount</h4>
-                                        </div>	
-                                        <div class="card-body">
-                                            <div class="row"> 
-                                                <div class="col-4">
-                                                    <div id="irrigationamounttable"></div>
-                                                </div>  
-                                                <div class="col-8">
-                                                    <div id="irrigationamount"></div>
-                                                </div> 
-                                            </div>
-                                            
-                                        </div>
-                                        
-                                    </div>
-                                </div>                                                                                 
-                                <div class="col-12">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h4 >Water Balance</h4>
-                                        </div>	
-                                        <div class="card-body">
-                                            <div class="row"> 
-                                                <div class="col-12">
-                                                    <div id="swdchart"></div>
-                                                </div> 
-                                            </div>
-                                            
-                                        </div>
-                                        
-                                    </div>
-                                </div>                                                                                                                
-                            </div>
-                    </div>
-                </div>
                 <div class="row">            
                     <div id="item"></div>             
                 </div>  
@@ -1122,16 +647,16 @@
                     }
                     
 
-                    let btns = document.querySelectorAll('button');
+                    // let btns = document.querySelectorAll('button');
 
-                    for (i of btns) {
-                    (function(i) {
-                        i.addEventListener('click', function() {
+                    // for (i of btns) {
+                    // (function(i) {
+                    //     i.addEventListener('click', function() {
                         
-                        updateirrigation("2020-04-16", i.id.substring(0, 6),i.id.substring(6, 10));  
-                        });
-                    })(i);
-                    }
+                    //     updateirrigation("2020-04-16", i.id.substring(0, 6),i.id.substring(6, 10));  
+                    //     });
+                    // })(i);
+                    // }
                 </script>
 			</main>
             <?php include('comp/footer.php')?>
