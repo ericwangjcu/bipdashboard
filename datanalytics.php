@@ -499,7 +499,15 @@
     <div class="wrapper">   
         <div class="main">
             <?php include('comp/nav.php')?>
-            <main class="content">               
+            <main class="content">     
+                <div class="card">
+                    <div class="card-body">
+                        <div class = "card-text h2">Comparison and Patterns</div>
+                        </br>
+                        <div class = "card-text h4">This page is used to show the comparison on irrigation and energy performance bewteen some baseline elements. It can be also used to find certain patterns or relationshop between different irrigation elements. </div>
+                        </br>
+                    </div>  
+                </div>            
                 <div class="row">       
                     <div class="col-12" style='display:none;'>
                         <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>     

@@ -500,7 +500,15 @@
     <div class="wrapper">   
         <div class="main">
             <?php include('comp/nav.php')?>
-            <main class="content">               
+            <main class="content">          
+                <div class="card">
+                    <div class="card-body">
+                        <div class = "card-text h2">Baseline Dashboard</div>
+                        </br>
+                        <div class = "card-text h4">This page is simply showing the aggregated baseline information collected by the delivery teams on all BIP farms. </div>
+                        </br>
+                    </div>  
+                </div>             
                 <div class="row">       
                     <div class="col-12">
                         <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>     
@@ -627,7 +635,7 @@
                                                     "Energy per Hour (kWh/h)","Energy Cost ($/kWh)","Energy Cost per ML ($/ML)","Energy Cost per Irrigation ($/ha/ML)","Area vs Irrigation", "Irrigation vs District","Irrigation vs Water Supply","District vs Water Supply"];
                                                     types = [5,2,2,2,2,0,0,0,0,0,1,1,0,1,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,1,2,3,4,6];
                                                     intervals = [0,2,2,2,2,0,0,0,0,0,10,100,0,1,0,0,0,10,0,10,1,2,1,20,1,10,10,100,20,10,0,10,5,0,0,0,0];
-                                                    gridsizes = [9,2,2,2,2,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,12,12,12,12];
+                                                    gridsizes = [9,2,2,2,2,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,12,12,12,12,12,12];
                                                     number = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6,6,2];
                                                     newunits = ["","","","","","","","","","","","m","m","ha","","","","KW","","L/S","L/S/Cup","hrs","ML","mm","","mm","%","KWH","kWh/ML","kWh/h","$/kWh","$/ML","$/ha/ML",""];
                                                     

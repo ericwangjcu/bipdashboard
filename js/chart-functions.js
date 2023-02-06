@@ -1,13 +1,20 @@
-var pieColors = (function () {
-    var colors = [],
-        base = Highcharts.getOptions().colors[7],
-        i;
+// var pieColors = (function () {
+//     var colors = [],
+//         base = Highcharts.getOptions().colors[7],
+//         i;
 
-    for (i = 6; i > 0; i -= 1) {
-       colors.push(Highcharts.color(base).brighten((i - 4) / 6).get());
-    }
-    return colors;
-});    
+//     for (i = 6; i > 0; i -= 1) {
+//        colors.push(Highcharts.color(base).brighten((i - 4) / 6).get());
+//     }
+//     return colors;
+// });    
+
+piecolors = ["#fd7f6f", "#7eb0d5", "#b2e061", "#bd7ebe", "#ffb55a", "#ffee65", "#beb9db", "#fdcce5", "#8bd3c7"];
+// piecolors = ["#b30000", "#7c1158", "#4421af", "#1a53ff", "#0d88e6", "#00b7c7", "#5ad45a", "#8be04e", "#ebdc78"];
+// piecolors = ["#e60049", "#0bb4ff", "#50e991", "#e6d800", "#9b19f5", "#ffa300", "#dc0ab4", "#b3d4ff", "#00bfa0"];
+// piecolors = ["#ea5545", "#f46a9b", "#ef9b20", "#edbf33", "#ede15b", "#bdcf32", "#87bc45", "#27aeef", "#b33dc6"];
+barcolors = ["#115f9a", "#1984c5", "#22a7f0", "#48b5c4", "#76c68f", "#a6d75b", "#c9e52f", "#d0ee11", "#f4f100"];
+
 
 
 function createtreemap(c, d, e ,f, t,s){
@@ -404,8 +411,9 @@ function createpiechart(c, d, e ,f, t,s){
         pie: {
             allowPointSelect: true,
             cursor: 'pointer',
-            borderWidth: 8,
-			borderColor: '#fff',            
+            borderWidth: 6,
+			borderColor: '#fff',     
+            colors: piecolors,       
             dataLabels: {
                 enabled: true,
                 formatter: function(){
@@ -716,7 +724,8 @@ function createbasicbar(c, d, e, f, t, xt, s, dist){
         plotOptions: {
             series: {
                 borderWidth: 0,
-                pointWidth: 50,
+                pointWidth: 40,
+                colors: barcolors,  
                 dataLabels: {
                     enabled: true,
                     shadow: true,                       
@@ -964,6 +973,8 @@ function createnewcomparison(c,x,y,yname,yunits,height){
         plotOptions: {
             boxplot: {
                 lineWidth: 3,
+                colors: barcolors,  
+
             },
         },      
         
@@ -1086,7 +1097,9 @@ function createstackedbars(c,x,y,t,ss){
         },
         plotOptions: {
             column: {
-                stacking: 'percent'
+                stacking: 'percent',
+                colors: barcolors,  
+
             },
             dataLabels: {
                 enabled: true,								

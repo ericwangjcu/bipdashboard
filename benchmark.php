@@ -6,23 +6,88 @@
     
 <?php include('comp/header.php')?>
 </head>
+<style>
+/* .badge {
+  display: inline-block;
+  padding: 1em 1em;
+  font-size: 40%;
+  font-weight: 700;
+  line-height: 2;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 100%;
+  /* transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; */
+} */
 
+</style>
 <script>   
+    function addbenchmarkcard(infor, farminfo, score){
+        const col = document.createElement("div");
+        col.className = "col-xl-2 col-md-4 col-sm-12  d-flex align-items-stretch";            
+        
+        const card = document.createElement("div");
+        card.className = "card  w-100";
+        const cardbody = document.createElement("div");
+        cardbody.className = "card-body";
+
+        const row = document.createElement("div");
+        row.className = "row";
+        const titlecol = document.createElement("div");
+        titlecol.className = "col";
+
+        const title = document.createElement("div");
+        title.className = "card-title";
+        title.innerText = infor;  
+        cardbody.appendChild(title);
+
+        const text = document.createElement("h3");
+        text.className = "mt-2";
+        text.innerText = farminfo;
+        titlecol.appendChild(text);
+        row.appendChild(titlecol);
+        
+        const colauto = document.createElement("div");
+        colauto.className = "col-auto";
+        const mb = document.createElement("div");
+        mb.className = "h1";
+        const badge = document.createElement("span");
+
+
+        if (score < 100){
+        badge.className = "badge badge bg-success";
+        }
+        if (score < 66){
+            badge.className = "badge badge bg-warning";
+        } 
+        if (score < 33){
+            badge.className = "badge badge bg-danger";
+        }           
+        badge.innerText = score + "%";
+        mb.appendChild(badge);
+        colauto.appendChild(mb);
+        row.appendChild(colauto);
+        
+
+        cardbody.appendChild(row);
+
+        card.appendChild(cardbody);
+        col.appendChild(card);
+
+        return col;
+    }
     function createparentcard(farminfo,infor,score){
         const currentDiv = document.getElementById("item");
         let parentDiv = currentDiv.parentNode
-
-        const newDiv1 = document.createElement("div");
-        newDiv1.className = "card bg-light  mb-3  mt-3";
-
+        
 
         const newDiv2 = document.createElement("div");
+        newDiv2.className = "card bg-light";
         newDiv2.setAttribute('data-toggle',"collapse");
         newDiv2.setAttribute('data-target',"#" + farminfo[0]);
         newDiv2.setAttribute('aria-expanded',"false");
         newDiv2.setAttribute('aria-controls',farminfo[0]);
-
-        
+     
         const newDiv3 = document.createElement("div");
         newDiv3.className = "card-body"; 
         const cardjeader = document.createElement("h1");
@@ -35,172 +100,369 @@
         newDiv5.className = "row";
 
         for (let i=1;i<farminfo.length;i++){   
-            if (i==1 || i==2 || i==6 || i ==7 || i== 11 || i== 12){         
-                const col = document.createElement("div");
-                col.className = "col-xl-2 col-md-4 col-sm-12  d-flex align-items-stretch";            
-                
-                const card = document.createElement("div");
-                card.className = "card  w-100";
-                const cardbody = document.createElement("div");
-                cardbody.className = "card-body";
-
-                const row = document.createElement("div");
-                row.className = "row";
-                const titlecol = document.createElement("div");
-                titlecol.className = "col";
-
-                const title = document.createElement("div");
-                title.className = "card-title";
-                title.innerText = infor[i];  
-                cardbody.appendChild(title);
-
-                const text = document.createElement("h3");
-                text.className = "mt-2";
-                text.innerText = farminfo[i];
-                titlecol.appendChild(text);
-                row.appendChild(titlecol);
-                
-                const colauto = document.createElement("div");
-                colauto.className = "col-auto";
-                const mb = document.createElement("div");
-                mb.className = "h1";
-                const badge = document.createElement("span");
-
-
-                if (score[i] < 100){
-                badge.className = "badge rounded-pill bg-success";
-                }
-                if (score[i] < 66){
-                    badge.className = "badge rounded-pill bg-warning ";
-                } 
-                if (score[i] < 33){
-                    badge.className = "badge rounded-pill bg-danger";
-                }           
-                badge.innerText = score[i];
-                mb.appendChild(badge);
-                colauto.appendChild(mb);
-                row.appendChild(colauto);
-                
-
-                cardbody.appendChild(row);
-
-                card.appendChild(cardbody);
-                col.appendChild(card);
-                newDiv5.appendChild(col); 
+            if (i==1 || i==3 || i== 8 || i == 9 || i== 13 || i== 14){         
+                newDiv5.appendChild(addbenchmarkcard(infor[i],farminfo[i],score[i])); 
             }
         }     
         newDiv4.appendChild(newDiv5);
-           
+         
 
         newDiv3.appendChild(newDiv4);
         newDiv2.appendChild(newDiv3);
-        newDiv1.appendChild(newDiv2);
-        parentDiv.insertBefore(newDiv1, currentDiv); 
+        parentDiv.insertBefore(newDiv2, currentDiv); 
 
     }   
+    // function createchildcard(set,infor,id){
+    //     const currentDiv = document.getElementById("item");
+    //     let parentDiv = currentDiv.parentNode
+        
+    //     const newDiv2 = document.createElement("div");
+    //     newDiv2.className = "card bg-light collapse"; 
+    //     newDiv2.id = id; 
+     
+    //     const newDiv3 = document.createElement("div");
+    //     newDiv3.className = "card-body"; 
+    //     const cardjeader = document.createElement("h1");
+    //     cardjeader.className = "card-title h1";
+    //     cardjeader.innerText = set[0];
+    //     newDiv3.appendChild(cardjeader);
+
+    //     const newDiv4 = document.createElement("container");
+    //     const newDiv5 = document.createElement("div");
+    //     newDiv5.className = "row";
+
+    //     // for (let i=1;i<set.length;i++){   
+    //     //     newDiv5.appendChild(addbenchmarkcard(infor[i],set[i],));
+    //     // }     
+    //     // newDiv4.appendChild(newDiv5);
+         
+
+    //     newDiv3.appendChild(newDiv4);
+    //     newDiv2.appendChild(newDiv3);
+    //     parentDiv.insertBefore(newDiv2, currentDiv); 
+    // }
+    // function createchildcard(set,infor,id){
+    //     const currentDiv = document.getElementById("item");
+    //     let parentDiv = currentDiv.parentNode
+        
+    //     const newDiv2 = document.createElement("div");
+    //     newDiv2.className = "card bg-light collapse"; 
+    //     newDiv2.id = id; 
+     
+    //     const newDiv3 = document.createElement("div");
+    //     newDiv3.className = "card-body"; 
+    //     const cardjeader = document.createElement("h1");
+    //     cardjeader.className = "card-title h1";
+    //     cardjeader.innerText = set[0];
+    //     newDiv3.appendChild(cardjeader);
+
+    //     const newDiv4 = document.createElement("container");
+    //     const newDiv5 = document.createElement("div");
+    //     newDiv5.className = "row";
+
+    //     // for (let i=1;i<set.length;i++){   
+    //     //     newDiv5.appendChild(addbenchmarkcard(infor[i],set[i],));
+    //     // }     
+    //     // newDiv4.appendChild(newDiv5);
+         
+
+    //     newDiv3.appendChild(newDiv4);
+    //     newDiv2.appendChild(newDiv3);
+    //     parentDiv.insertBefore(newDiv2, currentDiv); 
+    // }
     function createchildcard(set,infor,id){
         const currentDiv = document.getElementById("item");
         let parentDiv = currentDiv.parentNode
 
-        const newDiv4 = document.createElement("div");
-        newDiv4.className = "collapse"; 
-        newDiv4.id = id; 
-        const newDiv1 = document.createElement("div");
-        newDiv1.className = "card";
-
-        const newDiv5 = document.createElement("div");
-        newDiv5.className = "card-body"; 
-        const newDiv52 = document.createElement("div");
-        newDiv52.className = "row";
-
-        const newDiv51 = document.createElement("div");
-        newDiv51.className = "col-10"; 
+        const newDiv2 = document.createElement("div");
+        newDiv2.className = "card collapse"; 
+        newDiv2.id = id; 
 
         const newDiv3 = document.createElement("div");
-        newDiv3.className = "row";
-        
-        for (let i=0;i<infor.length;i++){
-            
-            const newDiv6 = document.createElement("div");
-            if (i > 1){
-                newDiv6.className = "col-2";
-            }
-            else{
-                newDiv6.className = "col-1";
-            }
-            const newDiv7 = document.createElement("h5");
-            newDiv7.className = "card-title";
-            newDiv7.innerText = infor[i];  
-            
-            newDiv6.appendChild(newDiv7);
-            newDiv3.appendChild(newDiv6);         
-        } 
-
-        for (let i=0;i<set.length;i++){
-            
-            const newDiv4 = document.createElement("div");
-            if (i > 1){
-                newDiv4.className = "col-2";
-            }
-            else{
-                newDiv4.className = "col-1";
-            }
-            
-
-            if (i > 3){
-                const newDiv5 = document.createElement("h5");
-
-                const newDiv7 = document.createElement("span");
-                newDiv7.className = "badge badge-primary-light";
-                newDiv7.innerText = set[i];
-                newDiv5.appendChild(newDiv7);
-                newDiv4.appendChild(newDiv5);
-            }
-            else{
-                const newDiv5 = document.createElement("p");
-                newDiv5.className = "card-text";
-                newDiv5.innerText = set[i];
-                newDiv4.appendChild(newDiv5);
-            } 
-            newDiv3.appendChild(newDiv4);       
-        } 
-        newDiv51.appendChild(newDiv3);     
+        newDiv3.className = "card-body"; 
  
-        const newDiv41 = document.createElement("div");
-        newDiv41.className = "col-1";  
-        const newDiv42 = document.createElement("div");
-        newDiv42.className = "row";
-
-        const newbutton = document.createElement("button");
-        newbutton.className = "btn btn-xl btn-primary";    
-        newbutton.type = "button";    
-        newbutton.innerText = "Irrigation";    
-        newbutton.setAttribute('data-bs-toggle',"offcanvas");
-        newbutton.setAttribute('href',"#offcanvasExample");
-        newbutton.id = id + set[0];
-        newDiv42.appendChild(newbutton);
-        newDiv41.appendChild(newDiv42);
+        var newdiv4 = document.createElement("p");
+        newdiv4.className = "mb-0 h2"; 
+        newdiv4.innerText = "Irrigation Evaluation";
+        newDiv3.appendChild(newdiv4);
         
+        var br = document.createElement('br');
+        newDiv3.appendChild(br);
 
 
-        newDiv52.appendChild(newDiv51);
-        newDiv52.appendChild(newDiv41);
-        newDiv5.appendChild(newDiv52);
+        // newdiv4 = document.createElement("p");
+        // newdiv4.className = "mb-0 h4"; 
+        // newdiv4.innerText = "This page is used to show the benchmark of the irrigation practice from the water perspective on a farm. It also display the benchmark of individual compoenents of an irrigation event, including area, flow rate and duration, which can be used to observe the relationship bettween them and an irrigation event.";
+        // newDiv3.appendChild(newdiv4);
+
+        // var br = document.createElement('br');
+        // newDiv3.appendChild(br);
+
+        // newdiv4 = document.createElement("p");
+        // newdiv4.className = "mb-0 h4"; 
+        // newdiv4.innerText = "The formulas used are shown below.";
+        // newDiv3.appendChild(newdiv4);
+
+        // newDiv3.appendChild(br);
+
+        // newdiv4 = document.createElement("p");
+        // newdiv4.className = "mb-0 h4"; 
+        // newdiv4.innerText = "Total ML per Farm =  Sum of Total ML per Set.";
+        // newDiv3.appendChild(newdiv4);
+        // newdiv4 = document.createElement("p");
+        // newdiv4.className = "mb-0 h4"; 
+        // newdiv4.innerText = "Total ML per Set =  Duration * Total Flow Rate * 3600 / 1000000.";
+        // newDiv3.appendChild(newdiv4);
+        // newdiv4 = document.createElement("p");
+        // newdiv4.className = "mb-0 h4"; 
+        // newdiv4.innerText = "Total mm per Set =  Total ML per Set * 100 / Set Area.";
+        // newDiv3.appendChild(newdiv4);
+        // newdiv4 = document.createElement("p");
+        // newdiv4.className = "mb-0 h4"; 
+        // newdiv4.innerText = "Avg mm =  Sum of Total mm per Set / Number of Sets.";
+        // newDiv3.appendChild(newdiv4);
+        // newdiv4 = document.createElement("p");
+        // newdiv4.className = "mb-0 h4"; 
+        // newdiv4.innerText = "Avg area =  Sum of Total Set Area / Number of Sets.";
+        // newDiv3.appendChild(newdiv4);
+        // newdiv4 = document.createElement("p");
+        // newdiv4.className = "mb-0 h4"; 
+        // newdiv4.innerText = "Avg Flow Rate =  Sum of Total Flow Rate / Number of Sets.";
+        // newDiv3.appendChild(newdiv4);
+        // newdiv4 = document.createElement("p");
+        // newdiv4.className = "mb-0 h4"; 
+        // newdiv4.innerText = "Avg Duration =  Sum of Total Duration / Number of Sets.";
+        // newDiv3.appendChild(newdiv4);
+
+
+
+        const newDiv5 = document.createElement("div");
+        newDiv5.className = "row";
+
+        var newDiv6 = document.createElement("div");
+        newDiv6.className = "col-6";
+        var newDiv7 = document.createElement("div");
+        newDiv7.className = "row";
+        var newDiv8 = document.createElement("div");
+        newDiv8.className = "col-6";
+        var newDiv9 = document.createElement("div");
+        newDiv9.className = "chart-container";
+        newDiv9.id = id + "container0";
+        newDiv8.appendChild(newDiv9);
+        newDiv7.appendChild(newDiv8);
+
+        newDiv8 = document.createElement("div");
+        newDiv8.className = "col-6";        
+        newDiv9 = document.createElement("div");
+        newDiv9.className = "chart-container";
+        newDiv9.id = id + "container1";
+        newDiv8.appendChild(newDiv9);
+        newDiv7.appendChild(newDiv8);             
+        newDiv6.appendChild(newDiv7);
+        newDiv5.appendChild(newDiv6);
         
+        newDiv6 = document.createElement("div");
+        newDiv6.className = "col-6";
+        newDiv7 = document.createElement("div");
+        newDiv7.className = "row";
 
-        newDiv1.appendChild(newDiv5);
-        newDiv4.appendChild(newDiv1);
-        parentDiv.insertBefore(newDiv4, currentDiv); 
+        newDiv8 = document.createElement("div");
+        newDiv8.className = "col-3";
+        newDiv9 = document.createElement("div");
+        newDiv9.className = "chart-container";
+        newDiv9.id = id + "container2";
+        newDiv8.appendChild(newDiv9);
+        newDiv7.appendChild(newDiv8);
+        
+        newDiv8 = document.createElement("div");
+        newDiv8.className = "col-3";        
+        newDiv9 = document.createElement("div");
+        newDiv9.className = "chart-container";
+        newDiv9.id = id + "container3";
+        newDiv8.appendChild(newDiv9);
+        newDiv7.appendChild(newDiv8);      
+
+        newDiv8 = document.createElement("div");
+        newDiv8.className = "col-3";        
+        newDiv9 = document.createElement("div");
+        newDiv9.className = "chart-container";
+        newDiv9.id = id + "container4";
+        newDiv8.appendChild(newDiv9);
+        newDiv7.appendChild(newDiv8);  
+
+        newDiv8 = document.createElement("div");
+        newDiv8.className = "col-3";        
+        newDiv9 = document.createElement("div");
+        newDiv9.className = "chart-container";
+        newDiv9.id = id + "container5";
+        newDiv8.appendChild(newDiv9);
+        newDiv7.appendChild(newDiv8);  
+
+
+        newDiv6.appendChild(newDiv7);
+        newDiv5.appendChild(newDiv6);
+        newDiv3.appendChild(newDiv5);
+
+        newDiv2.appendChild(newDiv3);
+        parentDiv.insertBefore(newDiv2, currentDiv); 
     }
+    function creategauge(c,type, score, title){
+        var ticks = [];
+        for (let i=0;i<100;i++){
+            ticks[i] = i * 1;
+        }
+
+        if (type == 1){
+            var ya =  {
+                labels: {
+                    enabled: false,
+                },
+                reversed: false,
+                min: 0,
+                max: 100,
+                lineWidth: 0,
+                tickLength: 60,
+                tickWidth: 3,
+                tickColor: 'white',
+                tickPosition: 'inside',
+                minorTickLength: 0,
+                tickPositions: ticks,
+                zIndex: 10,
+                stops: [
+                    [0.3, '#DF5353'], // red
+                    [0.6, '#DDDF0D'], // yellow
+                    [0.9, '#55BF3B']                            
+                ],
+            };
+            var distance = -40;   
+            var titledistance = 250;                  
+        }
+        else{
+            var ya =  {
+                labels: {
+                    enabled: false,
+                },
+                reversed: false,
+                min: 0,
+                max: 100,
+                lineWidth: 0,
+                tickLength: 60,
+                tickWidth: 0,
+                // tickColor: 'white',
+                // tickPosition: 'inside',
+                minorTickLength: 0,
+                // tickPositions: ticks,
+                zIndex: 10,
+                stops: [
+                    [0.3, '#DF5353'], // red
+                    [0.6, '#DDDF0D'], // yellow
+                    [0.9, '#55BF3B']                            
+                ],
+            };
+            var distance = 50;                     
+            var titledistance = 80;                  
+    
+        }
+
+
+        Highcharts.chart(c, {
+            chart: {
+                type: 'solidgauge',
+                margin: [0, 0, 0, 0],
+                height: 400,
+            },
+
+            title: {
+                text: title,
+                y: titledistance,
+                style: {
+                    fontFamily: 'Poppins',
+                    fontSize: '18px'
+                },   
+    
+
+            },
+            tooltip: {
+                enabled: false,
+            },
+            pane: {
+                startAngle: -140,
+                endAngle: 140,
+                background: [{ // Track for Move
+                    outerRadius: '100%',
+                    innerRadius: '65%',
+                    backgroundColor: Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0.2).get(),
+                    borderWidth: 0,
+                    shape: 'arc'
+                }]
+            },
+
+            yAxis: ya,   
+
+            plotOptions: {
+                solidgauge: {
+                    innerRadius: '65%',
+                    dataLabels: {
+                        y: distance,
+                        borderWidth: 0,
+                        useHTML: true,
+                        style: {
+                            fontFamily: 'Poppins',
+                            fontSize: '50px'
+                        },   
+                        format: '<span style="text-align:center; font-size:50px;">{y}</span><span style="text-align:center; font-size:25px;">/100</span>',
+                    }
+                }
+            },
+
+            series: [{
+                name: 'Your Score',
+                borderColor: Highcharts.getOptions().colors[0],
+                data: [{
+                    color: Highcharts.getOptions().colors[0],
+                    y: score
+                }]
+            }],
+            exporting: {
+                enabled: false
+            },
+            credits: {
+                enabled: false
+            },
+            legend: {
+                enabled: true
+            },
+        });
+    };
+
+    </script> 
 </script>
 <body>
 	<div class="wrapper">  
 		<div class="main">
         <?php include('comp/nav.php')?>
 			<main class="content">
+                <div class="card">
+                    <div class="card-body">
+                        <div class = "card-text h2">Irrigation and Energy Benchmark</div>
+                        </br>
+                        <div class = "card-text h4">This page is used to show the benchmark of the irrigation practice on a farm. It also display the benchmark of individual compoenents of an irrigation event, including area, flow rate, duration and total KWh, which can be used to observe the relationship bettween them and an irrigation event.</div>
+                        </br>
+                        <p class="mb-0 h4">The formulas used are shown below.</p>
+                        </br>                
+                        <p class="mb-0 h4 ">Total ML per Farm =  Sum of Total ML per Set.</p>
+                        <p class="mb-0 h4">Total ML per Set =  Duration * Total Flow Rate * 3600 / 1000000.</p>
+                        <p class="mb-0 h4">Total mm per Set =  Total ML per Set * 100 / Set Area.</p>
+                        <p class="mb-0 h4">Avg mm =  Sum of Total mm per Set / Number of Sets.</p>
+                        <p class="mb-0 h4">Avg area =  Sum of Total Set Area / Number of Sets.</p>
+                        <p class="mb-0 h4">Avg Flow Rate =  Sum of Total Flow Rate / Number of Sets.</p>
+                        <p class="mb-0 h4">Avg Duration =  Sum of Total Duration / Number of Sets.</p>
+                    </div>  
+                </div>  
                 <div class="row">            
                     <div id="item"></div>             
                 </div>  
+
                 <script>
                     var setnames = <?php echo json_encode($setnames); ?>;
                     var setvalues = <?php echo json_encode($setvalues); ?>;
@@ -269,22 +531,22 @@
                         counts[num] = counts[num] ? counts[num] + 1 : 1;
                     }    
                     const iterator = Object.entries(counts);
-                    var infor = ["Grower ID","Total Area (ha)","No of Sets","Avg No Rows","Avg Row Length (m)","Avg Flow Rate (L/S)","Total Water Applied (ML)","Avg Water Applied (ML)","Avg Water Applied (mm)"
+                    var infor = ["Grower ID","Total Area (ha)", "Avg Area (ha)", "No of Sets","Avg No Rows","Avg Row Length (m)","Avg Flow Rate (L/S)","Avg Duration (h)", "Total Water Applied (ML)","Avg Water Applied (ML)","Avg Water Applied (mm)"
                     ,"Avg Crop Water Use (mm)","Avg Applied Efficiency","Total Energy (KWH)","Avg Energy (KWH)","Avg Energy per ML (KWH/ML)","Avg Energy per Hour (KWH/H)",
                     "Avg Energy Cost per ML ($/ML)","Avg Energy Cost per Irrig ($/ha/ML)"];
-                    var setn = ["Set ID","Area","Crop Class","Date Planted","Total Water Applied (ML)","Total Energy (KWH)","Total Energy Cost per Irrig ($/ha/ML)"];
-                    var index = [0,14,0,11,12,20,23,23,24,26,27,28,28,29,30,31,32];
-                    var avg = [0,0,0,1,1,1,0,1,1,1,1,0,1,1,1,1,1];
-                    var fixed = [0,1,0,0,0,1,1,1,1,1,2,1,1,1,1,1,1];
-                    var theme = [0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1];
+                    // var setn = ["Set ID","Area","Crop Class","Date Planted","Total Water Applied (ML)","Total Energy (KWH)","Total Energy Cost per Irrig ($/ha/ML)"];
+                    var index = [0,14,14,0,11,12,20,22,23,23,24,26,27,28,28,29,30,31,32];
+                    var avg = [0,0,1,0,1,1,1,0,1,1,1,1,1,0,1,1,1,1,1];
+                    var fixed = [0,1,1,0,0,0,1,1,1,1,1,2,1,1,1,1,1,1];
+                    // var theme = [0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1];
                     var farminfor = [];
 
                     var setinfor = [];
-                    var score = ["",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+                    var score = ["",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
                     var farmsummary = [];
                     for (let i=0;i<iterator.length;i++){
                         farmsummary[i] = [];
-                        for (let j=1;j<17;j++){
+                        for (let j=1;j<infor.length;j++){
                             farmsummary[i][j] = 0;
                         }                        
 
@@ -292,7 +554,7 @@
 
                         for (let j=0;j<subset.length;j++){
                             if (subset[j][2] == farmsummary[i][0]){
-                                for (let z=1;z<17;z++){
+                                for (let z=1;z<infor.length;z++){
                                     if (index[z] !== 0){
                                         farmsummary[i][z] += Number(subset[j][index[z]]);
                                     }else{
@@ -302,7 +564,7 @@
                             }
                         }     
 
-                        for (let j=1;j<17;j++){
+                        for (let j=1;j<infor.length;j++){
                             if (avg[j] == 1){
                                 farmsummary[i][j] = farmsummary[i][j]/farmsummary[i][1];
                             }
@@ -312,7 +574,7 @@
                     
 
                     for (let i=0;i<iterator.length;i++){
-                        for (let j=1;j<17;j++){
+                        for (let j=1;j<infor.length;j++){
                             farminfor[j] = 0;
                         }                        
 
@@ -320,7 +582,7 @@
 
                         for (let j=0;j<subset.length;j++){
                             if (subset[j][2] == farminfor[0]){
-                                for (let z=1;z<17;z++){
+                                for (let z=1;z<infor.length;z++){
                                     if (index[z] !== 0){
                                         farminfor[z] += Number(subset[j][index[z]]);
                                     }else{
@@ -330,14 +592,14 @@
                             }
                         }     
 
-                        for (let j=1;j<17;j++){
+                        for (let j=1;j<infor.length;j++){
                             if (avg[j] == 1){
                                 farminfor[j] = farminfor[j]/farminfor[1];
                             }
                             farminfor[j] = farminfor[j].toFixed(fixed[j]);  
                         }                        
                         var score = [];
-                        for (let j=1;j<17;j++){
+                        for (let j=1;j<infor.length;j++){
                             newarray = [];
                             for (let z=0;z<farmsummary.length;z++){
                                 newarray[z] = Number(farmsummary[z][j]);
@@ -351,9 +613,15 @@
                             
                             score[j] = ((index + 1) * 100 / newarray.length).toFixed(0);
                         }  
-
+                        console.log(infor);
                         createparentcard(farminfor,infor,score);
-
+                        createchildcard('','',farminfor[0]);
+                        creategauge(farminfor[0] + "container0",1,Number(score[8]),"Total ML");
+                        creategauge(farminfor[0] + "container1",1,Number(score[10]),"Avg mm");
+                        creategauge(farminfor[0] + "container2",2,Number(score[1]),"Total Area");
+                        creategauge(farminfor[0] + "container3",2,Number(score[2]),"Avg Area");
+                        creategauge(farminfor[0] + "container4",2,Number(score[6]),"Avg Flow Rate");
+                        creategauge(farminfor[0] + "container5",2,Number(score[7]),"Avg Duration");
                         // for (let j=0;j<subset.length;j++){
                         //     if (subset[j][2] == farminfor[0]){
                         //         setinfor[0] = subset[j][5];
