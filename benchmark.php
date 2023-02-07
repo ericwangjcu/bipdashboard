@@ -240,11 +240,11 @@
         newDiv5.className = "row";
 
         var newDiv6 = document.createElement("div");
-        newDiv6.className = "col-6";
+        newDiv6.className = "col-xl-6 col-sm-12";
         var newDiv7 = document.createElement("div");
         newDiv7.className = "row";
         var newDiv8 = document.createElement("div");
-        newDiv8.className = "col-6";
+        newDiv8.className = "col-xl-6 col-sm-12";
         var newDiv9 = document.createElement("div");
         newDiv9.className = "chart-container";
         newDiv9.id = id + "container0";
@@ -252,7 +252,7 @@
         newDiv7.appendChild(newDiv8);
 
         newDiv8 = document.createElement("div");
-        newDiv8.className = "col-6";        
+        newDiv8.className = "col-xl-6 col-sm-12";        
         newDiv9 = document.createElement("div");
         newDiv9.className = "chart-container";
         newDiv9.id = id + "container1";
@@ -262,12 +262,12 @@
         newDiv5.appendChild(newDiv6);
         
         newDiv6 = document.createElement("div");
-        newDiv6.className = "col-6";
+        newDiv6.className = "col-xl-6 col-sm-12";
         newDiv7 = document.createElement("div");
         newDiv7.className = "row";
 
         newDiv8 = document.createElement("div");
-        newDiv8.className = "col-3";
+        newDiv8.className = "col-xl-3 col-sm-12";
         newDiv9 = document.createElement("div");
         newDiv9.className = "chart-container";
         newDiv9.id = id + "container2";
@@ -275,7 +275,7 @@
         newDiv7.appendChild(newDiv8);
         
         newDiv8 = document.createElement("div");
-        newDiv8.className = "col-3";        
+        newDiv8.className = "col-xl-3 col-sm-12";        
         newDiv9 = document.createElement("div");
         newDiv9.className = "chart-container";
         newDiv9.id = id + "container3";
@@ -283,7 +283,7 @@
         newDiv7.appendChild(newDiv8);      
 
         newDiv8 = document.createElement("div");
-        newDiv8.className = "col-3";        
+        newDiv8.className = "col-xl-3 col-sm-12";        
         newDiv9 = document.createElement("div");
         newDiv9.className = "chart-container";
         newDiv9.id = id + "container4";
@@ -291,7 +291,7 @@
         newDiv7.appendChild(newDiv8);  
 
         newDiv8 = document.createElement("div");
-        newDiv8.className = "col-3";        
+        newDiv8.className = "col-xl-3 col-sm-12";        
         newDiv9 = document.createElement("div");
         newDiv9.className = "chart-container";
         newDiv9.id = id + "container5";
