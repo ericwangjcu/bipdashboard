@@ -280,7 +280,7 @@
 
         }        
         if (type == 2){
-            createsregression(14,[22,23,33],"Area (ha)", ["Duration (h)","ML","$/Irrigation"],["h","ML","$/Irrigation"]);      
+            createsregression(14,[22,23,33],"Area (ha)",["Duration (h)","Water Applied (ML)","Cost per ha per irrigation ($/ha/irrig)"],["Duration (h)","Water Applied (ML)","Cost per ha per irrigation ($/ha/irrig)"]);      
         }
         function comparisonchart(x,y, ynames,yunits){
             var sub = [];
