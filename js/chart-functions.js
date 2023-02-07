@@ -16,7 +16,7 @@ piecolors = ["#fd7f6f", "#7eb0d5", "#b2e061", "#bd7ebe", "#ffb55a", "#ffee65", "
 barcolors = ["#115f9a", "#1984c5", "#22a7f0", "#48b5c4", "#76c68f", "#a6d75b", "#c9e52f", "#d0ee11", "#f4f100"];
 
 
-
+// barcolors = ["#1346ff", "#2854ea", "#3e61d5", "#536fc0", "#697dab", "#7e8a96", "#949881", "#a9a56c", "#bfb357", "#d4c142", "#eace2d", "#ffdc18"];
 function createtreemap(c, d, e ,f, t,s){
     var counts = {};
     for (const num of d) {
@@ -724,7 +724,7 @@ function createbasicbar(c, d, e, f, t, xt, s, dist){
         plotOptions: {
             series: {
                 borderWidth: 0,
-                pointWidth: 40,
+                pointWidth: $(this).width() / (3*number),
                 colors: barcolors,  
                 dataLabels: {
                     enabled: true,
@@ -1022,6 +1022,8 @@ function createnewcomparison(c,x,y,yname,yunits,height){
     
     });
 };
+Highcharts.setOptions({ colors: piecolors });
+
 function createstackedbars(c,x,y,t,ss){
     var counts = {};
     for (const num of x) {
@@ -1098,9 +1100,10 @@ function createstackedbars(c,x,y,t,ss){
         plotOptions: {
             column: {
                 stacking: 'percent',
-                colors: barcolors,  
+                
 
             },
+            colors: barcolors,  
             dataLabels: {
                 enabled: true,								
                 color: 'white'

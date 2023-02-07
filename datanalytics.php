@@ -276,7 +276,7 @@
                     y[j][i] = Number(subset[i][indy[j]]);
                 }                    
             } 
-            createline(header + "body0",x,y,xname, ynames,yunits, 600);                
+            createline(header + "body0",x,y,xname, ynames,yunits, 900);                
 
         }        
         if (type == 2){
@@ -285,7 +285,7 @@
         function comparisonchart(x,y, ynames,yunits){
             var sub = [];
             var ind = [];
-            for (let i = 0; i < y.length; i++){
+            for (let i = 0; i < y.length; i++){ 
                 sub[i] = [];
                 ind[i] = [];
             }
