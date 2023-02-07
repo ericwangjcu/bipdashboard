@@ -9,12 +9,15 @@
 //     return colors;
 // });    
 
-piecolors = ["#fd7f6f", "#7eb0d5", "#b2e061", "#bd7ebe", "#ffb55a", "#ffee65", "#beb9db", "#fdcce5", "#8bd3c7"];
+// piecolors = ["#fd7f6f", "#7eb0d5", "#b2e061", "#bd7ebe", "#ffb55a", "#ffee65", "#beb9db", "#fdcce5", "#8bd3c7"];
+piecolors = ["#115f9a", "#1984c5", "#22a7f0", "#48b5c4", "#76c68f", "#a6d75b", "#c9e52f", "#d0ee11", "#f4f100"];
+
 // piecolors = ["#b30000", "#7c1158", "#4421af", "#1a53ff", "#0d88e6", "#00b7c7", "#5ad45a", "#8be04e", "#ebdc78"];
 // piecolors = ["#e60049", "#0bb4ff", "#50e991", "#e6d800", "#9b19f5", "#ffa300", "#dc0ab4", "#b3d4ff", "#00bfa0"];
 // piecolors = ["#ea5545", "#f46a9b", "#ef9b20", "#edbf33", "#ede15b", "#bdcf32", "#87bc45", "#27aeef", "#b33dc6"];
 barcolors = ["#115f9a", "#1984c5", "#22a7f0", "#48b5c4", "#76c68f", "#a6d75b", "#c9e52f", "#d0ee11", "#f4f100"];
 
+Highcharts.setOptions({ colors: barcolors });
 
 // barcolors = ["#1346ff", "#2854ea", "#3e61d5", "#536fc0", "#697dab", "#7e8a96", "#949881", "#a9a56c", "#bfb357", "#d4c142", "#eace2d", "#ffdc18"];
 function createtreemap(c, d, e ,f, t,s){
@@ -1022,7 +1025,6 @@ function createnewcomparison(c,x,y,yname,yunits,height){
     
     });
 };
-Highcharts.setOptions({ colors: piecolors });
 
 function createstackedbars(c,x,y,t,ss){
     var counts = {};
