@@ -318,7 +318,7 @@
             ["L/S","mm","%","KWh/ML","KWh/h","$/ML"]);
         } 
         if (type == 5){
-            createnestedpiechart(header + "body0", data,  data1, tempdata,"Sets","Farms",short,500);
+            createnestedpiechart(header + "body0", data,  data1,  tempdata,"Sets","Farms",short,500);
             // createpiechart(header + "body0", data, tempdata,"Sets",short,500);
             // createpiechart(header + "body1", data1, tempdata,"Farms",short,500);
         }  

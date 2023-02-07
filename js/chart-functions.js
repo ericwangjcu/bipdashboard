@@ -133,9 +133,10 @@ function createnestedpiechart(c, d, d1, e ,f, f1, t,s){
                     },
                     
                     style:{
-                    fontSize: '14px',
+                    fontSize: '18px',
                     fontWeight: 'thin',
                     },
+                    distance: '40%'
                 },
                 showInLegend: true,
             },
@@ -193,9 +194,6 @@ function createnestedpiechart(c, d, d1, e ,f, f1, t,s){
             zMin: 0, 
             keys: ['name', 'y', 'z', 'id'],
             data: dataset,
-            dataLabels: {
-                alignTo: 'fixedOffset'
-            }
         },{
             center: [10000, 10000],
             data: [{
@@ -219,9 +217,7 @@ function createnestedpiechart(c, d, d1, e ,f, f1, t,s){
             data: dataset1,
             colors: ["#81CACF", "#E98841", "#E3D830", "#A6C46F",
             "#894C7B", "#BA9765", "#7F7F7F", "#C3C3C3"],
-            dataLabels: {
-                alignTo: 'connectors'
-            }
+
         },{
             center: [10000, 10000],
             data: [{
