@@ -6,23 +6,9 @@
     
 <?php include('comp/header.php')?>
 </head>
-<style>
-/* .badge {
-  display: inline-block;
-  padding: 1em 1em;
-  font-size: 40%;
-  font-weight: 700;
-  line-height: 2;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: baseline;
-  border-radius: 100%;
-  /* transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; */
-} */
 
-</style>
 <script>   
-    function addbenchmarkcard(infor, farminfo, score){
+    function addbenchmarkcard(infor, farminfo, score, pos, total){
         const col = document.createElement("div");
         col.className = "col-xl-2 col-md-4 col-sm-12  d-flex align-items-stretch";            
         
@@ -63,7 +49,7 @@
         if (score < 33){
             badge.className = "badge badge bg-danger";
         }           
-        badge.innerText = score + "%";
+        badge.innerText = pos + "/" + total + "  (" + score + "%)";
         mb.appendChild(badge);
         colauto.appendChild(mb);
         row.appendChild(colauto);
@@ -76,7 +62,7 @@
 
         return col;
     }
-    function createparentcard(farminfo,infor,score){
+    function createparentcard(farminfo,infor,score,pos,total){
         const currentDiv = document.getElementById("item");
         let parentDiv = currentDiv.parentNode
         
@@ -91,7 +77,7 @@
         const newDiv3 = document.createElement("div");
         newDiv3.className = "card-body"; 
         const cardjeader = document.createElement("h1");
-        cardjeader.className = "card-title h1";
+        // cardjeader.className = "card-title h1";
         cardjeader.innerText = farminfo[0];
         newDiv3.appendChild(cardjeader);
 
@@ -101,75 +87,22 @@
 
         for (let i=1;i<farminfo.length;i++){   
             if (i==1 || i==3 || i== 8 || i == 9 || i== 13 || i== 14){         
-                newDiv5.appendChild(addbenchmarkcard(infor[i],farminfo[i],score[i])); 
+                newDiv5.appendChild(addbenchmarkcard(infor[i],farminfo[i],score[i],pos[i],total[i])); 
             }
         }     
         newDiv4.appendChild(newDiv5);
+
+        const text = document.createElement("h4");
+        text.innerText = "Click to Expand";
+            
          
 
         newDiv3.appendChild(newDiv4);
+        newDiv3.appendChild(text);   
         newDiv2.appendChild(newDiv3);
         parentDiv.insertBefore(newDiv2, currentDiv); 
 
     }   
-    // function createchildcard(set,infor,id){
-    //     const currentDiv = document.getElementById("item");
-    //     let parentDiv = currentDiv.parentNode
-        
-    //     const newDiv2 = document.createElement("div");
-    //     newDiv2.className = "card bg-light collapse"; 
-    //     newDiv2.id = id; 
-     
-    //     const newDiv3 = document.createElement("div");
-    //     newDiv3.className = "card-body"; 
-    //     const cardjeader = document.createElement("h1");
-    //     cardjeader.className = "card-title h1";
-    //     cardjeader.innerText = set[0];
-    //     newDiv3.appendChild(cardjeader);
-
-    //     const newDiv4 = document.createElement("container");
-    //     const newDiv5 = document.createElement("div");
-    //     newDiv5.className = "row";
-
-    //     // for (let i=1;i<set.length;i++){   
-    //     //     newDiv5.appendChild(addbenchmarkcard(infor[i],set[i],));
-    //     // }     
-    //     // newDiv4.appendChild(newDiv5);
-         
-
-    //     newDiv3.appendChild(newDiv4);
-    //     newDiv2.appendChild(newDiv3);
-    //     parentDiv.insertBefore(newDiv2, currentDiv); 
-    // }
-    // function createchildcard(set,infor,id){
-    //     const currentDiv = document.getElementById("item");
-    //     let parentDiv = currentDiv.parentNode
-        
-    //     const newDiv2 = document.createElement("div");
-    //     newDiv2.className = "card bg-light collapse"; 
-    //     newDiv2.id = id; 
-     
-    //     const newDiv3 = document.createElement("div");
-    //     newDiv3.className = "card-body"; 
-    //     const cardjeader = document.createElement("h1");
-    //     cardjeader.className = "card-title h1";
-    //     cardjeader.innerText = set[0];
-    //     newDiv3.appendChild(cardjeader);
-
-    //     const newDiv4 = document.createElement("container");
-    //     const newDiv5 = document.createElement("div");
-    //     newDiv5.className = "row";
-
-    //     // for (let i=1;i<set.length;i++){   
-    //     //     newDiv5.appendChild(addbenchmarkcard(infor[i],set[i],));
-    //     // }     
-    //     // newDiv4.appendChild(newDiv5);
-         
-
-    //     newDiv3.appendChild(newDiv4);
-    //     newDiv2.appendChild(newDiv3);
-    //     parentDiv.insertBefore(newDiv2, currentDiv); 
-    // }
     function createchildcard(set,infor,id){
         const currentDiv = document.getElementById("item");
         let parentDiv = currentDiv.parentNode
@@ -188,52 +121,6 @@
         
         var br = document.createElement('br');
         newDiv3.appendChild(br);
-
-
-        // newdiv4 = document.createElement("p");
-        // newdiv4.className = "mb-0 h4"; 
-        // newdiv4.innerText = "This page is used to show the benchmark of the irrigation practice from the water perspective on a farm. It also display the benchmark of individual compoenents of an irrigation event, including area, flow rate and duration, which can be used to observe the relationship bettween them and an irrigation event.";
-        // newDiv3.appendChild(newdiv4);
-
-        // var br = document.createElement('br');
-        // newDiv3.appendChild(br);
-
-        // newdiv4 = document.createElement("p");
-        // newdiv4.className = "mb-0 h4"; 
-        // newdiv4.innerText = "The formulas used are shown below.";
-        // newDiv3.appendChild(newdiv4);
-
-        // newDiv3.appendChild(br);
-
-        // newdiv4 = document.createElement("p");
-        // newdiv4.className = "mb-0 h4"; 
-        // newdiv4.innerText = "Total ML per Farm =  Sum of Total ML per Set.";
-        // newDiv3.appendChild(newdiv4);
-        // newdiv4 = document.createElement("p");
-        // newdiv4.className = "mb-0 h4"; 
-        // newdiv4.innerText = "Total ML per Set =  Duration * Total Flow Rate * 3600 / 1000000.";
-        // newDiv3.appendChild(newdiv4);
-        // newdiv4 = document.createElement("p");
-        // newdiv4.className = "mb-0 h4"; 
-        // newdiv4.innerText = "Total mm per Set =  Total ML per Set * 100 / Set Area.";
-        // newDiv3.appendChild(newdiv4);
-        // newdiv4 = document.createElement("p");
-        // newdiv4.className = "mb-0 h4"; 
-        // newdiv4.innerText = "Avg mm =  Sum of Total mm per Set / Number of Sets.";
-        // newDiv3.appendChild(newdiv4);
-        // newdiv4 = document.createElement("p");
-        // newdiv4.className = "mb-0 h4"; 
-        // newdiv4.innerText = "Avg area =  Sum of Total Set Area / Number of Sets.";
-        // newDiv3.appendChild(newdiv4);
-        // newdiv4 = document.createElement("p");
-        // newdiv4.className = "mb-0 h4"; 
-        // newdiv4.innerText = "Avg Flow Rate =  Sum of Total Flow Rate / Number of Sets.";
-        // newDiv3.appendChild(newdiv4);
-        // newdiv4 = document.createElement("p");
-        // newdiv4.className = "mb-0 h4"; 
-        // newdiv4.innerText = "Avg Duration =  Sum of Total Duration / Number of Sets.";
-        // newDiv3.appendChild(newdiv4);
-
 
 
         const newDiv5 = document.createElement("div");
@@ -359,8 +246,8 @@
                     [0.9, '#55BF3B']                            
                 ],
             };
-            var distance = 50;                     
-            var titledistance = 80;                  
+            var distance = 70;                     
+            var titledistance = 10;                  
     
         }
 
@@ -599,6 +486,8 @@
                             farminfor[j] = farminfor[j].toFixed(fixed[j]);  
                         }                        
                         var score = [];
+                        var pos = [];
+                        var total = [];
                         for (let j=1;j<infor.length;j++){
                             newarray = [];
                             for (let z=0;z<farmsummary.length;z++){
@@ -612,9 +501,11 @@
                             
                             
                             score[j] = ((index + 1) * 100 / newarray.length).toFixed(0);
+                            pos[j] = index + 1;
+                            total[j] = newarray.length;
                         }  
                         console.log(infor);
-                        createparentcard(farminfor,infor,score);
+                        createparentcard(farminfor,infor,score,pos,total);
                         createchildcard('','',farminfor[0]);
                         creategauge(farminfor[0] + "container0",1,Number(score[8]),"Total ML");
                         creategauge(farminfor[0] + "container1",1,Number(score[10]),"Avg mm");

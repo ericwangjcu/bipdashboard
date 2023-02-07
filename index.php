@@ -505,7 +505,7 @@
                     <div class="card-body">
                         <div class = "card-text h2">Baseline Dashboard</div>
                         </br>
-                        <div class = "card-text h4">This page is simply showing the aggregated baseline information collected by the delivery teams on all BIP farms. </div>
+                        <div class = "card-text h4">This page is simply showing the aggregated baseline information collected by the delivery teams on all BIP farms </div>
                         </br>
                     </div>  
                 </div>             
