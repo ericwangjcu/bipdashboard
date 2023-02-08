@@ -36,7 +36,7 @@
         const colauto = document.createElement("div");
         colauto.className = "col-auto";
         const mb = document.createElement("div");
-        mb.className = "h1";
+        mb.className = "h2";
         const badge = document.createElement("span");
 
 
