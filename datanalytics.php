@@ -256,7 +256,40 @@
             }
         }        
         
+        var names = [];
+        var areas = [];
+        for (let i = 1; i < subset.length; i++) {
+            names[i] = subset[i][1];
+            areas[i] = subset[i][14];
+        }       
+
+        var counts = {};
+        for (const num of names) {
+        counts[num] = counts[num] ? counts[num] + 1 : 1;
+        }    
+        const iterator = Object.keys(counts);
         
+        var areasum = [];
+        var indexkey = 0;
+        for (const key of iterator) {
+            areasum[indexkey] = 0;
+            for (let i = 1; i < areas.length; i++) {
+                if (names[i] == key){
+                    areasum[indexkey] += Number(areas[i]);   
+                }
+            } 
+            areasum[indexkey] = areasum[indexkey].toFixed(0);
+            indexkey ++;
+        }     
+        function removeItemOnce(arr, value) {
+            var index = arr.indexOf(value);
+            if (index > -1) {
+                arr.splice(index, 1);
+            }
+            return arr;
+        }
+        areasum = removeItemOnce(areasum, "0")
+                
         if (type == 0){
             createpiechart(header + "body0", data, tempdata,'',short,500);
             // createtreemap(header + "body0", data, tempdata,'',short,500);
@@ -370,7 +403,7 @@
             ["L/S","mm","%","KWh/ML","KWh/h","$/ML"]);
         } 
         if (type == 5){
-            createnestedpiechart(header + "body0", data,  data1, tempdata,"Sets","Farms",short,500);
+            createnestedpiechart(header + "body0", data, data1, areasum, tempdata, "Sets","Farms","Area",short,500);
 
         }  
         if (type == 6){
