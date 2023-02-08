@@ -204,6 +204,8 @@ function createnestedpiechart(c, d, d1, d2, e ,f, f1, f2, t,s){
             zMin: 0, 
             keys: ['name', 'y', 'z', 'id'],
             data: dataset,
+            colors: ["#fd7f6f", "#7eb0d5", "#b2e061", "#bd7ebe", "#ffb55a", "#ffee65", "#beb9db", "#fdcce5", "#8bd3c7"],
+
             dataLabels: {
                 alignTo: 'fixedOffset'
             }
@@ -228,6 +230,8 @@ function createnestedpiechart(c, d, d1, d2, e ,f, f1, f2, t,s){
             zMin: 0, 
             keys: ['name', 'y', 'z', 'id'],
             data: dataset1,
+            colors: ["#fd7f6f", "#7eb0d5", "#b2e061", "#bd7ebe", "#ffb55a", "#ffee65", "#beb9db", "#fdcce5", "#8bd3c7"],
+
             dataLabels: {
                 alignTo: 'connectors'
             }
@@ -252,6 +256,7 @@ function createnestedpiechart(c, d, d1, d2, e ,f, f1, f2, t,s){
             zMin: 0, 
             keys: ['name', 'y', 'z', 'id'],
             data: dataset2,
+            colors: ["#fd7f6f", "#7eb0d5", "#b2e061", "#bd7ebe", "#ffb55a", "#ffee65", "#beb9db", "#fdcce5", "#8bd3c7"],
             dataLabels: {
                 alignTo: 'connectors'
             }
