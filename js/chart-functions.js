@@ -69,7 +69,7 @@ function createtreemap(c, d, e ,f, t,s){
     });
 
 };
-function createnestedpiechart(c, d, d1, e ,f, f1, t,s){
+function createnestedpiechart(c, d, d1, d2, e ,f, f1, f2, t,s){
     var counts = {};
     for (const num of d) {
       counts[num] = counts[num] ? counts[num] + 1 : 1;
@@ -80,12 +80,14 @@ function createnestedpiechart(c, d, d1, e ,f, f1, t,s){
     for (const num of d1) {
       counts1[num] = counts1[num] ? counts1[num] + 1 : 1;
     }    
-    const iterator1 = Object.keys(counts1);  
-
+    const iterator1 = Object.keys(counts1);
+  
     var dataset = [];
     var dataset1 = [];
+    var dataset2 = [];
     var index = 0;
     var index1 = 0;
+    var index2 = 0;
     var text1 = "CNT";
     var text2 = "Count"
     for (const key of iterator) {
@@ -102,7 +104,16 @@ function createnestedpiechart(c, d, d1, e ,f, f1, t,s){
                 id: index1.toString()};
         index1 ++;
     }
-  
+    for (const key of iterator1) {
+        dataset2[index2] = {name: key + ": " + f2,
+                y: Number(d2[index2]),
+                z: 80,
+                id: index2.toString()};
+        index2 ++;
+    }
+    console.log(dataset1);
+    console.log(dataset2);
+
     new Highcharts.chart(c, {
         chart: {
             type: 'pie',
@@ -133,10 +144,9 @@ function createnestedpiechart(c, d, d1, e ,f, f1, t,s){
                     },
                     
                     style:{
-                    fontSize: '18px',
+                    fontSize: '14px',
                     fontWeight: 'thin',
                     },
-                    distance: '40%'
                 },
                 showInLegend: true,
             },
@@ -194,6 +204,9 @@ function createnestedpiechart(c, d, d1, e ,f, f1, t,s){
             zMin: 0, 
             keys: ['name', 'y', 'z', 'id'],
             data: dataset,
+            dataLabels: {
+                alignTo: 'fixedOffset'
+            }
         },{
             center: [10000, 10000],
             data: [{
@@ -217,12 +230,40 @@ function createnestedpiechart(c, d, d1, e ,f, f1, t,s){
             data: dataset1,
             colors: ["#81CACF", "#E98841", "#E3D830", "#A6C46F",
             "#894C7B", "#BA9765", "#7F7F7F", "#C3C3C3"],
-
+            dataLabels: {
+                alignTo: 'connectors'
+            }
         },{
             center: [10000, 10000],
             data: [{
               name: "Total",
               y: d1.length,
+            }, ]
+          },{
+            center: [10000, 10000],
+            data: [{
+              name: "skip",
+              y: 1,
+            },],
+            colors: ["#FFFFFF"],
+        },{
+            name: f2,
+            minPointSize: 10,
+            size: '40%',
+            innerSize: '35%',
+            zMin: 0, 
+            keys: ['name', 'y', 'z', 'id'],
+            data: dataset2,
+            colors: ["#81CACF", "#E98841", "#E3D830", "#A6C46F",
+            "#894C7B", "#BA9765", "#7F7F7F", "#C3C3C3"],
+            dataLabels: {
+                alignTo: 'connectors'
+            }
+        },{
+            center: [10000, 10000],
+            data: [{
+              name: "Total",
+              y: dataset2[0].y + dataset2[1].y,
             }, ]
           }],
         credits: {
@@ -560,7 +601,7 @@ function createpiechart(c, d, e ,f, t,s){
 
   });
   
-  };
+};
 function createbasicbar(c, d, e, f, t, xt, s, dist){
     
     var m1 = Math.max.apply(Math, d);

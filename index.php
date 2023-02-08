@@ -226,13 +226,20 @@
                     areasum[indexkey] += Number(areas[i]);   
                 }
             } 
+            areasum[indexkey] = areasum[indexkey].toFixed(0);
             indexkey ++;
-        }         
-        console.log(areasum);
+        }     
+        function removeItemOnce(arr, value) {
+            var index = arr.indexOf(value);
+            if (index > -1) {
+                arr.splice(index, 1);
+            }
+            return arr;
+        }
+        areasum = removeItemOnce(areasum, "0")
 
         if (type == 0){
             createpiechart(header + "body0", data, tempdata,'',short,500);
-            // createtreemap(header + "body0", data, tempdata,'',short,500);
         }
         if (type == 1){
             createbasicbar(header + "body0",data, tempdata,'',header,"",500, interval);
@@ -343,8 +350,9 @@
             comparisonchart(15,[20,24,27,29,30,32],["Flow Rate","mm per Irrigation","Applied Efficiency","Energy per ML","Energy per Hour","Cost per ML"],
             ["L/S","mm","%","KWh/ML","KWh/h","$/ML"]);
         } 
+
         if (type == 5){
-            createnestedpiechart(header + "body0", data,  data1,  tempdata,"Sets","Farms",short,500);
+            createnestedpiechart(header + "body0", data, data1, areasum, tempdata, "Sets","Farms","Area",short,500);
             // createpiechart(header + "body0", data, tempdata,"Sets",short,500);
             // createpiechart(header + "body1", data1, tempdata,"Farms",short,500);
         }  
