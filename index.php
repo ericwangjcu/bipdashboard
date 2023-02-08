@@ -220,10 +220,10 @@
         var areasum = [];
         var indexkey = 0;
         for (const key of iterator) {
-            areasum[indexkey] = [];
+            areasum[indexkey] = 0;
             for (let i = 1; i < areas.length; i++) {
                 if (names[i] == key){
-                    areasum[indexkey] += areas[i];   
+                    areasum[indexkey] += Number(areas[i]);   
                 }
             } 
             indexkey ++;
