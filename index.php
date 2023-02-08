@@ -204,7 +204,32 @@
             }
         }        
         
+        var names = [];
+        var areas = [];
+        for (let i = 1; i < subset.length; i++) {
+            names[i] = subset[i][1];
+            areas[i] = subset[i][14];
+        }       
+
+        var counts = {};
+        for (const num of names) {
+        counts[num] = counts[num] ? counts[num] + 1 : 1;
+        }    
+        const iterator = Object.keys(counts);
         
+        var areasum = [];
+        var indexkey = 0;
+        for (const key of iterator) {
+            areasum[indexkey] = [];
+            for (let i = 1; i < areas.length; i++) {
+                if (names[i] == key){
+                    areasum[indexkey] += areas[i];   
+                }
+            } 
+            indexkey ++;
+        }         
+        console.log(areasum);
+
         if (type == 0){
             createpiechart(header + "body0", data, tempdata,'',short,500);
             // createtreemap(header + "body0", data, tempdata,'',short,500);
@@ -303,6 +328,7 @@
                 }
                 
             }
+
             
             for (let i = 0; i < y.length; i++){
                 createnewcomparison(header + "body" + i,iterator,x[i],ynames[i],yunits[i],500)
