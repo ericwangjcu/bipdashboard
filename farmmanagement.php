@@ -465,7 +465,7 @@
 <script src="js/datatables.js"></script>
 
 
-
+<!-- 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
        // Datatables Responsive
@@ -473,5 +473,16 @@
             responsive: true,
         });			
     });
-</script>	
+</script>	 -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Datatables with Buttons
+        var datatablesButtons = $("#datatables-reponsive").DataTable({
+            responsive: true,
+            lengthChange: !1,
+            buttons: ["copy", "print"]
+        });
+        datatablesButtons.buttons().container().appendTo("#datatables-reponsive_wrapper .col-md-6:eq(0)");
+    });
+</script>
 </html>

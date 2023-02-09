@@ -10,8 +10,8 @@
 // });    
 
 // piecolors = ["#fd7f6f", "#7eb0d5", "#b2e061", "#bd7ebe", "#ffb55a", "#ffee65", "#beb9db", "#fdcce5", "#8bd3c7"];
-piecolors = ["#fd7f6f", "#7eb0d5", "#b2e061", "#bd7ebe", "#ffb55a", "#ffee65", "#beb9db", "#fdcce5", "#8bd3c7"];
-barcolors = ["#fd7f6f", "#7eb0d5", "#b2e061", "#bd7ebe", "#ffb55a", "#ffee65", "#beb9db", "#fdcce5", "#8bd3c7"];
+piecolors = ["#115f9a", "#1984c5", "#22a7f0", "#48b5c4", "#76c68f", "#a6d75b", "#c9e52f", "#d0ee11", "#f4f100"];
+barcolors = ["#115f9a", "#1984c5", "#22a7f0", "#48b5c4", "#76c68f", "#a6d75b", "#c9e52f", "#d0ee11", "#f4f100"];
 
 Highcharts.setOptions({ colors: barcolors });
 
@@ -204,7 +204,7 @@ function createnestedpiechart(c, d, d1, d2, e ,f, f1, f2, t,s){
             zMin: 0, 
             keys: ['name', 'y', 'z', 'id'],
             data: dataset,
-            colors: ["#fd7f6f", "#7eb0d5", "#b2e061", "#bd7ebe", "#ffb55a", "#ffee65", "#beb9db", "#fdcce5", "#8bd3c7"],
+            colors: ["#115f9a", "#1984c5", "#22a7f0", "#48b5c4", "#76c68f", "#a6d75b", "#c9e52f", "#d0ee11", "#f4f100"],
 
             dataLabels: {
                 alignTo: 'fixedOffset'
@@ -230,7 +230,7 @@ function createnestedpiechart(c, d, d1, d2, e ,f, f1, f2, t,s){
             zMin: 0, 
             keys: ['name', 'y', 'z', 'id'],
             data: dataset1,
-            colors: ["#fd7f6f", "#7eb0d5", "#b2e061", "#bd7ebe", "#ffb55a", "#ffee65", "#beb9db", "#fdcce5", "#8bd3c7"],
+            colors: ["#115f9a", "#1984c5", "#22a7f0", "#48b5c4", "#76c68f", "#a6d75b", "#c9e52f", "#d0ee11", "#f4f100"],
 
             dataLabels: {
                 alignTo: 'connectors'
@@ -256,7 +256,7 @@ function createnestedpiechart(c, d, d1, d2, e ,f, f1, f2, t,s){
             zMin: 0, 
             keys: ['name', 'y', 'z', 'id'],
             data: dataset2,
-            colors: ["#fd7f6f", "#7eb0d5", "#b2e061", "#bd7ebe", "#ffb55a", "#ffee65", "#beb9db", "#fdcce5", "#8bd3c7"],
+            colors: ["#115f9a", "#1984c5", "#22a7f0", "#48b5c4", "#76c68f", "#a6d75b", "#c9e52f", "#d0ee11", "#f4f100"],
             dataLabels: {
                 alignTo: 'connectors'
             }
