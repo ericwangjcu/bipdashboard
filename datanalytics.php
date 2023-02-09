@@ -210,7 +210,7 @@
                 subset = setvalues;
                 break;             
             case "FARMACIST":
-                findsubset("FARMACIST");
+                findsubset("FBIP");
                 break;
             case "BPS":
                 findsubset("BPS");        
@@ -596,7 +596,7 @@
                                 subset = setvalues;
                                 break;                            
                             case "FARMACIST":
-                                findsubset("FARMACIST");
+                                findsubset("FBIP");
                                 break;
                             case "BPS":
                                 findsubset("BPS");        

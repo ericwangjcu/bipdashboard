@@ -158,7 +158,7 @@
                 subset = setvalues;
                 break;             
             case "FARMACIST":
-                findsubset("FARMACIST");
+                findsubset("FBIP");
                 break;
             case "BPS":
                 findsubset("BPS");        
@@ -351,11 +351,7 @@
             ["L/S","mm","%","KWh/ML","KWh/h","$/ML"]);
         } 
 
-        if (type == 5){
-            createnestedpiechart(header + "body0", data, data1, areasum, tempdata, "Sets","Farms","Area",short,500);
-            // createpiechart(header + "body0", data, tempdata,"Sets",short,500);
-            // createpiechart(header + "body1", data1, tempdata,"Farms",short,500);
-        }  
+
         if (type == 6){
             var x = [];
             ind = 0;
@@ -386,15 +382,18 @@
             createstackedbars(header + "body1",x,y,500);
         }                        
     }
-    function addgroup(header,size,cards){
+    function addgroup(header,size,cards,value,text){
         const newDiv1 = document.createElement("div");
-        newDiv1.className = "col-12 col-md-12" + " col-xl-" + size + " d-flex align-items-stretch";
+        newDiv1.className = "col-12 col-md-12" + " col-xl-" + size;
         newDiv1.id = header;
 
         const newDiv0 = document.createElement("div");
         newDiv0.className = "row";
 
         for (let i=0;i<cards.length;i++){
+            const newDiv2 = document.createElement("div");
+            newDiv2.className = "col-12 col-md-12" + " col-xl-4";
+
             const card1 = document.createElement("div");
             card1.className = "card";        
             const cardheader1 = document.createElement("div");
@@ -405,12 +404,22 @@
             const cardbody = document.createElement("div");
             cardbody.className = "card-body";
 
-            const container = document.createElement("div");
-            container.id = header + cards[i] + "body";
+            let col8 = document.createElement('span');
+            col8.className = 'h1 text-primary mt-2 mb-0';
+            col8.innerText = value[i];
+            let col9 = document.createElement('span');
+            col9.className = 'h1 text-muted mt-2 mb-0';
+            col9.innerText = "            " + text[i];
+            let col10 = document.createElement('div');
+            col10.id = header + cards[i];
 
-            cardbody.appendChild(container);
+            cardbody.appendChild(col8);
+            cardbody.appendChild(col9);
+            cardbody.appendChild(col10);
+
             card1.appendChild(cardbody);
-            newDiv0.appendChild(card1);
+            newDiv2.appendChild(card1);
+            newDiv0.appendChild(newDiv2);
         }
         newDiv1.appendChild(newDiv0);
 
@@ -419,114 +428,7 @@
 
         parentDiv.insertBefore(newDiv1, currentDiv);        
     }  
-    function addstatcard(header, value, text){
-        const newDiv1 = document.createElement("div");
-        newDiv1.className = "col-xl-12 col-md-12 col-sm-12";
-        newDiv1.id = header;
 
-        const card1 = document.createElement("div");
-        card1.className = "card";        
-        const cardheader1 = document.createElement("div");
-        cardheader1.className = "card-header h3";
-        cardheader1.innerText = header;
-        card1.appendChild(cardheader1);
-
-        const cardbody = document.createElement("div");
-        cardbody.className = "card-body";
-
-        let col6 = document.createElement('h1');
-        let col8 = document.createElement('span');
-        col8.className = 'h1 text-primary mt-2 mb-0';
-        col8.innerText = value;
-        let col9 = document.createElement('span');
-        col9.className = 'h3 text-muted mt-2 mb-0';
-        col9.innerText = "            " + text;
-
-        cardbody.appendChild(col8);
-        cardbody.appendChild(col9);
-
-        card1.appendChild(cardbody);
-        
-        newDiv1.appendChild(card1);
-
-        const currentDiv = document.getElementById("head");
-        let parentDiv = currentDiv.parentNode
-
-        parentDiv.insertBefore(newDiv1, currentDiv); 
-	};	
-    function createcard(header, value, text){
-        const currentDiv = document.getElementById(header);
-        let parentDiv = currentDiv.parentNode
-
-		let col6 = document.createElement('h1');
-		let col8 = document.createElement('span');
-        col8.className = 'h1 text-primary mt-2 mb-0';
-		col8.innerText = value;
-		let col9 = document.createElement('span');
-		col9.className = 'h1 text-muted mt-2 mb-0';
-		col9.innerText = "            " + text;
-		
-		
-		
-		col6.appendChild(col8);
-		col6.appendChild(col9);
-		
-        parentDiv.insertBefore(col6, currentDiv);  
-	};	
-    function createsmallcard(header, value, text){
-        const currentDiv = document.getElementById(header);
-        let parentDiv = currentDiv.parentNode
-
-		let col6 = document.createElement('h1');
-		let col8 = document.createElement('span');
-        col8.className = 'h1 text-primary mt-2 mb-0';
-		col8.innerText = value;
-		let col9 = document.createElement('span');
-		col9.className = 'h3 text-muted mt-2 mb-0';
-		col9.innerText = "            " + text;
-		
-		
-		
-		col6.appendChild(col8);
-		col6.appendChild(col9);
-		
-        parentDiv.insertBefore(col6, currentDiv);  
-	};
-    function createtable(header, head, row, name, offset){
-        const currentDiv = document.getElementById(header);
-        let parentDiv = currentDiv.parentNode
-
-        const tbl = document.createElement('table');
-        tbl .className = "table table-striped";   
-        tbl .id = name;
-        tbl .style = "width:100%";
-
-        const thead = document.createElement('thead');
-        
-        const tr = document.createElement('tr');
-        for (let i=0;i<head.length-offset;i++){
-            const th = document.createElement('th');
-            th.appendChild(document.createTextNode(head[i]));
-            tr.appendChild(th);
-        }
-
-        thead.appendChild(tr);
-        tbl.appendChild(thead);
-
-        const tbody = document.createElement('tbody');    
-        for (let i=0;i<row.length;i++){
-            const tr = document.createElement('tr');
-            for (let j=0;j<row[i].length-offset;j++){
-                const td = document.createElement('td');            
-                td.appendChild(document.createTextNode(row[i][j]));       
-                tr.appendChild(td);
-            }
-            tbody.appendChild(tr);
-        }          
-        tbl.appendChild(tbody);
-
-        parentDiv.insertBefore(tbl, currentDiv);  
-    }
 </script>
 
 
@@ -598,7 +500,7 @@
                                 subset = setvalues;
                                 break;                            
                             case "FARMACIST":
-                                findsubset("FARMACIST");
+                                findsubset("FBIP");
                                 break;
                             case "BPS":
                                 findsubset("BPS");        
@@ -619,25 +521,115 @@
                         for (const num of farms) {
                             counts[num] = counts[num] ? counts[num] + 1 : 1;
                         }    
-                        const iterator = Object.keys(counts);
+                        var iterator = Object.keys(counts);
 
                         value[0] = iterator.length;
                         value[1] = subset.length;
                         value[2] = sizes.reduce((a, b) => {
                             return a + b;
                             }).toFixed(0);
-
-                        // cards=["No. of Farms", "No. of Sets", "Total Area"];
-                        
-                        // for (let i=0;i<3;i++){                            
-                        //     addstatcard(cards[i], value[i],units[i])
-                        // }  
                         cards=["No. of Farms", "No. of Sets", "Total Area"];
-                        addgroup("test",3, cards);
-                        for (let i=0;i<3;i++){
-                            createcard("test" + cards[i] +"body",value[i],units[i]); 
-                        }  
+                        addgroup("test",12, cards, value, units);
 
+                        var data = [];
+                        ind = 0;
+                        for (let i = 0; i < subset.length; i++) {
+                            if (Number(subset[i][1]) != 0){
+                                data[ind] = subset[i][1];
+                                ind ++;                
+                            }
+                        } 
+
+                        var data1 = [];
+                        var ind1 = 0;
+
+
+                        for (let i = 1; i < subset.length; i++) {
+                            var count = 0;
+                            for (let j = 1; j < i; j++) {
+                                if (subset[i][2] != subset[j][2]){
+                                    count ++;
+                                }
+                            }
+                            if (count == i-1){
+                                data1[ind1] = subset[i][1];
+                                ind1 ++;    
+                            }
+                        }        
+
+                        var names = [];
+                        var areas = [];
+                        for (let i = 1; i < subset.length; i++) {
+                            names[i] = subset[i][1];
+                            areas[i] = subset[i][14];
+                        }       
+
+                        var counts = {};
+                        for (const num of names) {
+                        counts[num] = counts[num] ? counts[num] + 1 : 1;
+                        }    
+                        iterator = Object.keys(counts);
+
+                        var areasum = [];
+                        var indexkey = 0;
+                        for (const key of iterator) {
+                            areasum[indexkey] = 0;
+                            for (let i = 1; i < areas.length; i++) {
+                                if (names[i] == key){
+                                    areasum[indexkey] += Number(areas[i]);   
+                                }
+                            } 
+                            areasum[indexkey] = areasum[indexkey].toFixed(0);
+                            indexkey ++;
+                        }     
+                        function removeItemOnce(arr, value) {
+                            var index = arr.indexOf(value);
+                            if (index > -1) {
+                                arr.splice(index, 1);
+                            }
+                            return arr;
+                        }
+                        areasum = removeItemOnce(areasum, "0")
+                        var counts = {};
+                        for (const num of data) {
+                        counts[num] = counts[num] ? counts[num] + 1 : 1;
+                        }    
+                        iterator = Object.keys(counts);  
+
+                        var dataset = [];
+                        var index = 0;
+                        for (const key of iterator) {
+                            dataset[index] = {name: key,
+                                data: [counts[key]]};
+                            index ++;
+                        }    
+
+                        var counts1 = {};
+                        for (const num of data1) {
+                        counts1[num] = counts1[num] ? counts1[num] + 1 : 1;
+                        }    
+                        iterator1 = Object.keys(counts1);  
+
+                        var dataset1 = [];
+                        var index1 = 0;
+                        for (const key of iterator1) {
+                            dataset1[index1] = {name: key,
+                                data: [counts1[key]]};
+                            index1 ++;
+                        }    
+
+                        var  dataset2 = [];
+                        var index2 = 0;
+                        for (const key of iterator) {
+                            dataset2[index2] = {name: key,
+                                data: [Number(areasum[index2])]};
+                            index2 ++;
+                        }    
+                        console.log(dataset2);
+                        stackedcolumn("testNo. of Farms",dataset1);
+                        stackedcolumn("testNo. of Sets",dataset);
+                        stackedcolumn("testTotal Area",dataset2);
+                            // createpiechart(header + "body1", data1, tempdata,"Farms",short,500);
                     </script>
                 </div>                 
                 <div class="container-fluid p-0">
@@ -724,7 +716,7 @@
                     document.getElementById('result-table').value  = document.getElementById('result-table').value + dashboarditems[i] + ";";
                 }
             }
-            adddashboarditem(0);
+            // adddashboarditem(0);
             // adddashboarditem(36);
             // adddashboarditem(33);
             // adddashboarditem(34);

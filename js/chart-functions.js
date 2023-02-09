@@ -106,14 +106,18 @@ function createnestedpiechart(c, d, d1, d2, e ,f, f1, f2, t,s){
                 id: index1.toString()};
         index1 ++;
     }
-    for (const key of iterator1) {
+    var sum = 0;
+    for (const key of iterator) {
         dataset2[index2] = {name: key + ": " + f2,
                 y: Number(d2[index2]),
                 z: 80,
                 id: index2.toString()};
+        sum += Number(d2[index2]);
         index2 ++;
+
+        
     }
-    console.log(dataset1);
+    console.log(sum);
     console.log(dataset2);
 
     new Highcharts.chart(c, {
@@ -253,8 +257,8 @@ function createnestedpiechart(c, d, d1, d2, e ,f, f1, f2, t,s){
         },{
             name: f2,
             minPointSize: 10,
-            size: '40%',
-            innerSize: '35%',
+            size: '29%',
+            innerSize: '0%',
             zMin: 0, 
             keys: ['name', 'y', 'z', 'id'],
             data: dataset2,
@@ -266,7 +270,7 @@ function createnestedpiechart(c, d, d1, d2, e ,f, f1, f2, t,s){
             center: [10000, 10000],
             data: [{
               name: "Total",
-              y: dataset2[0].y + dataset2[1].y,
+              y: sum,
             }, ]
           }],
         credits: {
@@ -358,6 +362,54 @@ function createnestedpiechart(c, d, d1, d2, e ,f, f1, f2, t,s){
         }
     }
     )    
+};
+function stackedcolumn(c,dataset){
+
+    Highcharts.chart(c, {
+        chart: {
+            type: 'bar',
+            height: 100
+        },
+        title: {
+            text: null
+        },
+        xAxis: {
+            visible: false
+        },
+        yAxis: {
+            visible: false
+
+        },
+        legend: {
+            enabled: false
+        },
+        tooltip: {
+            enabled: false
+        },
+        plotOptions: {
+            series: {
+                stacking: 'normal',
+                dataLabels: {
+                    enabled: true,
+                    formatter: function(){
+                        return String(this.series.name + ": " + this.point.y);
+                    },
+                    style:{
+                        fontSize: '16px',
+                    },
+                    y: 2,
+                }
+            }
+        },
+        series: dataset,
+        credits: {
+        enabled: false
+        },
+        exporting: {
+            enabled: false
+        },
+});
+
 }
 function createpiechart(c, d, e ,f, t,s){
     var counts = {};
