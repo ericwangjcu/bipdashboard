@@ -71,298 +71,298 @@ function createtreemap(c, d, e ,f, t,s){
     });
 
 };
-function createnestedpiechart(c, d, d1, d2, e ,f, f1, f2, t,s){
-    var counts = {};
-    for (const num of d) {
-      counts[num] = counts[num] ? counts[num] + 1 : 1;
-    }    
-    const iterator = Object.keys(counts);  
+// function createnestedpiechart(c, d, d1, d2, e ,f, f1, f2, t,s){
+//     var counts = {};
+//     for (const num of d) {
+//       counts[num] = counts[num] ? counts[num] + 1 : 1;
+//     }    
+//     const iterator = Object.keys(counts);  
 
-    var counts1 = {};
-    for (const num of d1) {
-      counts1[num] = counts1[num] ? counts1[num] + 1 : 1;
-    }    
-    const iterator1 = Object.keys(counts1);
+//     var counts1 = {};
+//     for (const num of d1) {
+//       counts1[num] = counts1[num] ? counts1[num] + 1 : 1;
+//     }    
+//     const iterator1 = Object.keys(counts1);
   
-    var dataset = [];
-    var dataset1 = [];
-    var dataset2 = [];
-    var index = 0;
-    var index1 = 0;
-    var index2 = 0;
-    var text1 = "CNT";
-    var text2 = "Count"
-    for (const key of iterator) {
-        dataset[index] = {name: key + ": " + f,
-                y: counts[key],
-                z: 80,
-                id: index.toString()};
-        index ++;
-    }
-    for (const key of iterator1) {
-        dataset1[index1] = {name: key + ": " + f1,
-                y: counts1[key],
-                z: 80,
-                id: index1.toString()};
-        index1 ++;
-    }
-    var sum = 0;
-    for (const key of iterator) {
-        dataset2[index2] = {name: key + ": " + f2,
-                y: Number(d2[index2]),
-                z: 80,
-                id: index2.toString()};
-        sum += Number(d2[index2]);
-        index2 ++;
+//     var dataset = [];
+//     var dataset1 = [];
+//     var dataset2 = [];
+//     var index = 0;
+//     var index1 = 0;
+//     var index2 = 0;
+//     var text1 = "CNT";
+//     var text2 = "Count"
+//     for (const key of iterator) {
+//         dataset[index] = {name: key + ": " + f,
+//                 y: counts[key],
+//                 z: 80,
+//                 id: index.toString()};
+//         index ++;
+//     }
+//     for (const key of iterator1) {
+//         dataset1[index1] = {name: key + ": " + f1,
+//                 y: counts1[key],
+//                 z: 80,
+//                 id: index1.toString()};
+//         index1 ++;
+//     }
+//     var sum = 0;
+//     for (const key of iterator) {
+//         dataset2[index2] = {name: key + ": " + f2,
+//                 y: Number(d2[index2]),
+//                 z: 80,
+//                 id: index2.toString()};
+//         sum += Number(d2[index2]);
+//         index2 ++;
 
         
-    }
-    console.log(sum);
-    console.log(dataset2);
+//     }
+//     console.log(sum);
+//     console.log(dataset2);
 
-    new Highcharts.chart(c, {
-        chart: {
-            type: 'pie',
-            height: s,
-            style: {
-                fontFamily: 'Poppins'
-        },      
+//     new Highcharts.chart(c, {
+//         chart: {
+//             type: 'pie',
+//             height: s,
+//             style: {
+//                 fontFamily: 'Poppins'
+//         },      
             
-        },
-        title: {
-            text: "",
-            style:{
-              fontSize: '16px'
-            }
-        },
+//         },
+//         title: {
+//             text: "",
+//             style:{
+//               fontSize: '16px'
+//             }
+//         },
 
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                borderWidth: 8,
-                borderColor: '#fff',            
-                dataLabels: {
-                    enabled: true,
-                    formatter: function(){
-                        var sn = this.point.name.length > 10 ? this.point.name.substring(0, 10) + '..' : this.point.name;
-                        return String(sn + "<br>" + this.point.percentage.toFixed(0) + "%" + "<br>" + text2 + ": " + this.point.y);
-                    },
+//         plotOptions: {
+//             pie: {
+//                 allowPointSelect: true,
+//                 cursor: 'pointer',
+//                 borderWidth: 8,
+//                 borderColor: '#fff',            
+//                 dataLabels: {
+//                     enabled: true,
+//                     formatter: function(){
+//                         var sn = this.point.name.length > 10 ? this.point.name.substring(0, 10) + '..' : this.point.name;
+//                         return String(sn + "<br>" + this.point.percentage.toFixed(0) + "%" + "<br>" + text2 + ": " + this.point.y);
+//                     },
                     
-                    style:{
-                    fontSize: '14px',
-                    fontWeight: 'thin',
-                    },
-                },
-                showInLegend: true,
-            },
-            series: {
-                colorByPoint: true,
-                animation: false
-            }
-        },   
+//                     style:{
+//                     fontSize: '14px',
+//                     fontWeight: 'thin',
+//                     },
+//                 },
+//                 showInLegend: true,
+//             },
+//             series: {
+//                 colorByPoint: true,
+//                 animation: false
+//             }
+//         },   
         
         
-        accessibility: {
-            point: {
-                valueSuffix: '%'
-            }
-        }, 
+//         accessibility: {
+//             point: {
+//                 valueSuffix: '%'
+//             }
+//         }, 
      
-        legend: {
-            layout: 'vertical',
-            verticalAlign: 'middle',
-            align: 'right',
-            symbolRadius: 2,
-            useHTML: true,
-            labelFormatter: function() {
-              var shortname = this.name.length > 12 ? this.name.substring(0, 12) + '..' : this.name;
-              if (this.name === t) {
-                return `<span style="min-width: 200px; display:inline-block; border-bottom: 1px solid #b2b2b2;">
-                            <span style="float:left; font-size:16px;">${this.name}</span></span>
-                        <span style="min-width: 80px; display:inline-block; border-bottom: 1px solid #b2b2b2;">
-                            <span style="float:left; font-size:16px;">${text1}</span>
-                            <span style="float:right; font-size:16px;">%</span>
-                        </span>`
-              }
-              if (this.name === "skip") {
-                return `</br></br>`
-              }
-              return `<span style="min-width: 200px; display:inline-block; border-bottom: 1px solid #ccc;">
-              <span style="float:left; font-size:16px; font-weight:normal" >${shortname}</span></span>
-              <span style="min-width: 80px; display:inline-block; border-bottom: 1px solid #ccc;">
-              <span style="float:left; font-size:16px;">${this.y}</span>
-              <span style="float:right; font-size:16px;">${(this.y * 100 / this.total).toFixed(0)}</span>
-              </span>`
-            }
-          },          
-        series: [{
-            center: [10000, 10000],
-            data: [{
-              name: t,
-              y: 0,
-            }, ]
-          },{
-            name: f,
-            minPointSize: 10,
-            size: '100%',
-            innerSize: '70%',
-            zMin: 0, 
-            keys: ['name', 'y', 'z', 'id'],
-            data: dataset,
-            colors: ["#d03161", "#178a94", "#bfd8d1", "#ee8080", "#2b374b"],
+//         legend: {
+//             layout: 'vertical',
+//             verticalAlign: 'middle',
+//             align: 'right',
+//             symbolRadius: 2,
+//             useHTML: true,
+//             labelFormatter: function() {
+//               var shortname = this.name.length > 12 ? this.name.substring(0, 12) + '..' : this.name;
+//               if (this.name === t) {
+//                 return `<span style="min-width: 200px; display:inline-block; border-bottom: 1px solid #b2b2b2;">
+//                             <span style="float:left; font-size:16px;">${this.name}</span></span>
+//                         <span style="min-width: 80px; display:inline-block; border-bottom: 1px solid #b2b2b2;">
+//                             <span style="float:left; font-size:16px;">${text1}</span>
+//                             <span style="float:right; font-size:16px;">%</span>
+//                         </span>`
+//               }
+//               if (this.name === "skip") {
+//                 return `</br></br>`
+//               }
+//               return `<span style="min-width: 200px; display:inline-block; border-bottom: 1px solid #ccc;">
+//               <span style="float:left; font-size:16px; font-weight:normal" >${shortname}</span></span>
+//               <span style="min-width: 80px; display:inline-block; border-bottom: 1px solid #ccc;">
+//               <span style="float:left; font-size:16px;">${this.y}</span>
+//               <span style="float:right; font-size:16px;">${(this.y * 100 / this.total).toFixed(0)}</span>
+//               </span>`
+//             }
+//           },          
+//         series: [{
+//             center: [10000, 10000],
+//             data: [{
+//               name: t,
+//               y: 0,
+//             }, ]
+//           },{
+//             name: f,
+//             minPointSize: 10,
+//             size: '100%',
+//             innerSize: '70%',
+//             zMin: 0, 
+//             keys: ['name', 'y', 'z', 'id'],
+//             data: dataset,
+//             colors: ["#d03161", "#178a94", "#bfd8d1", "#ee8080", "#2b374b"],
 
-            dataLabels: {
-                alignTo: 'fixedOffset'
-            }
-        },{
-            center: [10000, 10000],
-            data: [{
-              name: "Total",
-              y: d.length,
-            }, ]
-          },{
-            center: [10000, 10000],
-            data: [{
-              name: "skip",
-              y: 1,
-            },],
-            colors: ["#FFFFFF"],
-        },{
-            name: f1,
-            minPointSize: 10,
-            size: '65%',
-            innerSize: '55%',
-            zMin: 0, 
-            keys: ['name', 'y', 'z', 'id'],
-            data: dataset1,
-            colors: ["#d03161", "#178a94", "#bfd8d1", "#ee8080", "#2b374b"],
+//             dataLabels: {
+//                 alignTo: 'fixedOffset'
+//             }
+//         },{
+//             center: [10000, 10000],
+//             data: [{
+//               name: "Total",
+//               y: d.length,
+//             }, ]
+//           },{
+//             center: [10000, 10000],
+//             data: [{
+//               name: "skip",
+//               y: 1,
+//             },],
+//             colors: ["#FFFFFF"],
+//         },{
+//             name: f1,
+//             minPointSize: 10,
+//             size: '65%',
+//             innerSize: '55%',
+//             zMin: 0, 
+//             keys: ['name', 'y', 'z', 'id'],
+//             data: dataset1,
+//             colors: ["#d03161", "#178a94", "#bfd8d1", "#ee8080", "#2b374b"],
 
-            dataLabels: {
-                alignTo: 'connectors'
-            }
-        },{
-            center: [10000, 10000],
-            data: [{
-              name: "Total",
-              y: d1.length,
-            }, ]
-          },{
-            center: [10000, 10000],
-            data: [{
-              name: "skip",
-              y: 1,
-            },],
-            colors: ["#FFFFFF"],
-        },{
-            name: f2,
-            minPointSize: 10,
-            size: '29%',
-            innerSize: '0%',
-            zMin: 0, 
-            keys: ['name', 'y', 'z', 'id'],
-            data: dataset2,
-            colors: ["#d03161", "#178a94", "#bfd8d1", "#ee8080", "#2b374b"],
-            dataLabels: {
-                alignTo: 'connectors'
-            }
-        },{
-            center: [10000, 10000],
-            data: [{
-              name: "Total",
-              y: sum,
-            }, ]
-          }],
-        credits: {
-          enabled: false
-        },
-        exporting: {
-              enabled: false
-        },
-        responsive: {
-            rules: [{
-                condition: {
-                    maxWidth: 700
-                },
-                chartOptions: {
-                    // chart:{
-                    //     height: 1.5*s
-                    // },
-                    legend: {
-                        enabled: true,
-                        layout: 'center',
-                        verticalAlign: 'bottom',
-                        align: 'center',
-                        symbolRadius: 2,
-                        useHTML: true,
-                        labelFormatter: function() {
-                          var shortname = this.name.length > 10 ? this.name.substring(0, 10) + '..' : this.name;
-                          if (this.name === t) {
-                            return `<span style="min-width: 200px; display:inline-block; border-bottom: 1px solid #b2b2b2;">
-                                        <span style="float:left; font-size:16px;">${this.name}</span></span>
-                                    <span style="min-width: 80px; display:inline-block; border-bottom: 1px solid #b2b2b2;">
-                                        <span style="float:left; font-size:16px;">${text1}</span>
-                                        <span style="float:right; font-size:16px;">%</span>
-                                    </span>`
-                          }
-                          if (this.name === "skip") {
-                            return `</br></br>`
-                          }
-                          return `<span style="min-width: 200px; display:inline-block; border-bottom: 1px solid #ccc;">
-                          <span style="float:left; font-size:16px; font-weight:normal" >${shortname}</span></span>
-                          <span style="min-width: 80px; display:inline-block; border-bottom: 1px solid #ccc;">
-                          <span style="float:left; font-size:16px;">${this.y}</span>
-                          <span style="float:right; font-size:16px;">${(this.y * 100 / this.total).toFixed(0)}</span>
-                          </span>`
-                        }
-                      },
-                    yAxis: {
-                        labels: {
-                            align: 'left',
-                            x: 0,
-                            y: -5
-                        },
-                        title: {
-                            text: null
-                        }
-                    },
-                    plotOptions: {
-                        pie: {
-                            allowPointSelect: true,
-                            cursor: 'pointer',
-                            borderWidth: 8,
-                            borderColor: '#fff',    
-                            dataLabels: {
-                                enabled: false,
-                                formatter: function(){
-                                    var sn = this.point.name.length > 10 ? this.point.name.substring(0, 10) + '..' : this.point.name;
-                                    return String(sn + "<br>" + this.point.percentage.toFixed(0) + "%" + "<br>" + text2 + ": " + this.point.y);
-                                },
+//             dataLabels: {
+//                 alignTo: 'connectors'
+//             }
+//         },{
+//             center: [10000, 10000],
+//             data: [{
+//               name: "Total",
+//               y: d1.length,
+//             }, ]
+//           },{
+//             center: [10000, 10000],
+//             data: [{
+//               name: "skip",
+//               y: 1,
+//             },],
+//             colors: ["#FFFFFF"],
+//         },{
+//             name: f2,
+//             minPointSize: 10,
+//             size: '29%',
+//             innerSize: '0%',
+//             zMin: 0, 
+//             keys: ['name', 'y', 'z', 'id'],
+//             data: dataset2,
+//             colors: ["#d03161", "#178a94", "#bfd8d1", "#ee8080", "#2b374b"],
+//             dataLabels: {
+//                 alignTo: 'connectors'
+//             }
+//         },{
+//             center: [10000, 10000],
+//             data: [{
+//               name: "Total",
+//               y: sum,
+//             }, ]
+//           }],
+//         credits: {
+//           enabled: false
+//         },
+//         exporting: {
+//               enabled: false
+//         },
+//         responsive: {
+//             rules: [{
+//                 condition: {
+//                     maxWidth: 700
+//                 },
+//                 chartOptions: {
+//                     // chart:{
+//                     //     height: 1.5*s
+//                     // },
+//                     legend: {
+//                         enabled: true,
+//                         layout: 'center',
+//                         verticalAlign: 'bottom',
+//                         align: 'center',
+//                         symbolRadius: 2,
+//                         useHTML: true,
+//                         labelFormatter: function() {
+//                           var shortname = this.name.length > 10 ? this.name.substring(0, 10) + '..' : this.name;
+//                           if (this.name === t) {
+//                             return `<span style="min-width: 200px; display:inline-block; border-bottom: 1px solid #b2b2b2;">
+//                                         <span style="float:left; font-size:16px;">${this.name}</span></span>
+//                                     <span style="min-width: 80px; display:inline-block; border-bottom: 1px solid #b2b2b2;">
+//                                         <span style="float:left; font-size:16px;">${text1}</span>
+//                                         <span style="float:right; font-size:16px;">%</span>
+//                                     </span>`
+//                           }
+//                           if (this.name === "skip") {
+//                             return `</br></br>`
+//                           }
+//                           return `<span style="min-width: 200px; display:inline-block; border-bottom: 1px solid #ccc;">
+//                           <span style="float:left; font-size:16px; font-weight:normal" >${shortname}</span></span>
+//                           <span style="min-width: 80px; display:inline-block; border-bottom: 1px solid #ccc;">
+//                           <span style="float:left; font-size:16px;">${this.y}</span>
+//                           <span style="float:right; font-size:16px;">${(this.y * 100 / this.total).toFixed(0)}</span>
+//                           </span>`
+//                         }
+//                       },
+//                     yAxis: {
+//                         labels: {
+//                             align: 'left',
+//                             x: 0,
+//                             y: -5
+//                         },
+//                         title: {
+//                             text: null
+//                         }
+//                     },
+//                     plotOptions: {
+//                         pie: {
+//                             allowPointSelect: true,
+//                             cursor: 'pointer',
+//                             borderWidth: 8,
+//                             borderColor: '#fff',    
+//                             dataLabels: {
+//                                 enabled: false,
+//                                 formatter: function(){
+//                                     var sn = this.point.name.length > 10 ? this.point.name.substring(0, 10) + '..' : this.point.name;
+//                                     return String(sn + "<br>" + this.point.percentage.toFixed(0) + "%" + "<br>" + text2 + ": " + this.point.y);
+//                                 },
                                 
-                                style:{
-                                  fontSize: '10px',
-                                  fontWeight: 'thin',
-                                },
-                            },
-                            showInLegend: true,
-                        },
-                        series: {
-                            colorByPoint: true,
-                            animation: false
-                        }
-                    },
-                    subtitle: {
-                        text: null
-                    },
-                    credits: {
-                        enabled: false
-                    }
-                }
-            }]
-        }
-    }
-    )    
-};
+//                                 style:{
+//                                   fontSize: '10px',
+//                                   fontWeight: 'thin',
+//                                 },
+//                             },
+//                             showInLegend: true,
+//                         },
+//                         series: {
+//                             colorByPoint: true,
+//                             animation: false
+//                         }
+//                     },
+//                     subtitle: {
+//                         text: null
+//                     },
+//                     credits: {
+//                         enabled: false
+//                     }
+//                 }
+//             }]
+//         }
+//     }
+//     )    
+// };
 function stackedcolumn(c,dataset){
 
     Highcharts.chart(c, {
@@ -398,8 +398,9 @@ function stackedcolumn(c,dataset){
                         fontSize: '16px',
                     },
                     y: 2,
-                }
-            }
+                },
+                animation: false
+            },
         },
         series: dataset,
         credits: {
@@ -1112,7 +1113,6 @@ function createnewcomparison(c,x,y,yname,yunits,height){
     
     });
 };
-
 function createstackedbars(c,x,y,t,ss){
     var counts = {};
     for (const num of x) {
