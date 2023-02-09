@@ -253,7 +253,7 @@
         const thead = document.createElement('thead');
         
         const tr = document.createElement('tr');
-        for (let i=0;i<head.length-offset;i++){
+        for (let i=1;i<head.length-offset;i++){
             const th = document.createElement('th');
             th.appendChild(document.createTextNode(head[i]));
             tr.appendChild(th);
@@ -265,7 +265,7 @@
         const tbody = document.createElement('tbody');    
         for (let i=0;i<row.length;i++){
             const tr = document.createElement('tr');
-            for (let j=0;j<row[i].length-offset;j++){
+            for (let j=1;j<row[i].length-offset;j++){
                 const td = document.createElement('td');
                 // if (j == 1){
                 //     var a = document.createElement('a');
@@ -281,6 +281,18 @@
             tbody.appendChild(tr);
         }          
         tbl.appendChild(tbody);
+
+        const tfoot = document.createElement('tfoot');
+        
+        const tr1 = document.createElement('tr');
+        for (let i=1;i<head.length-offset;i++){
+            const th = document.createElement('th');
+            th.appendChild(document.createTextNode(head[i]));
+            tr1.appendChild(th);
+        }
+
+        tfoot.appendChild(tr1);
+        tbl.appendChild(tfoot);
 
         parentDiv.insertBefore(tbl, currentDiv);  
     }
@@ -485,4 +497,50 @@
         datatablesButtons.buttons().container().appendTo("#datatables-reponsive_wrapper .col-md-6:eq(0)");
     });
 </script>
+<script>
+		// DataTables with Column Search by Text Inputs
+		document.addEventListener("DOMContentLoaded", function() {
+			// Setup - add a text input to each footer cell
+			$("#datatables-reponsive tfoot th").each(function() {
+				var title = $(this).text();
+				$(this).html("<input type=\"text\" class=\"form-control\" placeholder=\"Search " + title + "\" />");
+			});
+			// DataTables
+			var table = $("#datatables-reponsive").DataTable();
+			// Apply the search
+			table.columns().every(function() {
+				var that = this;
+				$("input", this.footer()).on("keyup change clear", function() {
+					if (that.search() !== this.value) {
+						that
+							.search(this.value)
+							.draw();
+					}
+				});
+			});
+		});
+		// DataTables with Column Search by Select Inputs
+		// document.addEventListener("DOMContentLoaded", function() {
+		// 	$("#datatables-reponsive").DataTable({
+		// 		initComplete: function() {
+		// 			this.api().columns().every(function() {
+		// 				var column = this;
+		// 				var select = $("<select class=\"form-control\"><option value=\"\"></option></select>")
+		// 					.appendTo($(column.footer()).empty())
+		// 					.on("change", function() {
+		// 						var val = $.fn.dataTable.util.escapeRegex(
+		// 							$(this).val()
+		// 						);
+		// 						column
+		// 							.search(val ? "^" + val + "$" : "", true, false)
+		// 							.draw();
+		// 					});
+		// 				column.data().unique().sort().each(function(d, j) {
+		// 					select.append("<option value=\"" + d + "\">" + d + "</option>")
+		// 				});
+		// 			});
+		// 		}
+		// 	});
+		// });
+	</script>
 </html>
