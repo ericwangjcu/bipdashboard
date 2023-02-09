@@ -492,6 +492,7 @@
         var datatablesButtons = $("#datatables-reponsive").DataTable({
             responsive: true,
             lengthChange: !1,
+            fixedHeader: true,
             buttons: ["copy", "print"]
         });
         datatablesButtons.buttons().container().appendTo("#datatables-reponsive_wrapper .col-md-6:eq(0)");
