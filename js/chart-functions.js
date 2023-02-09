@@ -13,7 +13,7 @@
 // piecolors = ["#115f9a", "#1984c5", "#22a7f0", "#48b5c4", "#76c68f", "#a6d75b", "#c9e52f", "#d0ee11", "#f4f100"];
 piecolors = ["#d03161", "#178a94", "#bfd8d1", "#ee8080", "#2b374b", "#a6d75b", "#c9e52f", "#d0ee11", "#f4f100"];
 
-barcolors = ["#115f9a", "#1984c5", "#22a7f0", "#48b5c4", "#76c68f", "#a6d75b", "#c9e52f", "#d0ee11", "#f4f100"];
+barcolors = ["#115f9a",  "#76c68f", "#48b5c4", "#1984c5", "#a6d75b", "#c9e52f", "#d0ee11", "#f4f100"];
 
 Highcharts.setOptions({ colors: barcolors });
 
