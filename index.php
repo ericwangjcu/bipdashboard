@@ -643,7 +643,7 @@
 
                     <div id="head"></div>
                     <div class="col-12">
-                        <div class="tab tab-light">
+                        <div class="tab tab-light tab-vertical">
                             <ul class="nav nav-tabs" role="tablist">
                                 <!-- <li class="nav-item">
                                     <a class="nav-link active" href="#vertical-icon-tab-1" data-bs-toggle="tab" role="tab">
