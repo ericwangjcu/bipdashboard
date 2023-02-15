@@ -17,6 +17,7 @@
 <link href="https://fonts.googleapis.com/css2?family=BIZ+UDPMincho&family=Open+Sans&family=Poppins:wght@300;400&family=Raleway&family=Roboto+Slab&family=Roboto:wght@900&family=Source+Sans+Pro&family=Ubuntu&display=swap" rel="stylesheet">
 <!-- <link href="css/light.css" rel="stylesheet"> -->
 <!-- <link href="css/dark.css" rel="stylesheet"> -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
 
 <!-- BEGIN SETTINGS -->
 <!-- Remove this after purchasing -->
@@ -42,6 +43,7 @@
 <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-exports.min.js?hcode=a0c21fc77e1449cc86299c5faa067dc4"></script>
 <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-ui.min.js?hcode=a0c21fc77e1449cc86299c5faa067dc4"></script>
 <script src="https://code.highcharts.com/modules/bullet.js"></script>
+<script src="https://code.highcharts.com/modules/drilldown.js"></script>
 
 <script src="https://code.highcharts.com/modules/coloraxis.js"></script>
 <script src="js/chart-functions.js"></script> 

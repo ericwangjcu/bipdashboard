@@ -40,15 +40,16 @@
         const badge = document.createElement("span");
 
 
-        if (score < 100){
-        badge.className = "badge badge bg-success";
-        }
-        if (score < 66){
-            badge.className = "badge badge bg-warning";
-        } 
-        if (score < 33){
-            badge.className = "badge badge bg-danger";
-        }           
+        // if (score < 100){
+        // badge.className = "badge badge bg-secondary";
+        // }
+        // if (score < 66){
+        //     badge.className = "badge badge bg-secondary";
+        // } 
+        // if (score < 33){
+        //     badge.className = "badge badge bg-secondary";
+        // }           
+        badge.className = "badge badge bg-secondary";
         badge.innerText = pos + "/" + total + "  (" + score + "%)";
         mb.appendChild(badge);
         colauto.appendChild(mb);
@@ -216,9 +217,9 @@
                 tickPositions: ticks,
                 zIndex: 10,
                 stops: [
-                    [0.3, '#DF5353'], // red
-                    [0.6, '#DDDF0D'], // yellow
-                    [0.9, '#55BF3B']                            
+                    [0.3, '#B4B4B4'], // red
+                    [0.6, '#B4B4B4'], // yellow
+                    [0.9, '#B4B4B4']                            
                 ],
             };
             var distance = -40;   
@@ -241,9 +242,9 @@
                 // tickPositions: ticks,
                 zIndex: 10,
                 stops: [
-                    [0.3, '#DF5353'], // red
-                    [0.6, '#DDDF0D'], // yellow
-                    [0.9, '#55BF3B']                            
+                    [0.3, '#B4B4B4'], // red
+                    [0.6, '#B4B4B4'], // yellow
+                    [0.9, '#B4B4B4']                            
                 ],
             };
             var distance = 70;                     
@@ -278,7 +279,7 @@
                 background: [{ // Track for Move
                     outerRadius: '100%',
                     innerRadius: '65%',
-                    backgroundColor: Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0.2).get(),
+                    backgroundColor: 'rgba(160, 160, 160, 0.30)',
                     borderWidth: 0,
                     shape: 'arc'
                 }]

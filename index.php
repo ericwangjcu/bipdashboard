@@ -6,35 +6,80 @@
 <head>
 <?php include('comp/header.php')?>
 <style>
-.form-check-lg {
+/* .form-check-lg {
   font-size: 150%;
-}
+} */
 
-.offcanvas {
+/* .offcanvas {
   width: 60%;
   background: #f5f7fb;
-}
-.modal {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background: rgb(0 0 0 / 70%);
+} */
+/* .modal {
+  width: 200px !important;
+  max-height: 5200px !important;
 }
 
-.modal .chart {
-    height: 90%;
-    width: 90%;
-    max-width: none;
+.modal-content {
+  padding: 100px !important;
+} */
+
+.tooltipHeader {
+  float: center;
+  font-size: 1rem;
 }
+
+/* table {
+    height: 500px
+} */
+
+.tooltipPointWrapper {
+  display: block;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.tooltipPoint {
+  font-size: 2rem;
+  padding-left: 5px;
+  /* color: #FF0045; */
+}
+
+.tooltipValueSuffix {
+  padding-left: 5px;
+  color: #1bc9a8;
+}
+
+.tooltipLine {
+  display: block;
+  opacity: 0.5;
+  background-color: #fff;
+  width: 100%;
+  height: 1px;
+  padding: 0;
+  margin: 0;
+}
+
+/* li{
+    height:70px;
+    width:120px;
+    font-size: 12px;
+} */
+.nav-tabs .nav-item .nav-link {
+  background-color: light;
+  color: #c4c4c4;
+}
+
+.nav-tabs .nav-item .nav-link.active {
+  color: #000;
+}
+
 </style>
 
 </head>
 
 
 <script>   
-    function addElement (id, text, dv, tt, ss, index, interval,number) {
+    function addElement (id, text, dv, tt, ss, index, interval,number,tab) {
         const newDiv1 = document.createElement("div");
         newDiv1.className = "form-check form-switch form-check-lg";
 
@@ -64,6 +109,8 @@
         int.id = interval;
         const num = document.createElement("number");
         num.id = number;
+        const tabs = document.createElement("tab");
+        tabs.id = tab;
 
         newDiv1.appendChild(newDiv2);
         newDiv1.appendChild(t);
@@ -71,6 +118,7 @@
         newDiv1.appendChild(idd);
         newDiv1.appendChild(int);
         newDiv1.appendChild(num);
+        newDiv1.appendChild(tabs);
 
         const currentDiv = document.getElementById(dv);
         let parentDiv = currentDiv.parentNode
@@ -87,7 +135,7 @@
 
         parentDiv.insertBefore(textrow, currentDiv);             
     }
-    function addcard(header,size, number){
+    function addcard(header,size, number,tab){
         const newDiv1 = document.createElement("div");
         newDiv1.className = "col-12 col-sm-12 col-md" + size + " col-xl-" + size;  
         
@@ -109,8 +157,8 @@
 
             if (number <= 1){
                 const cardjeader = document.createElement("div");
-                cardjeader.className = "card-header h3";
-                cardjeader.innerText = header;
+                cardjeader.className = "card-header h3 text-dark";
+                cardjeader.innerText = header + " (by Set)";
                 card.appendChild(cardjeader);
             }
 
@@ -127,12 +175,12 @@
        
         newDiv1.appendChild(newDiv0);
 
-        const currentDiv = document.getElementById("head");
+        const currentDiv = document.getElementById("head-"+tab);
         let parentDiv = currentDiv.parentNode
 
         parentDiv.insertBefore(newDiv1, currentDiv);        
     }      
-    function addchart(header, type, short, index, interval){
+    function addchart(header, type, short, index, interval,legend){
         var setvalues = <?php echo json_encode($setvalues,JSON_INVALID_UTF8_IGNORE); ?>;
         var username = <?php echo json_encode($_SESSION['username'],JSON_INVALID_UTF8_IGNORE); ?>; 
 
@@ -230,8 +278,8 @@
             indexkey ++;
         }     
         function removeItemOnce(arr, value) {
-            var index = arr.indexOf(value);
-            if (index > -1) {
+            var id = arr.indexOf(value);
+            if (id > -1) {
                 arr.splice(index, 1);
             }
             return arr;
@@ -239,10 +287,17 @@
         areasum = removeItemOnce(areasum, "0")
 
         if (type == 0){
-            createpiechart(header + "body0", data, tempdata,'',short,500);
+            createpiechart(header + "body0", data, tempdata,'',short,460, index,legend);
+            // createbarcharts(header + "body0", data, tempdata,'',short,500, index);
+
+        }
+        if (type == 8){
+            // createpiechart(header + "body0", data, tempdata,'',short,500, index);
+            createbarcharts(header + "body0", data, tempdata,'',short,460, index);
+
         }
         if (type == 1){
-            createbasicbar(header + "body0",data, tempdata,'',header,"",500, interval);
+            createbasicbar(header + "body0",data, tempdata,'',header,interval,460, index);
         }
         function createsregression(indx, indy, xname, ynames, yunits){
             var x = [];
@@ -350,8 +405,6 @@
             comparisonchart(15,[20,24,27,29,30,32],["Flow Rate","mm per Irrigation","Applied Efficiency","Energy per ML","Energy per Hour","Cost per ML"],
             ["L/S","mm","%","KWh/ML","KWh/h","$/ML"]);
         } 
-
-
         if (type == 6){
             var x = [];
             ind = 0;
@@ -370,7 +423,7 @@
                 }
             }  
                                          
-            createstackedbars(header + "body0",x,y,500);
+            createstackedbars(header + "body0",x,y,460);
             var y = [];
             ind = 0;
             for (let i = 0; i < subset.length; i++) {
@@ -379,8 +432,72 @@
                     ind ++;                
                 }
             }        
-            createstackedbars(header + "body1",x,y,500);
-        }                        
+            createstackedbars(header + "body1",x,y,460);
+        }   
+        if (type == 9){
+            var newdata = [];
+            var index = 0;
+            for (let i=0;i<data.length;i++){
+                if (data[i] != "0000-00-00"){
+                    newdata[index] = data[i];
+                    index ++;
+                }
+            }
+            createtime(header + "body0",newdata,short,460,index);
+            // createpiechart(header + "body0", newdata, tempdata,'',short,500, index);
+        }
+        // if (type == 9){
+        //     var counts = {};
+        //     for (const num of data) {
+        //     counts[num] = counts[num] ? counts[num] + 1 : 1;
+        //     }    
+        //     const iterator = Object.keys(counts);      
+        
+        //     var dataset = [];
+        //     var index = 0;
+        //     for (const key of iterator) {
+        //         dataset[index] = {name: key,
+        //             data: [counts[key]]};  
+        //         index ++;
+        //     }  
+        //     stackedcolumn(header + "body0",dataset);
+        // }
+
+        if (type == 7){
+            var counts = {};
+            for (const num of data) {
+                counts[num] = counts[num] ? counts[num] + 1 : 1;
+            }    
+            const iterator = Object.keys(counts);  
+
+            keysSorted = Object.keys(counts).sort(function(a,b){return counts[b] - counts[a]})
+            // console.log(keysSorted);     // bar,me,you,foo  
+            // console.log(counts);
+            var dataset = [];
+            var cat = [];
+            var index = 0;
+
+            for (const key of keysSorted) {
+                cat[index] = key;
+                dataset[index] = counts[key];  
+                index ++;
+            }  
+            // console.log(dataset);
+            var head = ["1",short,"CNT","%"];
+            var row = [];
+            var sum = dataset.reduce((a, b) => {
+                    return a + b;
+                    }).toFixed(0);
+            for (let i = 0; i < dataset.length; i++){
+                row[i] = [];
+                row[i][0] = "";
+                row[i][1] = cat[i];
+                row[i][2] = dataset[i];
+                row[i][3] = (dataset[i]*100/sum).toFixed(0);
+            }
+
+            createtable(header + "body0", head, row, "", 0);
+        }                     
     }
     function addgroup(header,size,cards,value,text){
         const newDiv1 = document.createElement("div");
@@ -396,26 +513,48 @@
 
             const card1 = document.createElement("div");
             card1.className = "card";        
-            const cardheader1 = document.createElement("div");
-            cardheader1.className = "card-header h1";
-            cardheader1.innerText = cards[i];
-            card1.appendChild(cardheader1);
+
+ 
+            // const cardheader1 = document.createElement("div");
+            // cardheader1.className = "card-header h3";
+            // cardheader1.innerText = cards[i];
+            // card1.appendChild(cardheader1);
 
             const cardbody = document.createElement("div");
             cardbody.className = "card-body";
 
+            const row = document.createElement("div");
+            row.className = "row";  
+
+            const col = document.createElement("div");
+            col.className = "col-5 mt-4"; 
+
+            let col7 = document.createElement('span');
+            col7.className = 'h3 mt-4 mb-0';
+            col7.innerText = cards[i] + ":               ";
             let col8 = document.createElement('span');
-            col8.className = 'h1 text-primary mt-2 mb-0';
+            col8.className = 'h3 text-primary mt-4 mb-0';
             col8.innerText = value[i];
             let col9 = document.createElement('span');
-            col9.className = 'h1 text-muted mt-2 mb-0';
+            col9.className = 'h3 text-muted mt-4 mb-0';
             col9.innerText = "            " + text[i];
+
+
+            const col1 = document.createElement("div");
+            col1.className = "col-7";  
+
             let col10 = document.createElement('div');
             col10.id = header + cards[i];
 
-            cardbody.appendChild(col8);
-            cardbody.appendChild(col9);
-            cardbody.appendChild(col10);
+            col.appendChild(col7)
+            col.appendChild(col8);
+            col.appendChild(col9);
+            row.appendChild(col);
+
+
+            col1.appendChild(col10);
+            row.appendChild(col1);
+            cardbody.appendChild(row);
 
             card1.appendChild(cardbody);
             newDiv2.appendChild(card1);
@@ -428,25 +567,66 @@
 
         parentDiv.insertBefore(newDiv1, currentDiv);        
     }  
+    function createtable(header, head, row, name, offset){
+        const currentDiv = document.getElementById(header);
+        let parentDiv = currentDiv.parentNode
 
+        const tbl = document.createElement('table');
+        tbl .className = "table table-striped text-xsmall";   
+        tbl .id = name;
+        tbl .style = "width:100%";
+
+        const thead = document.createElement('thead');
+        
+        const tr = document.createElement('tr');
+        for (let i=1;i<head.length-offset;i++){
+            const th = document.createElement('th');
+            th.appendChild(document.createTextNode(head[i]));
+            tr.appendChild(th);
+        }
+
+        thead.appendChild(tr);
+        tbl.appendChild(thead);
+
+        const tbody = document.createElement('tbody');    
+        for (let i=0;i<row.length;i++){
+            const tr = document.createElement('tr');
+            for (let j=1;j<row[i].length-offset;j++){
+                const td = document.createElement('td');
+      
+                td.appendChild(document.createTextNode(row[i][j]));       
+                tr.appendChild(td);
+            }
+            tbody.appendChild(tr);
+        }          
+        tbl.appendChild(tbody);
+
+        // const tfoot = document.createElement('tfoot');
+        
+        // const tr1 = document.createElement('tr');
+        // for (let i=1;i<head.length-offset;i++){
+        //     const th = document.createElement('th');
+        //     th.appendChild(document.createTextNode(head[i]));
+        //     tr1.appendChild(th);
+        // }
+
+        // tfoot.appendChild(tr1);
+        // tbl.appendChild(tfoot);
+
+        parentDiv.insertBefore(tbl, currentDiv);  
+    }
 </script>
-
 
 <body>
     <div class="wrapper">   
         <div class="main">
             <?php include('comp/nav.php')?>
-            <main class="content">          
-                <div class="card">
-                    <div class="card-body">
-                        <div class = "card-text h2">Baseline Dashboard</div>
-                        </br>
-                        <div class = "card-text h4">This page is simply showing the aggregated baseline information collected by the delivery teams on all BIP farms </div>
-                        </br>
-                    </div>  
-                </div>             
+            <main class="content">      
+                <div class="col-auto d-none d-sm-block">
+                    <h3><strong>Baseline</strong> Dashboard</h3>
+                </div>    
                 <div class="row">       
-                    <div class="col-12">
+                    <div class="col-12" style='display:none;'>
                         <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>     
                         <form method="post" action="savedashboard.php"  target="dummyframe" >
                             <a class="btn btn-outline-info my-1" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
@@ -460,8 +640,90 @@
                     </br>
                     </br>
                     </br>
+
                     <div id="head"></div>
-                    
+                    <div class="col-12">
+                        <div class="tab tab-light">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <!-- <li class="nav-item">
+                                    <a class="nav-link active" href="#vertical-icon-tab-1" data-bs-toggle="tab" role="tab">
+                                        <div class="bi-info-circle-fill text-center" style="font-size: 30px;"></div> 
+                                        <div class="text-center" >Summary</div>
+                                    </a>
+                                </li> -->
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#vertical-icon-tab-2" data-bs-toggle="tab" role="tab">
+                                        <div class="bi-border-all text-center" style="font-size: 20px;"></div> 
+                                        <div class="text-center">Set</div>
+                                    </a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="#vertical-icon-tab-3" data-bs-toggle="tab" role="tab">
+                                        <div class="bi-droplet-fill text-center" style="font-size: 20px;"></div> 
+                                        <div class="text-center">Irrigation</div>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#vertical-icon-tab-4" data-bs-toggle="tab" role="tab">
+                                        <div class="bi-currency-dollar text-center" style="font-size: 20px;"></div> 
+                                        <div class="text-center">Cost</div>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <!-- <div class="tab-pane active" id="vertical-icon-tab-1" role="tabpanel">
+                                    <div class="row"> 
+                                        </br>
+                                        </br>
+                                        </br>
+                                        <div id="head-0"></div>
+                                    </div>
+                                </div> -->
+                                <div class="tab-pane" id="vertical-icon-tab-2" role="tabpanel">
+                                    <div class="row"> 
+                                        </br>
+                                        </br>
+                                        </br>
+                                        <div id="head-1"></div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="vertical-icon-tab-3" role="tabpanel">
+                                    <div class="row"> 
+                                        </br>
+                                        </br>
+                                        </br>
+                                        <div id="head-2"></div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="vertical-icon-tab-4" role="tabpanel">
+                                    <div class="row"> 
+                                    </br>
+                                        </br>
+                                        </br>
+                                        <div id="head-3"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                            <h4 class="modal-title">Set Table</h4>
+                            </div>
+                            <div class="modal-body">
+                            <!-- <p>Some text in the modal.</p> -->
+                            <div id="datatable"></div>
+                            </div>
+                            <!-- <div class="modal-footer"> -->
+                            <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+                            <!-- </div> -->
+                        </div>
+                        
+                        </div>
+                    </div>
                     <script>
                         var baselinearray = ["No. of Farms", "No. of Sets", "Total Area", "Total KW","Avg Area per Sets", "Avr. Motor KW",
                                             "Avg Flow Rate", "Avg ML Applied", "Avg Depth Applied", "Avg Crop Water Use between Irrigation",
@@ -625,13 +887,13 @@
                                 data: [Number(areasum[index2])]};
                             index2 ++;
                         }    
-                        console.log(dataset2);
                         stackedcolumn("testNo. of Farms",dataset1);
                         stackedcolumn("testNo. of Sets",dataset);
                         stackedcolumn("testTotal Area",dataset2);
-                            // createpiechart(header + "body1", data1, tempdata,"Farms",short,500);
+                                // createpiechart(header + "body1", data1, tempdata,"Farms",short,500);
                     </script>
-                </div>                 
+                </div>
+                
                 <div class="container-fluid p-0">
                     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                         <div class="offcanvas-header">
@@ -659,15 +921,17 @@
                                                     "Depth Applied (mm)","Days Between Irrigation Duration","Crop Water Use Between Irrigations",
                                                     "Application Efficency (%)","Energy (kWh)","Energy per ML (kWh/ML)",
                                                     "Energy per Hour (kWh/h)","Energy Cost ($/kWh)","Energy Cost per ML ($/ML)","Energy Cost per Irrigation ($/ha/ML)","Area vs Irrigation", "Irrigation vs District","Irrigation vs Water Supply","District vs Water Supply"];
-                                                    types = [5,2,2,2,2,0,0,0,0,0,1,1,0,1,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,1,2,3,4,6];
-                                                    intervals = [0,2,2,2,2,0,0,0,0,0,10,100,0,1,0,0,0,10,0,10,1,2,1,20,1,10,10,100,20,10,0,10,5,0,0,0,0];
-                                                    gridsizes = [9,2,2,2,2,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,12,12,12,12,12,12];
+                                                    types = [5,2,2,2,2,0,7,8,0,9,1,1,8,1,0,8,8,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,1,2,3,4,6];
+                                                    intervals = [5,2,2,2,2,0,7,8,0,9,1,1,8,0.1,0,8,8,1,0,1,0.1,1,0.1,1,1,1,1,1,1,1,0,1,1,2,3,4,6];
+                                                    tabs = [0,5,5,5,5,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,5,5,5,5];
+                                                    gridsizes = [9,2,2,2,2,3,3,6,7,5,3,3,3,3,3,3,3,3,3,4,5,6,6,6,6,6,6,6,6,6,6,6,6,12,12,12,12];
+                                                    legends = [5,2,2,2,2,0,7,8,1,9,1,1,8,1,0,8,8,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,1,2,3,4,6];
                                                     number = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6,6,2];
                                                     newunits = ["","","","","","","","","","","","m","m","ha","","","","KW","","L/S","L/S/Cup","hrs","ML","mm","","mm","%","KWH","kWh/ML","kWh/h","$/kWh","$/ML","$/ha/ML",""];
                                                     
                                                     for (let i=0;i<33;i++){
-                                                        if (i != 1 && i != 2 && i != 3 && i != 4 && i != 9){
-                                                            addElement(setarray[i], setarray[i], "div3", types[i],setarray[i],i+1, intervals[i],number[i]); 
+                                                        if (i != 1 && i != 2 && i != 3 && i != 4){
+                                                            addElement(setarray[i], setarray[i], "div3", types[i],setarray[i],i+1, intervals[i], number[i], tabs[i]); 
                                                         }                                                    
                                                     }     
                                                 </script>
@@ -683,7 +947,7 @@
                                                 <div id="div4"></div>
                                                 <script>                                               
                                                     for (let i=33;i<setarray.length;i++){
-                                                        addElement(setarray[i], setarray[i], "div4", types[i],setarray[i],i+1, intervals[i],number[i]); 
+                                                        addElement(setarray[i], setarray[i], "div4", types[i],setarray[i],i+1, intervals[i],number[i],tabs[i]); 
                                                     }                                                      
                                                 </script>
                                             </div>
@@ -700,16 +964,19 @@
     </div>
 
 	<script src="js/app.js"></script>
+    <script src="js/datatables.js"></script>
 
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {
             var dashboarditems = <?php echo json_encode($dashboarditems); ?>; 
             var dashboardshown = <?php echo json_encode($dashboardshown); ?>; 
 
+
+
             function adddashboarditem(i){
                 if (dashboardshown[i] == 1){
-                    addcard(dashboarditems[i],gridsizes[i],number[i]);                    
-                    addchart(dashboarditems[i], types[i], dashboarditems[i],i+1, intervals[i]); 
+                    addcard(dashboarditems[i],gridsizes[i],number[i],tabs[i]);                    
+                    addchart(dashboarditems[i], types[i], dashboarditems[i],i+1, intervals[i],legends[i]); 
                     
                     var checkbox = document.getElementById(dashboarditems[i]);
                     checkbox.checked = true;
@@ -724,46 +991,52 @@
             
                 
             for (let i=1;i<33;i++){
-                if(i == 5 && dashboardshown[i] == 1){
-                    addtext("Baseline");
-                }
-                if(i == 19 && dashboardshown[i] == 1){
-                    addtext("Irrigation");
-                } 
-                if(i == 27 && dashboardshown[i] == 1){
-                    addtext("Energy & Cost");
-                }                                             
+                // if(i == 5 && dashboardshown[i] == 1){
+                //     addtext("Baseline");
+                // }
+                // if(i == 19 && dashboardshown[i] == 1){
+                //     addtext("Irrigation");
+                // } 
+                // if(i == 27 && dashboardshown[i] == 1){
+                //     addtext("Energy & Cost");
+                // }                                             
                 adddashboarditem(i);
             }        
-               
+            function activaTab(tab){
+                $('.nav-tabs a[href="#' + tab + '"]').tab('show');
+            };
+
+            activaTab('vertical-icon-tab-3');
+            // $('#vertical-icon-tab-2').show();
+            // $('$vertical-icon-tab-2').tab('show');
 		});
 
-        $(document).on('change', '.form-check', function (e) {
-            var header = this.getElementsByTagName("label")[0].innerText;
-            var status = this.getElementsByTagName("input")[0].checked;
-            var elementExists = document.getElementById(header + "card");
-            var type = this.getElementsByTagName("type")[0].id;
-            var short = this.getElementsByTagName("short")[0].id;
-            var index = this.getElementsByTagName("index")[0].id;
-            var interval = this.getElementsByTagName("interval")[0].id;
-            var number = this.getElementsByTagName("number")[0].id;
-            if (elementExists == null && status == true){
-                if (types == 1){
-                    addcard(header,"10",number);
-                }
-                else{
-                    addcard(header,"6",number);
-                }
-                addchart(header, type, short, index,interval);
+        // $(document).on('change', '.form-check', function (e) {
+        //     var header = this.getElementsByTagName("label")[0].innerText;
+        //     var status = this.getElementsByTagName("input")[0].checked;
+        //     var elementExists = document.getElementById(header + "card");
+        //     var type = this.getElementsByTagName("type")[0].id;
+        //     var short = this.getElementsByTagName("short")[0].id;
+        //     var index = this.getElementsByTagName("index")[0].id;
+        //     var interval = this.getElementsByTagName("interval")[0].id;
+        //     var number = this.getElementsByTagName("number")[0].id;
+        //     if (elementExists == null && status == true){
+        //         if (types == 1){
+        //             addcard(header,"10",number);
+        //         }
+        //         else{
+        //             addcard(header,"6",number);
+        //         }
+        //         addchart(header, type, short, index,interval);
           
-                document.getElementById('result-table').value  = document.getElementById('result-table').value + header + ";";
-            }else{
-                const element = document.getElementById(header+ "chart");
-                element.remove();                     
-                document.getElementById('result-table').value  = document.getElementById('result-table').value.replace(header + ";", '');  
-            }
+        //         document.getElementById('result-table').value  = document.getElementById('result-table').value + header + ";";
+        //     }else{
+        //         const element = document.getElementById(header+ "chart");
+        //         element.remove();                     
+        //         document.getElementById('result-table').value  = document.getElementById('result-table').value.replace(header + ";", '');  
+        //     }
             
-        });    
+        // });    
 
 
 	</script>
@@ -774,6 +1047,7 @@
             }).addClass('active');
         });
     </script>
+
 </body>
 
 </html>

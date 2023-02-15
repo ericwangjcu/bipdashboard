@@ -1,374 +1,15 @@
-// var pieColors = (function () {
-//     var colors = [],
-//         base = Highcharts.getOptions().colors[7],
-//         i;
-
-//     for (i = 6; i > 0; i -= 1) {
-//        colors.push(Highcharts.color(base).brighten((i - 4) / 6).get());
-//     }
-//     return colors;
-// });    
-
-// piecolors = ["#fd7f6f", "#7eb0d5", "#b2e061", "#bd7ebe", "#ffb55a", "#ffee65", "#beb9db", "#fdcce5", "#8bd3c7"];
-// piecolors = ["#115f9a", "#1984c5", "#22a7f0", "#48b5c4", "#76c68f", "#a6d75b", "#c9e52f", "#d0ee11", "#f4f100"];
 piecolors = ["#d03161", "#178a94", "#bfd8d1", "#ee8080", "#2b374b", "#a6d75b", "#c9e52f", "#d0ee11", "#f4f100"];
 
-barcolors = ["#115f9a",  "#76c68f", "#48b5c4", "#1984c5", "#a6d75b", "#c9e52f", "#d0ee11", "#f4f100"];
+barcolors = ["#C4C4C4", "#00A5E3", "#48b5c4", "#1984c5", "#a6d75b", "#c9e52f", "#d0ee11", "#f4f100"];
 
 Highcharts.setOptions({ colors: barcolors });
-
-// barcolors = ["#1346ff", "#2854ea", "#3e61d5", "#536fc0", "#697dab", "#7e8a96", "#949881", "#a9a56c", "#bfb357", "#d4c142", "#eace2d", "#ffdc18"];
-function createtreemap(c, d, e ,f, t,s){
-    var counts = {};
-    for (const num of d) {
-      counts[num] = counts[num] ? counts[num] + 1 : 1;
-    }    
-    const iterator = Object.keys(counts);      
-  
-    var dataset = [];
-    var index = 0;
-    for (const key of iterator) {
-        dataset[index] = {name: key,
-                value: counts[key],
-                color: Highcharts.getOptions().colors[index]};
-        index++;
-
-    }  
-
-    Highcharts.chart(c, {
-        series: [{
-            type: 'treemap',
-            data: dataset
-        }],
-        title: {
-            text: ''
-        },
-        legend: {
-            enabled: true
-        },
-        plotOptions: {
-            treemap: {
-                dataLabels: {
-                    formatter: function () {
-                        return '<b>Name : ' + this.point.name + '</b> ' +
-                            '<br/>' +
-                            '<b>Value :' + this.point.value + '</b> ' +
-                            '<br/>';
-                    },
-                    color: 'white',
-                    style:{
-                        fontSize: '20px',
-                      },
-                },
-            }
-        },
-        exporting: {
-            enabled: false
-        },
-        credits: {
-            enabled: false
-        },
-    });
-
-};
-// function createnestedpiechart(c, d, d1, d2, e ,f, f1, f2, t,s){
-//     var counts = {};
-//     for (const num of d) {
-//       counts[num] = counts[num] ? counts[num] + 1 : 1;
-//     }    
-//     const iterator = Object.keys(counts);  
-
-//     var counts1 = {};
-//     for (const num of d1) {
-//       counts1[num] = counts1[num] ? counts1[num] + 1 : 1;
-//     }    
-//     const iterator1 = Object.keys(counts1);
-  
-//     var dataset = [];
-//     var dataset1 = [];
-//     var dataset2 = [];
-//     var index = 0;
-//     var index1 = 0;
-//     var index2 = 0;
-//     var text1 = "CNT";
-//     var text2 = "Count"
-//     for (const key of iterator) {
-//         dataset[index] = {name: key + ": " + f,
-//                 y: counts[key],
-//                 z: 80,
-//                 id: index.toString()};
-//         index ++;
-//     }
-//     for (const key of iterator1) {
-//         dataset1[index1] = {name: key + ": " + f1,
-//                 y: counts1[key],
-//                 z: 80,
-//                 id: index1.toString()};
-//         index1 ++;
-//     }
-//     var sum = 0;
-//     for (const key of iterator) {
-//         dataset2[index2] = {name: key + ": " + f2,
-//                 y: Number(d2[index2]),
-//                 z: 80,
-//                 id: index2.toString()};
-//         sum += Number(d2[index2]);
-//         index2 ++;
-
-        
-//     }
-//     console.log(sum);
-//     console.log(dataset2);
-
-//     new Highcharts.chart(c, {
-//         chart: {
-//             type: 'pie',
-//             height: s,
-//             style: {
-//                 fontFamily: 'Poppins'
-//         },      
-            
-//         },
-//         title: {
-//             text: "",
-//             style:{
-//               fontSize: '16px'
-//             }
-//         },
-
-//         plotOptions: {
-//             pie: {
-//                 allowPointSelect: true,
-//                 cursor: 'pointer',
-//                 borderWidth: 8,
-//                 borderColor: '#fff',            
-//                 dataLabels: {
-//                     enabled: true,
-//                     formatter: function(){
-//                         var sn = this.point.name.length > 10 ? this.point.name.substring(0, 10) + '..' : this.point.name;
-//                         return String(sn + "<br>" + this.point.percentage.toFixed(0) + "%" + "<br>" + text2 + ": " + this.point.y);
-//                     },
-                    
-//                     style:{
-//                     fontSize: '14px',
-//                     fontWeight: 'thin',
-//                     },
-//                 },
-//                 showInLegend: true,
-//             },
-//             series: {
-//                 colorByPoint: true,
-//                 animation: false
-//             }
-//         },   
-        
-        
-//         accessibility: {
-//             point: {
-//                 valueSuffix: '%'
-//             }
-//         }, 
-     
-//         legend: {
-//             layout: 'vertical',
-//             verticalAlign: 'middle',
-//             align: 'right',
-//             symbolRadius: 2,
-//             useHTML: true,
-//             labelFormatter: function() {
-//               var shortname = this.name.length > 12 ? this.name.substring(0, 12) + '..' : this.name;
-//               if (this.name === t) {
-//                 return `<span style="min-width: 200px; display:inline-block; border-bottom: 1px solid #b2b2b2;">
-//                             <span style="float:left; font-size:16px;">${this.name}</span></span>
-//                         <span style="min-width: 80px; display:inline-block; border-bottom: 1px solid #b2b2b2;">
-//                             <span style="float:left; font-size:16px;">${text1}</span>
-//                             <span style="float:right; font-size:16px;">%</span>
-//                         </span>`
-//               }
-//               if (this.name === "skip") {
-//                 return `</br></br>`
-//               }
-//               return `<span style="min-width: 200px; display:inline-block; border-bottom: 1px solid #ccc;">
-//               <span style="float:left; font-size:16px; font-weight:normal" >${shortname}</span></span>
-//               <span style="min-width: 80px; display:inline-block; border-bottom: 1px solid #ccc;">
-//               <span style="float:left; font-size:16px;">${this.y}</span>
-//               <span style="float:right; font-size:16px;">${(this.y * 100 / this.total).toFixed(0)}</span>
-//               </span>`
-//             }
-//           },          
-//         series: [{
-//             center: [10000, 10000],
-//             data: [{
-//               name: t,
-//               y: 0,
-//             }, ]
-//           },{
-//             name: f,
-//             minPointSize: 10,
-//             size: '100%',
-//             innerSize: '70%',
-//             zMin: 0, 
-//             keys: ['name', 'y', 'z', 'id'],
-//             data: dataset,
-//             colors: ["#d03161", "#178a94", "#bfd8d1", "#ee8080", "#2b374b"],
-
-//             dataLabels: {
-//                 alignTo: 'fixedOffset'
-//             }
-//         },{
-//             center: [10000, 10000],
-//             data: [{
-//               name: "Total",
-//               y: d.length,
-//             }, ]
-//           },{
-//             center: [10000, 10000],
-//             data: [{
-//               name: "skip",
-//               y: 1,
-//             },],
-//             colors: ["#FFFFFF"],
-//         },{
-//             name: f1,
-//             minPointSize: 10,
-//             size: '65%',
-//             innerSize: '55%',
-//             zMin: 0, 
-//             keys: ['name', 'y', 'z', 'id'],
-//             data: dataset1,
-//             colors: ["#d03161", "#178a94", "#bfd8d1", "#ee8080", "#2b374b"],
-
-//             dataLabels: {
-//                 alignTo: 'connectors'
-//             }
-//         },{
-//             center: [10000, 10000],
-//             data: [{
-//               name: "Total",
-//               y: d1.length,
-//             }, ]
-//           },{
-//             center: [10000, 10000],
-//             data: [{
-//               name: "skip",
-//               y: 1,
-//             },],
-//             colors: ["#FFFFFF"],
-//         },{
-//             name: f2,
-//             minPointSize: 10,
-//             size: '29%',
-//             innerSize: '0%',
-//             zMin: 0, 
-//             keys: ['name', 'y', 'z', 'id'],
-//             data: dataset2,
-//             colors: ["#d03161", "#178a94", "#bfd8d1", "#ee8080", "#2b374b"],
-//             dataLabels: {
-//                 alignTo: 'connectors'
-//             }
-//         },{
-//             center: [10000, 10000],
-//             data: [{
-//               name: "Total",
-//               y: sum,
-//             }, ]
-//           }],
-//         credits: {
-//           enabled: false
-//         },
-//         exporting: {
-//               enabled: false
-//         },
-//         responsive: {
-//             rules: [{
-//                 condition: {
-//                     maxWidth: 700
-//                 },
-//                 chartOptions: {
-//                     // chart:{
-//                     //     height: 1.5*s
-//                     // },
-//                     legend: {
-//                         enabled: true,
-//                         layout: 'center',
-//                         verticalAlign: 'bottom',
-//                         align: 'center',
-//                         symbolRadius: 2,
-//                         useHTML: true,
-//                         labelFormatter: function() {
-//                           var shortname = this.name.length > 10 ? this.name.substring(0, 10) + '..' : this.name;
-//                           if (this.name === t) {
-//                             return `<span style="min-width: 200px; display:inline-block; border-bottom: 1px solid #b2b2b2;">
-//                                         <span style="float:left; font-size:16px;">${this.name}</span></span>
-//                                     <span style="min-width: 80px; display:inline-block; border-bottom: 1px solid #b2b2b2;">
-//                                         <span style="float:left; font-size:16px;">${text1}</span>
-//                                         <span style="float:right; font-size:16px;">%</span>
-//                                     </span>`
-//                           }
-//                           if (this.name === "skip") {
-//                             return `</br></br>`
-//                           }
-//                           return `<span style="min-width: 200px; display:inline-block; border-bottom: 1px solid #ccc;">
-//                           <span style="float:left; font-size:16px; font-weight:normal" >${shortname}</span></span>
-//                           <span style="min-width: 80px; display:inline-block; border-bottom: 1px solid #ccc;">
-//                           <span style="float:left; font-size:16px;">${this.y}</span>
-//                           <span style="float:right; font-size:16px;">${(this.y * 100 / this.total).toFixed(0)}</span>
-//                           </span>`
-//                         }
-//                       },
-//                     yAxis: {
-//                         labels: {
-//                             align: 'left',
-//                             x: 0,
-//                             y: -5
-//                         },
-//                         title: {
-//                             text: null
-//                         }
-//                     },
-//                     plotOptions: {
-//                         pie: {
-//                             allowPointSelect: true,
-//                             cursor: 'pointer',
-//                             borderWidth: 8,
-//                             borderColor: '#fff',    
-//                             dataLabels: {
-//                                 enabled: false,
-//                                 formatter: function(){
-//                                     var sn = this.point.name.length > 10 ? this.point.name.substring(0, 10) + '..' : this.point.name;
-//                                     return String(sn + "<br>" + this.point.percentage.toFixed(0) + "%" + "<br>" + text2 + ": " + this.point.y);
-//                                 },
-                                
-//                                 style:{
-//                                   fontSize: '10px',
-//                                   fontWeight: 'thin',
-//                                 },
-//                             },
-//                             showInLegend: true,
-//                         },
-//                         series: {
-//                             colorByPoint: true,
-//                             animation: false
-//                         }
-//                     },
-//                     subtitle: {
-//                         text: null
-//                     },
-//                     credits: {
-//                         enabled: false
-//                     }
-//                 }
-//             }]
-//         }
-//     }
-//     )    
-// };
 function stackedcolumn(c,dataset){
 
     Highcharts.chart(c, {
         chart: {
             type: 'bar',
-            height: 100
+            height: 75,            
+            margin: [0,0,0,0]
         },
         title: {
             text: null
@@ -387,7 +28,7 @@ function stackedcolumn(c,dataset){
             enabled: false
         },
         plotOptions: {
-            series: {
+            series: {               
                 stacking: 'normal',
                 dataLabels: {
                     enabled: true,
@@ -395,24 +36,24 @@ function stackedcolumn(c,dataset){
                         return String(this.series.name + ": " + this.point.y);
                     },
                     style:{
-                        fontSize: '16px',
+                        fontSize: '12px',
                     },
-                    y: 2,
                 },
                 animation: false
             },
         },
         series: dataset,
         credits: {
-        enabled: false
+            enabled: false
         },
         exporting: {
             enabled: false
         },
 });
 
-}
-function createpiechart(c, d, e ,f, t,s){
+};
+
+function createpiechart(c, d, e ,f, t,s,id,leg){
     var counts = {};
     for (const num of d) {
       counts[num] = counts[num] ? counts[num] + 1 : 1;
@@ -421,10 +62,6 @@ function createpiechart(c, d, e ,f, t,s){
   
     var dataset = [];
     var index = 0;
-    var loc = [];
-    var count = [0,0,0,0,0,0,0,0];
-    var anno = ['','','','','','','','','','','','']; 
-    var more = 0;
     var text1 = "CNT";
     var text2 = "Count"
     if (f != ""){
@@ -435,46 +72,10 @@ function createpiechart(c, d, e ,f, t,s){
       dataset[index] = {name: key,
               y: counts[key],
               z: 80,
-              id: index.toString()};
-      
-      if (e){     
-          if(Array.isArray(e)){
-              for (let z = 0;z < e.length; z++){               
-                  if (e[z] == key)
-                  { 
-                    loc[index] = index;
-                    count[index] ++;
-  
-                    if (f){     
-                      if(Array.isArray(f)){ 
-                              if (anno[index].length < 10)
-                              {
-                                  anno[index] +=  f[z] + '<br/>';
-                              }else{
-                                  more ++;                       
-                              }
-                          }
-                      }
-                      else{
-                          anno[index] = 'Your Farm';
-                      }      
-                  } 
-              }                    
-          }else{
-              if (e == key)
-              {
-                loc[index] = index;
-                count[index] = 1;
-                anno[index] =  'Your Farm';              
-              }
-          }   
-      }    
-      if (more > 0)
-      {
-        anno[index] +=  'and ' + String(more) + ' more.';
-      }    
+              id: index.toString()};  
       index ++;
     }  
+    
     
     new Highcharts.chart(c, {
     chart: {
@@ -482,38 +83,52 @@ function createpiechart(c, d, e ,f, t,s){
         height: s,
         style: {
             fontFamily: 'Poppins'
-    },      
-        
+        },      
+      
     },
     title: {
-        text: "",
-        style:{
-          fontSize: '16px'
-        }
+        text: null,
     },
     
- 
-    accessibility: {
-        point: {
-            valueSuffix: '%'
-        }
-    }, 
+    tooltip: {
+        useHTML: true,
+        headerFormat: '<span class="tooltipHeader">{point.key}</span>',
+        pointFormat: '<br/> <div class="tooltipPointWrapper">'
+        +
+        '<span class="tooltipPoint">{point.y}</span>'
+        +
+        '<span class="tooltipValueSuffix"> </span></div>'
+        +
+        '<span class="tooltipLine"></span> <br/>'
+        +
+        '<span style="color:{point.color}">\u25CF</span> {series.name}',
+        style: {
+          color: '#fff'
+        },
+        valueDecimals: 0,
+        backgroundColor: '#000',
+        borderColor: '#000',
+        borderRadius: 10,
+        borderWidth: 3,
+    },
     plotOptions: {
         pie: {
             allowPointSelect: true,
             cursor: 'pointer',
             borderWidth: 6,
 			borderColor: '#fff',     
-            colors: piecolors,       
+            colors: piecolors,    
+            size:  '70%',
             dataLabels: {
                 enabled: true,
                 formatter: function(){
                     var sn = this.point.name.length > 10 ? this.point.name.substring(0, 10) + '..' : this.point.name;
                     return String(sn + "<br>" + this.point.percentage.toFixed(0) + "%" + "<br>" + text2 + ": " + this.point.y);
                 },
-                
+                distance: 5 + leg * 50,
+
                 style:{
-                  fontSize: '14px',
+                  fontSize: '18px',
                   fontWeight: 'thin',
                 },
             },
@@ -521,7 +136,55 @@ function createpiechart(c, d, e ,f, t,s){
         },
         series: {
             colorByPoint: true,
-            animation: false
+            animation: false,
+            point: {
+                events: {
+                    click: function () {
+                        var newnames = ["1","District","Grower ID","Block ID", t];
+                        const myArray = t.split(" ");
+                        var databasename = [];
+                        console.log(myArray);
+                        for (let i=0;i<myArray.length;i++){
+                            if (i < myArray.length - 1){
+                                databasename += myArray[i].toLowerCase() + "_";
+                            }else{
+                                databasename += myArray[i].toLowerCase();
+                            }
+                            
+                        }
+                        var newvalues = [];
+                        var index = 0;
+                        for (let j=0;j<subset.length;j++){
+                            if (subset[j][id] == this.name){
+                                newvalues[index] = [];
+                                newvalues[index][0] = "1";
+                                newvalues[index][1] = subset[j][1];
+                                newvalues[index][2] = subset[j][2];
+                                newvalues[index][3] = subset[j][3];
+                                newvalues[index][4] = subset[j][id];
+                                index ++;
+                            }
+
+                        }
+                        var element = document.getElementById("datatables-reponsive");
+                        var element1 = document.getElementById("datatables-reponsive_wrapper");
+                        if (element){
+                            element.remove(); 
+                            element1.remove(); 
+                        }
+
+                        createtable("datatable", newnames,  newvalues,"datatables-reponsive",0);
+                        $("#datatables-reponsive").DataTable({
+                            responsive: true,
+                            "pageLength": 5,
+                            "lengthChange": false,
+                            "searching": false,
+                            "info": true, 
+                        });
+                        $("#myModal").modal('show');
+                    }
+                }
+            }
         }
     },
    
@@ -531,6 +194,7 @@ function createpiechart(c, d, e ,f, t,s){
         align: 'right',
         symbolRadius: 2,
         useHTML: true,
+        enabled: leg,
         labelFormatter: function() {
           var shortname = this.name.length > 10 ? this.name.substring(0, 10) + '..' : this.name;
           if (this.name === t) {
@@ -551,6 +215,7 @@ function createpiechart(c, d, e ,f, t,s){
       },
     
     series: [{
+        
         center: [10000, 10000],
         data: [{
           name: t,
@@ -582,16 +247,14 @@ function createpiechart(c, d, e ,f, t,s){
                 maxWidth: 700
             },
             chartOptions: {
-                // chart:{
-                //     height: 1.5*s
-                // },
                 legend: {
-                    enabled: true,
+                    enabled: leg,
                     layout: 'center',
                     verticalAlign: 'bottom',
                     align: 'center',
                     symbolRadius: 2,
                     useHTML: true,
+                    enabled: false,
                     labelFormatter: function() {
                       var shortname = this.name.length > 10 ? this.name.substring(0, 10) + '..' : this.name;
                       if (this.name === t) {
@@ -627,14 +290,14 @@ function createpiechart(c, d, e ,f, t,s){
                         borderWidth: 8,
                         borderColor: '#fff',    
                         dataLabels: {
-                            enabled: false,
+                            enabled: true,
                             formatter: function(){
                                 var sn = this.point.name.length > 10 ? this.point.name.substring(0, 10) + '..' : this.point.name;
                                 return String(sn + "<br>" + this.point.percentage.toFixed(0) + "%" + "<br>" + text2 + ": " + this.point.y);
                             },
-                            
+
                             style:{
-                              fontSize: '10px',
+                              fontSize: '16px',
                               fontWeight: 'thin',
                             },
                         },
@@ -658,113 +321,213 @@ function createpiechart(c, d, e ,f, t,s){
   });
   
 };
-function createbasicbar(c, d, e, f, t, xt, s, dist){
+function createbarcharts(c, d, e ,f, t,s,id){
+    var counts = {};
+    for (const num of d) {
+      counts[num] = counts[num] ? counts[num] + 1 : 1;
+    }    
+    const iterator = Object.keys(counts);      
+  
+    var dataset = [];
+    var cat = [];
+    var index = 0;
+
+    keysSorted = Object.keys(counts).sort(function(a,b){return counts[b] - counts[a]})
+
+    for (const key of keysSorted) {
+        cat[index] = key;
+        dataset[index] = counts[key];  
+        index ++;
+    }  
+
+    var maxheight = Math.max.apply(Math, dataset);
+    for (let i = 0; i < dataset.length; i++){
+        if (dataset[i] == maxheight){
+            dataset[i] = {y: dataset[i], color: '#00A5E3'};
+        }
+    }
+
+    Highcharts.chart(c, {
+        chart: {
+            type: 'bar',
+            height: s,
+        },
+        title: {
+            text: null,
+            align: 'left'
+        },
     
+        xAxis: {
+            categories: cat,
+            title: {
+                text: null
+            },
+            labels: {
+                style: {
+                    fontSize: '16px'
+                }
+            }
+           
+        },
+        yAxis: {
+            title: {
+                text: null,
+                align: 'high'
+            },
+            visible: false
+        }, 
+        tooltip: {
+            useHTML: true,
+            headerFormat: '<span class="tooltipHeader">{point.key}</span>',
+            pointFormat: '<br/> <div class="tooltipPointWrapper">'
+            +
+            '<span class="tooltipPoint">{point.y}</span>'
+            +
+            '<span class="tooltipValueSuffix"> </span></div>'
+            +
+            '<span class="tooltipLine"></span> <br/>'
+            +
+            '<span style="color:{point.color}">\u25CF</span> {series.name}',
+            style: {
+              color: '#fff'
+            },
+            valueDecimals: 0,
+            backgroundColor: '#000',
+            borderColor: '#000',
+            borderRadius: 10,
+            borderWidth: 3,
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true,
+                    style: {
+                        fontSize: '16px'
+                    }
+                },
+                pointWidth: $(this).height() / (2.8*dataset.length),
+            },
+            series:{
+                point: {
+                    events: {
+                        click: function () {
+                            var name = t;    
+                            var newnames = ["1","District","Grower ID","Block ID", name];
+
+                            var newvalues = [];                                                                                
+                            var index = 0;
+                            for (let j=0;j<subset.length;j++){  
+                                // console.log(cat[this.x]);
+                                if (subset[j][id] == cat[this.x]){
+                                    console.log(subset[j][id]);
+                                    console.log(j);
+                                    newvalues[index] = [];
+                                    newvalues[index][0] = "1";
+                                    newvalues[index][1] = subset[j][1];
+                                    newvalues[index][2] = subset[j][2];
+                                    newvalues[index][3] = subset[j][3];
+                                    newvalues[index][4] = subset[j][id];
+                                    index ++;
+                                }
+
+                            }
+                            console.log(newvalues);
+
+                            var element = document.getElementById("datatables-reponsive");
+                            var element1 = document.getElementById("datatables-reponsive_wrapper");
+                            if (element){
+                                element.remove(); 
+                                element1.remove(); 
+                            }    
+                            createtable("datatable", newnames,  newvalues,"datatables-reponsive",0);
+                            $("#datatables-reponsive").DataTable({
+                                responsive: true,
+                                "pageLength": 5,
+                                "lengthChange": false,
+                                "searching": false,
+                                "info": true, 
+                            });
+                            $("#myModal").modal('show');
+                        }
+                    }
+                }
+            }
+        },
+        credits: {
+            enabled: false
+        },
+        exporting: {
+            enabled: false
+        },
+        legend: {
+            enabled: false
+        },
+        series: [{
+            // dataSorting: {
+            //     enabled: true
+            // },
+            data: dataset
+        }]
+    });
+
+    
+}
+function createbasicbar(c, d, e, f, t, xt, s, id){
     var m1 = Math.max.apply(Math, d);
     var m2 = Math.min.apply(Math, d);
     var range = m1 - m2;
-    var number = range / dist;
+    var number = 10;
+    var dist = range / number;
     var cat = [];
     var catstr = [];
+    var fix = 0;
+    if (xt == 0.1){
+         fix = 1;
+    }
     for (let i = 0; i < number+1; i++){
         cat[i] = m2 + dist * (i);
-        if (i > 0){
-            catstr[i-1] = cat[i-1].toFixed(0).toString().concat("-",cat[i].toFixed(0).toString());
+        var text1 = "";
+        var text2 = "";
+        if (i > 0 && i <= 1){
+            text1 = (cat[i-1]).toFixed(1).toString();
+            text2 = cat[i].toFixed(1).toString();
+        } 
+        if (i > 1){
+            text1 = (cat[i-1] + xt).toFixed(1).toString();
+            text2 = cat[i].toFixed(1).toString();
         }   
+        if (fix == 1){
+            catstr[i-1] = text1 + "-" + text2;
+        }
+        if (fix == 0){
+            catstr[i-1] = text1.substring(0,text1.length-2) + "-" + text2.substring(0,text2.length-2);
+        }
     }
-
-    
 
     var count = [];
     var loc = [];
     var cc = [0,0,0,0,0,0,0,0];   
     var anno = ['','','','','','','','','','','','']; 
-    var more = 0;
-    
     for (let i = 0; i < number; i++){
         count[i] = 0;
         for (let j = 0; j < d.length; j++){
-            if (d[j] >= cat[i] && d[j] <= cat[i+1])
+            if (d[j] > cat[i] && d[j] <= cat[i+1])
             {
                 count[i] ++;
             }
+        }              
+    }
+    var dataset = [];
+    var maxheight = Math.max.apply(Math, count);
+    for (let i = 0; i < count.length; i++){
+        dataset[i] = count[i];
+        if (count[i] == maxheight){
+            dataset[i] = {y: count[i], color: '#FF5768'};
         }
-        if (e){     
-            if(Array.isArray(e)){
-                for (let z = 0;z < e.length; z++){
-                    if (e[z] >= cat[i] && e[z] <= cat[i+1])
-                    {
-                        
-                        loc[i] = i;
-                        cc[i] ++;
-                        if (f){     
-                            if(Array.isArray(f)){ 
-                                if (anno[i].length < 1)
-                                {
-                                    anno[i] +=  f[z] + ';';
-                                }else{
-                                    more ++;                       
-                                }
-                            }
-                        }
-                        else{
-                            anno[i] = 'Your Farm';
-                        }                     
-                    } 
-                }                    
-            }else{
-                if (e >= cat[i] && e <= cat[i+1])
-                {
-                    
-                    loc[i] = i;
-                    cc[i] = 1;
-                    anno[i] =  'Your Farm';
-                }
-            }   
-        } 
-        if (more > 0)
-        {
-        anno[i] +=  'and ' + String(more) + ' more.';
-        }                  
     }
-
-    function calculate(array){
-        high = Math.max.apply(null, array);
-        low = Math.min.apply(null, array);
-        const asc = arr => arr.sort((a, b) => a - b);
-        const median = arr => {
-            const mid = Math.floor(arr.length / 2),
-                nums = [...arr].sort((a, b) => a - b);
-            return arr.length % 2 !== 0 ? nums[mid] : (nums[mid - 1] + nums[mid]) / 2;
-            };
-        med = median(array);    
-        const quantile = (arr, q) => {
-            const sorted = asc(arr);
-            const pos = (sorted.length - 1) * q;
-            const base = Math.floor(pos);
-            const rest = pos - base;
-            if (sorted[base + 1] !== undefined) {
-                return sorted[base] + rest * (sorted[base + 1] - sorted[base]);
-            } else {
-                return sorted[base];
-            }
-        };        
-        lowqua = quantile(array,0.25);    
-        upqua = quantile(array,0.75);                          
-        return [low.toFixed(1),lowqua.toFixed(1),med.toFixed(1),upqua.toFixed(1),high.toFixed(1)];
-    }
-
-    var newd = [];
-    for (let i = 0; i < d.length; i++){
-        newd[i] = Number(d[i]);
-    }
-    var x = calculate(newd);
-    var titles = "Low: " + x[0] + " , Low Quartile: " + x[1] + " , Median: " + x[2] + " , High Quartile: " + x[3] + " , High: " + x[4];
-
-
     Highcharts.chart(c, {
         chart: {
-            type: 'column',
+            type: 'bar',
             style: {
             fontSize: '16px'
             },
@@ -774,7 +537,7 @@ function createbasicbar(c, d, e, f, t, xt, s, dist){
             height: s, 
         },
         title: {
-            text: titles,
+            text: null,
             align: 'left',
             style: {
             fontSize: '20px'
@@ -787,14 +550,14 @@ function createbasicbar(c, d, e, f, t, xt, s, dist){
             categories: catstr,
             crosshair: true,
             title: {
-                text: t,
+                text: null,
                 style: {
                     fontSize: '16px'
-                }
+                },
             },            
             labels: {
                 style: {
-                    fontSize: '16px'
+                    fontSize: '20px'
                 }
             }
         },
@@ -810,54 +573,105 @@ function createbasicbar(c, d, e, f, t, xt, s, dist){
                 style: {
                     fontSize: '16px'
                 }
-            }            
+            },
+            visible: false           
         },
+        tooltip: {
+            useHTML: true,
+            headerFormat: '<span class="tooltipHeader">{point.key}</span>',
+            pointFormat: '<br/> <div class="tooltipPointWrapper">'
+            +
+            '<span class="tooltipPoint">{point.y}</span>'
+            +
+            '<span class="tooltipValueSuffix"> </span></div>'
+            +
+            '<span class="tooltipLine"></span> <br/>'
+            +
+            '<span style="color:{point.color}">\u25CF</span> {series.name}',
+            style: {
+              color: '#fff'
+            },
+            valueDecimals: 0,
+            backgroundColor: '#000',
+            borderColor: '#000',
+            borderRadius: 10,
+            borderWidth: 3,
+        },        
         plotOptions: {
             series: {
                 borderWidth: 0,
-                pointWidth: $(this).width() / (3*number),
-                colors: barcolors,  
+                pointWidth: $(this).height() / (40),
+                colors: ['#B4B4B4'],  
                 dataLabels: {
                     enabled: true,
                     shadow: true,                       
                     style: {
-                        fontSize: '16px',
+                        fontSize: '20px',
                         fontWeight: 'thin',
-                    },
-                    formatter: function(){
-                        
-                        
-                        if (loc.length > 0){
-                            for (let i=0;i<loc.length;i++){
-                                if (this.point.index == loc[i]){
-                                    return String(anno[i]);
-                                }
-                                return String(count[i]);
-                            }
-                        }else{
-                            return String(count[this.point.index]);
-                        }
-
-                    },
+                    },                    
                 },
-                animation: false
-            }
+                animation: false,
+                point: {
+                    events: {
+                        click: function () {
+                            var name = t;    
+                            var newnames = ["1","District","Grower ID","Block ID", name];
+                            const myArray = t.split(" ");
+                            var databasename = [];                            
+                            for (let i=0;i<myArray.length;i++){
+                                if (i < myArray.length - 1){
+                                    databasename += myArray[i].toLowerCase() + "_";
+                                }else{
+                                    databasename += myArray[i].toLowerCase();
+                                }
+                                
+                            }    
+                            var newvalues = [];                                                                                
+                            var index = 0;
+                            // console.log(id);
+                            for (let j=0;j<subset.length;j++){ 
+                                if (id == 27){
+                                    subset[j][id] = Number(subset[j][id]) * 100;
+                                    // console.log(subset[j][id]);
+                                }
+                                if (Number(subset[j][id]) >= cat[this.x] && Number(subset[j][id]) <= cat[this.x +1]){
+                                    newvalues[index] = [];
+                                    newvalues[index][0] = "1";
+                                    newvalues[index][1] = subset[j][1];
+                                    newvalues[index][2] = subset[j][2];
+                                    newvalues[index][3] = subset[j][3];
+                                    newvalues[index][4] = subset[j][id];
+                                    index ++;
+                                }
+
+                            }
+                            var element = document.getElementById("datatables-reponsive");
+                            var element1 = document.getElementById("datatables-reponsive_wrapper");
+                            if (element){
+                                element.remove(); 
+                                element1.remove(); 
+                            }    
+                            createtable("datatable", newnames,  newvalues,"datatables-reponsive",0);
+                            $("#datatables-reponsive").DataTable({
+                                responsive: true,
+                                "pageLength": 5,
+                                "lengthChange": false,
+                                "searching": false,
+                                "info": true, 
+                            });
+                            $("#myModal").modal('show');
+                        }
+                    }
+                }
+            },
         },
         legend: {
             enabled: false
         },
         series: [{
             colorByPoint: true,
-            
-            name: '',
-            keys: ['y', 'id'],
-            data: count.map((v, i) => ([v, String(i)]))               
-        },{
-            name:'',
-            type:'spline',
-            visible: true,
-            data:  count
-            
+            name: t,
+            data: dataset              
         }],
         exporting: {
             enabled: false
@@ -891,7 +705,7 @@ function createbasicbar(c, d, e, f, t, xt, s, dist){
                     xAxis: {
                         labels: {
                             style: {
-                                fontSize: '10px'
+                                fontSize: '20px'
                             }
                         } 
                     },
@@ -1241,4 +1055,89 @@ function createstackedbars(c,x,y,t,ss){
         }
     });
 
-}
+};
+function createtime(c,d,short,h, id){
+    var counts = {};
+    for (const num of d) {
+      counts[num] = counts[num] ? counts[num] + 1 : 1;
+    }    
+    const iterator = Object.keys(counts);      
+  
+    var dataset = [];
+    var index = 0;
+
+    
+
+    for (const key of iterator) {
+    const myArray = key.split("-");
+      dataset[index] = [Date.UTC(myArray[0], myArray[1], myArray[2]),counts[key]];  
+      index ++;
+    } 
+    dataset.sort((a, b) => a[0] - b[0]);
+
+    // console.log(dataset);
+
+    Highcharts.chart(c, {
+
+
+    
+        chart:{
+            height: h,
+            type: 'column'
+        },
+        title: {
+            text: null,
+        },
+        yAxis: {
+            visible: false
+        },
+        xAxis: {
+            type: 'datetime',
+            title: {
+                text: null,
+            },
+            labels: {
+                style: {
+                    fontSize: '20px',
+                }
+            }
+        },  
+        plotOptions: {
+            series: {
+                pointWidth: $(this).width() / (300),
+                dataLabels: {
+                    enabled: true,
+                    style: {
+                        fontSize: '16px'
+                    }
+                },
+                marker: {
+                    enabled: true,
+                    states: {
+                        hover: {
+                            enabled: false
+                        }
+                    }
+                }
+            }
+        },
+
+        legend:{
+            enabled: false
+        },
+        series: [{
+            data: dataset,
+            // dataSorting: {
+            //     enabled: true,
+            //     sortKey: 'value'
+            // },
+        }],
+        exporting: {
+            enabled: false
+        },
+        credits: {
+            enabled: false
+        },
+    
+    }); 
+};

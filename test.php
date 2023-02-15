@@ -18,6 +18,7 @@
                                     <div class = "card-text h2">Irrigation Evaluation</div>
                                     </br>
                                     <div class = "card-text h4">This page is used to show the benchmark of the irrigation practice from the water perspective on a farm. It also display the benchmark of individual compoenents of an irrigation event, including area, flow rate and duration, which can be used to observe the relationship bettween them and an irrigation event.</div>
+                                    <!-- <hr style="height:2px; width:50%"> -->
                                     </br>
                                     <p class="mb-0 h4">The formulas used are shown below.</p>
                                     </br>
