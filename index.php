@@ -68,8 +68,8 @@
     font-size: 12px;
 } */
 .nav-tabs .nav-item .nav-link {
-  background-color: light;
-  color: #c4c4c4;
+  background-color: #C4C4C4;
+  color: #FFF;
 }
 
 .nav-tabs .nav-item .nav-link.active {
