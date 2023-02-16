@@ -58,6 +58,9 @@
   padding: 0;
   margin: 0;
 }
+.card {
+      box-shadow: 8px 8px 15px 0 rgba(100, 100, 100, 0.26);
+}
 
 /* li{
     height:70px;
@@ -153,7 +156,7 @@
             newDiv2.className = "col-12 col-sm-" + size * 2 + " col-md" + size + " col-xl-" + size; 
 
             const card = document.createElement("div");
-            card.className = "card";
+            card.className = "card ";
 
             if (number <= 1){
                 const cardjeader = document.createElement("div");
@@ -446,6 +449,18 @@
             createtime(header + "body0",newdata,short,460,index);
             // createpiechart(header + "body0", newdata, tempdata,'',short,500, index);
         }
+        if (type == 10){
+            // var newdata = [];
+            // var index = 0;
+            // for (let i=0;i<data.length;i++){
+            //     newdata[index] = Number(data[i]);
+            //     index ++;
+            // }
+            // console.log(newdata);
+
+            createnewline(header + "body0",data,short,460,index);
+            // createpiechart(header + "body0", newdata, tempdata,'',short,500, index);
+        }
         // if (type == 9){
         //     var counts = {};
         //     for (const num of data) {
@@ -618,11 +633,11 @@
 </script>
 
 <body>
-    <div class="wrapper">   
-        <div class="main">
+    <div class="wrapper "> 
+        <div class="main ">
             <?php include('comp/nav.php')?>
             <main class="content">      
-                <div class="col-auto d-none d-sm-block">
+                <div class="col-auto d-none d-sm-block ">
                     <h3><strong>Baseline</strong> Dashboard</h3>
                 </div>    
                 <div class="row">       
@@ -643,7 +658,7 @@
 
                     <div id="head"></div>
                     <div class="col-12">
-                        <div class="tab tab-light tab-vertical">
+                        <div class="tab tab-ligh tab-vertical">
                             <ul class="nav nav-tabs" role="tablist">
                                 <!-- <li class="nav-item">
                                     <a class="nav-link active" href="#vertical-icon-tab-1" data-bs-toggle="tab" role="tab">
@@ -921,11 +936,11 @@
                                                     "Depth Applied (mm)","Days Between Irrigation Duration","Crop Water Use Between Irrigations",
                                                     "Application Efficency (%)","Energy (kWh)","Energy per ML (kWh/ML)",
                                                     "Energy per Hour (kWh/h)","Energy Cost ($/kWh)","Energy Cost per ML ($/ML)","Energy Cost per Irrigation ($/ha/ML)","Area vs Irrigation", "Irrigation vs District","Irrigation vs Water Supply","District vs Water Supply"];
-                                                    types = [5,2,2,2,2,0,7,8,0,9,1,1,8,1,0,8,8,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,1,2,3,4,6];
+                                                    types = [5,2,2,2,2,0,7,8,0,9,1,1,8,1,0,0,8,1,0,1,1,1,1,1,10,1,1,1,1,1,0,1,1,2,3,4,6];
                                                     intervals = [5,2,2,2,2,0,7,8,0,9,1,1,8,0.1,0,8,8,1,0,1,0.1,1,0.1,1,1,1,1,1,1,1,0,1,1,2,3,4,6];
                                                     tabs = [0,5,5,5,5,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,5,5,5,5];
-                                                    gridsizes = [9,2,2,2,2,3,3,6,7,5,3,3,3,3,3,3,3,3,3,4,5,6,6,6,6,6,6,6,6,6,6,6,6,12,12,12,12];
-                                                    legends = [5,2,2,2,2,0,7,8,1,9,1,1,8,1,0,8,8,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,1,2,3,4,6];
+                                                    gridsizes = [9,2,2,2,2,3,2,7,7,5,6,6,4,8,3,3,3,3,3,4,5,6,6,6,6,6,6,6,6,6,6,6,6,12,12,12,12];
+                                                    legends = [5,2,2,2,2,0,7,8,1,9,1,1,8,1,0,0,8,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,1,2,3,4,6];
                                                     number = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6,6,2];
                                                     newunits = ["","","","","","","","","","","","m","m","ha","","","","KW","","L/S","L/S/Cup","hrs","ML","mm","","mm","%","KWH","kWh/ML","kWh/h","$/kWh","$/ML","$/ha/ML",""];
                                                     
@@ -999,8 +1014,11 @@
                 // } 
                 // if(i == 27 && dashboardshown[i] == 1){
                 //     addtext("Energy & Cost");
-                // }                                             
-                adddashboarditem(i);
+                // }       
+                if (i != 30){
+                    adddashboarditem(i);
+
+                }                                      
             }        
             function activaTab(tab){
                 $('.nav-tabs a[href="#' + tab + '"]').tab('show');

@@ -29,7 +29,7 @@ function stackedcolumn(c,dataset){
         },
         plotOptions: {
             series: {               
-                stacking: 'normal',
+                // stacking: 'normal',
                 dataLabels: {
                     enabled: true,
                     formatter: function(){
@@ -343,7 +343,7 @@ function createbarcharts(c, d, e ,f, t,s,id){
     var maxheight = Math.max.apply(Math, dataset);
     for (let i = 0; i < dataset.length; i++){
         if (dataset[i] == maxheight){
-            dataset[i] = {y: dataset[i], color: '#00A5E3'};
+            dataset[i] = {y: dataset[i], color: '#FF5768'};
         }
     }
 
@@ -405,9 +405,12 @@ function createbarcharts(c, d, e ,f, t,s,id){
                         fontSize: '16px'
                     }
                 },
-                pointWidth: $(this).height() / (2.8*dataset.length),
+                pointWidth: $(this).height() / (4*dataset.length),
+                // pointWidth: [20,30,40,30,30,10],
+
             },
             series:{
+                animation: false,
                 point: {
                     events: {
                         click: function () {
@@ -527,7 +530,7 @@ function createbasicbar(c, d, e, f, t, xt, s, id){
     }
     Highcharts.chart(c, {
         chart: {
-            type: 'bar',
+            type: 'column',
             style: {
             fontSize: '16px'
             },
@@ -557,7 +560,7 @@ function createbasicbar(c, d, e, f, t, xt, s, id){
             },            
             labels: {
                 style: {
-                    fontSize: '20px'
+                    fontSize: '16px'
                 }
             }
         },
@@ -600,13 +603,13 @@ function createbasicbar(c, d, e, f, t, xt, s, id){
         plotOptions: {
             series: {
                 borderWidth: 0,
-                pointWidth: $(this).height() / (40),
+                pointWidth: $(this).height() / (35),
                 colors: ['#B4B4B4'],  
                 dataLabels: {
                     enabled: true,
                     shadow: true,                       
                     style: {
-                        fontSize: '20px',
+                        fontSize: '16px',
                         fontWeight: 'thin',
                     },                    
                 },
@@ -1131,6 +1134,164 @@ function createtime(c,d,short,h, id){
             //     enabled: true,
             //     sortKey: 'value'
             // },
+        }],
+        exporting: {
+            enabled: false
+        },
+        credits: {
+            enabled: false
+        },
+    
+    }); 
+};
+function createnewline(c,d,short,h, id){
+    var counts = {};
+    for (const num of d) {
+      counts[num] = counts[num] ? counts[num] + 1 : 1;
+    }    
+    const iterator = Object.keys(counts);      
+  
+    var dataset = [];
+    var index = 0;
+
+    // var maxheight = Math.max.apply(Math, counts);
+    // console.log(maxheight);
+    // // for (let i = 0; i < dataset.length; i++){
+    // //     if (dataset[i] == maxheight){
+    // //         dataset[i] = {y: dataset[i], color: '#FF5768'};
+    // //     }
+    // // }
+
+    for (const key of iterator) {
+      dataset[index] = [Number(key),counts[key]];  
+      index ++;
+    } 
+    // dataset.sort((a, b) => a[0] - b[0]);
+
+    // console.log(dataset);
+
+    Highcharts.chart(c, {
+
+
+    
+        chart:{
+            height: h,
+            type: 'line'
+        },
+        title: {
+            text: null,
+        },
+        yAxis: {
+            visible: false
+        },
+        xAxis: {
+            title: {
+                text: null,
+            },
+            labels: {
+                style: {
+                    fontSize: '20px',
+                }
+            }
+        },  
+        plotOptions: {
+            series: {
+                dataLabels: {
+                    enabled: true,
+                    style: {
+                        fontSize: '16px'
+                    }
+                },
+                marker: {
+                    enabled: true,
+                    states: {
+                        hover: {
+                            enabled: false
+                        }
+                    }
+                },
+                animation: false,
+                point: {
+                    events: {
+                        click: function () {
+                            var name = short;    
+                            var newnames = ["1","District","Grower ID","Block ID", name];
+
+                            var newvalues = [];                                                                                
+                            var index = 0;
+                            for (let j=0;j<subset.length;j++){  
+                                // console.log(cat[this.x]);
+                                if (subset[j][id] == this.x){
+                                    console.log(subset[j][id]);
+                                    console.log(j);
+                                    newvalues[index] = [];
+                                    newvalues[index][0] = "1";
+                                    newvalues[index][1] = subset[j][1];
+                                    newvalues[index][2] = subset[j][2];
+                                    newvalues[index][3] = subset[j][3];
+                                    newvalues[index][4] = subset[j][id];
+                                    index ++;
+                                }
+
+                            }
+                            console.log(newvalues);
+
+                            var element = document.getElementById("datatables-reponsive");
+                            var element1 = document.getElementById("datatables-reponsive_wrapper");
+                            if (element){
+                                element.remove(); 
+                                element1.remove(); 
+                            }    
+                            createtable("datatable", newnames,  newvalues,"datatables-reponsive",0);
+                            $("#datatables-reponsive").DataTable({
+                                responsive: true,
+                                "pageLength": 5,
+                                "lengthChange": false,
+                                "searching": false,
+                                "info": true, 
+                            });
+                            $("#myModal").modal('show');
+                        }
+                    }
+                }
+            }
+
+        },
+        tooltip: {
+            useHTML: true,
+            headerFormat: '<span class="tooltipHeader">{point.key}</span>',
+            pointFormat: '<br/> <div class="tooltipPointWrapper">'
+            +
+            '<span class="tooltipPoint">{point.y}</span>'
+            +
+            '<span class="tooltipValueSuffix"> </span></div>'
+            +
+            '<span class="tooltipLine"></span> <br/>'
+            +
+            '<span style="color:{point.color}">\u25CF</span> {series.name}',
+            style: {
+              color: '#fff'
+            },
+            valueDecimals: 0,
+            backgroundColor: '#000',
+            borderColor: '#000',
+            borderRadius: 10,
+            borderWidth: 3,
+        },   
+        legend:{
+            enabled: false
+        },
+        series: [{
+            name: short,
+            data: dataset,
+            // dataSorting: {
+            //     enabled: true,
+            //     sortKey: 'value'
+            // },
+            marker: {
+                radius: 8
+            },
+            lineWidth: 4
         }],
         exporting: {
             enabled: false
