@@ -658,7 +658,7 @@
 
                     <div id="head"></div>
                     <div class="col-12">
-                        <div class="tab tab-ligh tab-vertical">
+                        <div class="tab tab-light">
                             <ul class="nav nav-tabs" role="tablist">
                                 <!-- <li class="nav-item">
                                     <a class="nav-link active" href="#vertical-icon-tab-1" data-bs-toggle="tab" role="tab">
@@ -936,10 +936,10 @@
                                                     "Depth Applied (mm)","Days Between Irrigation Duration","Crop Water Use Between Irrigations",
                                                     "Application Efficency (%)","Energy (kWh)","Energy per ML (kWh/ML)",
                                                     "Energy per Hour (kWh/h)","Energy Cost ($/kWh)","Energy Cost per ML ($/ML)","Energy Cost per Irrigation ($/ha/ML)","Area vs Irrigation", "Irrigation vs District","Irrigation vs Water Supply","District vs Water Supply"];
-                                                    types = [5,2,2,2,2,0,7,8,0,9,1,1,8,1,0,0,8,1,0,1,1,1,1,1,10,1,1,1,1,1,0,1,1,2,3,4,6];
+                                                    types = [5,2,2,2,2,0,7,8,0,9,1,1,8,1,0,0,8,1,0,1,1,10,1,1,10,1,1,1,1,1,0,1,1,2,3,4,6];
                                                     intervals = [5,2,2,2,2,0,7,8,0,9,1,1,8,0.1,0,8,8,1,0,1,0.1,1,0.1,1,1,1,1,1,1,1,0,1,1,2,3,4,6];
                                                     tabs = [0,5,5,5,5,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,5,5,5,5];
-                                                    gridsizes = [9,2,2,2,2,3,2,7,7,5,6,6,4,8,3,3,3,3,3,4,5,6,6,6,6,6,6,6,6,6,6,6,6,12,12,12,12];
+                                                    gridsizes = [9,2,2,2,2,3,2,7,7,5,3,3,3,3,3,3,3,3,3,4,5,6,3,3,6,3,3,4,4,4,4,4,4,12,12,12,12];
                                                     legends = [5,2,2,2,2,0,7,8,1,9,1,1,8,1,0,0,8,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,1,2,3,4,6];
                                                     number = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6,6,2];
                                                     newunits = ["","","","","","","","","","","","m","m","ha","","","","KW","","L/S","L/S/Cup","hrs","ML","mm","","mm","%","KWH","kWh/ML","kWh/h","$/kWh","$/ML","$/ha/ML",""];

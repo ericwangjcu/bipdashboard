@@ -244,7 +244,7 @@ function createpiechart(c, d, e ,f, t,s,id,leg){
       responsive: {
         rules: [{
             condition: {
-                maxWidth: 700
+                maxWidth: 300
             },
             chartOptions: {
                 legend: {
@@ -254,7 +254,7 @@ function createpiechart(c, d, e ,f, t,s,id,leg){
                     align: 'center',
                     symbolRadius: 2,
                     useHTML: true,
-                    enabled: false,
+                    enabled: true,
                     labelFormatter: function() {
                       var shortname = this.name.length > 10 ? this.name.substring(0, 10) + '..' : this.name;
                       if (this.name === t) {
@@ -290,7 +290,7 @@ function createpiechart(c, d, e ,f, t,s,id,leg){
                         borderWidth: 8,
                         borderColor: '#fff',    
                         dataLabels: {
-                            enabled: true,
+                            enabled: false,
                             formatter: function(){
                                 var sn = this.point.name.length > 10 ? this.point.name.substring(0, 10) + '..' : this.point.name;
                                 return String(sn + "<br>" + this.point.percentage.toFixed(0) + "%" + "<br>" + text2 + ": " + this.point.y);
@@ -341,8 +341,13 @@ function createbarcharts(c, d, e ,f, t,s,id){
     }  
 
     var maxheight = Math.max.apply(Math, dataset);
+    var minheight = Math.min.apply(Math, dataset);
+
     for (let i = 0; i < dataset.length; i++){
         if (dataset[i] == maxheight){
+            dataset[i] = {y: dataset[i], color: '#45b6fe'};
+        }
+        if (dataset[i] == minheight){
             dataset[i] = {y: dataset[i], color: '#FF5768'};
         }
     }
@@ -487,8 +492,34 @@ function createbasicbar(c, d, e, f, t, xt, s, id){
     if (xt == 0.1){
          fix = 1;
     }
-    for (let i = 0; i < number+1; i++){
-        cat[i] = m2 + dist * (i);
+
+
+
+    for (let i = 0; i < number; i++){
+        cat[i] = m2 + dist * (i);     
+    }
+
+    var count = [];
+    var index = 0;
+    
+    for (let i = 0; i < number; i++){
+        var cc = 0;
+
+        for (let j = 0; j < d.length; j++){
+            if (d[j] > cat[index] && d[j] <= cat[index+1])
+            {
+                cc ++;
+            }
+        }    
+        if (cc != 0){
+            count[index] = cc;
+            index ++;
+        }         
+    }
+    console.log(count);
+
+    for (let i = 0; i < cat.length; i++){
+        // cat[i] = m2 + dist * (i);
         var text1 = "";
         var text2 = "";
         if (i > 0 && i <= 1){
@@ -507,27 +538,22 @@ function createbasicbar(c, d, e, f, t, xt, s, id){
         }
     }
 
-    var count = [];
-    var loc = [];
-    var cc = [0,0,0,0,0,0,0,0];   
-    var anno = ['','','','','','','','','','','','']; 
-    for (let i = 0; i < number; i++){
-        count[i] = 0;
-        for (let j = 0; j < d.length; j++){
-            if (d[j] > cat[i] && d[j] <= cat[i+1])
-            {
-                count[i] ++;
-            }
-        }              
-    }
     var dataset = [];
     var maxheight = Math.max.apply(Math, count);
+    var minheight = Math.min.apply(null, count.filter(Boolean));
+
+    // var minheight = Math.min.apply(Math, count);
+
     for (let i = 0; i < count.length; i++){
         dataset[i] = count[i];
         if (count[i] == maxheight){
+            dataset[i] = {y: count[i], color: '#45b6fe'};
+        }
+        if (count[i] == minheight){
             dataset[i] = {y: count[i], color: '#FF5768'};
         }
     }
+
     Highcharts.chart(c, {
         chart: {
             type: 'column',
@@ -1145,6 +1171,10 @@ function createtime(c,d,short,h, id){
     }); 
 };
 function createnewline(c,d,short,h, id){
+    for (let i=0;i<d.length;i++){
+        d[i] = Math.round(d[i]);
+    }
+
     var counts = {};
     for (const num of d) {
       counts[num] = counts[num] ? counts[num] + 1 : 1;
@@ -1158,17 +1188,29 @@ function createnewline(c,d,short,h, id){
     // console.log(maxheight);
     // // for (let i = 0; i < dataset.length; i++){
     // //     if (dataset[i] == maxheight){
-    // //         dataset[i] = {y: dataset[i], color: '#FF5768'};
+    // //         dataset[i] = {y: dataset[i], color: '#45b6fe'};
     // //     }
     // // }
-
-    for (const key of iterator) {
-      dataset[index] = [Number(key),counts[key]];  
-      index ++;
-    } 
-    // dataset.sort((a, b) => a[0] - b[0]);
+    // keysSorted = Object.keys(counts).sort(function(a,b){return counts[b] - counts[a]})
 
     // console.log(dataset);
+
+    for (const key of iterator) {
+        dataset[index] = counts[key];  
+        index ++;
+    } 
+    var maxheight = Math.max.apply(Math, dataset);
+
+    var dataset = [];
+    var index = 0;
+    for (const key of iterator) {
+        // var value = Math.floor(Number(key));
+      dataset[index] = {x: Number(key),y: counts[key]};  
+      if (counts[key] == maxheight){
+            dataset[index] = {x: Number(key),y: counts[key], color: '#45b6fe'};  
+        }
+      index ++;
+    } 
 
     Highcharts.chart(c, {
 
@@ -1176,23 +1218,38 @@ function createnewline(c,d,short,h, id){
     
         chart:{
             height: h,
-            type: 'line'
+            type: 'spline'
         },
         title: {
             text: null,
         },
         yAxis: {
-            visible: false
+            title: {
+                text: "No. of Sets",
+                style: {
+                    fontSize: '20px',
+                }
+            },
+            labels: {
+                style: {
+                    fontSize: '16px',
+                }
+            },
+            gridLineColor: 'transparent',
         },
         xAxis: {
             title: {
-                text: null,
+                text: short,
+                style: {
+                    fontSize: '20px',
+                }
             },
             labels: {
                 style: {
                     fontSize: '20px',
                 }
-            }
+            },
+            tickInterval: 1
         },  
         plotOptions: {
             series: {
@@ -1289,7 +1346,7 @@ function createnewline(c,d,short,h, id){
             //     sortKey: 'value'
             // },
             marker: {
-                radius: 8
+                radius: 6
             },
             lineWidth: 4
         }],
