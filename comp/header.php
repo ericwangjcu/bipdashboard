@@ -37,6 +37,7 @@
 <script src="https://code.highcharts.com/modules/heatmap.js"></script>
 <script src="https://code.highcharts.com/modules/treemap.js"></script>
 <script src="https://code.highcharts.com/modules/annotations.js"></script>
+<script src="https://code.highcharts.com/modules/series-label.js"></script>
 <div id="anychart-embed-samples-gauge-linear-04" class="anychart-embed anychart-embed-samples-gauge-linear-04">
 <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-base.min.js?hcode=a0c21fc77e1449cc86299c5faa067dc4"></script>
 <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-linear-gauge.min.js?hcode=a0c21fc77e1449cc86299c5faa067dc4"></script>

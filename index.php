@@ -587,7 +587,7 @@
         let parentDiv = currentDiv.parentNode
 
         const tbl = document.createElement('table');
-        tbl .className = "table table-striped text-xsmall";   
+        tbl .className = "table table-striped text-xsmall table-editable";   
         tbl .id = name;
         tbl .style = "width:100%";
 
@@ -608,6 +608,8 @@
             const tr = document.createElement('tr');
             for (let j=1;j<row[i].length-offset;j++){
                 const td = document.createElement('td');
+                td.className = "changeable";
+                td.setAttribute('contenteditable',"true");
       
                 td.appendChild(document.createTextNode(row[i][j]));       
                 tr.appendChild(td);
@@ -659,7 +661,7 @@
                     <div id="head"></div>
                     <div class="col-12">
                         <div class="tab tab-light">
-                            <ul class="nav nav-tabs" role="tablist">
+                            <ul class="nav nav-tabs nav-fill" role="tablist">
                                 <!-- <li class="nav-item">
                                     <a class="nav-link active" href="#vertical-icon-tab-1" data-bs-toggle="tab" role="tab">
                                         <div class="bi-info-circle-fill text-center" style="font-size: 30px;"></div> 
@@ -939,7 +941,7 @@
                                                     types = [5,2,2,2,2,0,7,8,0,9,1,1,8,1,0,0,8,1,0,1,1,10,1,1,10,1,1,1,1,1,0,1,1,2,3,4,6];
                                                     intervals = [5,2,2,2,2,0,7,8,0,9,1,1,8,0.1,0,8,8,1,0,1,0.1,1,0.1,1,1,1,1,1,1,1,0,1,1,2,3,4,6];
                                                     tabs = [0,5,5,5,5,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,5,5,5,5];
-                                                    gridsizes = [9,2,2,2,2,3,2,7,7,5,3,3,3,3,3,3,3,3,3,4,5,6,3,3,6,3,3,4,4,4,4,4,4,12,12,12,12];
+                                                    gridsizes = [9,2,2,2,2,3,2,7,7,5,6,6,6,6,4,4,4,8,4,6,6,6,6,6,6,6,6,6,6,6,6,6,6,12,12,12,12];
                                                     legends = [5,2,2,2,2,0,7,8,1,9,1,1,8,1,0,0,8,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,1,2,3,4,6];
                                                     number = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6,6,2];
                                                     newunits = ["","","","","","","","","","","","m","m","ha","","","","KW","","L/S","L/S/Cup","hrs","ML","mm","","mm","%","KWH","kWh/ML","kWh/h","$/kWh","$/ML","$/ha/ML",""];
@@ -1063,6 +1065,14 @@
             $('nav li a').filter(function () {
                 return this.href === location.href;
             }).addClass('active');
+        });
+
+        var contents = $('.changeable').html();
+        $('.changeable').blur(function() {
+            if (contents!=$(this).html()){
+                // alert('Handler for .change() called.');
+                console.log(this);
+            }
         });
     </script>
 

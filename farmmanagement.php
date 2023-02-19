@@ -4,7 +4,7 @@
 <?php include('server/getfarms.php') ?>
 <head>
 <?php include('comp/header.php')?>
-<script src="https://unpkg.com/read-excel-file@5.x/bundle/read-excel-file.min.js"></script>
+<script src="https:
 <style>
     #input
     {
@@ -76,92 +76,23 @@
 </head>
 
 
-<script>
-    function addElement (id, text, dv, tt, ss, index, interval) {
-        const newDiv1 = document.createElement("div");
-        newDiv1.className = "form-check form-switch form-check-lg";
-
-        const newDiv = document.createElement("input");
-        newDiv.className = "form-check-input";
-        newDiv.type = "checkbox";
-        newDiv.id = id;
-
-        newDiv1.appendChild(newDiv);
-
-        const newDiv2 = document.createElement("label");
-        newDiv2.className = "form-check-label";
-        newDiv2.for = id;
-        newDiv2.innerText = text;
-
-
-        const t = document.createElement("type");
-        t.id = tt;
-
-        const s = document.createElement("short");
-        s.id = ss;
-
-        const idd = document.createElement("index");
-        idd.id = index;
-
-        const int = document.createElement("interval");
-        int.id = interval;
-
-        newDiv1.appendChild(newDiv2);
-        newDiv1.appendChild(t);
-        newDiv1.appendChild(s);
-        newDiv1.appendChild(idd);
-        newDiv1.appendChild(int);
-
-        const currentDiv = document.getElementById(dv);
-        let parentDiv = currentDiv.parentNode
-
-        parentDiv.insertBefore(newDiv1, currentDiv);
-    }   
-    function addgroup(header,size,cards){
-        const newDiv1 = document.createElement("div");
-        newDiv1.className = "col-12 col-md-" + size + " col-xl-" + size;
-        newDiv1.id = header;
-
-        for (let i=0;i<cards.length;i++){
-            const card1 = document.createElement("div");
-            card1.className = "card";        
-            const cardheader1 = document.createElement("div");
-            cardheader1.className = "card-header h3";
-            cardheader1.innerText = cards[i];
-            card1.appendChild(cardheader1);
-
-            const cardbody = document.createElement("div");
-            cardbody.className = "card-body";
-
-            const container = document.createElement("div");
-            container.id = header + cards[i] + "body";
-
-            cardbody.appendChild(container);
-            card1.appendChild(cardbody);
-            newDiv1.appendChild(card1);
-        }
-
-        const currentDiv = document.getElementById("head");
-        let parentDiv = currentDiv.parentNode
-
-        parentDiv.insertBefore(newDiv1, currentDiv);        
-    }       
+<script>  
     function addcard(header,size){
         const newDiv1 = document.createElement("div");
         newDiv1.className = "col-12 col-md-" + size + " col-xl-" + size;  
 
         const card = document.createElement("div");
         card.className = "card";
-        // card.id = header + "card";
+        
         
         const cardheader = document.createElement("div");
         cardheader.className = "card-header h3";
         cardheader.innerText = header;
 
-        // const cardheadertext = document.createElement("h4");
-        // cardheadertext.innerText = header;
+        
+        
 
-        // cardheader.appendChild(cardheadertext);
+        
         card.appendChild(cardheader);
         
         const cardbody = document.createElement("div");
@@ -178,69 +109,7 @@
         let parentDiv = currentDiv.parentNode
 
         parentDiv.insertBefore(newDiv1, currentDiv);        
-    }      
-    function addchart(header, type, short, index, interval){
-        var setvalues = <?php echo json_encode($setvalues,JSON_INVALID_UTF8_IGNORE); ?>;            
-        for (let i=0;i<setvalues.length;i++){
-            setvalues[i][27] = Number(setvalues[i][27]) * 100; 
-        }
-
-        var tempdata = [];
-        var unit = "";
-        var t = 0;
-   
-
-        var data = [];
-        // var t = 0;
-        for (let i = 0; i < setvalues.length; i++) {
-            data[i] = setvalues[i][index];
-        } 
-
-        if (type == 0){
-            createpiechart(header + "body", data, tempdata,'',short,370);
-        }else if (type == 1){
-            createbasicbar(header + "body",data, tempdata,'',header,"",370,interval);
-        }
-        
-    }
-    function createcard(header, value, text){
-        const currentDiv = document.getElementById(header);
-        let parentDiv = currentDiv.parentNode
-
-		let col6 = document.createElement('h1');
-		let col8 = document.createElement('span');
-        col8.className = 'h1 text-primary mt-2 mb-0';
-		col8.innerText = value;
-		let col9 = document.createElement('span');
-		col9.className = 'h3 text-muted mt-2 mb-0';
-		col9.innerText = "            " + text;
-		
-		
-		
-		col6.appendChild(col8);
-		col6.appendChild(col9);
-		
-        parentDiv.insertBefore(col6, currentDiv);  
-	};	
-    function createsmallcard(header, value, text){
-        const currentDiv = document.getElementById(header);
-        let parentDiv = currentDiv.parentNode
-
-		let col6 = document.createElement('h1');
-		let col8 = document.createElement('span');
-        col8.className = 'h1 text-primary mt-2 mb-0';
-		col8.innerText = value;
-		let col9 = document.createElement('span');
-		col9.className = 'h3 text-muted mt-2 mb-0';
-		col9.innerText = "            " + text;
-		
-		
-		
-		col6.appendChild(col8);
-		col6.appendChild(col9);
-		
-        parentDiv.insertBefore(col6, currentDiv);  
-	};
+    };
     function createtable(header, head, row, name, offset){
         const currentDiv = document.getElementById(header);
         let parentDiv = currentDiv.parentNode
@@ -267,14 +136,11 @@
             const tr = document.createElement('tr');
             for (let j=1;j<row[i].length-offset;j++){
                 const td = document.createElement('td');
-                // if (j == 1){
-                //     var a = document.createElement('a');
-                //     a.setAttribute('href',"showeachset.php?id=" + row[i][0]);
-                //     a.innerHTML = row[i][j];
-                //     td.appendChild(a);
-                // }else{
-                //     td.appendChild(document.createTextNode(row[i][j]));
-                // }             
+                td.className = "changeable";
+                console.log(i);
+                td.id = i - 181 + "," + j;
+                console.log(td.id);
+                td.setAttribute('contenteditable',"true");          
                 td.appendChild(document.createTextNode(row[i][j]));       
                 tr.appendChild(td);
             }
@@ -322,7 +188,7 @@
                         for (let i=0;i<setvalues.length;i++){
                             
                             var nameArr = setvalues[i][2].split('_');
-                            // console.log(nameArr[0]);
+                            
                             if (nameArr[0] == "FBIP"){
                                 subset[ind] = [];
                                 for (let j=0;j<setvalues[i].length;j++){
@@ -336,7 +202,7 @@
                         for (let i=0;i<setvalues.length;i++){
                             
                             var nameArr = setvalues[i][2].split('_');
-                            // console.log(nameArr[0]);
+                            
                             if (nameArr[0] == "BPS"){
                                 subset[ind] = [];
                                 for (let j=0;j<setvalues[i].length;j++){
@@ -349,7 +215,7 @@
                     case "ATS":
                         for (let i=0;i<setvalues.length;i++){
                             var nameArr = setvalues[i][2].split('_');
-                            // console.log(nameArr[0]);
+                            
                             if (nameArr[0] == "ATS"){
                                 subset[ind] = [];
                                 for (let j=0;j<setvalues[i].length;j++){
@@ -360,7 +226,7 @@
                         }         
                         break;                                
                     default:
-                        // code block
+                        
                 }
                 addcard("Data",12);
                 createtable("Data"+"body", setnames, subset,"datatables-reponsive",0); 
@@ -480,7 +346,7 @@
 <!-- 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-       // Datatables Responsive
+       
         $("#datatables-reponsive").DataTable({
             responsive: true,
         });			
@@ -488,27 +354,29 @@
 </script>	 -->
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // Datatables with Buttons
+        
         var datatablesButtons = $("#datatables-reponsive").DataTable({
-            responsive: true,
+            
             lengthChange: !1,
             fixedHeader: true,
+            scrollX: 2000,
+            scrollY: false,
             buttons: ["copy", "print"]
         });
         datatablesButtons.buttons().container().appendTo("#datatables-reponsive_wrapper .col-md-6:eq(0)");
     });
 </script>
 <script>
-		// DataTables with Column Search by Text Inputs
+		
 		document.addEventListener("DOMContentLoaded", function() {
-			// Setup - add a text input to each footer cell
+			
 			$("#datatables-reponsive tfoot th").each(function() {
 				var title = $(this).text();
 				$(this).html("<input type=\"text\" class=\"form-control\" placeholder=\"Search " + title + "\" />");
 			});
-			// DataTables
+			
 			var table = $("#datatables-reponsive").DataTable();
-			// Apply the search
+			
 			table.columns().every(function() {
 				var that = this;
 				$("input", this.footer()).on("keyup change clear", function() {
@@ -520,28 +388,35 @@
 				});
 			});
 		});
-		// DataTables with Column Search by Select Inputs
-		// document.addEventListener("DOMContentLoaded", function() {
-		// 	$("#datatables-reponsive").DataTable({
-		// 		initComplete: function() {
-		// 			this.api().columns().every(function() {
-		// 				var column = this;
-		// 				var select = $("<select class=\"form-control\"><option value=\"\"></option></select>")
-		// 					.appendTo($(column.footer()).empty())
-		// 					.on("change", function() {
-		// 						var val = $.fn.dataTable.util.escapeRegex(
-		// 							$(this).val()
-		// 						);
-		// 						column
-		// 							.search(val ? "^" + val + "$" : "", true, false)
-		// 							.draw();
-		// 					});
-		// 				column.data().unique().sort().each(function(d, j) {
-		// 					select.append("<option value=\"" + d + "\">" + d + "</option>")
-		// 				});
-		// 			});
-		// 		}
-		// 	});
-		// });
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+        var contents = $('.changeable').html();
+        $('.changeable').blur(function() {
+            if (contents!=$(this).html()){
+                
+                console.log(this);
+            }
+        });
 	</script>
 </html>

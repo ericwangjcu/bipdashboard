@@ -3,6 +3,55 @@ piecolors = ["#d03161", "#178a94", "#bfd8d1", "#ee8080", "#2b374b", "#a6d75b", "
 barcolors = ["#C4C4C4", "#00A5E3", "#48b5c4", "#1984c5", "#a6d75b", "#c9e52f", "#d0ee11", "#f4f100"];
 
 Highcharts.setOptions({ colors: barcolors });
+
+function clickshowmodal(t, comp, comp2, type, id){
+    var newnames = ["1","District","Grower ID","Grower Block ID", "Area (ha)", t];
+
+    var newvalues = [];                                                                                
+    var index = 0;
+    for (let j=0;j<subset.length;j++){    
+        var match = 0;
+        if (type == 1){
+            if (subset[j][id] == comp){
+                match = 1;
+            }
+        }else{
+            if (id == 27){
+                subset[j][id] = Number(subset[j][id]) * 100;
+            }
+            if (Number(subset[j][id]) >= comp && Number(subset[j][id]) <= comp2){
+                match = 1;
+            }
+        }
+        if (match == 1){
+            newvalues[index] = [];
+            newvalues[index][0] = "1";
+            newvalues[index][1] = subset[j][1];
+            newvalues[index][2] = subset[j][2];
+            newvalues[index][3] = subset[j][4];
+            newvalues[index][4] = subset[j][14];
+            newvalues[index][5] = subset[j][id];
+            index ++;
+        }
+
+    }
+    
+    var element = document.getElementById("datatables-reponsive");
+    var element1 = document.getElementById("datatables-reponsive_wrapper");
+    if (element){
+        element.remove(); 
+        element1.remove(); 
+    }    
+    createtable("datatable", newnames,  newvalues,"datatables-reponsive",0);
+    $("#datatables-reponsive").DataTable({
+        responsive: true,
+        "pageLength": 5,
+        "lengthChange": false,
+        "searching": false,
+        "info": true, 
+    });
+    $("#myModal").modal('show');
+};
 function stackedcolumn(c,dataset){
 
     Highcharts.chart(c, {
@@ -29,7 +78,6 @@ function stackedcolumn(c,dataset){
         },
         plotOptions: {
             series: {               
-                // stacking: 'normal',
                 dataLabels: {
                     enabled: true,
                     formatter: function(){
@@ -52,7 +100,6 @@ function stackedcolumn(c,dataset){
 });
 
 };
-
 function createpiechart(c, d, e ,f, t,s,id,leg){
     var counts = {};
     for (const num of d) {
@@ -62,8 +109,8 @@ function createpiechart(c, d, e ,f, t,s,id,leg){
   
     var dataset = [];
     var index = 0;
-    var text1 = "CNT";
-    var text2 = "Count"
+    var text1 = "No.";
+    var text2 = "No."
     if (f != ""){
         text1 = f;
         text2 = f;
@@ -140,48 +187,7 @@ function createpiechart(c, d, e ,f, t,s,id,leg){
             point: {
                 events: {
                     click: function () {
-                        var newnames = ["1","District","Grower ID","Block ID", t];
-                        const myArray = t.split(" ");
-                        var databasename = [];
-                        console.log(myArray);
-                        for (let i=0;i<myArray.length;i++){
-                            if (i < myArray.length - 1){
-                                databasename += myArray[i].toLowerCase() + "_";
-                            }else{
-                                databasename += myArray[i].toLowerCase();
-                            }
-                            
-                        }
-                        var newvalues = [];
-                        var index = 0;
-                        for (let j=0;j<subset.length;j++){
-                            if (subset[j][id] == this.name){
-                                newvalues[index] = [];
-                                newvalues[index][0] = "1";
-                                newvalues[index][1] = subset[j][1];
-                                newvalues[index][2] = subset[j][2];
-                                newvalues[index][3] = subset[j][3];
-                                newvalues[index][4] = subset[j][id];
-                                index ++;
-                            }
-
-                        }
-                        var element = document.getElementById("datatables-reponsive");
-                        var element1 = document.getElementById("datatables-reponsive_wrapper");
-                        if (element){
-                            element.remove(); 
-                            element1.remove(); 
-                        }
-
-                        createtable("datatable", newnames,  newvalues,"datatables-reponsive",0);
-                        $("#datatables-reponsive").DataTable({
-                            responsive: true,
-                            "pageLength": 5,
-                            "lengthChange": false,
-                            "searching": false,
-                            "info": true, 
-                        });
-                        $("#myModal").modal('show');
+                        clickshowmodal(t,this.name,"",1,id);
                     }
                 }
             }
@@ -326,32 +332,30 @@ function createbarcharts(c, d, e ,f, t,s,id){
     for (const num of d) {
       counts[num] = counts[num] ? counts[num] + 1 : 1;
     }    
-    const iterator = Object.keys(counts);      
   
     var dataset = [];
+    var dataset1 = [];
+
     var cat = [];
     var index = 0;
 
     keysSorted = Object.keys(counts).sort(function(a,b){return counts[b] - counts[a]})
 
+
     for (const key of keysSorted) {
         cat[index] = key;
         dataset[index] = counts[key];  
+        var area = 0;
+        for (let j=0;j<subset.length;j++){
+            // console.log(id);
+            // console.log(counts[key]);
+            if (subset[j][id] == key){
+                area += Number(subset[j][14]);
+            }         
+        }
+        dataset1[index] = Number(area.toFixed(0));
         index ++;
-    }  
-
-    var maxheight = Math.max.apply(Math, dataset);
-    var minheight = Math.min.apply(Math, dataset);
-
-    for (let i = 0; i < dataset.length; i++){
-        if (dataset[i] == maxheight){
-            dataset[i] = {y: dataset[i], color: '#45b6fe'};
-        }
-        if (dataset[i] == minheight){
-            dataset[i] = {y: dataset[i], color: '#FF5768'};
-        }
     }
-
     Highcharts.chart(c, {
         chart: {
             type: 'bar',
@@ -374,13 +378,20 @@ function createbarcharts(c, d, e ,f, t,s,id){
             }
            
         },
-        yAxis: {
+        yAxis: [{
             title: {
                 text: null,
                 align: 'high'
             },
             visible: false
-        }, 
+        }, {
+            title: {
+                text: null,
+                align: 'high'
+            },
+            visible: false,
+            opposite: true,
+        }],
         tooltip: {
             useHTML: true,
             headerFormat: '<span class="tooltipHeader">{point.key}</span>',
@@ -408,10 +419,14 @@ function createbarcharts(c, d, e ,f, t,s,id){
                     enabled: true,
                     style: {
                         fontSize: '16px'
-                    }
+                    },
+                    formatter: function(){
+                        return (this.y!=0)?this.y + " " + this.series.name.substring(this.series.name.length - 4):"";
+                    },
+                    allowOverlap: true
                 },
                 pointWidth: $(this).height() / (4*dataset.length),
-                // pointWidth: [20,30,40,30,30,10],
+                
 
             },
             series:{
@@ -419,43 +434,8 @@ function createbarcharts(c, d, e ,f, t,s,id){
                 point: {
                     events: {
                         click: function () {
-                            var name = t;    
-                            var newnames = ["1","District","Grower ID","Block ID", name];
+                            clickshowmodal(t, cat[this.x],'',1,id);
 
-                            var newvalues = [];                                                                                
-                            var index = 0;
-                            for (let j=0;j<subset.length;j++){  
-                                // console.log(cat[this.x]);
-                                if (subset[j][id] == cat[this.x]){
-                                    console.log(subset[j][id]);
-                                    console.log(j);
-                                    newvalues[index] = [];
-                                    newvalues[index][0] = "1";
-                                    newvalues[index][1] = subset[j][1];
-                                    newvalues[index][2] = subset[j][2];
-                                    newvalues[index][3] = subset[j][3];
-                                    newvalues[index][4] = subset[j][id];
-                                    index ++;
-                                }
-
-                            }
-                            console.log(newvalues);
-
-                            var element = document.getElementById("datatables-reponsive");
-                            var element1 = document.getElementById("datatables-reponsive_wrapper");
-                            if (element){
-                                element.remove(); 
-                                element1.remove(); 
-                            }    
-                            createtable("datatable", newnames,  newvalues,"datatables-reponsive",0);
-                            $("#datatables-reponsive").DataTable({
-                                responsive: true,
-                                "pageLength": 5,
-                                "lengthChange": false,
-                                "searching": false,
-                                "info": true, 
-                            });
-                            $("#myModal").modal('show');
                         }
                     }
                 }
@@ -468,13 +448,15 @@ function createbarcharts(c, d, e ,f, t,s,id){
             enabled: false
         },
         legend: {
-            enabled: false
+            enabled: true
         },
         series: [{
-            // dataSorting: {
-            //     enabled: true
-            // },
+            name: "No. of Sets",
             data: dataset
+        },{
+            name: "Area (ha)",
+            data: dataset1,
+            yAxis: 1,
         }]
     });
 
@@ -493,33 +475,11 @@ function createbasicbar(c, d, e, f, t, xt, s, id){
          fix = 1;
     }
 
-
-
-    for (let i = 0; i < number; i++){
-        cat[i] = m2 + dist * (i);     
-    }
-
     var count = [];
     var index = 0;
     
-    for (let i = 0; i < number; i++){
-        var cc = 0;
-
-        for (let j = 0; j < d.length; j++){
-            if (d[j] > cat[index] && d[j] <= cat[index+1])
-            {
-                cc ++;
-            }
-        }    
-        if (cc != 0){
-            count[index] = cc;
-            index ++;
-        }         
-    }
-    console.log(count);
-
-    for (let i = 0; i < cat.length; i++){
-        // cat[i] = m2 + dist * (i);
+    for (let i = 0; i < number + 1; i++){
+        cat[i] = m2 + dist * (i);
         var text1 = "";
         var text2 = "";
         if (i > 0 && i <= 1){
@@ -538,22 +498,45 @@ function createbasicbar(c, d, e, f, t, xt, s, id){
         }
     }
 
+    for (let i = 0; i < number; i++){
+        count[i] = 0;
+        for (let j = 0; j < d.length; j++){
+            if (d[j] > cat[i] && d[j] <= cat[i+1])
+            {
+                count[i] ++;
+            }
+        }    
+        
+    }
     var dataset = [];
-    var maxheight = Math.max.apply(Math, count);
-    var minheight = Math.min.apply(null, count.filter(Boolean));
-
-    // var minheight = Math.min.apply(Math, count);
-
-    for (let i = 0; i < count.length; i++){
-        dataset[i] = count[i];
-        if (count[i] == maxheight){
-            dataset[i] = {y: count[i], color: '#45b6fe'};
-        }
-        if (count[i] == minheight){
-            dataset[i] = {y: count[i], color: '#FF5768'};
+    var dataset1 = [];
+    
+    var area = [];
+    for (let i = 0; i < cat.length; i++){
+        area[i] = 0;
+        for (let j=0;j<subset.length;j++){ 
+            if (id == 27){
+                if (Number(subset[j][id]) >= cat[i]/100 && Number(subset[j][id]) < cat[i + 1]/100){
+                    area[i] += Number(subset[j][14]);
+                }
+            }
+            if (Number(subset[j][id]) >= cat[i] && Number(subset[j][id]) < cat[i + 1]){
+                area[i] += Number(subset[j][14]);
+            }
+    
         }
     }
+    var newcatstr = [];
+    var index = 0;
+    for (let i = 0; i < count.length; i++){
+        if (count[i] != 0){
+            dataset[index] = count[i];
+            dataset1[index] = Number(area[i].toFixed(0));
+            newcatstr[index] = catstr[i];
+            index ++;
+        }
 
+    }
     Highcharts.chart(c, {
         chart: {
             type: 'column',
@@ -576,7 +559,7 @@ function createbasicbar(c, d, e, f, t, xt, s, id){
             text: ''
         },
         xAxis: {
-            categories: catstr,
+            categories: newcatstr,
             crosshair: true,
             title: {
                 text: null,
@@ -587,10 +570,10 @@ function createbasicbar(c, d, e, f, t, xt, s, id){
             labels: {
                 style: {
                     fontSize: '16px'
-                }
+                },     
             }
         },
-        yAxis: {
+        yAxis: [{
             min: 0,
             title: {
                 text: 'Count',
@@ -599,12 +582,33 @@ function createbasicbar(c, d, e, f, t, xt, s, id){
                 }
             },
             labels: {
+                enabled: false,
+
                 style: {
                     fontSize: '16px'
                 }
             },
-            visible: false           
-        },
+            visible: false ,
+            gridLineColor: 'transparent',
+         
+        },{
+            title: {
+                text: 'Area (ha)',
+                style: {
+                    fontSize: '16px'
+                }
+            },
+            labels: {
+                enabled: false,
+                style: {
+                    fontSize: '16px'
+                }
+            },
+            opposite: true,
+            visible: false,
+            gridLineColor: 'transparent',
+          
+        },],
         tooltip: {
             useHTML: true,
             headerFormat: '<span class="tooltipHeader">{point.key}</span>',
@@ -627,80 +631,74 @@ function createbasicbar(c, d, e, f, t, xt, s, id){
             borderWidth: 3,
         },        
         plotOptions: {
+            column: {
+                shadow: false,
+                borderWidth: 0
+            },
             series: {
                 borderWidth: 0,
-                pointWidth: $(this).height() / (35),
+                // pointWidth: $(this).height() / (35),
                 colors: ['#B4B4B4'],  
                 dataLabels: {
                     enabled: true,
                     shadow: true,                       
                     style: {
-                        fontSize: '16px',
+                        fontSize: '18px',
                         fontWeight: 'thin',
-                    },                    
+                    },   
+                    formatter: function(){
+                        var label = "";
+                        if (this.series.index == 1)
+                        {
+                            label= "ha";
+                        }
+                        console.log(this.series.index);
+                        return (this.y!=0)?this.y + " " + label:"";
+                    },
+                    allowOverlap: true
                 },
                 animation: false,
                 point: {
                     events: {
                         click: function () {
-                            var name = t;    
-                            var newnames = ["1","District","Grower ID","Block ID", name];
-                            const myArray = t.split(" ");
-                            var databasename = [];                            
-                            for (let i=0;i<myArray.length;i++){
-                                if (i < myArray.length - 1){
-                                    databasename += myArray[i].toLowerCase() + "_";
-                                }else{
-                                    databasename += myArray[i].toLowerCase();
-                                }
-                                
-                            }    
-                            var newvalues = [];                                                                                
-                            var index = 0;
-                            // console.log(id);
-                            for (let j=0;j<subset.length;j++){ 
-                                if (id == 27){
-                                    subset[j][id] = Number(subset[j][id]) * 100;
-                                    // console.log(subset[j][id]);
-                                }
-                                if (Number(subset[j][id]) >= cat[this.x] && Number(subset[j][id]) <= cat[this.x +1]){
-                                    newvalues[index] = [];
-                                    newvalues[index][0] = "1";
-                                    newvalues[index][1] = subset[j][1];
-                                    newvalues[index][2] = subset[j][2];
-                                    newvalues[index][3] = subset[j][3];
-                                    newvalues[index][4] = subset[j][id];
-                                    index ++;
-                                }
-
-                            }
-                            var element = document.getElementById("datatables-reponsive");
-                            var element1 = document.getElementById("datatables-reponsive_wrapper");
-                            if (element){
-                                element.remove(); 
-                                element1.remove(); 
-                            }    
-                            createtable("datatable", newnames,  newvalues,"datatables-reponsive",0);
-                            $("#datatables-reponsive").DataTable({
-                                responsive: true,
-                                "pageLength": 5,
-                                "lengthChange": false,
-                                "searching": false,
-                                "info": true, 
-                            });
-                            $("#myModal").modal('show');
+                            clickshowmodal(t, cat[this.x], cat[this.x + 1], 0, id)
                         }
                     }
                 }
             },
         },
         legend: {
-            enabled: false
+            enabled: true,
+            itemStyle: {
+                fontSize: '16px'
+            }
         },
         series: [{
-            colorByPoint: true,
-            name: t,
-            data: dataset              
+            colorByPoint: false,
+            color: 'rgba(200,200,200,.5)',
+            // pointPadding: 0.3,
+            // pointPlacement: -0.2,
+            name: "No. of Sets",
+            data: dataset,
+            // pointWidth: $(this).height() / (20),  
+            // dataLabels:{
+            //     x: -10,
+            //     y: -10
+            // }        
+        },{
+            colorByPoint: false,
+            color: 'rgba(69,182,254,.9)',
+            // pointPadding: 0.4,
+            // pointPlacement: -0.2,
+            name: "Area (ha)",
+            data: dataset1,
+            yAxis: 1,
+
+            // pointWidth: $(this).height() / (30),     
+            // dataLabels:{
+            //     x: 10,
+            //     y: 10
+            // }     
         }],
         exporting: {
             enabled: false
@@ -717,14 +715,21 @@ function createbasicbar(c, d, e, f, t, xt, s, id){
                     title: {
                         text: null,
                     },
-                    yAxis: {
+                    yAxis: [{
                         labels: {
                             enabled: true
                         },
                         title:{
                             text: null
                         }
-                    },
+                    },{
+                        labels: {
+                            enabled: true
+                        },
+                        title:{
+                            text: null
+                        }
+                    }],
                     plotOptions: {
                         series: {
                             borderWidth: 0,
@@ -1104,7 +1109,7 @@ function createtime(c,d,short,h, id){
     } 
     dataset.sort((a, b) => a[0] - b[0]);
 
-    // console.log(dataset);
+    
 
     Highcharts.chart(c, {
 
@@ -1156,10 +1161,10 @@ function createtime(c,d,short,h, id){
         },
         series: [{
             data: dataset,
-            // dataSorting: {
-            //     enabled: true,
-            //     sortKey: 'value'
-            // },
+            
+            
+            
+            
         }],
         exporting: {
             enabled: false
@@ -1184,17 +1189,6 @@ function createnewline(c,d,short,h, id){
     var dataset = [];
     var index = 0;
 
-    // var maxheight = Math.max.apply(Math, counts);
-    // console.log(maxheight);
-    // // for (let i = 0; i < dataset.length; i++){
-    // //     if (dataset[i] == maxheight){
-    // //         dataset[i] = {y: dataset[i], color: '#45b6fe'};
-    // //     }
-    // // }
-    // keysSorted = Object.keys(counts).sort(function(a,b){return counts[b] - counts[a]})
-
-    // console.log(dataset);
-
     for (const key of iterator) {
         dataset[index] = counts[key];  
         index ++;
@@ -1204,7 +1198,7 @@ function createnewline(c,d,short,h, id){
     var dataset = [];
     var index = 0;
     for (const key of iterator) {
-        // var value = Math.floor(Number(key));
+        
       dataset[index] = {x: Number(key),y: counts[key]};  
       if (counts[key] == maxheight){
             dataset[index] = {x: Number(key),y: counts[key], color: '#45b6fe'};  
@@ -1271,43 +1265,7 @@ function createnewline(c,d,short,h, id){
                 point: {
                     events: {
                         click: function () {
-                            var name = short;    
-                            var newnames = ["1","District","Grower ID","Block ID", name];
-
-                            var newvalues = [];                                                                                
-                            var index = 0;
-                            for (let j=0;j<subset.length;j++){  
-                                // console.log(cat[this.x]);
-                                if (subset[j][id] == this.x){
-                                    console.log(subset[j][id]);
-                                    console.log(j);
-                                    newvalues[index] = [];
-                                    newvalues[index][0] = "1";
-                                    newvalues[index][1] = subset[j][1];
-                                    newvalues[index][2] = subset[j][2];
-                                    newvalues[index][3] = subset[j][3];
-                                    newvalues[index][4] = subset[j][id];
-                                    index ++;
-                                }
-
-                            }
-                            console.log(newvalues);
-
-                            var element = document.getElementById("datatables-reponsive");
-                            var element1 = document.getElementById("datatables-reponsive_wrapper");
-                            if (element){
-                                element.remove(); 
-                                element1.remove(); 
-                            }    
-                            createtable("datatable", newnames,  newvalues,"datatables-reponsive",0);
-                            $("#datatables-reponsive").DataTable({
-                                responsive: true,
-                                "pageLength": 5,
-                                "lengthChange": false,
-                                "searching": false,
-                                "info": true, 
-                            });
-                            $("#myModal").modal('show');
+                            clickshowmodal(t,this.x,'',1,id);
                         }
                     }
                 }
@@ -1341,10 +1299,10 @@ function createnewline(c,d,short,h, id){
         series: [{
             name: short,
             data: dataset,
-            // dataSorting: {
-            //     enabled: true,
-            //     sortKey: 'value'
-            // },
+            
+            
+            
+            
             marker: {
                 radius: 6
             },
