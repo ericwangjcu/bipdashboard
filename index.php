@@ -6,31 +6,17 @@
 <head>
 <?php include('comp/header.php')?>
 <style>
-/* .form-check-lg {
-  font-size: 150%;
-} */
 
-/* .offcanvas {
-  width: 60%;
-  background: #f5f7fb;
-} */
-/* .modal {
-  width: 200px !important;
-  max-height: 5200px !important;
-}
 
-.modal-content {
-  padding: 100px !important;
-} */
+
+
 
 .tooltipHeader {
   float: center;
   font-size: 1rem;
 }
 
-/* table {
-    height: 500px
-} */
+
 
 .tooltipPointWrapper {
   display: block;
@@ -41,7 +27,7 @@
 .tooltipPoint {
   font-size: 2rem;
   padding-left: 5px;
-  /* color: #FF0045; */
+ 
 }
 
 .tooltipValueSuffix {
@@ -62,11 +48,7 @@
       box-shadow: 8px 8px 15px 0 rgba(100, 100, 100, 0.26);
 }
 
-/* li{
-    height:70px;
-    width:120px;
-    font-size: 12px;
-} */
+
 .nav-tabs .nav-item .nav-link {
   background-color: #C4C4C4;
   color: #FFF;
@@ -183,7 +165,7 @@
 
         parentDiv.insertBefore(newDiv1, currentDiv);        
     }      
-    function addchart(header, type, short, index, interval,legend){
+    function addchart(header, type, short, index, interval,legend,height){
         var setvalues = <?php echo json_encode($setvalues,JSON_INVALID_UTF8_IGNORE); ?>;
         var username = <?php echo json_encode($_SESSION['username'],JSON_INVALID_UTF8_IGNORE); ?>; 
 
@@ -290,17 +272,17 @@
         areasum = removeItemOnce(areasum, "0")
 
         if (type == 0){
-            createpiechart(header + "body0", data, tempdata,'',short,460, index,legend);
-            // createbarcharts(header + "body0", data, tempdata,'',short,500, index);
+            createpiechart(header + "body0", data, tempdata,'',short,height, index,legend);
+            
 
         }
         if (type == 8){
-            // createpiechart(header + "body0", data, tempdata,'',short,500, index);
-            createbarcharts(header + "body0", data, tempdata,'',short,460, index);
+            
+            createbarcharts(header + "body0", data, tempdata,'',short,height, index);
 
         }
         if (type == 1){
-            createbasicbar(header + "body0",data, tempdata,'',header,interval,460, index);
+            createbasicbar(header + "body0",data, tempdata,'',header,interval,height, index);
         }
         function createsregression(indx, indy, xname, ynames, yunits){
             var x = [];
@@ -426,7 +408,7 @@
                 }
             }  
                                          
-            createstackedbars(header + "body0",x,y,460);
+            createstackedbars(header + "body0",x,y,height);
             var y = [];
             ind = 0;
             for (let i = 0; i < subset.length; i++) {
@@ -435,7 +417,7 @@
                     ind ++;                
                 }
             }        
-            createstackedbars(header + "body1",x,y,460);
+            createstackedbars(header + "body1",x,y,height);
         }   
         if (type == 9){
             var newdata = [];
@@ -446,37 +428,37 @@
                     index ++;
                 }
             }
-            createtime(header + "body0",newdata,short,460,index);
-            // createpiechart(header + "body0", newdata, tempdata,'',short,500, index);
+            createtime(header + "body0",newdata,short,height,index);
+            
         }
         if (type == 10){
-            // var newdata = [];
-            // var index = 0;
-            // for (let i=0;i<data.length;i++){
-            //     newdata[index] = Number(data[i]);
-            //     index ++;
-            // }
-            // console.log(newdata);
+            
+            
+            
+            
+            
+            
+            
 
-            createnewline(header + "body0",data,short,460,index);
-            // createpiechart(header + "body0", newdata, tempdata,'',short,500, index);
+            createnewline(header + "body0",data,short,height,index);
+            
         }
-        // if (type == 9){
-        //     var counts = {};
-        //     for (const num of data) {
-        //     counts[num] = counts[num] ? counts[num] + 1 : 1;
-        //     }    
-        //     const iterator = Object.keys(counts);      
         
-        //     var dataset = [];
-        //     var index = 0;
-        //     for (const key of iterator) {
-        //         dataset[index] = {name: key,
-        //             data: [counts[key]]};  
-        //         index ++;
-        //     }  
-        //     stackedcolumn(header + "body0",dataset);
-        // }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 
         if (type == 7){
             var counts = {};
@@ -486,8 +468,8 @@
             const iterator = Object.keys(counts);  
 
             keysSorted = Object.keys(counts).sort(function(a,b){return counts[b] - counts[a]})
-            // console.log(keysSorted);     // bar,me,you,foo  
-            // console.log(counts);
+            
+            
             var dataset = [];
             var cat = [];
             var index = 0;
@@ -497,7 +479,7 @@
                 dataset[index] = counts[key];  
                 index ++;
             }  
-            // console.log(dataset);
+            
             var head = ["1",short,"CNT","%"];
             var row = [];
             var sum = dataset.reduce((a, b) => {
@@ -530,10 +512,10 @@
             card1.className = "card";        
 
  
-            // const cardheader1 = document.createElement("div");
-            // cardheader1.className = "card-header h3";
-            // cardheader1.innerText = cards[i];
-            // card1.appendChild(cardheader1);
+            
+            
+            
+            
 
             const cardbody = document.createElement("div");
             cardbody.className = "card-body";
@@ -618,17 +600,17 @@
         }          
         tbl.appendChild(tbody);
 
-        // const tfoot = document.createElement('tfoot');
         
-        // const tr1 = document.createElement('tr');
-        // for (let i=1;i<head.length-offset;i++){
-        //     const th = document.createElement('th');
-        //     th.appendChild(document.createTextNode(head[i]));
-        //     tr1.appendChild(th);
-        // }
+        
+        
+        
+        
+        
+        
+        
 
-        // tfoot.appendChild(tr1);
-        // tbl.appendChild(tfoot);
+        
+        
 
         parentDiv.insertBefore(tbl, currentDiv);  
     }
@@ -662,12 +644,6 @@
                     <div class="col-12">
                         <div class="tab tab-light">
                             <ul class="nav nav-tabs nav-fill" role="tablist">
-                                <!-- <li class="nav-item">
-                                    <a class="nav-link active" href="#vertical-icon-tab-1" data-bs-toggle="tab" role="tab">
-                                        <div class="bi-info-circle-fill text-center" style="font-size: 30px;"></div> 
-                                        <div class="text-center" >Summary</div>
-                                    </a>
-                                </li> -->
                                 <li class="nav-item">
                                     <a class="nav-link" href="#vertical-icon-tab-2" data-bs-toggle="tab" role="tab">
                                         <div class="bi-border-all text-center" style="font-size: 20px;"></div> 
@@ -688,14 +664,6 @@
                                 </li>
                             </ul>
                             <div class="tab-content">
-                                <!-- <div class="tab-pane active" id="vertical-icon-tab-1" role="tabpanel">
-                                    <div class="row"> 
-                                        </br>
-                                        </br>
-                                        </br>
-                                        <div id="head-0"></div>
-                                    </div>
-                                </div> -->
                                 <div class="tab-pane" id="vertical-icon-tab-2" role="tabpanel">
                                     <div class="row"> 
                                         </br>
@@ -907,7 +875,7 @@
                         stackedcolumn("testNo. of Farms",dataset1);
                         stackedcolumn("testNo. of Sets",dataset);
                         stackedcolumn("testTotal Area",dataset2);
-                                // createpiechart(header + "body1", data1, tempdata,"Farms",short,500);
+                                
                     </script>
                 </div>
                 
@@ -941,9 +909,10 @@
                                                     types = [5,2,2,2,2,0,7,8,0,9,1,1,8,1,0,0,8,1,0,1,1,10,1,1,10,1,1,1,1,1,0,1,1,2,3,4,6];
                                                     intervals = [5,2,2,2,2,0,7,8,0,9,1,1,8,0.1,0,8,8,1,0,1,0.1,1,0.1,1,1,1,1,1,1,1,0,1,1,2,3,4,6];
                                                     tabs = [0,5,5,5,5,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,5,5,5,5];
-                                                    gridsizes = [9,2,2,2,2,3,2,7,7,5,6,6,6,6,4,4,4,8,4,6,6,6,6,6,6,6,6,6,6,6,6,6,6,12,12,12,12];
-                                                    legends = [5,2,2,2,2,0,7,8,1,9,1,1,8,1,0,0,8,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,1,2,3,4,6];
+                                                    gridsizes = [9,2,2,2,2,6,6,12,7,5,6,6,6,6,4,4,4,4,3,5,6,6,6,6,6,6,6,6,6,6,6,6,6,12,12,12,12];
+                                                    legends = [5,2,2,2,2,1,7,8,1,9,1,1,8,1,0,0,8,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,1,2,3,4,6];
                                                     number = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6,6,2];
+                                                    height = [0,0,0,0,0,460,460,700,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460];
                                                     newunits = ["","","","","","","","","","","","m","m","ha","","","","KW","","L/S","L/S/Cup","hrs","ML","mm","","mm","%","KWH","kWh/ML","kWh/h","$/kWh","$/ML","$/ha/ML",""];
                                                     
                                                     for (let i=0;i<33;i++){
@@ -993,30 +962,30 @@
             function adddashboarditem(i){
                 if (dashboardshown[i] == 1){
                     addcard(dashboarditems[i],gridsizes[i],number[i],tabs[i]);                    
-                    addchart(dashboarditems[i], types[i], dashboarditems[i],i+1, intervals[i],legends[i]); 
+                    addchart(dashboarditems[i], types[i], dashboarditems[i],i+1, intervals[i],legends[i],height[i]); 
                     
                     var checkbox = document.getElementById(dashboarditems[i]);
                     checkbox.checked = true;
                     document.getElementById('result-table').value  = document.getElementById('result-table').value + dashboarditems[i] + ";";
                 }
             }
-            // adddashboarditem(0);
-            // adddashboarditem(36);
-            // adddashboarditem(33);
-            // adddashboarditem(34);
-            // adddashboarditem(35);
+            
+            
+            
+            
+            
             
                 
             for (let i=1;i<33;i++){
-                // if(i == 5 && dashboardshown[i] == 1){
-                //     addtext("Baseline");
-                // }
-                // if(i == 19 && dashboardshown[i] == 1){
-                //     addtext("Irrigation");
-                // } 
-                // if(i == 27 && dashboardshown[i] == 1){
-                //     addtext("Energy & Cost");
-                // }       
+                
+                
+                
+                
+                
+                
+                
+                
+                
                 if (i != 30){
                     adddashboarditem(i);
 
@@ -1027,36 +996,36 @@
             };
 
             activaTab('vertical-icon-tab-3');
-            // $('#vertical-icon-tab-2').show();
-            // $('$vertical-icon-tab-2').tab('show');
+            
+            
 		});
 
-        // $(document).on('change', '.form-check', function (e) {
-        //     var header = this.getElementsByTagName("label")[0].innerText;
-        //     var status = this.getElementsByTagName("input")[0].checked;
-        //     var elementExists = document.getElementById(header + "card");
-        //     var type = this.getElementsByTagName("type")[0].id;
-        //     var short = this.getElementsByTagName("short")[0].id;
-        //     var index = this.getElementsByTagName("index")[0].id;
-        //     var interval = this.getElementsByTagName("interval")[0].id;
-        //     var number = this.getElementsByTagName("number")[0].id;
-        //     if (elementExists == null && status == true){
-        //         if (types == 1){
-        //             addcard(header,"10",number);
-        //         }
-        //         else{
-        //             addcard(header,"6",number);
-        //         }
-        //         addchart(header, type, short, index,interval);
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
           
-        //         document.getElementById('result-table').value  = document.getElementById('result-table').value + header + ";";
-        //     }else{
-        //         const element = document.getElementById(header+ "chart");
-        //         element.remove();                     
-        //         document.getElementById('result-table').value  = document.getElementById('result-table').value.replace(header + ";", '');  
-        //     }
+        
+        
+        
+        
+        
+        
             
-        // });    
+        
 
 
 	</script>
@@ -1070,7 +1039,7 @@
         var contents = $('.changeable').html();
         $('.changeable').blur(function() {
             if (contents!=$(this).html()){
-                // alert('Handler for .change() called.');
+                
                 console.log(this);
             }
         });

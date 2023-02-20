@@ -35,7 +35,7 @@ function clickshowmodal(t, comp, comp2, type, id){
         }
 
     }
-    
+
     var element = document.getElementById("datatables-reponsive");
     var element1 = document.getElementById("datatables-reponsive_wrapper");
     if (element){
@@ -125,6 +125,7 @@ function createpiechart(c, d, e ,f, t,s,id,leg){
     
     
     new Highcharts.chart(c, {
+        colors: ['#01BAF2','#71BF45', '#FAA74B', '#B37CD2','#F8362E','#FFF200','#C4C4C4','#000000'],
     chart: {
         type: 'pie',
         height: s,
@@ -164,22 +165,31 @@ function createpiechart(c, d, e ,f, t,s,id,leg){
             cursor: 'pointer',
             borderWidth: 6,
 			borderColor: '#fff',     
-            colors: piecolors,    
+            // colors: piecolors,    
             size:  '70%',
             dataLabels: {
                 enabled: true,
-                formatter: function(){
-                    var sn = this.point.name.length > 10 ? this.point.name.substring(0, 10) + '..' : this.point.name;
-                    return String(sn + "<br>" + this.point.percentage.toFixed(0) + "%" + "<br>" + text2 + ": " + this.point.y);
-                },
-                distance: 5 + leg * 50,
-
-                style:{
-                  fontSize: '18px',
+                format: '{point.name}: {y} %',
+                                style:{
+                  fontSize: '14px',
                   fontWeight: 'thin',
                 },
             },
-            showInLegend: true,
+            showInLegend: true
+            // dataLabels: {
+            //     enabled: true,
+            //     formatter: function(){
+            //         var sn = this.point.name.length > 10 ? this.point.name.substring(0, 10) + '..' : this.point.name;
+            //         return String(sn + "<br>" + this.point.percentage.toFixed(0) + "%" + "<br>" + text2 + ": " + this.point.y);
+            //     },
+            //     distance: 5 + leg * 50,
+
+            //     style:{
+            //       fontSize: '18px',
+            //       fontWeight: 'thin',
+            //     },
+            // },
+            // showInLegend: true,
         },
         series: {
             colorByPoint: true,
@@ -194,53 +204,57 @@ function createpiechart(c, d, e ,f, t,s,id,leg){
         }
     },
    
-    legend: {
-        layout: 'vertical',
-        verticalAlign: 'middle',
-        align: 'right',
-        symbolRadius: 2,
-        useHTML: true,
-        enabled: leg,
-        labelFormatter: function() {
-          var shortname = this.name.length > 10 ? this.name.substring(0, 10) + '..' : this.name;
-          if (this.name === t) {
-            return `<span style="min-width: 200px; display:inline-block; border-bottom: 1px solid #b2b2b2;">
-                        <span style="float:left; font-size:16px;">${this.name}</span></span>
-                    <span style="min-width: 80px; display:inline-block; border-bottom: 1px solid #b2b2b2;">
-                        <span style="float:left; font-size:16px;">${text1}</span>
-                        <span style="float:right; font-size:16px;">%</span>
-                    </span>`
-          }
-          return `<span style="min-width: 200px; display:inline-block; border-bottom: 1px solid #ccc;">
-          <span style="float:left; font-size:16px; font-weight:normal" >${shortname}</span></span>
-          <span style="min-width: 80px; display:inline-block; border-bottom: 1px solid #ccc;">
-          <span style="float:left; font-size:16px;">${this.y}</span>
-          <span style="float:right; font-size:16px;">${(this.y * 100 / this.total).toFixed(0)}</span>
-          </span>`
-        }
-      },
+    // legend: {
+    //     layout: 'vertical',
+    //     verticalAlign: 'middle',
+    //     align: 'right',
+    //     symbolRadius: 2,
+    //     useHTML: true,
+    //     enabled: leg,
+    //     labelFormatter: function() {
+    //       var shortname = this.name.length > 10 ? this.name.substring(0, 10) + '..' : this.name;
+    //       if (this.name === t) {
+    //         return `<span style="min-width: 200px; display:inline-block; border-bottom: 1px solid #b2b2b2;">
+    //                     <span style="float:left; font-size:16px;">${this.name}</span></span>
+    //                 <span style="min-width: 80px; display:inline-block; border-bottom: 1px solid #b2b2b2;">
+    //                     <span style="float:left; font-size:16px;">${text1}</span>
+    //                     <span style="float:right; font-size:16px;">%</span>
+    //                 </span>`
+    //       }
+    //       return `<span style="min-width: 200px; display:inline-block; border-bottom: 1px solid #ccc;">
+    //       <span style="float:left; font-size:16px; font-weight:normal" >${shortname}</span></span>
+    //       <span style="min-width: 80px; display:inline-block; border-bottom: 1px solid #ccc;">
+    //       <span style="float:left; font-size:16px;">${this.y}</span>
+    //       <span style="float:right; font-size:16px;">${(this.y * 100 / this.total).toFixed(0)}</span>
+    //       </span>`
+    //     }
+    //   },
     
-    series: [{
+    series: [
+    //     {
         
-        center: [10000, 10000],
-        data: [{
-          name: t,
-          y: 0,
-        }, ]
-      },{
+    //     center: [10000, 10000],
+    //     data: [{
+    //       name: t,
+    //       y: 0,
+    //     }, ]
+    //   },
+      {
         name: t,
         minPointSize: 10,
-        innerSize: '60%',
+        innerSize: '75%',
         zMin: 0, 
         keys: ['name', 'y', 'z', 'id'],
         data: dataset
-    },{
-        center: [10000, 10000],
-        data: [{
-          name: "Total",
-          y: d.length,
-        }, ]
-      }],
+    },
+    // {
+    //     center: [10000, 10000],
+    //     data: [{
+    //       name: "Total",
+    //       y: d.length,
+    //     }, ]
+    //   }
+    ],
     credits: {
       enabled: false
       },
@@ -347,8 +361,6 @@ function createbarcharts(c, d, e ,f, t,s,id){
         dataset[index] = counts[key];  
         var area = 0;
         for (let j=0;j<subset.length;j++){
-            // console.log(id);
-            // console.log(counts[key]);
             if (subset[j][id] == key){
                 area += Number(subset[j][14]);
             }         
@@ -425,7 +437,7 @@ function createbarcharts(c, d, e ,f, t,s,id){
                     },
                     allowOverlap: true
                 },
-                pointWidth: $(this).height() / (4*dataset.length),
+                // pointWidth: $(this).height() / (4*dataset.length),
                 
 
             },
@@ -1317,3 +1329,50 @@ function createnewline(c,d,short,h, id){
     
     }); 
 };
+function sammplechart(c,h){
+    Highcharts.chart(c, {
+        colors: ['#01BAF2', '#71BF45', '#FAA74B', '#B37CD2'],
+        chart: {
+            type: 'pie',
+            height: h
+        },
+        title: {
+            text: null
+        },
+        tooltip: {
+            valueSuffix: '%'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.name}: {y} %'
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            name: 'Percentage',
+            colorByPoint: true,
+            innerSize: '75%',
+            data: [{
+                name: 'Nitrogen',
+                y: 78
+            }, {
+                name: 'Oxygen',
+                y: 20.9
+            }, {
+                name: 'Other gases',
+                y: 1.1
+            }]
+        }],
+        credits:{
+            enabled: false,
+        },
+        exporting:{
+            enabled: false,
+        }
+    });
+}
