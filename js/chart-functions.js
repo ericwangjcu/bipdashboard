@@ -45,7 +45,7 @@ function clickshowmodal(t, comp, comp2, type, id){
     createtable("datatable", newnames,  newvalues,"datatables-reponsive",0);
     $("#datatables-reponsive").DataTable({
         responsive: true,
-        "pageLength": 5,
+        "pageLength": 10,
         "lengthChange": false,
         "searching": false,
         "info": true, 
