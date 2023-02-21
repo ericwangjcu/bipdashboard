@@ -143,7 +143,7 @@ function createpiechart(c, d, e ,f, t,s,id,leg){
         headerFormat: '<span class="tooltipHeader">{point.key}</span>',
         pointFormat: '<br/> <div class="tooltipPointWrapper">'
         +
-        '<span class="tooltipPoint">{point.y}</span>'
+        '<span class="tooltipPoint">{point.y}/{point.percentage:.1f}%</span>'
         +
         '<span class="tooltipValueSuffix"> </span></div>'
         +
@@ -169,13 +169,15 @@ function createpiechart(c, d, e ,f, t,s,id,leg){
             size:  '70%',
             dataLabels: {
                 enabled: true,
-                format: '{point.name}: {y} %',
+                format: '{point.name}: {point.percentage:.1f} %',
                                 style:{
                   fontSize: '14px',
                   fontWeight: 'thin',
                 },
+                // distance: 20 + leg * 50,
             },
-            showInLegend: true
+            showInLegend: true,
+            
             // dataLabels: {
             //     enabled: true,
             //     formatter: function(){
@@ -430,7 +432,8 @@ function createbarcharts(c, d, e ,f, t,s,id){
                 dataLabels: {
                     enabled: true,
                     style: {
-                        fontSize: '16px'
+                        fontSize: '12px',
+                        fontWeight: 'thin',
                     },
                     formatter: function(){
                         return (this.y!=0)?this.y + " " + this.series.name.substring(this.series.name.length - 4):"";
@@ -553,7 +556,7 @@ function createbasicbar(c, d, e, f, t, xt, s, id){
         chart: {
             type: 'column',
             style: {
-            fontSize: '16px'
+            fontSize: '12px'
             },
             style: {
                 fontFamily: 'Poppins'
@@ -564,7 +567,7 @@ function createbasicbar(c, d, e, f, t, xt, s, id){
             text: null,
             align: 'left',
             style: {
-            fontSize: '20px'
+            fontSize: '12px'
         }
         },
         subtitle: {
@@ -576,12 +579,12 @@ function createbasicbar(c, d, e, f, t, xt, s, id){
             title: {
                 text: null,
                 style: {
-                    fontSize: '16px'
+                    fontSize: '12px'
                 },
             },            
             labels: {
                 style: {
-                    fontSize: '16px'
+                    fontSize: '12px'
                 },     
             }
         },
@@ -590,14 +593,14 @@ function createbasicbar(c, d, e, f, t, xt, s, id){
             title: {
                 text: 'Count',
                 style: {
-                    fontSize: '16px'
+                    fontSize: '12px'
                 }
             },
             labels: {
                 enabled: false,
 
                 style: {
-                    fontSize: '16px'
+                    fontSize: '12px'
                 }
             },
             visible: false ,
@@ -607,13 +610,13 @@ function createbasicbar(c, d, e, f, t, xt, s, id){
             title: {
                 text: 'Area (ha)',
                 style: {
-                    fontSize: '16px'
+                    fontSize: '12px'
                 }
             },
             labels: {
                 enabled: false,
                 style: {
-                    fontSize: '16px'
+                    fontSize: '12px'
                 }
             },
             opposite: true,
@@ -655,7 +658,7 @@ function createbasicbar(c, d, e, f, t, xt, s, id){
                     enabled: true,
                     shadow: true,                       
                     style: {
-                        fontSize: '18px',
+                        fontSize: '12px',
                         fontWeight: 'thin',
                     },   
                     formatter: function(){
@@ -664,7 +667,7 @@ function createbasicbar(c, d, e, f, t, xt, s, id){
                         {
                             label= "ha";
                         }
-                        console.log(this.series.index);
+                        // console.log(this.series.index);
                         return (this.y!=0)?this.y + " " + label:"";
                     },
                     allowOverlap: true
@@ -682,7 +685,7 @@ function createbasicbar(c, d, e, f, t, xt, s, id){
         legend: {
             enabled: true,
             itemStyle: {
-                fontSize: '16px'
+                fontSize: '12px'
             }
         },
         series: [{
@@ -751,7 +754,7 @@ function createbasicbar(c, d, e, f, t, xt, s, id){
                     xAxis: {
                         labels: {
                             style: {
-                                fontSize: '20px'
+                                fontSize: '12px'
                             }
                         } 
                     },
@@ -822,11 +825,11 @@ function createline(c, x, y, xname, yname, yunits, s){
         axisdata[i] = {
             title: { text: yunits[i],
             style: {
-                fontSize: '16px'
+                fontSize: '12px'
             }},
             labels: {
                 style: {
-                    fontSize: '16px'
+                    fontSize: '12px'
                 }
             },
             top: (0.26 * i + 0.05) * s , 
@@ -851,11 +854,11 @@ function createline(c, x, y, xname, yname, yunits, s){
         xAxis: {
             title: { text: xname,
             style: {
-                fontSize: '16px'
+                fontSize: '12px'
             }},
             labels: {
                 style: {
-                    fontSize: '16px'
+                    fontSize: '12px'
                 }
             }
         },
@@ -904,7 +907,7 @@ function createnewcomparison(c,x,y,yname,yunits,height){
             categories: [""],
             labels: {
                 style: {
-                    fontSize: '16px'
+                    fontSize: '12px'
                 },
                 enabled: false
             } 
@@ -913,11 +916,11 @@ function createnewcomparison(c,x,y,yname,yunits,height){
         yAxis: {
             title: {
                 text: yunits,style: {
-                    fontSize: '16px'
+                    fontSize: '12px'
                 }
             },labels: {
                 style: {
-                    fontSize: '16px'
+                    fontSize: '12px'
                 }
             } 
         },
@@ -963,7 +966,7 @@ function createnewcomparison(c,x,y,yname,yunits,height){
                     xAxis: {
                         labels: {
                             style: {
-                                fontSize: '10px'
+                                fontSize: '12px'
                             }
                         } 
                     },
@@ -1022,7 +1025,7 @@ function createstackedbars(c,x,y,t,ss){
             categories: iterator1,
             labels: {
                 style: {
-                    fontSize: '16px'
+                    fontSize: '12px'
                 },
                 enabled: true
             } 
@@ -1032,12 +1035,12 @@ function createstackedbars(c,x,y,t,ss){
             title: {
                 text: 'Total',
                 style:{
-                    fontSize: '16px'
+                    fontSize: '12px'
                   }
             },
             labels: {
                 style: {
-                    fontSize: '16px'
+                    fontSize: '12px'
                 },
                 enabled: true
             } 
@@ -1092,7 +1095,7 @@ function createstackedbars(c,x,y,t,ss){
                     xAxis: {
                         labels: {
                             style: {
-                                fontSize: '10px'
+                                fontSize: '12px'
                             }
                         } 
                     },
@@ -1144,7 +1147,7 @@ function createtime(c,d,short,h, id){
             },
             labels: {
                 style: {
-                    fontSize: '20px',
+                    fontSize: '12px',
                 }
             }
         },  
@@ -1154,7 +1157,7 @@ function createtime(c,d,short,h, id){
                 dataLabels: {
                     enabled: true,
                     style: {
-                        fontSize: '16px'
+                        fontSize: '12px'
                     }
                 },
                 marker: {
@@ -1233,12 +1236,12 @@ function createnewline(c,d,short,h, id){
             title: {
                 text: "No. of Sets",
                 style: {
-                    fontSize: '20px',
+                    fontSize: '12px',
                 }
             },
             labels: {
                 style: {
-                    fontSize: '16px',
+                    fontSize: '12px',
                 }
             },
             gridLineColor: 'transparent',
@@ -1247,12 +1250,12 @@ function createnewline(c,d,short,h, id){
             title: {
                 text: short,
                 style: {
-                    fontSize: '20px',
+                    fontSize: '12px',
                 }
             },
             labels: {
                 style: {
-                    fontSize: '20px',
+                    fontSize: '12px',
                 }
             },
             tickInterval: 1
@@ -1262,7 +1265,7 @@ function createnewline(c,d,short,h, id){
                 dataLabels: {
                     enabled: true,
                     style: {
-                        fontSize: '16px'
+                        fontSize: '12px'
                     }
                 },
                 marker: {

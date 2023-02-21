@@ -57,13 +57,96 @@
 .nav-tabs .nav-item .nav-link.active {
   color: #000;
 }
+/* #btn-back-to-set {
+    position: fixed;
+    top: 40%;
+    left: 5px;
+    width : 20px;
+}
+.content { 
+  width: 95%;
+  margin: 0px 2.5%;
+}
+#btn-back-to-irrig {
+    position: fixed;
+    top: 50%;
+    left: 5px;
+    width : 20px;
 
+}
+#btn-back-to-cost {
+    position: fixed;
+    top: 60%;
+    left: 5px;
+    width : 20px;
+
+} */
+/* .btn {
+    position: fixed;
+    top: 57%;
+    left: 5px;
+  /* background-color: #04AA6D;
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px; */
+/* .btn {border-radius: 50%;} */
 </style>
 
 </head>
 
+<!-- <button
+        type="button"
+        class="btn btn-primary btn-floating btn-lg"
+        id="btn-back-to-set"
+        >
+        <div class="bi-border-all" style="font-size: 15px;"></div> 
+        <div class="text-center">Set</div>
+</button>
+<button
+        type="button"
+        class="btn btn-primary btn-floating btn-lg"
+        id="btn-back-to-irrig"
+        >
+        <div class="bi-droplet-fill" style="font-size: 15px;"></div> 
+        <div class="text-center">Irrig</div>
+</button>
+<button
+        type="button"
+        class="btn btn-primary btn-floating btn-lg"
+        id="btn-back-to-cost"
+        >
+        <div class="bi-currency-dollar" style="font-size: 15px;"></div> 
+        <div class="text-center">Cost</div>
+</button> -->
+<script>  
+            // let mybutton1 = document.getElementById("btn-back-to-set");
+            // let mybutton2 = document.getElementById("btn-back-to-irrig");
+            // let mybutton3 = document.getElementById("btn-back-to-cost");
+            // mybutton1.style.display = "block";
+            // mybutton1.addEventListener("click", backToTop1);
+            // mybutton2.style.display = "block";
+            // mybutton2.addEventListener("click", backToTop2);
+            // mybutton3.style.display = "block";
+            // mybutton3.addEventListener("click", backToTop3);
 
-<script>   
+            // function backToTop1() {
+            //     document.getElementById("Soil Typecard").scrollIntoView();
+            //     // const element = document.getElementById("Soil Typebody0");
+            //     // element.scrollTop += 10;
+            // }
+            // function backToTop2() {
+            //     document.getElementById("Water Supplycard").scrollIntoView();
+            // }
+            // function backToTop3() {
+            //     document.getElementById("Energy (kWh)card").scrollIntoView();
+            // }   
+
+
     function addElement (id, text, dv, tt, ss, index, interval,number,tab) {
         const newDiv1 = document.createElement("div");
         newDiv1.className = "form-check form-switch form-check-lg";
@@ -527,13 +610,13 @@
             col.className = "col-5 mt-4"; 
 
             let col7 = document.createElement('span');
-            col7.className = 'h3 mt-4 mb-0';
+            col7.className = 'h4 mt-4 mb-0';
             col7.innerText = cards[i] + ":               ";
             let col8 = document.createElement('span');
-            col8.className = 'h3 text-primary mt-4 mb-0';
+            col8.className = 'h4 text-primary mt-4 mb-0';
             col8.innerText = value[i];
             let col9 = document.createElement('span');
-            col9.className = 'h3 text-muted mt-4 mb-0';
+            col9.className = 'h4 text-muted mt-4 mb-0';
             col9.innerText = "            " + text[i];
 
 
@@ -620,7 +703,7 @@
     <div class="wrapper "> 
         <div class="main ">
             <?php include('comp/nav.php')?>
-            <main class="content">      
+            <main class="content" >      
                 <div class="col-auto d-none d-sm-block ">
                     <h3><strong>Baseline</strong> Dashboard</h3>
                 </div>    
@@ -906,13 +989,13 @@
                                                     "Depth Applied (mm)","Days Between Irrigation Duration","Crop Water Use Between Irrigations",
                                                     "Application Efficency (%)","Energy (kWh)","Energy per ML (kWh/ML)",
                                                     "Energy per Hour (kWh/h)","Energy Cost ($/kWh)","Energy Cost per ML ($/ML)","Energy Cost per Irrigation ($/ha/ML)","Area vs Irrigation", "Irrigation vs District","Irrigation vs Water Supply","District vs Water Supply"];
-                                                    types = [5,2,2,2,2,0,7,8,0,9,1,1,8,1,0,0,8,1,0,1,1,10,1,1,10,1,1,1,1,1,0,1,1,2,3,4,6];
+                                                    types = [5,2,2,2,2,0,8,8,0,9,1,1,8,1,0,0,8,1,0,1,1,10,1,1,10,1,1,1,1,1,0,1,1,2,3,4,6];
                                                     intervals = [5,2,2,2,2,0,7,8,0,9,1,1,8,0.1,0,8,8,1,0,1,0.1,1,0.1,1,1,1,1,1,1,1,0,1,1,2,3,4,6];
                                                     tabs = [0,5,5,5,5,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,5,5,5,5];
                                                     gridsizes = [9,2,2,2,2,6,6,12,7,5,6,6,6,6,4,4,4,4,3,5,6,6,6,6,6,6,6,6,6,6,6,6,6,12,12,12,12];
                                                     legends = [5,2,2,2,2,1,7,8,1,9,1,1,8,1,0,0,8,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,1,2,3,4,6];
                                                     number = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6,6,2];
-                                                    height = [0,0,0,0,0,460,460,700,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460];
+                                                    // height = [0,0,0,0,0,460,460,700,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460];
                                                     newunits = ["","","","","","","","","","","","m","m","ha","","","","KW","","L/S","L/S/Cup","hrs","ML","mm","","mm","%","KWH","kWh/ML","kWh/h","$/kWh","$/ML","$/ha/ML",""];
                                                     
                                                     for (let i=0;i<33;i++){
@@ -958,39 +1041,90 @@
             var dashboardshown = <?php echo json_encode($dashboardshown); ?>; 
 
 
+            rows = [1,1,1,1,1, 2,2,2, 2,2,2, 2,2,2, 2,2,2, 1.5,1,2.5, 2,2,2, 2, 2,2,2, 2,2,2, 2,2,2, 2,2,2,2];
+            cols = [4,4,4,4,4, 6,6,12, 4,4,4, 4,4,4, 4,4,4, 4,4,8, 4,4,4, 4, 4,4,4, 4,4,4, 3,4,5, 4,4,4,4];
 
-            function adddashboarditem(i){
-                if (dashboardshown[i] == 1){
-                    addcard(dashboarditems[i],gridsizes[i],number[i],tabs[i]);                    
-                    addchart(dashboarditems[i], types[i], dashboarditems[i],i+1, intervals[i],legends[i],height[i]); 
-                    
-                    var checkbox = document.getElementById(dashboarditems[i]);
-                    checkbox.checked = true;
-                    document.getElementById('result-table').value  = document.getElementById('result-table').value + dashboarditems[i] + ";";
-                }
+            var height = [];
+            for (let i=0;i<rows.length;i++){
+                height[i] = rows[i] * 150 + (rows[i] - 1) * 122;               
             }
-            
-            
-            
-            
-            
-            
-                
-            for (let i=1;i<33;i++){
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                if (i != 30){
-                    adddashboarditem(i);
 
-                }                                      
-            }        
+            function addgroup(dashboarditems,rows,cols,tabs){
+                var i = 5;
+                while(i<cols.length - 4){
+                    const col = document.createElement("div");
+                    col.className = "col-12 col-sm-12 col-md" + cols[i] + " col-xl-" + cols[i];
+
+                    var sum = 2;
+                    var index = 0;
+                    while (sum > 0){                
+                        const card = document.createElement("div");
+                        card.className = "card  d-flex align-items-stretch";
+                        card.id = dashboarditems[i + index] + "card";
+
+                        const cardjeader = document.createElement("div");
+                        cardjeader.className = "card-header h4 text-dark";
+                        cardjeader.innerText = dashboarditems[i + index] + " (by Set)";
+                        card.appendChild(cardjeader);
+
+                        const cardbody = document.createElement("div");
+                        cardbody.className = "card-body";
+                        cardbody.id = dashboarditems[i + index] + "body0";
+
+                        card.appendChild(cardbody);
+                        col.appendChild(card);
+                
+                        sum -= rows[i + index];
+                        // console.log(sum);
+                        index ++;    
+                    }
+                    i += index;
+                    
+                    // console.log(tabs[i - index]);
+                    const currentDiv = document.getElementById("head-" + tabs[i - index]);
+                    // const currentDiv = document.getElementById("head");
+
+                    let parentDiv = currentDiv.parentNode
+                    parentDiv.insertBefore(col, currentDiv); 
+                }          
+                
+            } 
+
+            addgroup(dashboarditems,rows,cols,tabs);
+
+            // function adddashboarditem(i){
+            //     if (dashboardshown[i] == 1){
+            //         addcard(dashboarditems[i],gridsizes[i],number[i],tabs[i]);                    
+            //         addchart(dashboarditems[i], types[i], dashboarditems[i],i+1, intervals[i],legends[i],height[i]); 
+                    
+            //         var checkbox = document.getElementById(dashboarditems[i]);
+            //         checkbox.checked = true;
+            //         document.getElementById('result-table').value  = document.getElementById('result-table').value + dashboarditems[i] + ";";
+            //     }
+            // }
+            
+            
+            
+            
+            
+            
+                
+            for (let i=5;i<33;i++){
+                
+                addchart(dashboarditems[i], types[i], dashboarditems[i],i+1, intervals[i],legends[i],height[i]);
+                
+                
+                
+                
+                
+                
+                
+                // if (i != 30){
+                //     adddashboarditem(i);
+
+                // }                                      
+            } 
+    
             function activaTab(tab){
                 $('.nav-tabs a[href="#' + tab + '"]').tab('show');
             };
