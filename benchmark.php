@@ -424,7 +424,7 @@
                     "Avg Energy Cost per ML ($/ML)","Avg Energy Cost per Irrig ($/ha/ML)"];
                     // var setn = ["Set ID","Area","Crop Class","Date Planted","Total Water Applied (ML)","Total Energy (KWH)","Total Energy Cost per Irrig ($/ha/ML)"];
                     var index = [0,14,14,0,11,12,20,22,23,23,24,26,27,28,28,29,30,31,32];
-                    var avg = [0,0,1,0,1,1,1,0,1,1,1,1,1,0,1,1,1,1,1];
+                    var avg = [0,0,1,0,1,1,1,0,0,1,1,1,1,0,1,1,1,1,1];
                     var fixed = [0,1,1,0,0,0,1,1,1,1,1,2,1,1,1,1,1,1];
                     // var theme = [0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1];
                     var farminfor = [];
