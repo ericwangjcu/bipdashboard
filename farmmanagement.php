@@ -4,7 +4,7 @@
 <?php include('server/getfarms.php') ?>
 <head>
 <?php include('comp/header.php')?>
-<script src="https:
+<script src="https://unpkg.com/read-excel-file@5.x/bundle/read-excel-file.min.js"></script>
 <style>
     #input
     {
