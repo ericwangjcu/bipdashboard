@@ -1338,11 +1338,16 @@ function createnewline(c,d,short,h, id){
                 point: {
                     events: {
                         click: function () {
-                            clickshowmodal(t,this.x,'',1,id);
+                            clickshowmodal(short,this.x,'',1,id);
                         }
                     }
                 }
-            }
+            },
+            // spline: {
+            //     marker: {
+            //         enable: false
+            //     }
+            // }
 
         },
         tooltip: {
@@ -1372,10 +1377,6 @@ function createnewline(c,d,short,h, id){
         series: [{
             name: short,
             data: dataset,
-            
-            
-            
-            
             marker: {
                 radius: 6
             },
