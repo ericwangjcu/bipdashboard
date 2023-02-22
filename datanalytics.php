@@ -312,7 +312,7 @@
             createsregression(14,[22,23,24,33],"Area (ha)",["Duration (h)","Water Applied (ML)","Water Applied (mm)","Cost per ha per irrigation ($/ha/irrig)"],["Duration (h)","Water Applied (ML)","Water Applied (mm)","Cost per ha per irrigation ($/ha/irrig)"]);      
         }
         if (type == 5){
-            createsregression(12,[21,22,23,24],"Row Length (m)",["Total Flow Rate (L/S)",
+            createsregression(12,[20,21,22,23],"Row Length (m)",["Total Flow Rate (L/S)",
                         "Per Cup Flow Rate (L/S/Cup)","Duration (hrs)","Total ML Applied (ML)"],["Total Flow Rate (L/S)",
                         "Per Cup Flow Rate (L/S/Cup)","Duration (hrs)","Total ML Applied (ML)"]);      
         }
