@@ -49,7 +49,7 @@
         // if (score < 33){
         //     badge.className = "badge badge bg-secondary";
         // }           
-        badge.className = "badge badge bg-secondary";
+        badge.className = "badge badge bg-success";
         badge.innerText = pos + "/" + total + "  (" + score + "%)";
         mb.appendChild(badge);
         colauto.appendChild(mb);
@@ -217,9 +217,9 @@
                 tickPositions: ticks,
                 zIndex: 10,
                 stops: [
-                    [0.3, '#B4B4B4'], // red
-                    [0.6, '#B4B4B4'], // yellow
-                    [0.9, '#B4B4B4']                            
+                    [0.3, '#00A5E3'], // red
+                    [0.6, '#00A5E3'], // yellow
+                    [0.9, '#00A5E3']                            
                 ],
             };
             var distance = -40;   
@@ -242,9 +242,9 @@
                 // tickPositions: ticks,
                 zIndex: 10,
                 stops: [
-                    [0.3, '#B4B4B4'], // red
-                    [0.6, '#B4B4B4'], // yellow
-                    [0.9, '#B4B4B4']                            
+                    [0.3, '#00A5E3'], // red
+                    [0.6, '#00A5E3'], // yellow
+                    [0.9, '#00A5E3']                            
                 ],
             };
             var distance = 70;                     

@@ -4,8 +4,48 @@ barcolors = ["#C4C4C4", "#00A5E3", "#48b5c4", "#1984c5", "#a6d75b", "#c9e52f", "
 
 Highcharts.setOptions({ colors: barcolors });
 
+function clickshowmodalscatter(tx, ty, compx, compy, idx, idy){
+    var newnames = ["1","District","Grower ID","Grower Block ID", tx, ty];
+
+    console.log(tx, ty, compx, compy, idx, idy);
+
+    var newvalues = [];                                                                                
+    var index = 0;
+    for (let j=0;j<subset.length;j++){    
+        if (Number(subset[j][idx]) == compx && Number(subset[j][idy]) == compy){
+            newvalues[index] = [];
+            newvalues[index][0] = "1";
+            newvalues[index][1] = subset[j][1];
+            newvalues[index][2] = subset[j][2];
+            newvalues[index][3] = subset[j][4];
+            newvalues[index][4] = subset[j][idx];
+            newvalues[index][5] = subset[j][idy];
+            index ++;
+        }
+    }
+
+
+    var element = document.getElementById("datatables-reponsive");
+    var element1 = document.getElementById("datatables-reponsive_wrapper");
+    if (element){
+        element.remove(); 
+        element1.remove(); 
+    }    
+    createtable("datatable", newnames,  newvalues,"datatables-reponsive",0);
+    $("#datatables-reponsive").DataTable({
+        responsive: true,
+        "pageLength": 10,
+        "lengthChange": false,
+        "searching": false,
+        "info": true, 
+    });
+    $("#myModal").modal('show');
+};
+
 function clickshowmodal(t, comp, comp2, type, id){
     var newnames = ["1","District","Grower ID","Grower Block ID", "Area (ha)", t];
+
+    console.log(t, comp, comp2, type, id);
 
     var newvalues = [];                                                                                
     var index = 0;
@@ -481,14 +521,18 @@ function createbasicbar(c, d, e, f, t, xt, s, id){
     var m1 = Math.max.apply(Math, d);
     var m2 = Math.min.apply(Math, d);
     var range = m1 - m2;
+    var fix = 0;
+    if (range < 10){
+        fix = 1;
+    }
     var number = 10;
     var dist = range / number;
     var cat = [];
     var catstr = [];
-    var fix = 0;
-    if (xt == 0.1){
-         fix = 1;
-    }
+    // var fix = 0;
+    // if (xt == 0.1){
+    //      fix = 1;
+    // }
 
     var count = [];
     var index = 0;
@@ -544,12 +588,12 @@ function createbasicbar(c, d, e, f, t, xt, s, id){
     var newcatstr = [];
     var index = 0;
     for (let i = 0; i < count.length; i++){
-        if (count[i] != 0){
+        // if (count[i] != 0){
             dataset[index] = count[i];
             dataset1[index] = Number(area[i].toFixed(0));
             newcatstr[index] = catstr[i];
             index ++;
-        }
+        // }
 
     }
     Highcharts.chart(c, {
@@ -1012,7 +1056,7 @@ function createstackedbars(c,x,y,t,ss){
 
     Highcharts.chart(c, {
         chart: {
-            type: 'column',
+            type: 'bar',
             style: {
                 fontFamily: 'Poppins'
             },   
@@ -1043,23 +1087,37 @@ function createstackedbars(c,x,y,t,ss){
                     fontSize: '12px'
                 },
                 enabled: true
-            } 
+            },
+            visible: false
         },
         tooltip: {
             pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
             shared: true
         },
         plotOptions: {
-            column: {
+            bar: {
                 stacking: 'percent',
                 
+                animation: false,
 
             },
-            colors: barcolors,  
-            dataLabels: {
-                enabled: true,								
-                color: 'white'
-            }
+            series: {               
+                dataLabels: {
+                    enabled: true,
+                    formatter: function(){
+                        return String(this.series.name + ": " + this.point.percentage.toFixed(1) + "%");
+                    },
+                    style:{
+                        fontSize: '12px',
+                    },
+                },
+            },
+            // colors: barcolors,  
+            // dataLabels: {
+            //     enabled: true,		
+            // },
+
+
         },
         series: seriesdata,
         exporting: {
@@ -1069,7 +1127,7 @@ function createstackedbars(c,x,y,t,ss){
             enabled: false
         },
         legend: {
-            enabled: true
+            enabled: false
         },
         
         responsive: {
@@ -1332,50 +1390,82 @@ function createnewline(c,d,short,h, id){
     
     }); 
 };
-function sammplechart(c,h){
+function createscatter(c,x,y,xname,yname, idx, idy,h){
+    Highcharts.setOptions({
+        colors: ['rgba(5,141,199,0.5)', 'rgba(80,180,50,0.5)', 'rgba(237,86,27,0.5)']
+    });
+
+    var seriesdata = [];
+    for (let i=0;i<y.length;i++){
+        seriesdata[i] = [x[i],y[i]];
+    }
+    // console.log(seriesdata);
     Highcharts.chart(c, {
-        colors: ['#01BAF2', '#71BF45', '#FAA74B', '#B37CD2'],
         chart: {
-            type: 'pie',
-            height: h
+            type: 'scatter',
+            zoomType: 'xy',
+            height: h,
+            style: {
+                fontFamily: 'Poppins'
+            },    
         },
         title: {
-            text: null
+            text: null,
         },
-        tooltip: {
-            valueSuffix: '%'
+        xAxis: {
+            title: {
+                text: xname,
+                style: {
+                    fontSize: '12px',
+                }
+            },
+            labels: {
+                style: {
+                    fontSize: '12px',
+                }
+            },
+            
+        },
+        yAxis: {
+            title: {
+                text: yname,
+                style: {
+                    fontSize: '12px',
+                }
+            },
+            labels: {
+                style: {
+                    fontSize: '12px',
+                }
+            },
+            gridLineColor: 'transparent',
+        },
+        legend: {
+            enabled: false
         },
         plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: true,
-                    format: '{point.name}: {y} %'
-                },
-                showInLegend: true
-            }
+            series: {
+                animation: false,
+                point: {
+                    events: {
+                        click: function () {
+                            clickshowmodalscatter(xname, yname, this.x, this.y, idx, idy);
+
+                        }
+                    }
+                }
+            },
         },
+
         series: [{
-            name: 'Percentage',
-            colorByPoint: true,
-            innerSize: '75%',
-            data: [{
-                name: 'Nitrogen',
-                y: 78
-            }, {
-                name: 'Oxygen',
-                y: 20.9
-            }, {
-                name: 'Other gases',
-                y: 1.1
-            }]
+            data: seriesdata,
+            name: yname,
         }],
-        credits:{
-            enabled: false,
+        exporting: {
+            enabled: false
         },
-        exporting:{
-            enabled: false,
-        }
+        credits: {
+            enabled: false
+        },
     });
-}
+};

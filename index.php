@@ -6,35 +6,25 @@
 <head>
 <?php include('comp/header.php')?>
 <style>
-
-
-
-
-
 .tooltipHeader {
   float: center;
   font-size: 1rem;
 }
-
-
 
 .tooltipPointWrapper {
   display: block;
   text-align: center;
   padding: 10px 0;
 }
-
 .tooltipPoint {
   font-size: 2rem;
   padding-left: 5px;
  
 }
-
 .tooltipValueSuffix {
   padding-left: 5px;
   color: #1bc9a8;
 }
-
 .tooltipLine {
   display: block;
   opacity: 0.5;
@@ -47,8 +37,6 @@
 .card {
       box-shadow: 8px 8px 15px 0 rgba(100, 100, 100, 0.26);
 }
-
-
 .nav-tabs .nav-item .nav-link {
   background-color: #C4C4C4;
   color: #FFF;
@@ -61,193 +49,31 @@
     position: fixed;
     top: 40%;
     left: 5px;
-    width : 20px;
-}
-.content { 
-  width: 95%;
-  margin: 0px 2.5%;
+    width : 5%;
+    height : 8%;
 }
 #btn-back-to-irrig {
     position: fixed;
     top: 50%;
     left: 5px;
-    width : 20px;
+    width : 5%;
+    height : 8%;
 
 }
 #btn-back-to-cost {
     position: fixed;
     top: 60%;
     left: 5px;
-    width : 20px;
+    width : 5%;
+    height : 8%;
 
 } */
-/* .btn {
-    position: fixed;
-    top: 57%;
-    left: 5px;
-  /* background-color: #04AA6D;
-  border: none;
-  color: white;
-  padding: 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px; */
-/* .btn {border-radius: 50%;} */
 </style>
 
 </head>
 
-<!-- <button
-        type="button"
-        class="btn btn-primary btn-floating btn-lg"
-        id="btn-back-to-set"
-        >
-        <div class="bi-border-all" style="font-size: 15px;"></div> 
-        <div class="text-center">Set</div>
-</button>
-<button
-        type="button"
-        class="btn btn-primary btn-floating btn-lg"
-        id="btn-back-to-irrig"
-        >
-        <div class="bi-droplet-fill" style="font-size: 15px;"></div> 
-        <div class="text-center">Irrig</div>
-</button>
-<button
-        type="button"
-        class="btn btn-primary btn-floating btn-lg"
-        id="btn-back-to-cost"
-        >
-        <div class="bi-currency-dollar" style="font-size: 15px;"></div> 
-        <div class="text-center">Cost</div>
-</button> -->
+
 <script>  
-            // let mybutton1 = document.getElementById("btn-back-to-set");
-            // let mybutton2 = document.getElementById("btn-back-to-irrig");
-            // let mybutton3 = document.getElementById("btn-back-to-cost");
-            // mybutton1.style.display = "block";
-            // mybutton1.addEventListener("click", backToTop1);
-            // mybutton2.style.display = "block";
-            // mybutton2.addEventListener("click", backToTop2);
-            // mybutton3.style.display = "block";
-            // mybutton3.addEventListener("click", backToTop3);
-
-            // function backToTop1() {
-            //     document.getElementById("Soil Typecard").scrollIntoView();
-            //     // const element = document.getElementById("Soil Typebody0");
-            //     // element.scrollTop += 10;
-            // }
-            // function backToTop2() {
-            //     document.getElementById("Water Supplycard").scrollIntoView();
-            // }
-            // function backToTop3() {
-            //     document.getElementById("Energy (kWh)card").scrollIntoView();
-            // }   
-
-
-    function addElement (id, text, dv, tt, ss, index, interval,number,tab) {
-        const newDiv1 = document.createElement("div");
-        newDiv1.className = "form-check form-switch form-check-lg";
-
-        const newDiv = document.createElement("input");
-        newDiv.className = "form-check-input";
-        newDiv.type = "checkbox";
-        newDiv.id = id;
-
-        newDiv1.appendChild(newDiv);
-
-        const newDiv2 = document.createElement("label");
-        newDiv2.className = "form-check-label";
-        newDiv2.for = id;
-        newDiv2.innerText = text;
-
-
-        const t = document.createElement("type");
-        t.id = tt;
-
-        const s = document.createElement("short");
-        s.id = ss;
-
-        const idd = document.createElement("index");
-        idd.id = index;
-
-        const int = document.createElement("interval");
-        int.id = interval;
-        const num = document.createElement("number");
-        num.id = number;
-        const tabs = document.createElement("tab");
-        tabs.id = tab;
-
-        newDiv1.appendChild(newDiv2);
-        newDiv1.appendChild(t);
-        newDiv1.appendChild(s);
-        newDiv1.appendChild(idd);
-        newDiv1.appendChild(int);
-        newDiv1.appendChild(num);
-        newDiv1.appendChild(tabs);
-
-        const currentDiv = document.getElementById(dv);
-        let parentDiv = currentDiv.parentNode
-
-        parentDiv.insertBefore(newDiv1, currentDiv);
-    }       
-    function addtext(text,card){
-        var textrow = document.createElement("div");   
-        textrow.className = "col-12 h2 mt-6 mb-6";
-        textrow.innerText = text; 
-        
-        const currentDiv = document.getElementById("head");
-        let parentDiv = currentDiv.parentNode
-
-        parentDiv.insertBefore(textrow, currentDiv);             
-    }
-    function addcard(header,size, number,tab){
-        const newDiv1 = document.createElement("div");
-        newDiv1.className = "col-12 col-sm-12 col-md" + size + " col-xl-" + size;  
-        
-        if (number > 1){
-            addtext(header);
-        }
-
-        const newDiv0 = document.createElement("div");
-        newDiv0.className = "row"; 
-
-        var size = 12 / number;
-
-        for (let i=0;i<number;i++){
-            const newDiv2 = document.createElement("div");
-            newDiv2.className = "col-12 col-sm-" + size * 2 + " col-md" + size + " col-xl-" + size; 
-
-            const card = document.createElement("div");
-            card.className = "card ";
-
-            if (number <= 1){
-                const cardjeader = document.createElement("div");
-                cardjeader.className = "card-header h3 text-dark";
-                cardjeader.innerText = header + " (by Set)";
-                card.appendChild(cardjeader);
-            }
-
-
-            const cardbody = document.createElement("div");
-            cardbody.className = "card-body";
-            cardbody.id = header + "body" + i;            
-
-          
-            card.appendChild(cardbody);
-            newDiv2.appendChild(card);
-            newDiv0.appendChild(newDiv2);
-        }
-       
-        newDiv1.appendChild(newDiv0);
-
-        const currentDiv = document.getElementById("head-"+tab);
-        let parentDiv = currentDiv.parentNode
-
-        parentDiv.insertBefore(newDiv1, currentDiv);        
-    }      
     function addchart(header, type, short, index, interval,legend,height){
         var setvalues = <?php echo json_encode($setvalues,JSON_INVALID_UTF8_IGNORE); ?>;
         var username = <?php echo json_encode($_SESSION['username'],JSON_INVALID_UTF8_IGNORE); ?>; 
@@ -515,34 +341,9 @@
             
         }
         if (type == 10){
-            
-            
-            
-            
-            
-            
-            
-
             createnewline(header + "body0",data,short,height,index);
             
         }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
         if (type == 7){
             var counts = {};
             for (const num of data) {
@@ -708,17 +509,7 @@
                     <h3><strong>Baseline</strong> Dashboard</h3>
                 </div>    
                 <div class="row">       
-                    <div class="col-12" style='display:none;'>
-                        <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>     
-                        <form method="post" action="savedashboard.php"  target="dummyframe" >
-                            <a class="btn btn-outline-info my-1" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
-                                aria-controls="offcanvasExample">
-                                Customise   
-                            </a>
-                            <button type="submit" class="btn btn-outline-info my-1" name="save">Save Layout</button>
-                            <input id="result-table" name="dashboardtable" type="text"  style='display:none;'/>
-                        </form>                                     
-                    </div> 
+
                     </br>
                     </br>
                     </br>
@@ -778,28 +569,19 @@
                         <div class="modal-dialog modal-xl">
                         <div class="modal-content">
                             <div class="modal-header">
-                            <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
                             <h4 class="modal-title">Set Table</h4>
                             </div>
                             <div class="modal-body">
-                            <!-- <p>Some text in the modal.</p> -->
                             <div id="datatable"></div>
                             </div>
-                            <!-- <div class="modal-footer"> -->
-                            <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-                            <!-- </div> -->
                         </div>
                         
                         </div>
                     </div>
                     <script>
-                        var baselinearray = ["No. of Farms", "No. of Sets", "Total Area", "Total KW","Avg Area per Sets", "Avr. Motor KW",
-                                            "Avg Flow Rate", "Avg ML Applied", "Avg Depth Applied", "Avg Crop Water Use between Irrigation",
-                                            "Avg Application Efficiency","Avg Energy","Avg Energy per ML","Avg Energy per Hour","Avg Cost"
-                                            ,"Avg Cost per ML","Avg Cost per irrigation"];
-                        var units = ["","","ha","KW","ha","KW","L/S","ML","mm","mm","%","kwh","kwh/ML","kwh/h","$/kwh","$/ML","$/ha/ML"]
-                        var size = [4,4,4,3,3,3,3,3, 4,4,4, 4,4,4, 4,4,4];        
-                        var value = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; 
+                        var units = ["","","ha"]
+                        var size = [4,4,4];        
+                        var value = []; 
                         var setnames = <?php echo json_encode($setnames,JSON_INVALID_UTF8_IGNORE); ?>;
                         var setvalues = <?php echo json_encode($setvalues,JSON_INVALID_UTF8_IGNORE); ?>;
                         var username = <?php echo json_encode($_SESSION['username'],JSON_INVALID_UTF8_IGNORE); ?>; 
@@ -872,7 +654,6 @@
 
                         var data1 = [];
                         var ind1 = 0;
-
 
                         for (let i = 1; i < subset.length; i++) {
                             var count = 0;
@@ -960,73 +741,136 @@
                         stackedcolumn("testTotal Area",dataset2);
                                 
                     </script>
+
+
+                    <script>
+                        setarray = ["District","Grower ID","Wilmar Map Block ID",
+                        "Grower Block Identifier","Outlet Set Identifier","Soil Type",
+                        "Soil Group","IrrigWeb Soil Type","Crop Class",
+                        "Date Planted","Number of Rows","Avg Row Length (m)",
+                        "Row Spacing (m)","Area (ha)","Water Supply","Water Source",
+                        "Pump Type","Measured Motor KW","Tariff","Total Flow Rate (L/S)",
+                        "Per Cup Flow Rate (L/S/Cup)","Duration (hrs)","Total ML Applied (ML)",
+                        "Depth Applied (mm)","Days Between Irrigation Duration","Crop Water Use Between Irrigations",
+                        "Application Efficency (%)","Energy (kWh)","Energy per ML (kWh/ML)",
+                        "Energy per Hour (kWh/h)","Energy Cost ($/kWh)","Energy Cost per ML ($/ML)","Energy Cost per Irrigation ($/ha/ML)","Area vs Irrigation", "Irrigation vs District","Irrigation vs Water Supply","District vs Water Supply"];
+                        types = [5,2,2,2,2,0,8,8,0,9,1,1,8,1,0,0,8,1,0,1,1,10,1,1,10,1,1,1,1,1,0,1,1,2,3,4,6];
+                        intervals = [5,2,2,2,2,0,7,8,0,9,1,1,8,0.1,0,8,8,1,0,1,0.1,1,0.1,1,1,1,1,1,1,1,0,1,1,2,3,4,6];
+                        tabs = [0,5,5,5,5,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,5,5,5,5];
+                        gridsizes = [9,2,2,2,2,6,6,12,7,5,6,6,6,6,4,4,4,4,3,5,6,6,6,6,6,6,6,6,6,6,6,6,6,12,12,12,12];
+                        legends = [5,2,2,2,2,1,7,8,1,9,1,1,8,1,0,0,8,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,1,2,3,4,6];
+                        number = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6,6,2];
+                        newunits = ["","","","","","","","","","","","m","m","ha","","","","KW","","L/S","L/S/Cup","hrs","ML","mm","","mm","%","KWH","kWh/ML","kWh/h","$/kWh","$/ML","$/ha/ML",""];
+                        
+                        rows = [1,1,1,1,1, 2,2,2, 2,2,2, 2,2,2, 2,2,2, 1.5,1,2.5, 2,2,2, 2, 2,2,2, 2,2,2, 2,2,2, 2,2,2,2];
+                        cols = [4,4,4,4,4, 6,6,12, 4,4,4, 4,4,4, 4,4,4, 4,4,8, 4,4,4, 4, 4,4,4, 4,4,4, 3,4,5, 4,4,4,4];
+
+                        var height = [];
+                        for (let i=0;i<rows.length;i++){
+                            height[i] = rows[i] * 150 + (rows[i] - 1) * 122;               
+                        }
+
+                        function addgroup(dashboarditems,rows,cols,tabs){
+                            var i = 5;
+                            while(i<cols.length - 4){
+                                const col = document.createElement("div");
+                                col.className = "col-12 col-sm-12 col-md" + cols[i] + " col-xl-" + cols[i];
+
+                                var sum = 2;
+                                var index = 0;
+                                while (sum > 0){                
+                                    const card = document.createElement("div");
+                                    card.className = "card  d-flex align-items-stretch";
+                                    card.id = dashboarditems[i + index] + "card";
+
+                                    const cardjeader = document.createElement("div");
+                                    cardjeader.className = "card-header h4 text-dark";
+                                    cardjeader.innerText = dashboarditems[i + index] + " (by Set)";
+                                    card.appendChild(cardjeader);
+
+                                    const cardbody = document.createElement("div");
+                                    cardbody.className = "card-body";
+                                    cardbody.id = dashboarditems[i + index] + "body0";
+
+                                    card.appendChild(cardbody);
+                                    col.appendChild(card);
+                            
+                                    sum -= rows[i + index];
+                                    // console.log(sum);
+                                    index ++;    
+                                }
+                                i += index;
+                                
+                                const currentDiv = document.getElementById("head-" + tabs[i - index]);
+                                // const currentDiv = document.getElementById("head");
+
+                                let parentDiv = currentDiv.parentNode
+                                parentDiv.insertBefore(col, currentDiv); 
+                            }          
+                            
+                        } 
+
+                        addgroup(setarray,rows,cols,tabs);
+                        for (let i=5;i<33;i++){
+                            addchart(setarray[i], types[i], setarray[i],i+1, intervals[i],legends[i],height[i]);                        
+                        } 
+
+                        function activaTab(tab){
+                            $('.nav-tabs a[href="#' + tab + '"]').tab('show');
+                        };
+
+                        activaTab('vertical-icon-tab-3');   
+                    </script>
+
+                    <!-- <button
+                            type="button"
+                            class="btn btn-primary btn-floating btn-lg "
+                            id="btn-back-to-set"
+                            >
+                            <div class="bi-border-all" style="font-size: 15px;"></div> 
+                            <div class="text-center">Set</div>
+                    </button>
+                    <button
+                            type="button"
+                            class="btn btn-primary btn-floating btn-lg"
+                            id="btn-back-to-irrig"
+                            >
+                            <div class="bi-droplet-fill" style="font-size: 15px;"></div> 
+                            <div class="text-center">Irrig</div>
+                    </button>
+                    <button
+                            type="button"
+                            class="btn btn-primary btn-floating btn-lg"
+                            id="btn-back-to-cost"
+                            >
+                            <div class="bi-currency-dollar" style="font-size: 15px;"></div> 
+                            <div class="text-center">Cost</div>
+                    </button>
+                    <script>
+                            let mybutton1 = document.getElementById("btn-back-to-set");
+                            let mybutton2 = document.getElementById("btn-back-to-irrig");
+                            let mybutton3 = document.getElementById("btn-back-to-cost");
+                            mybutton1.style.display = "block";
+                            mybutton1.addEventListener("click", backToTop1);
+                            mybutton2.style.display = "block";
+                            mybutton2.addEventListener("click", backToTop2);
+                            mybutton3.style.display = "block";
+                            mybutton3.addEventListener("click", backToTop3);
+
+                            function backToTop1() {
+                                document.getElementById("Soil Typecard").scrollIntoView();
+                                // const element = document.getElementById("Soil Typebody0");
+                                // element.scrollTop += 10;
+                            }
+                            function backToTop2() {
+                                document.getElementById("Water Supplycard").scrollIntoView();
+                            }
+                            function backToTop3() {
+                                document.getElementById("Energy (kWh)card").scrollIntoView();
+                            }   
+                    </script> -->
                 </div>
-                
-                <div class="container-fluid p-0">
-                    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-                        <div class="offcanvas-header">
-                            <h2 class="offcanvas-title" id="offcanvasLabel"><strong>Dashboard</strong> Configuration</h2>
-                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                        </div>
-                        <div class="offcanvas-body">
-                            <div class="content">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="card flex-fill w-100">
-                                            <div class="card-header">
-                                                <h2 >Baseline</h2>
-                                            </div>												
-                                            <div class="card-body">
-                                                <div id="div3"></div>
-                                                <script>
-                                                    setarray = ["District","Grower ID","Wilmar Map Block ID",
-                                                    "Grower Block Identifier","Outlet Set Identifier","Soil Type",
-                                                    "Soil Group","IrrigWeb Soil Type","Crop Class",
-                                                    "Date Planted","Number of Rows","Avg Row Length (m)",
-                                                    "Row Spacing (m)","Area (ha)","Water Supply","Water Source",
-                                                    "Pump Type","Measured Motor KW","Tariff","Total Flow Rate (L/S)",
-                                                    "Per Cup Flow Rate (L/S/Cup)","Duration (hrs)","Total ML Applied (ML)",
-                                                    "Depth Applied (mm)","Days Between Irrigation Duration","Crop Water Use Between Irrigations",
-                                                    "Application Efficency (%)","Energy (kWh)","Energy per ML (kWh/ML)",
-                                                    "Energy per Hour (kWh/h)","Energy Cost ($/kWh)","Energy Cost per ML ($/ML)","Energy Cost per Irrigation ($/ha/ML)","Area vs Irrigation", "Irrigation vs District","Irrigation vs Water Supply","District vs Water Supply"];
-                                                    types = [5,2,2,2,2,0,8,8,0,9,1,1,8,1,0,0,8,1,0,1,1,10,1,1,10,1,1,1,1,1,0,1,1,2,3,4,6];
-                                                    intervals = [5,2,2,2,2,0,7,8,0,9,1,1,8,0.1,0,8,8,1,0,1,0.1,1,0.1,1,1,1,1,1,1,1,0,1,1,2,3,4,6];
-                                                    tabs = [0,5,5,5,5,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,5,5,5,5];
-                                                    gridsizes = [9,2,2,2,2,6,6,12,7,5,6,6,6,6,4,4,4,4,3,5,6,6,6,6,6,6,6,6,6,6,6,6,6,12,12,12,12];
-                                                    legends = [5,2,2,2,2,1,7,8,1,9,1,1,8,1,0,0,8,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,1,2,3,4,6];
-                                                    number = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6,6,2];
-                                                    // height = [0,0,0,0,0,460,460,700,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460,460];
-                                                    newunits = ["","","","","","","","","","","","m","m","ha","","","","KW","","L/S","L/S/Cup","hrs","ML","mm","","mm","%","KWH","kWh/ML","kWh/h","$/kWh","$/ML","$/ha/ML",""];
-                                                    
-                                                    for (let i=0;i<33;i++){
-                                                        if (i != 1 && i != 2 && i != 3 && i != 4){
-                                                            addElement(setarray[i], setarray[i], "div3", types[i],setarray[i],i+1, intervals[i], number[i], tabs[i]); 
-                                                        }                                                    
-                                                    }     
-                                                </script>
-                                            </div>
-                                        </div> 
-                                    </div> 
-                                    <div class="col-6">
-                                        <div class="card flex-fill w-100">
-                                            <div class="card-header">
-                                                <h2 >Analytics</h2>
-                                            </div>												
-                                            <div class="card-body">
-                                                <div id="div4"></div>
-                                                <script>                                               
-                                                    for (let i=33;i<setarray.length;i++){
-                                                        addElement(setarray[i], setarray[i], "div4", types[i],setarray[i],i+1, intervals[i],number[i],tabs[i]); 
-                                                    }                                                      
-                                                </script>
-                                            </div>
-                                        </div> 
-                                    </div> 
-                                </div>
-                            </div>                            	
-                        </div>
-                    </div>
-                </div>  
+
             </main>
             <?php include('comp/footer.php')?>
         </div>
@@ -1035,149 +879,6 @@
 	<script src="js/app.js"></script>
     <script src="js/datatables.js"></script>
 
-	<script>
-		document.addEventListener("DOMContentLoaded", function() {
-            var dashboarditems = <?php echo json_encode($dashboarditems); ?>; 
-            var dashboardshown = <?php echo json_encode($dashboardshown); ?>; 
-
-
-            rows = [1,1,1,1,1, 2,2,2, 2,2,2, 2,2,2, 2,2,2, 1.5,1,2.5, 2,2,2, 2, 2,2,2, 2,2,2, 2,2,2, 2,2,2,2];
-            cols = [4,4,4,4,4, 6,6,12, 4,4,4, 4,4,4, 4,4,4, 4,4,8, 4,4,4, 4, 4,4,4, 4,4,4, 3,4,5, 4,4,4,4];
-
-            var height = [];
-            for (let i=0;i<rows.length;i++){
-                height[i] = rows[i] * 150 + (rows[i] - 1) * 122;               
-            }
-
-            function addgroup(dashboarditems,rows,cols,tabs){
-                var i = 5;
-                while(i<cols.length - 4){
-                    const col = document.createElement("div");
-                    col.className = "col-12 col-sm-12 col-md" + cols[i] + " col-xl-" + cols[i];
-
-                    var sum = 2;
-                    var index = 0;
-                    while (sum > 0){                
-                        const card = document.createElement("div");
-                        card.className = "card  d-flex align-items-stretch";
-                        card.id = dashboarditems[i + index] + "card";
-
-                        const cardjeader = document.createElement("div");
-                        cardjeader.className = "card-header h4 text-dark";
-                        cardjeader.innerText = dashboarditems[i + index] + " (by Set)";
-                        card.appendChild(cardjeader);
-
-                        const cardbody = document.createElement("div");
-                        cardbody.className = "card-body";
-                        cardbody.id = dashboarditems[i + index] + "body0";
-
-                        card.appendChild(cardbody);
-                        col.appendChild(card);
-                
-                        sum -= rows[i + index];
-                        // console.log(sum);
-                        index ++;    
-                    }
-                    i += index;
-                    
-                    // console.log(tabs[i - index]);
-                    const currentDiv = document.getElementById("head-" + tabs[i - index]);
-                    // const currentDiv = document.getElementById("head");
-
-                    let parentDiv = currentDiv.parentNode
-                    parentDiv.insertBefore(col, currentDiv); 
-                }          
-                
-            } 
-
-            addgroup(dashboarditems,rows,cols,tabs);
-
-            // function adddashboarditem(i){
-            //     if (dashboardshown[i] == 1){
-            //         addcard(dashboarditems[i],gridsizes[i],number[i],tabs[i]);                    
-            //         addchart(dashboarditems[i], types[i], dashboarditems[i],i+1, intervals[i],legends[i],height[i]); 
-                    
-            //         var checkbox = document.getElementById(dashboarditems[i]);
-            //         checkbox.checked = true;
-            //         document.getElementById('result-table').value  = document.getElementById('result-table').value + dashboarditems[i] + ";";
-            //     }
-            // }
-            
-            
-            
-            
-            
-            
-                
-            for (let i=5;i<33;i++){
-                
-                addchart(dashboarditems[i], types[i], dashboarditems[i],i+1, intervals[i],legends[i],height[i]);
-                
-                
-                
-                
-                
-                
-                
-                // if (i != 30){
-                //     adddashboarditem(i);
-
-                // }                                      
-            } 
-    
-            function activaTab(tab){
-                $('.nav-tabs a[href="#' + tab + '"]').tab('show');
-            };
-
-            activaTab('vertical-icon-tab-3');
-            
-            
-		});
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-          
-        
-        
-        
-        
-        
-        
-            
-        
-
-
-	</script>
-    <script>
-        $(function () {
-            $('nav li a').filter(function () {
-                return this.href === location.href;
-            }).addClass('active');
-        });
-
-        var contents = $('.changeable').html();
-        $('.changeable').blur(function() {
-            if (contents!=$(this).html()){
-                
-                console.log(this);
-            }
-        });
-    </script>
 
 </body>
 

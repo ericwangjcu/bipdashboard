@@ -1,13 +1,11 @@
 <style>
 .nav-link
 {
-  font-size: 16px;
+  font-size: 20px;
 }
-.navbar-custom {
-  height: 60px;
-}
+
 </style>
-<nav class="navbar  navbar-custom navbar-expand-lg navbar-dark" style="background-color: #25a2ac;">
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #25a2ac;">
     <a class="navbar-brand" href="home.php">
       <img src="img/logo_W1.png" alt="..." height="24">
     </a>
@@ -16,9 +14,6 @@
   </button>	
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 		<ul class="navbar-nav ">
-			<li class="nav-item">
-				<a class="nav-link text-white"  href="home.php">Home</a>
-			</li>		
 			<li class="nav-item">
 				<a class="nav-link text-white" href="index.php">Dashboard</a>
 			</li>				
