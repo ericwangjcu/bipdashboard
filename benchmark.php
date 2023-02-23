@@ -28,7 +28,7 @@
         cardbody.appendChild(title);
 
         const text = document.createElement("h3");
-        text.className = "mt-2";
+        // text.className = "mt-2";
         text.innerText = farminfo;
         titlecol.appendChild(text);
         row.appendChild(titlecol);
@@ -36,19 +36,9 @@
         const colauto = document.createElement("div");
         colauto.className = "col-auto";
         const mb = document.createElement("div");
-        mb.className = "h2";
+        mb.className = "h3";
         const badge = document.createElement("span");
-
-
-        // if (score < 100){
-        // badge.className = "badge badge bg-secondary";
-        // }
-        // if (score < 66){
-        //     badge.className = "badge badge bg-secondary";
-        // } 
-        // if (score < 33){
-        //     badge.className = "badge badge bg-secondary";
-        // }           
+    
         badge.className = "badge badge bg-success";
         badge.innerText = pos + "/" + total + "  (" + score + "%)";
         mb.appendChild(badge);
@@ -78,7 +68,6 @@
         const newDiv3 = document.createElement("div");
         newDiv3.className = "card-body"; 
         const cardjeader = document.createElement("h1");
-        // cardjeader.className = "card-title h1";
         cardjeader.innerText = farminfo[0];
         newDiv3.appendChild(cardjeader);
 
@@ -95,8 +84,6 @@
 
         const text = document.createElement("h4");
         text.innerText = "Click to Expand";
-            
-         
 
         newDiv3.appendChild(newDiv4);
         newDiv3.appendChild(text);   
@@ -322,7 +309,36 @@
             },
         });
     };
+    function createchildcardnew(set,infor,id,score,pos,total){
+        const currentDiv = document.getElementById("item");
+        let parentDiv = currentDiv.parentNode
 
+        const newDiv2 = document.createElement("div");
+        newDiv2.className = "card collapse"; 
+        newDiv2.id = id; 
+
+        const newDiv3 = document.createElement("div");
+        newDiv3.className = "card-body"; 
+ 
+        var newdiv4 = document.createElement("h3");
+        newdiv4.innerText = set[5];
+        newDiv3.appendChild(newdiv4);
+
+        const newDiv6 = document.createElement("container");
+        const newDiv5 = document.createElement("div");
+        newDiv5.className = "row";
+
+        for (let i=1;i<infor.length;i++){   
+            if (i== 14 || i==20 || i== 29 || i == 30 || i== 32 || i==33){         
+                newDiv5.appendChild(addbenchmarkcard(infor[i],set[i],score[i],pos[i],total[i])); 
+            }
+        }     
+        newDiv6.appendChild(newDiv5);
+        newDiv3.appendChild(newDiv6);
+        
+        newDiv2.appendChild(newDiv3);
+        parentDiv.insertBefore(newDiv2, currentDiv); 
+    }
     </script> 
 </script>
 <body>
@@ -358,6 +374,18 @@
 
                     var subset = [];
                     var ind = 0;
+                    function findsubset(name){
+                        for (let i=0;i<setvalues.length;i++){                             
+                            var nameArr = setvalues[i][2].split('_');
+                            if (nameArr[0] == name){
+                                subset[ind] = [];
+                                for (let j=0;j<setvalues[i].length;j++){
+                                    subset[ind][j] = setvalues[i][j]; 
+                                }
+                                ind ++;
+                            }
+                        }      
+                    }
                     switch(username) {
                         case "BIP":
                             subset = setvalues;
@@ -366,48 +394,17 @@
                             subset = setvalues;
                             break;             
                         case "FARMACIST":
-                            for (let i=0;i<setvalues.length;i++){                             
-                                var nameArr = setvalues[i][2].split('_');
-                                
-                                if (nameArr[0] == "FBIP"){
-                                    subset[ind] = [];
-                                    for (let j=0;j<setvalues[i].length;j++){
-                                        subset[ind][j] = setvalues[i][j]; 
-                                    }
-                                    ind ++;
-                                }
-                            }         
+                            findsubset("FBIP");
                             break;
                         case "BPS":
-                            for (let i=0;i<setvalues.length;i++){
-                                var nameArr = setvalues[i][2].split('_');
-                                
-                                if (nameArr[0] == "BPS"){
-                                    subset[ind] = [];
-                                    for (let j=0;j<setvalues[i].length;j++){
-                                        subset[ind][j] = setvalues[i][j]; 
-                                    }
-                                    ind ++;
-                                }
-                            }         
+                            findsubset("BPS");        
                             break;   
                         case "ATS":
-                            for (let i=0;i<setvalues.length;i++){
-                                
-                                var nameArr = setvalues[i][2].split('_');
-                                
-                                if (nameArr[0] == "ATS"){
-                                    subset[ind] = [];
-                                    for (let j=0;j<setvalues[i].length;j++){
-                                        subset[ind][j] = setvalues[i][j]; 
-                                    }
-                                    ind ++;
-                                }
-                            }         
+                            findsubset("ATS");          
                             break;                                
                         default:
                             
-                    }       
+                    }     
                     
                     var farms = [];
                     for (let i=0;i<subset.length;i++){
@@ -422,11 +419,9 @@
                     var infor = ["Grower ID","Total Area (ha)", "Avg Area (ha)", "No of Sets","Avg No Rows","Avg Row Length (m)","Avg Flow Rate (L/S)","Avg Duration (h)", "Total Water Applied (ML)","Avg Water Applied (ML)","Avg Water Applied (mm)"
                     ,"Avg Crop Water Use (mm)","Avg Applied Efficiency","Total Energy (KWH)","Avg Energy (KWH)","Avg Energy per ML (KWH/ML)","Avg Energy per Hour (KWH/H)",
                     "Avg Energy Cost per ML ($/ML)","Avg Energy Cost per Irrig ($/ha/ML)"];
-                    // var setn = ["Set ID","Area","Crop Class","Date Planted","Total Water Applied (ML)","Total Energy (KWH)","Total Energy Cost per Irrig ($/ha/ML)"];
                     var index = [0,14,14,0,11,12,20,22,23,23,24,26,27,28,28,29,30,31,32];
                     var avg = [0,0,1,0,1,1,1,0,0,1,1,1,1,0,1,1,1,1,1];
                     var fixed = [0,1,1,0,0,0,1,1,1,1,1,2,1,1,1,1,1,1];
-                    // var theme = [0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1];
                     var farminfor = [];
 
                     var setinfor = [];
@@ -495,9 +490,7 @@
                                 newarray[z] = Number(farmsummary[z][j]);
                             }
                             
-                            sortarray = newarray.sort(function(a, b){return a - b});
-                            
-                            // console.log(sortarray);
+                            sortarray = newarray.sort(function(a, b){return a - b});                          
                             let index = sortarray.indexOf(Number(farminfor[j]));
                             
                             
@@ -514,32 +507,31 @@
                         creategauge(farminfor[0] + "container3",2,Number(score[2]),"Avg Area");
                         creategauge(farminfor[0] + "container4",2,Number(score[6]),"Avg Flow Rate");
                         creategauge(farminfor[0] + "container5",2,Number(score[7]),"Avg Duration");
-                        // for (let j=0;j<subset.length;j++){
-                        //     if (subset[j][2] == farminfor[0]){
-                        //         setinfor[0] = subset[j][5];
-                        //         setinfor[1] = subset[j][14];
-                        //         setinfor[2] = subset[j][9];
-                        //         setinfor[3] = subset[j][10];
-                        //         setinfor[4] = subset[j][23];
-                        //         setinfor[5] = subset[j][28];
-                        //         setinfor[6] = subset[j][33];
-                        //         createchildcard(setinfor,setn,farminfor[0]);
-                        //     }
-                        // }
+                        for (let i=0;i<subset.length;i++){
+                            if (subset[i][2] == farminfor[0]){
+                                var score = [];
+                                var pos = [];
+                                var total = [];
+                                for (let j=1;j<setnames.length;j++){
+                                    newarray = [];
+                                    for (let z=0;z<subset.length;z++){
+                                        newarray[z] = Number(subset[z][j]);
+                                    }
+                                    
+                                    sortarray = newarray.sort(function(a, b){return a - b});  
+                                    // console.log(sortarray);
+                        
+                                    let index = sortarray.indexOf(Number(subset[i][j]));
+                                    
+                                    score[j] = ((index + 1) * 100 / newarray.length).toFixed(0);
+                                    pos[j] = index + 1;
+                                    total[j] = newarray.length;
+                                }  
+                                createchildcardnew(subset[i],setnames,farminfor[0],score,pos,total);
+                            }
+                        }
 
                     }
-                    
-
-                    // let btns = document.querySelectorAll('button');
-
-                    // for (i of btns) {
-                    // (function(i) {
-                    //     i.addEventListener('click', function() {
-                        
-                    //     updateirrigation("2020-04-16", i.id.substring(0, 6),i.id.substring(6, 10));  
-                    //     });
-                    // })(i);
-                    // }
                 </script>
 			</main>
             <?php include('comp/footer.php')?>

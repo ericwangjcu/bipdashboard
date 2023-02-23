@@ -211,7 +211,7 @@ function createpiechart(c, d, e ,f, t,s,id,leg){
                 enabled: true,
                 format: '{point.name}: {point.percentage:.1f} %',
                                 style:{
-                  fontSize: '14px',
+                  fontSize: '18px',
                   fontWeight: 'thin',
                 },
                 // distance: 20 + leg * 50,
@@ -359,7 +359,7 @@ function createpiechart(c, d, e ,f, t,s,id,leg){
                             },
 
                             style:{
-                              fontSize: '16px',
+                              fontSize: '18px',
                               fontWeight: 'thin',
                             },
                         },
@@ -427,7 +427,7 @@ function createbarcharts(c, d, e ,f, t,s,id){
             },
             labels: {
                 style: {
-                    fontSize: '16px'
+                    fontSize: '18px'
                 }
             }
            
@@ -472,7 +472,7 @@ function createbarcharts(c, d, e ,f, t,s,id){
                 dataLabels: {
                     enabled: true,
                     style: {
-                        fontSize: '12px',
+                        fontSize: '18px',
                         fontWeight: 'thin',
                     },
                     formatter: function(){
@@ -600,7 +600,7 @@ function createbasicbar(c, d, e, f, t, xt, s, id){
         chart: {
             type: 'column',
             style: {
-            fontSize: '12px'
+            fontSize: '18px'
             },
             style: {
                 fontFamily: 'Poppins'
@@ -611,7 +611,7 @@ function createbasicbar(c, d, e, f, t, xt, s, id){
             text: null,
             align: 'left',
             style: {
-            fontSize: '12px'
+            fontSize: '18px'
         }
         },
         subtitle: {
@@ -623,12 +623,12 @@ function createbasicbar(c, d, e, f, t, xt, s, id){
             title: {
                 text: null,
                 style: {
-                    fontSize: '12px'
+                    fontSize: '18px'
                 },
             },            
             labels: {
                 style: {
-                    fontSize: '12px'
+                    fontSize: '18px'
                 },     
             }
         },
@@ -637,14 +637,14 @@ function createbasicbar(c, d, e, f, t, xt, s, id){
             title: {
                 text: 'Count',
                 style: {
-                    fontSize: '12px'
+                    fontSize: '18px'
                 }
             },
             labels: {
                 enabled: false,
 
                 style: {
-                    fontSize: '12px'
+                    fontSize: '18px'
                 }
             },
             visible: false ,
@@ -654,13 +654,13 @@ function createbasicbar(c, d, e, f, t, xt, s, id){
             title: {
                 text: 'Area (ha)',
                 style: {
-                    fontSize: '12px'
+                    fontSize: '18px'
                 }
             },
             labels: {
                 enabled: false,
                 style: {
-                    fontSize: '12px'
+                    fontSize: '18px'
                 }
             },
             opposite: true,
@@ -702,7 +702,7 @@ function createbasicbar(c, d, e, f, t, xt, s, id){
                     enabled: true,
                     shadow: true,                       
                     style: {
-                        fontSize: '12px',
+                        fontSize: '18px',
                         fontWeight: 'thin',
                     },   
                     formatter: function(){
@@ -729,7 +729,7 @@ function createbasicbar(c, d, e, f, t, xt, s, id){
         legend: {
             enabled: true,
             itemStyle: {
-                fontSize: '12px'
+                fontSize: '18px'
             }
         },
         series: [{
@@ -798,7 +798,7 @@ function createbasicbar(c, d, e, f, t, xt, s, id){
                     xAxis: {
                         labels: {
                             style: {
-                                fontSize: '12px'
+                                fontSize: '18px'
                             }
                         } 
                     },
@@ -869,11 +869,11 @@ function createline(c, x, y, xname, yname, yunits, s){
         axisdata[i] = {
             title: { text: yunits[i],
             style: {
-                fontSize: '12px'
+                fontSize: '18px'
             }},
             labels: {
                 style: {
-                    fontSize: '12px'
+                    fontSize: '18px'
                 }
             },
             top: (0.26 * i + 0.05) * s , 
@@ -898,11 +898,11 @@ function createline(c, x, y, xname, yname, yunits, s){
         xAxis: {
             title: { text: xname,
             style: {
-                fontSize: '12px'
+                fontSize: '18px'
             }},
             labels: {
                 style: {
-                    fontSize: '12px'
+                    fontSize: '18px'
                 }
             }
         },
@@ -951,7 +951,7 @@ function createnewcomparison(c,x,y,yname,yunits,height){
             categories: [""],
             labels: {
                 style: {
-                    fontSize: '12px'
+                    fontSize: '18px'
                 },
                 enabled: false
             } 
@@ -960,11 +960,11 @@ function createnewcomparison(c,x,y,yname,yunits,height){
         yAxis: {
             title: {
                 text: yunits,style: {
-                    fontSize: '12px'
+                    fontSize: '18px'
                 }
             },labels: {
                 style: {
-                    fontSize: '12px'
+                    fontSize: '18px'
                 }
             } 
         },
@@ -1010,7 +1010,7 @@ function createnewcomparison(c,x,y,yname,yunits,height){
                     xAxis: {
                         labels: {
                             style: {
-                                fontSize: '12px'
+                                fontSize: '18px'
                             }
                         } 
                     },
@@ -1069,7 +1069,7 @@ function createstackedbars(c,x,y,t,ss){
             categories: iterator1,
             labels: {
                 style: {
-                    fontSize: '12px'
+                    fontSize: '18px'
                 },
                 enabled: true
             } 
@@ -1079,12 +1079,12 @@ function createstackedbars(c,x,y,t,ss){
             title: {
                 text: 'Total',
                 style:{
-                    fontSize: '12px'
+                    fontSize: '18px'
                   }
             },
             labels: {
                 style: {
-                    fontSize: '12px'
+                    fontSize: '18px'
                 },
                 enabled: true
             },
@@ -1108,7 +1108,7 @@ function createstackedbars(c,x,y,t,ss){
                         return String(this.series.name + ": " + this.point.percentage.toFixed(1) + "%");
                     },
                     style:{
-                        fontSize: '12px',
+                        fontSize: '18px',
                     },
                 },
             },
@@ -1153,7 +1153,7 @@ function createstackedbars(c,x,y,t,ss){
                     xAxis: {
                         labels: {
                             style: {
-                                fontSize: '12px'
+                                fontSize: '18px'
                             }
                         } 
                     },
@@ -1205,7 +1205,7 @@ function createtime(c,d,short,h, id){
             },
             labels: {
                 style: {
-                    fontSize: '12px',
+                    fontSize: '18px',
                 }
             }
         },  
@@ -1215,7 +1215,7 @@ function createtime(c,d,short,h, id){
                 dataLabels: {
                     enabled: true,
                     style: {
-                        fontSize: '12px'
+                        fontSize: '18px'
                     }
                 },
                 marker: {
@@ -1294,12 +1294,12 @@ function createnewline(c,d,short,h, id){
             title: {
                 text: "No. of Sets",
                 style: {
-                    fontSize: '12px',
+                    fontSize: '18px',
                 }
             },
             labels: {
                 style: {
-                    fontSize: '12px',
+                    fontSize: '18px',
                 }
             },
             gridLineColor: 'transparent',
@@ -1308,12 +1308,12 @@ function createnewline(c,d,short,h, id){
             title: {
                 text: short,
                 style: {
-                    fontSize: '12px',
+                    fontSize: '18px',
                 }
             },
             labels: {
                 style: {
-                    fontSize: '12px',
+                    fontSize: '18px',
                 }
             },
             tickInterval: 1
@@ -1323,7 +1323,7 @@ function createnewline(c,d,short,h, id){
                 dataLabels: {
                     enabled: true,
                     style: {
-                        fontSize: '12px'
+                        fontSize: '18px'
                     }
                 },
                 marker: {
@@ -1417,12 +1417,12 @@ function createscatter(c,x,y,xname,yname, idx, idy,h){
             title: {
                 text: xname,
                 style: {
-                    fontSize: '12px',
+                    fontSize: '18px',
                 }
             },
             labels: {
                 style: {
-                    fontSize: '12px',
+                    fontSize: '18px',
                 }
             },
             
@@ -1431,12 +1431,12 @@ function createscatter(c,x,y,xname,yname, idx, idy,h){
             title: {
                 text: yname,
                 style: {
-                    fontSize: '12px',
+                    fontSize: '18px',
                 }
             },
             labels: {
                 style: {
-                    fontSize: '12px',
+                    fontSize: '18px',
                 }
             },
             gridLineColor: 'transparent',
