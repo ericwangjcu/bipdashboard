@@ -330,7 +330,7 @@
 
         for (let i=1;i<infor.length;i++){   
             if (i== 14 || i==20 || i== 29 || i == 30 || i== 32 || i==33){         
-                newDiv5.appendChild(addbenchmarkcard(infor[i],set[i],score[i],pos[i],total[i])); 
+                newDiv5.appendChild(addbenchmarkcard(infor[i-1],set[i],score[i],pos[i],total[i])); 
             }
         }     
         newDiv6.appendChild(newDiv5);
@@ -416,6 +416,16 @@
                         counts[num] = counts[num] ? counts[num] + 1 : 1;
                     }    
                     const iterator = Object.entries(counts);
+                    var setarray = ["District","Grower ID","Wilmar Map Block ID",
+                        "Grower Block Identifier","Outlet Set Identifier","Soil Type",
+                        "Soil Group","IrrigWeb Soil Type","Crop Class",
+                        "Date Planted","Number of Rows","Avg Row Length (m)",
+                        "Row Spacing (m)","Area (ha)","Water Supply","Water Source",
+                        "Pump Type","Measured Motor KW","Tariff","Total Flow Rate (L/S)",
+                        "Per Cup Flow Rate (L/S/Cup)","Duration (hrs)","Total ML Applied (ML)",
+                        "Depth Applied (mm)","Days Between Irrigation Duration","Crop Water Use Between Irrigations",
+                        "Application Efficency (%)","Energy (kWh)","Energy per ML (kWh/ML)",
+                        "Energy per Hour (kWh/h)","Energy Cost ($/kWh)","Energy Cost per ML ($/ML)","Energy Cost per Irrigation ($/ha/ML)","Area vs Irrigation", "Irrigation vs District","Irrigation vs Water Supply","District vs Water Supply"];
                     var infor = ["Grower ID","Total Area (ha)", "Avg Area (ha)", "No of Sets","Avg No Rows","Avg Row Length (m)","Avg Flow Rate (L/S)","Avg Duration (h)", "Total Water Applied (ML)","Avg Water Applied (ML)","Avg Water Applied (mm)"
                     ,"Avg Crop Water Use (mm)","Avg Applied Efficiency","Total Energy (KWH)","Avg Energy (KWH)","Avg Energy per ML (KWH/ML)","Avg Energy per Hour (KWH/H)",
                     "Avg Energy Cost per ML ($/ML)","Avg Energy Cost per Irrig ($/ha/ML)"];
@@ -527,7 +537,7 @@
                                     pos[j] = index + 1;
                                     total[j] = newarray.length;
                                 }  
-                                createchildcardnew(subset[i],setnames,farminfor[0],score,pos,total);
+                                createchildcardnew(subset[i],setarray,farminfor[0],score,pos,total);
                             }
                         }
 

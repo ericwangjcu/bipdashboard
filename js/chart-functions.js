@@ -1461,6 +1461,10 @@ function createscatter(c,x,y,xname,yname, idx, idy,h){
         series: [{
             data: seriesdata,
             name: yname,
+            marker: {
+                symbol: 'triangle',
+                radius: 8
+            }
         }],
         exporting: {
             enabled: false
