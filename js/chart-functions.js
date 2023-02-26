@@ -1285,7 +1285,7 @@ function createnewline(c,d,short,h, id){
     
         chart:{
             height: h,
-            type: 'spline'
+            type: 'column'
         },
         title: {
             text: null,
