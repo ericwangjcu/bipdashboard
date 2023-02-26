@@ -59,7 +59,7 @@
         
 
         const newDiv2 = document.createElement("div");
-        newDiv2.className = "card bg-light";
+        newDiv2.className = "card shadow-none bg-light";
         newDiv2.setAttribute('data-toggle',"collapse");
         newDiv2.setAttribute('data-target',"#" + farminfo[0]);
         newDiv2.setAttribute('aria-expanded',"false");
@@ -314,7 +314,7 @@
         let parentDiv = currentDiv.parentNode
 
         const newDiv2 = document.createElement("div");
-        newDiv2.className = "card collapse"; 
+        newDiv2.className = "card shadow-none  bg-light collapse"; 
         newDiv2.id = id; 
 
         const newDiv3 = document.createElement("div");

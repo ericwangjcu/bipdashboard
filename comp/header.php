@@ -52,7 +52,9 @@
 <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
 
 <style>
-
+.card {
+      box-shadow: 8px 8px 15px 0 rgba(100, 100, 100, 0.26);
+}
 body {
     font-family: 'Poppins', sans-serif;      }
 </style>

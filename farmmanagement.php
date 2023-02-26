@@ -140,7 +140,7 @@
                 console.log(i);
                 td.id = i - 181 + "," + j;
                 console.log(td.id);
-                td.setAttribute('contenteditable',"true");          
+                // td.setAttribute('contenteditable',"true");          
                 td.appendChild(document.createTextNode(row[i][j]));       
                 tr.appendChild(td);
             }
@@ -356,11 +356,11 @@
     document.addEventListener("DOMContentLoaded", function() {
         
         var datatablesButtons = $("#datatables-reponsive").DataTable({
-            
+            responsive: true,
             lengthChange: !1,
             fixedHeader: true,
-            scrollX: 2000,
-            scrollY: false,
+            // scrollX: 2000,
+            // scrollY: false,
             buttons: ["copy", "print"]
         });
         datatablesButtons.buttons().container().appendTo("#datatables-reponsive_wrapper .col-md-6:eq(0)");

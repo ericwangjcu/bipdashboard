@@ -474,8 +474,8 @@
             const tr = document.createElement('tr');
             for (let j=1;j<row[i].length-offset;j++){
                 const td = document.createElement('td');
-                td.className = "changeable";
-                td.setAttribute('contenteditable',"true");
+                // td.className = "changeable";
+                // td.setAttribute('contenteditable',"true");
       
                 td.appendChild(document.createTextNode(row[i][j]));       
                 tr.appendChild(td);
