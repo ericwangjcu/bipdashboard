@@ -148,7 +148,7 @@
 
         for (let i=0;i<number;i++){
             const newDiv2 = document.createElement("div");
-            newDiv2.className = "col-12 col-sm-" + cardsize * 2 + " col-md" + cardsize + " col-xl-" + cardsize; 
+            newDiv2.className = "col-12 col-sm-12" + " col-md" + cardsize + " col-xl-" + cardsize; 
 
             const card = document.createElement("div");
             card.className = "card";
