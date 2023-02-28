@@ -339,8 +339,7 @@
         newDiv2.appendChild(newDiv3);
         parentDiv.insertBefore(newDiv2, currentDiv); 
     }
-    </script> 
-</script>
+</script> 
 <body>
 	<div class="wrapper">  
 		<div class="main">
@@ -372,39 +371,8 @@
                     var setvalues = <?php echo json_encode($setvalues); ?>;
                     var username = <?php echo json_encode($_SESSION['username'],JSON_INVALID_UTF8_IGNORE); ?>; 
 
-                    var subset = [];
-                    var ind = 0;
-                    function findsubset(name){
-                        for (let i=0;i<setvalues.length;i++){                             
-                            var nameArr = setvalues[i][2].split('_');
-                            if (nameArr[0] == name){
-                                subset[ind] = [];
-                                for (let j=0;j<setvalues[i].length;j++){
-                                    subset[ind][j] = setvalues[i][j]; 
-                                }
-                                ind ++;
-                            }
-                        }      
-                    }
-                    switch(username) {
-                        case "BIP":
-                            subset = setvalues;
-                            break;
-                        case "SRA":
-                            subset = setvalues;
-                            break;             
-                        case "FARMACIST":
-                            findsubset("FBIP");
-                            break;
-                        case "BPS":
-                            findsubset("BPS");        
-                            break;   
-                        case "ATS":
-                            findsubset("ATS");          
-                            break;                                
-                        default:
-                            
-                    }     
+                    var subset = findsubset(username,setvalues);
+    
                     
                     var farms = [];
                     for (let i=0;i<subset.length;i++){
@@ -529,7 +497,6 @@
                                     }
                                     
                                     sortarray = newarray.sort(function(a, b){return a - b});  
-                                    // console.log(sortarray);
                         
                                     let index = sortarray.indexOf(Number(subset[i][j]));
                                     

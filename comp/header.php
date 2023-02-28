@@ -22,7 +22,7 @@
 <!-- BEGIN SETTINGS -->
 <!-- Remove this after purchasing -->
 <link class="js-stylesheet" href="css/light.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 
 <script src="https://code.highcharts.com/highcharts.js"></script>
@@ -47,14 +47,51 @@
 
 <script src="https://code.highcharts.com/modules/coloraxis.js"></script>
 <script src="js/chart-functions.js"></script> 
-<script src="js/card-functions.js"></script>
+<script src="js/functions.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
 
 <style>
-.card {
+/* .card {
       box-shadow: 8px 8px 15px 0 rgba(100, 100, 100, 0.26);
-}
+} */
 body {
     font-family: 'Poppins', sans-serif;      }
+    .tooltipHeader {
+  float: center;
+  font-size: 1rem;
+}
+
+.tooltipPointWrapper {
+  display: block;
+  text-align: center;
+  padding: 10px 0;
+}
+.tooltipPoint {
+  font-size: 2rem;
+  padding-left: 5px;
+ 
+}
+.tooltipValueSuffix {
+  padding-left: 5px;
+  color: #1bc9a8;
+}
+.tooltipLine {
+  display: block;
+  opacity: 0.5;
+  background-color: #fff;
+  width: 100%;
+  height: 1px;
+  padding: 0;
+  margin: 0;
+}
+.nav-tabs .nav-item .nav-link {
+  background-color: #f8f9fa;
+  color: #000;
+}
+
+.nav-tabs .nav-item .nav-link.active {
+  color: #FFF;
+  background-color: #25a2ac;
+}
 </style>
