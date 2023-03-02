@@ -38,6 +38,16 @@
                     </script>
 
                     <script>
+                        var setarray1 = ["District","Grower ID","Wilmar Map Block ID",
+                        "Grower Block Identifier","Outlet Set Identifier","Soil Type",
+                        "Soil Group","IrrigWeb Soil Type","Crop Class",
+                        "Date Planted","Number of Rows","Avg Row Length (m)",
+                        "Row Spacing (m)","Area (ha)","Water Supply","Water Source",
+                        "Pump Type","Measured Motor KW","Tariff","Total Flow Rate (L/S)",
+                        "Per Cup Flow Rate (L/S/Cup)","Duration (hrs)","Total ML Applied (ML)",
+                        "Depth Applied (mm)","Days Between Irrigation Duration","Crop Water Use Between Irrigations",
+                        "Application Efficency (%)","Energy (kWh)","Energy per ML (kWh/ML)",
+                        "Energy per Hour (kWh/h)","Energy Cost ($/kWh)","Energy Cost per ML ($/ML)","Energy Cost per Irrigation ($/ha/ML)","Area vs Irrigation", "Irrigation vs District","Irrigation vs Water Supply","District vs Water Supply"];
                         setarray = ["Water Supply by District","Irrigation vs District","Irrigation vs Water Supply","Irrigation vs Area","Irrigation vs Row Length"];
                         types = [6,3,4,2,5];
                         intervals = [0,0,0,0,0];

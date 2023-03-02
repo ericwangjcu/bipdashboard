@@ -80,13 +80,7 @@ function addgroup(header,size,cards,value,text){
         newDiv2.className = "col-12 col-md-12" + " col-xl-4";
 
         const card1 = document.createElement("div");
-        card1.className = "card";        
-
-
-        
-        
-        
-        
+        card1.className = "card";      
 
         const cardbody = document.createElement("div");
         cardbody.className = "card-body";
@@ -98,10 +92,10 @@ function addgroup(header,size,cards,value,text){
         col.className = "col-5 mt-4"; 
 
         let col7 = document.createElement('span');
-        col7.className = 'h4 mt-4 mb-0';
+        col7.className = 'h2 mt-4 mb-0';
         col7.innerText = cards[i] + ":               ";
         let col8 = document.createElement('span');
-        col8.className = 'h4 text-primary mt-4 mb-0';
+        col8.className = 'h3 text-primary mt-4 mb-0';
         col8.innerText = value[i];
         let col9 = document.createElement('span');
         col9.className = 'h4 text-muted mt-4 mb-0';
@@ -157,7 +151,7 @@ function addchart(header, type, short, index, interval,legend,height){
             return response;
         }
     }).responseText);
-    console.log(oldrecord);
+    // console.log(oldrecord);
 
 
     if (type == 0){
@@ -352,8 +346,8 @@ function addchart(header, type, short, index, interval,legend,height){
                         ind ++;                
                     }
                 }  
-                                            
-                createstackedbars(header + "body" + j,x,y,setarray[indy[j]-1],400);
+                createstackedbars(header + "body" + j,x,y,setarray1[indy[j]-1],400);
+                
             }
 
         }

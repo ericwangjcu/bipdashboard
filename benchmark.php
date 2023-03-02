@@ -53,6 +53,51 @@
 
         return col;
     }
+    function addbenchmarkcardnew(infor, farminfo, score, pos, total){
+        const col = document.createElement("div");
+        col.className = "col-xl-3 col-md-6 col-sm-12  d-flex align-items-stretch";            
+        
+        const card = document.createElement("div");
+        card.className = "card  w-100";
+        const cardbody = document.createElement("div");
+        cardbody.className = "card-body";
+
+        const row = document.createElement("div");
+        row.className = "row";
+        const titlecol = document.createElement("div");
+        titlecol.className = "col";
+
+        const title = document.createElement("div");
+        title.className = "card-title";
+        title.innerText = infor;  
+        cardbody.appendChild(title);
+
+        const text = document.createElement("h3");
+        // text.className = "mt-2";
+        text.innerText = farminfo;
+        titlecol.appendChild(text);
+        row.appendChild(titlecol);
+        
+        const colauto = document.createElement("div");
+        colauto.className = "col-auto";
+        const mb = document.createElement("div");
+        mb.className = "h3";
+        const badge = document.createElement("span");
+    
+        badge.className = "badge badge bg-success";
+        badge.innerText = pos + "/" + total + "  (" + score + "%)";
+        mb.appendChild(badge);
+        colauto.appendChild(mb);
+        row.appendChild(colauto);
+        
+
+        cardbody.appendChild(row);
+
+        card.appendChild(cardbody);
+        col.appendChild(card);
+
+        return col;
+    }
     function createparentcard(farminfo,infor,score,pos,total){
         const currentDiv = document.getElementById("item");
         let parentDiv = currentDiv.parentNode
@@ -329,8 +374,8 @@
         newDiv5.className = "row";
 
         for (let i=1;i<infor.length;i++){   
-            if (i== 14 || i==20 || i== 29 || i == 30 || i== 32 || i==33){         
-                newDiv5.appendChild(addbenchmarkcard(infor[i-1],set[i],score[i],pos[i],total[i])); 
+            if (i== 14 || i==20 || i==22 || i==23 || i==24 || i== 28 || i== 29 || i== 30 || i== 32 || i==33){         
+                newDiv5.appendChild(addbenchmarkcardnew(infor[i-1],Number(set[i]).toFixed(1),score[i],pos[i],total[i])); 
             }
         }     
         newDiv6.appendChild(newDiv5);

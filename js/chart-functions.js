@@ -60,7 +60,6 @@ Highcharts.setOptions({
         borderWidth: 3,
     }, 
     plotOptions: {
-
         series: {               
             animation: false,
             dataLabels: {
@@ -74,7 +73,10 @@ Highcharts.setOptions({
         },
     },
     legend: {
-        enabled: false
+        enabled: false,
+        itemStyle:{
+            fontSize: '16px',
+        },        
     },        
     exporting: {
         enabled: false
@@ -568,28 +570,35 @@ function createstackedbars(c,x,y,t,ss){
 
     Highcharts.chart(c, {
         chart: {
-            type: 'bar',
+            type: 'column',
             height: ss,     
         },
         title: {
             text: t,
+            enabled: true
         },
         xAxis: {
             categories: iterator1,
             visible: true             
         },
-        tooltip: {
-            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
-            shared: true
+        legend:{
+            enabled: true
         },
         plotOptions: {
-            bar: {
+            column: {
                 stacking: 'percent',
             },
             series: {               
                 dataLabels: {
                     formatter: function(){
-                        return String(this.series.name + ": " + this.point.percentage.toFixed(1) + "%");
+                        if (this.point.percentage != 0){
+                            return String(this.point.percentage.toFixed(0) + "%");
+                        }
+                        
+                    },
+                    style: {
+                        textOutline: 0,
+                        color:'white'
                     },
                 },
             },
@@ -705,9 +714,6 @@ function createnewline(c,d,short,h, id){
     }); 
 };
 function createscatter(c,x,y,xname,yname, idx, idy,h){
-    // Highcharts.setOptions({
-    //     colors: ['rgba(5,141,199,0.5)', 'rgba(80,180,50,0.5)', 'rgba(237,86,27,0.5)']
-    // });
 
     var seriesdata = [];
     for (let i=0;i<y.length;i++){

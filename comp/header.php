@@ -57,7 +57,7 @@
 } */
 body {
     font-family: 'Poppins', sans-serif;      }
-    .tooltipHeader {
+.tooltipHeader {
   float: center;
   font-size: 1rem;
 }
