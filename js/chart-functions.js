@@ -172,15 +172,20 @@ function clickshowmodal(t, comp, comp2, type, id){
     });
     $("#myModal").modal('show');
 };
-function stackedcolumn(c,dataset){
+function stackedcolumn(c,dataset,value){
     Highcharts.chart(c, {
+        colors: ["#C4C4C4","#25a2ac"],
+
         chart: {
             type: 'bar',
-            height: 75,            
+            height: 100,            
             margin: [0,0,0,0]
         },
         tooltip: {
             enabled: false
+        },
+        yAxis: {
+            max: value,
         },
         plotOptions: {
             series: {               
@@ -189,7 +194,7 @@ function stackedcolumn(c,dataset){
                         return String(this.series.name + ": " + this.point.y.toFixed(0));
                     },
                     style:{
-                        fontSize: '12px',
+                        fontSize: '18px',
                     },
                 },
             },
@@ -494,9 +499,14 @@ function createnewcomparison(c,x,y,yname,yunits,height){
             animation: false
         }
     }
+    if (x.length == 3){
+        colorscheme = ["#1984c5", "#a6d75b", "#190000"];
+    }else{
+        colorscheme = ["#25a2ac", "#C4C4C4", "#48b5c4", "#1984c5", "#a6d75b", "#c9e52f", "#d0ee11", "#f4f100"];
+    }
 
     Highcharts.chart(c, {
-
+        colors: colorscheme,
         chart: {
             type: 'boxplot',
             height: height, 
@@ -547,24 +557,46 @@ function createstackedbars(c,x,y,t,ss){
     }    
     const iterator1 = Object.keys(counts);
 
+
+
     var percentage = [];
+    var area = [];
     for (let i=0;i<iterator.length;i++){
         percentage[i] = [];
+        area[i] = [];
         for (let j=0;j<iterator1.length;j++){
             percentage[i][j] = 0;
+            area[i][j] = 0;
             for (let k=0;k<x.length;k++){
                 if (x[k] == iterator[i] && y[k] == iterator1[j]){
                     percentage[i][j] ++;
+                    area[i][j] += Number(subset[i][14]);
                 }
             }
+            area[i][j] = area[i][j].toFixed(0);
+            area[i][j] = Number(area[i][j]);
         }
     }
 
+
+
+    console.log(area);
+    colorss = ['rgba(37,162,172,1)', 'rgba(196,196,196,1)', 'rgba(37,162,172,0.4)', 'rgba(196,196,196,0.4)'];
     var seriesdata = [];
     for (let j=0;j<iterator.length;j++){
         seriesdata[j] = {
-            name: iterator[j],
+            name: "No. of Sets:  " + iterator[j],
+            color: colorss[j],
             data: percentage[j]           
+        }
+    } 
+    for (let j=0;j<iterator.length;j++){
+        seriesdata[iterator.length + j] = {
+            name: "Area:  " + iterator[j],
+            data: area[j],
+            color: colorss[iterator.length + j],
+            pointPadding: 0.1,
+            yAxis: 1     
         }
     } 
 
@@ -581,25 +613,38 @@ function createstackedbars(c,x,y,t,ss){
             categories: iterator1,
             visible: true             
         },
+        yAxis: [{
+            title: {
+                text: 'No. of Sets'
+            }
+        }, {
+            title: {
+                text: 'Area'
+            },
+            opposite: true
+        }],
         legend:{
             enabled: true
         },
         plotOptions: {
             column: {
-                stacking: 'percent',
+                grouping: true,
+                shadow: false,
+                borderWidth: 0
             },
-            series: {               
+            series: {
+                borderWidth: 0,
+                colors: ['#B4B4B4'],  
                 dataLabels: {
                     formatter: function(){
-                        if (this.point.percentage != 0){
-                            return String(this.point.percentage.toFixed(0) + "%");
+                        var label = "";
+                        if (this.series.index == 2 || this.series.index == 3)
+                        {
+                            label= "ha";
                         }
-                        
+                        return (this.y!=0)?this.y + " " + label:"";
                     },
-                    style: {
-                        textOutline: 0,
-                        color:'white'
-                    },
+                    allowOverlap: true
                 },
             },
         },
@@ -714,13 +759,14 @@ function createnewline(c,d,short,h, id){
     }); 
 };
 function createscatter(c,x,y,xname,yname, idx, idy,h){
-
+    
     var seriesdata = [];
     for (let i=0;i<y.length;i++){
         seriesdata[i] = [x[i],y[i]];
     }
     
     Highcharts.chart(c, {
+        colors: ["#0dee11", "#f4f100"],
         chart: {
             type: 'scatter',
             height: h,

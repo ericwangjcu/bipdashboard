@@ -241,7 +241,7 @@
                 </div>   
                 <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3">    
                   <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>            
-                  <form method="post" action="test.php" target="dummyframe">
+                  <form method="post" action="server/addentry.php" target="dummyframe">
                     <!-- <div id="result-table" name="result"></div>						 -->
                     <button type="submit" class="btn-primary" name="import">Import</button>
                     <input id="result-table1" name="sets" type="text" style='display:none;'/>

@@ -6,8 +6,20 @@
         $db = mysqli_connect('localhost', 'root', '', 'BIP');
     }
 
+    $keyword = '_%';
+    if ($_SESSION['username'] == "ATS"){
+        $keyword = 'ATS_%';
+        // echo "<script>console.log('ATS')</script>";
+    }
+    if ($_SESSION['username'] == "BPS"){
+        $keyword = 'BPS_%';
+    }
+    if ($_SESSION['username'] == "FARMACIST"){
+        $keyword = 'FBIP_%';
+    }
+
     $param = isset($_POST['param']) ? $_POST['param'] : null;
-    $sql = "SELECT $param, COUNT($param) * 100 / 399, COUNT($param), sum(area) FROM irrigset GROUP BY $param";
+    $sql = "SELECT $param, COUNT($param) * 100 / 399, COUNT($param), sum(area) FROM irrigset WHERE grower_id like '$keyword' GROUP BY $param";
     $result = mysqli_query($db, $sql);    
     if (mysqli_num_rows($result) > 0) {
         $j = 0;

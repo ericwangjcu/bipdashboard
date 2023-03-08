@@ -89,21 +89,21 @@ function addgroup(header,size,cards,value,text){
         row.className = "row";  
 
         const col = document.createElement("div");
-        col.className = "col-5 mt-4"; 
+        col.className = "col-4 mt-4"; 
 
         let col7 = document.createElement('span');
-        col7.className = 'h2 mt-4 mb-0';
+        col7.className = 'h2 mt-4 mb-4';
         col7.innerText = cards[i] + ":               ";
         let col8 = document.createElement('span');
-        col8.className = 'h3 text-primary mt-4 mb-0';
+        col8.className = 'h2 text-primary mt-4 mb-4';
         col8.innerText = value[i];
         let col9 = document.createElement('span');
-        col9.className = 'h4 text-muted mt-4 mb-0';
+        col9.className = 'h2 text-muted mt-4 mb-4';
         col9.innerText = "            " + text[i];
 
 
         const col1 = document.createElement("div");
-        col1.className = "col-7";  
+        col1.className = "col-8";  
 
         let col10 = document.createElement('div');
         col10.id = header + cards[i];
@@ -174,6 +174,7 @@ function addchart(header, type, short, index, interval,legend,height){
                 index ++;
             }
         }
+
         createtime(header + "body0",newdata,short,height,index);
         
     }
@@ -319,11 +320,11 @@ function addchart(header, type, short, index, interval,legend,height){
 
     }        
     if (type == 3){
-        comparisonchart(1,[20,24,27,29,30,32],["Flow Rate","mm per Irrigation","Applied Efficiency","Energy per ML","Energy per Hour","Cost per ML"],
+        comparisonchart(1,[20,24,27,29,30,32],["Flow Rate","mm per Irrigation","Applied Efficiency","Energy per ML","Energy per Hour","Energy Cost per ML"],
         ["L/S","mm","%","KWh/ML","KWh/h","$/ML"]);
     }  
     if (type == 4){
-        comparisonchart(15,[20,24,27,29,30,32],["Flow Rate","mm per Irrigation","Applied Efficiency","Energy per ML","Energy per Hour","Cost per ML"],
+        comparisonchart(15,[20,24,27,29,30,32],["Flow Rate","mm per Irrigation","Applied Efficiency","Energy per ML","Energy per Hour","Energy Cost per ML"],
         ["L/S","mm","%","KWh/ML","KWh/h","$/ML"]);
     } 
     if (type == 6){
@@ -346,8 +347,8 @@ function addchart(header, type, short, index, interval,legend,height){
                         ind ++;                
                     }
                 }  
-                createstackedbars(header + "body" + j,x,y,setarray1[indy[j]-1],400);
-                
+
+                createstackedbars(header + "body" + j,x,y,setarray1[indy[j]-1],500); 
             }
 
         }
@@ -412,11 +413,12 @@ function addcard(header,size, number){
 }      
 function addtop(){
     var value = [0,0,0];
-
+    var value2 = 0;
     for (let i=0;i<farmcount.length;i++){
         value[0] += Number(farmcount[i][1]);  
         value[1] += Number(farmcount[i][2]); 
         value[2] +=  Number(farmcount[i][3]); 
+        value2 += Number(farmcount[i][3]); 
     }  
     value[2] = value[2].toFixed(0);
 
@@ -424,14 +426,16 @@ function addtop(){
     addgroup("test",12, cards, value, units);
 
     var dataset = [];
+    console.log(farmcount);
     for (let i=0;i<3;i++){
         dataset[i] = [];
-        for (let j=0;j<2;j++){
+        for (let j=0;j<farmcount.length;j++){
             dataset[i][j] = {name: farmcount[j][0],
                 data: [Number(farmcount[j][i+1])]};
         }
     }
-    stackedcolumn("testNo. of Farms",dataset[0]);
-    stackedcolumn("testNo. of Sets",dataset[1]);
-    stackedcolumn("testTotal Area",dataset[2]);
+
+    stackedcolumn("testNo. of Farms",dataset[0], value[0]);
+    stackedcolumn("testNo. of Sets",dataset[1], value[1]);
+    stackedcolumn("testTotal Area",dataset[2], value2);
 }
