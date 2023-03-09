@@ -86,7 +86,7 @@ Highcharts.setOptions({
     },
 });
 function clickshowmodalscatter(tx, ty, compx, compy, idx, idy){
-    var newnames = ["1","District","Grower ID","Grower Block ID", tx, ty];
+    var newnames = ["1","District","Grower ID","Outlet Set ID", tx, ty];
 
     console.log(tx, ty, compx, compy, idx, idy);
 
@@ -98,7 +98,7 @@ function clickshowmodalscatter(tx, ty, compx, compy, idx, idy){
             newvalues[index][0] = "1";
             newvalues[index][1] = subset[j][1];
             newvalues[index][2] = subset[j][2];
-            newvalues[index][3] = subset[j][4];
+            newvalues[index][3] = subset[j][5];
             newvalues[index][4] = subset[j][idx];
             newvalues[index][5] = subset[j][idy];
             index ++;
@@ -766,7 +766,7 @@ function createscatter(c,x,y,xname,yname, idx, idy,h){
     }
     
     Highcharts.chart(c, {
-        colors: ["#0dee11", "#f4f100"],
+        colors: ["#45b6fe"],
         chart: {
             type: 'scatter',
             height: h,
@@ -802,8 +802,8 @@ function createscatter(c,x,y,xname,yname, idx, idy,h){
             data: seriesdata,
             name: yname,
             marker: {
-                symbol: 'triangle',
-                radius: 8
+                symbol: 'diamond',
+                radius: 6
             }
         }],
     });
