@@ -43,7 +43,6 @@ if ($_SESSION['username'] == "FARMACIST"){
     $keyword = 'FBIP_%';
 }
 $sql = "SELECT district, COUNT(district), sum(area), SUM(setscount) FROM (SELECT district, grower_id, COUNT(grower_id) as setscount, sum(area) as area FROM irrigset WHERE grower_id like '$keyword' GROUP BY grower_id HAVING COUNT(grower_id) > 0) as foo GROUP BY district HAVING COUNT(district) > 0";
-echo "<script>console.log('{$sql}')</script>";
 $result = mysqli_query($db, $sql);
 $i = 0;
 foreach ($result as $row) {
