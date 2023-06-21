@@ -174,7 +174,7 @@ function addchart(header, type, short, index, interval,legend,height){
                 index ++;
             }
         }
-
+        console.log(newdata);
         createtime(header + "body0",newdata,short,height,index);
         
     }

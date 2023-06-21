@@ -212,7 +212,7 @@ function createpie(c,d,t,s,id){
               id: i.toString()};  
     }      
     
-    new Highcharts.chart(c, {
+    Highcharts.chart(c, {
         colors: ['#25a2ac','#71BF45', '#FAA74B', '#B37CD2','#F8362E','#FFF200','#C4C4C4','#000000'],
         chart: {
             type: 'pie',

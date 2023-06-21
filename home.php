@@ -31,12 +31,12 @@
                             <div class="card">
                                 <img class="card-img-top" src="img/baseline.png" alt="Unsplash">
                                 <div class="card-header">
-                                    <h2 class="mb-0">Dashboard</h2>
+                                    <h2 class="mb-0">Baseline</h2>
                                 </div>
                                 <div class="card-body">
                                     <p class="card-text h4">View the aggregated information collated on all BIP farms, such as soil, crop, area, row spacing.</p>
                                 </div>
-                                <a href="index.php" class="btn btn-primary btn-lg">View dashboard</a>
+                                <a href="index.php" class="btn btn-primary btn-lg">View baseline</a>
                             </div>
                         </div>
                         

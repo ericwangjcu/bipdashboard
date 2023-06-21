@@ -12,7 +12,7 @@
             <?php include('comp/nav.php')?>
             <main class="content" >      
                 <div class="col-auto d-none d-sm-block ">
-                    <h3><strong>Baseline</strong> Dashboard</h3>
+                    <h3><strong>Baseline</strong></h3>
                 </div>    
                 <div class="row"> 
                     <div id="head"></div>
