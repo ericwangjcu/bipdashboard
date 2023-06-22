@@ -24,7 +24,7 @@
 				<a class="nav-link text-white" href="benchmark.php">Benchmark</a>
 			</li>	
 			<li class="nav-item">
-				<a class="nav-link text-white" href="wilma.php">High Input Sites</a>
+				<a class="nav-link text-white" href="wilma.php">High-input Sites</a>
 			</li>	
 			<li class="nav-item">
 				<a class="nav-link text-white" href="farmmanagement.php">Data</a>

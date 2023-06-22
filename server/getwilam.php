@@ -34,8 +34,9 @@ if (mysqli_num_rows($result) > 0) {
 
 //echo "<script>console.log('{$wilmavalues}')</script>";
 
+//$sql = "SELECT ANY_VALUE(ID) AS ID, ANY_VALUE(Date) AS Date, ANY_VALUE(Valve) AS Valve, ANY_VALUE(Event) AS Event, ANY_VALUE(Runtime) AS Runtime, ANY_VALUE(Flow) AS Flow, ANY_VALUE(Depth) AS Depth FROM wilma GROUP BY Valve";
 
-$sql = "SELECT ANY_VALUE(ID) AS ID, ANY_VALUE(Date) AS Date, ANY_VALUE(Valve) AS Valve, ANY_VALUE(Event) AS Event, ANY_VALUE(Runtime) AS Runtime, ANY_VALUE(Flow) AS Flow, ANY_VALUE(Depth) AS Depth FROM wilma GROUP BY Valve";
+$sql = "SELECT * FROM wilma GROUP BY Valve";
 $result = mysqli_query($db, $sql);
 $i = 0;
 foreach ($result as $row) {
@@ -57,7 +58,7 @@ foreach ($result as $row) {
 //echo "<script>console.log('{$valvenames}')</script>";
 
 
-$sql = "SELECT ANY_VALUE(data) AS data, SUM(rainfall) FROM rainfall GROUP BY data";
+$sql = "SELECT data, SUM(rainfall) FROM rainfall GROUP BY data";
 $result = mysqli_query($db, $sql);
 
 if (mysqli_num_rows($result) > 0) {
@@ -86,24 +87,24 @@ foreach ($result as $row) {
 }
 //echo "<script>console.log('{$sensornames}')</script>";
 
-//$sql = "SELECT * FROM sensor";
-//$result = mysqli_query($db, $sql);
-//if (mysqli_num_rows($result) > 0) {
-//    $j = 0;
-//    while($row = mysqli_fetch_assoc($result)) 
-//    {
-//        $i = 0;
-//        foreach ($row as $value) 
-//        {                                 
-//            $sensor[$j][$i] = $value; 
-//            $i++;
-//        }
-//        $j++;                
-//    }
-//} else {
-//    echo "0 results";
-//}  
-//echo "<script>console.log('{$sensor}')</script>";
+$sql = "SELECT * FROM sensor";
+$result = mysqli_query($db, $sql);
+if (mysqli_num_rows($result) > 0) {
+   $j = 0;
+   while($row = mysqli_fetch_assoc($result)) 
+   {
+       $i = 0;
+       foreach ($row as $value) 
+       {                                 
+           $sensor[$j][$i] = $value; 
+           $i++;
+       }
+       $j++;                
+   }
+} else {
+   echo "0 results";
+}  
+// echo "<script>console.log('{$sensor}')</script>";
 
 mysqli_close($db);
 ?>
