@@ -292,7 +292,7 @@
                     </script> -->
 
                     <script>                        
-                        setarray = ["Water Level Indicator Ultrasonic","Water Level History Ultrasonic"];
+                        setarray = ["Current Water Level","Water Level History"];
                         gridsizes = [2,10];
                         number = [1,1];
                         var sensordata = JSON.parse($.ajax({
@@ -311,13 +311,13 @@
 
 
                         var devicename = "6475407f796607dff7d3f5b8";
-                        addinfocard("Deivce Name Ultrasonic",3, 'Device Name', sensordata.devices[devicename].name); 
+                        addinfocard("Deivce Name Ultrasonic",3, 'Device Name', "JCU Water Level Sensor"); 
 
-                        addinfocard("Deivce EUI Ultrasonic",3, 'Device EUI', devicename); 
+                        addinfocard("Deivce EUI Ultrasonic",3, 'Device ID', devicename); 
                         var norecords = sensordata.devices[devicename].points.length;    
                         console.log(norecords);     
                         var battery = sensordata.devices[devicename].points[norecords-1].data.bat;
-                        addinfocard("Deivce Battery Ultrasonic",3, 'Battery Status', battery);
+                        addinfocard("Deivce Battery Ultrasonic",3, 'Battery Status', battery + "V");
                         
                         
                         var lasttime = new Date(sensordata.devices[devicename].points[norecords-1].time).toLocaleString('en-AU', { timeZone: 'Australia/Brisbane' });
