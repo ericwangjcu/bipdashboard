@@ -6,7 +6,7 @@
 <?php include('comp/header.php')?>
 </head>
 <script> 
-function irrigchart1(c,irrig,rainfall,text){
+function irrigchart(c,irrig,rainfall,text){
 
     var index = 0;
     var d = [];
@@ -80,7 +80,7 @@ function irrigchart1(c,irrig,rainfall,text){
             type: 'column',
         },
         title: {
-            text: text,
+            text: "Irrigation Chart",
         },
         yAxis:{
             title: {
@@ -192,8 +192,8 @@ function addcard1(header,size){
     card.className = "card";
 
     const cardjeader = document.createElement("div");
-    cardjeader.className = "card-header h5";
-    cardjeader.innerText = header;
+    cardjeader.className = "card-header h2";
+    cardjeader.innerText = "Set: " + header;
     card.appendChild(cardjeader);
 
 
@@ -211,162 +211,6 @@ function addcard1(header,size){
 
     parentDiv.insertBefore(newDiv2, currentDiv);        
 }      
-// function irrigchart(c,irrig){
-//     var d = [];
-//     // var index = 0;
-//     // console.log(irrig);
-//     for (let i=0;i<irrig.length;i++){
-//         d[i] = [irrig[i][0],Number(irrig[i][1]),Number(irrig[i][2].substring(0,2)) + Number(irrig[i][2].substring(3,5)/60),irrig[i][3]]; 
-//     }
-
-//     var newirrig = [];
-//     newirrig = d.sort(function(a,b){
-//         return new Date(a[0]) - new Date(b[0]);
-//     });
-//     // console.log(newirrig);
-
-//     var dateAndTimeArray = [];
-//     var data = [];
-//     var duration = [];
-//     for (let i=0;i<newirrig.length;i++){
-//         var datestring = new Date(newirrig[i][0]).getDate() + "/" + (new Date(newirrig[i][0]).getMonth() + 1) +
-//                                                  "/" + new Date(newirrig[i][0]).getFullYear() + " " + new Date(newirrig[i][0]).getHours() + ":" + new Date(newirrig[i][0]).getMinutes();        
-//         dateAndTimeArray[i] = datestring;
-//         data[i] = newirrig[i][1];
-//         duration[i] = newirrig[i][2];
-//     }    
-
-//     Highcharts.chart(c, {
-//         chart: {
-//             type: 'column',
-//         },
-//         title: {
-//             text: '',
-//         },
-//         yAxis: [
-//             {
-//                 title: {
-//                     text: "Irrig Amount (mm)",
-//                 },
-//                 visible: true,
-//             },
-//             {
-//                 title: {
-//                     text: "Duration (h)",
-//                 },
-//                 visible: true,
-//                 opposite: true
-//             },
-//         ],
-//         xAxis: {
-//             title: {
-//                 text: 'Date'
-//             },
-//             type: 'datetime',
-//             visible: true,
-//             categories: dateAndTimeArray,
-//             tickInterval: 4,
-//             labels: {
-//                 formatter: function() {
-//                     return this.value.toString();
-//                 },
-//             },
-//         },
-//         plotOptions: {
-//             series: {               
-//                 animation: false,
-//                 dataLabels: {
-//                     enabled: false,
-//                     style:{
-//                         fontSize: '18px',
-//                         fontWeight: 'thin',
-//                     },
-                    
-//                 },
-//             },
-//         },
-//         legend:{
-//             enabled: true
-//         },
-//         series: [{
-//             name: "Irrigation Amount (mm)",
-//             data: data,
-//         },{
-//             name: "Duration (hour)",
-//             data: duration,
-//             yAxis: 1,
-//         }],
-
-
-//         });
-
-// }
-function rainfallchart(c,rainfall){
-    var dateAndTimeArray = [];
-    var data = [];
-    for (let i=0;i<rainfall.length;i++){
-        dd = new Date(Date.UTC(rainfall[i][0].split("/")[2],rainfall[i][0].split("/")[0],rainfall[i][0].split("/")[1]));
-        
-        var utc= dd.toUTCString();
-        var datestring = new Date(utc).getDate() + "/" + (new Date(utc).getMonth() + 1) +
-                                                 "/" + new Date(utc).getFullYear();
-        dateAndTimeArray[i] = datestring;
-        data[i] = rainfall[i][1];
-    }    
-    Highcharts.chart(c, {
-        chart: {
-            type: 'column',
-        },
-        title: {
-            text: '',
-        },
-        yAxis: [
-            {
-                title: {
-                    text: "Rainfall (mm)",
-                },
-                visible: true,
-            }
-        ],
-        xAxis: {
-            title: {
-                text: 'Date'
-            },
-            type: 'date',
-            visible: true,
-            categories: dateAndTimeArray,
-            tickInterval: 4,
-            labels: {
-                formatter: function() {
-                    return this.value.toString();
-                },
-            },
-        },
-        plotOptions: {
-            series: {               
-                animation: false,
-                dataLabels: {
-                    enabled: false,
-                    style:{
-                        fontSize: '18px',
-                        fontWeight: 'thin',
-                    },
-                    
-                },
-            },
-        },
-        legend:{
-            enabled: true
-        },
-        series: [{
-            name: "Rainfall (mm)",
-            data: data,
-        }],
-
-
-        });
-
-}
 function sensorchart(c,sensor){
     var dateAndTimeArray = [];
     var data = [];
@@ -545,10 +389,10 @@ function sensorchart(c,sensor){
                         for (let i=0;i<valvenames.length;i++){
                             addcard1(valvenames[i],10);  
                             // var text = "Number of Irrigation: " + noirrigation[i] + ", Total irrigation depth: " + totalirrigation[i] + " mm, Total rainfall: " + totalrainfall + " mm, Total hours of irrigation: " + totalhours[i] + " h"
-                            irrigchart1(valvenames[i],irrigdepth[i],rainfalldata,"");  
+                            irrigchart(valvenames[i],irrigdepth[i],rainfalldata,"");  
                             // addcard("cc",2,1);
                             addgroup1("ccbody0",2,cards,[noirrigation[i],totalirrigation[i].toFixed(0),totalrainfall,totalhours[i]],units);
-                            // irrigchart1(valvenames[i]+"body1",irrigdepth[i],rainfalldata);            
+                            // irrigchart(valvenames[i]+"body1",irrigdepth[i],rainfalldata);            
                         }  
                         // addcard("rainfall",12,1);  
                         // rainfallchart("rainfallbody0",rainfalldata); 
