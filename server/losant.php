@@ -20,7 +20,7 @@ function get_data() {
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
-      CURLOPT_URL => 'https://api.losant.com/applications/63fab73b1371ae2e6dc8f3c5/data/time-series-query',
+      CURLOPT_URL => 'https://api.losant.com/applications/64753b182dc62b6ef4c6095b/data/time-series-query',
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_ENCODING => '',
       CURLOPT_MAXREDIRS => 10,
@@ -28,11 +28,11 @@ function get_data() {
       CURLOPT_FOLLOWLOCATION => true,
       CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
       CURLOPT_CUSTOMREQUEST => 'POST',
-      CURLOPT_POSTFIELDS =>'{"end":0,"duration":150000000,"resolution":300000,"aggregation":"LAST","attributes":["level","battery"],"deviceIds":["641b98bb10a7dabe2bb1a4ab"]}',
+      CURLOPT_POSTFIELDS =>'{"end":0,"duration":1500000000,"resolution":300000,"aggregation":"LAST","attributes":["bat","distance","RSSI"],"deviceIds":["6475407f796607dff7d3f5b8"]}',
       CURLOPT_HTTPHEADER => array(
         'Content-Type: application/json',
         'Accept: application/json',
-        'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDA1NTQxYmRjNTIxMzY3OWM2MTdlZGUiLCJzdWJ0eXBlIjoiZGV2aWNlIiwiYXBwIjoiNjNmYWI3M2IxMzcxYWUyZTZkYzhmM2M1IiwiZGV2aWNlQ2xhc3MiOiJzdGFuZGFsb25lIiwib3duZXJUeXBlIjoidXNlciIsInNjb3BlIjpbImFsbC5EZXZpY2UiXSwia2V5IjoiNjQwMDJjOTQ4YjA3YjcyOGEyOTRiZDZhIiwiaWF0IjoxNjc4NzQ2NzYxLCJpc3MiOiJhcGkuZ2V0c3RydWN0dXJlLmlvIn0.dkKQeTlIhEkOQo1moBMh3mHNZIcGs2RyilELuA6ct8U'
+        'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDljZDI0YjUzOGExN2VhYzBiYjkyN2MiLCJzdWJ0eXBlIjoiYXBpVG9rZW4iLCJzY29wZSI6WyJhbGwuVXNlciJdLCJpYXQiOjE2ODc5OTkwNTEsImlzcyI6ImFwaS5nZXRzdHJ1Y3R1cmUuaW8ifQ.Cn8iw0EkhR1kmbJ1excomRBxyw02WTKBl2wk1tlpImI'
       ),
     ));
     

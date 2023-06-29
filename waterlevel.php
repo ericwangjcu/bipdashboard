@@ -211,7 +211,7 @@
                         var subset = findsubset(username,setvalues);
                     </script>
 
-                    <script>                        
+                    <!-- <script>                        
                         setarray = ["Water Level Indicator","Water Level History"];
                         gridsizes = [2,10];
                         number = [1,1];
@@ -289,7 +289,7 @@
                         sinewave(setarray[0] +  "body0",sensordata.data.list[1][0][0][0]*10, tt);
                         // indicator(setarray[0] +  "body0",sensordata.data.list[1][0][0][0]*10);                                               
                         createtimeseries(setarray[1] +  "body0",data,'');
-                    </script>
+                    </script> -->
 
                     <script>                        
                         setarray = ["Water Level Indicator Ultrasonic","Water Level History Ultrasonic"];
@@ -307,33 +307,34 @@
 										return response;
 									}
                         }).responseText);	
-                        console.log(sensordata);
+                        // console.log(sensordata);
 
 
-                        // var devicename = "641b98bb10a7dabe2bb1a4ab";
-                        // addinfocard("Deivce Name Ultrasonic",3, 'Device Name', sensordata.devices[devicename].name); 
+                        var devicename = "6475407f796607dff7d3f5b8";
+                        addinfocard("Deivce Name Ultrasonic",3, 'Device Name', sensordata.devices[devicename].name); 
 
-                        // addinfocard("Deivce EUI Ultrasonic",3, 'Device EUI', devicename); 
-                        // var norecords = sensordata.devices[devicename].points.length;         
-                        // var battery = sensordata.devices[devicename].points[norecords-1].data.battery;
-                        // addinfocard("Deivce Battery Ultrasonic",3, 'Battery Status', battery);
+                        addinfocard("Deivce EUI Ultrasonic",3, 'Device EUI', devicename); 
+                        var norecords = sensordata.devices[devicename].points.length;    
+                        console.log(norecords);     
+                        var battery = sensordata.devices[devicename].points[norecords-1].data.bat;
+                        addinfocard("Deivce Battery Ultrasonic",3, 'Battery Status', battery);
                         
                         
-                        // var lasttime = new Date(sensordata.devices[devicename].points[norecords-1].time).toLocaleString('en-AU', { timeZone: 'Australia/Brisbane' });
-                        // addinfocard("Deivce Last Message Ultrasonic",3, 'Last Message', lasttime);
+                        var lasttime = new Date(sensordata.devices[devicename].points[norecords-1].time).toLocaleString('en-AU', { timeZone: 'Australia/Brisbane' });
+                        addinfocard("Deivce Last Message Ultrasonic",3, 'Last Message', lasttime);
 
 
-                        // var data = [];
-                        // var timestamp = [];
-                        // for (let i=0;i<norecords;i++){
-                        //     timestamp[i] = new Date(sensordata.devices[devicename].points[i].time).getTime();
-                        //     data[i] = [timestamp[i],470 - sensordata.devices[devicename].points[i].data.level];
+                        var data = [];
+                        var timestamp = [];
+                        for (let i=0;i<norecords;i++){
+                            timestamp[i] = new Date(sensordata.devices[devicename].points[i].time).getTime();
+                            data[i] = [timestamp[i],470 - sensordata.devices[devicename].points[i].data.distance];
                             
-                        // }    
-                        // addnewcard(setarray[0],gridsizes[0],number[0]);  
-                        // addnewcard(setarray[1],gridsizes[1],number[1]);  
-                        // sinewave(setarray[0] +  "body0",470 - sensordata.devices[devicename].points[norecords-1].data.level, lasttime);
-                        // createtimeseries(setarray[1] +  "body0",data,'');
+                        }    
+                        addnewcard(setarray[0],gridsizes[0],number[0]);  
+                        addnewcard(setarray[1],gridsizes[1],number[1]);  
+                        sinewave(setarray[0] +  "body0",470 - sensordata.devices[devicename].points[norecords-1].data.distance, lasttime);
+                        createtimeseries(setarray[1] +  "body0",data,'');
                     </script>
                 </div>                 
 

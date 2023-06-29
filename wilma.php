@@ -6,7 +6,7 @@
 <?php include('comp/header.php')?>
 </head>
 <script> 
-function irrigchart1(c,irrig,rainfall){
+function irrigchart1(c,irrig,rainfall,text){
 
     var index = 0;
     var d = [];
@@ -80,7 +80,7 @@ function irrigchart1(c,irrig,rainfall){
             type: 'column',
         },
         title: {
-            text: '',
+            text: text,
         },
         yAxis:{
             title: {
@@ -130,6 +130,87 @@ function irrigchart1(c,irrig,rainfall){
         });
 
 }
+function addgroup1(header,size,cards,value,text){
+    const newDiv1 = document.createElement("div");
+    newDiv1.className = "col-12 col-md-12" + " col-xl-" + size;
+    newDiv1.id = header;
+
+    const newDiv0 = document.createElement("div");
+    newDiv0.className = "row";
+
+    for (let i=0;i<cards.length;i++){
+        const newDiv2 = document.createElement("div");
+        newDiv2.className = "col-12 col-md-12" + " col-xl-12";
+
+        const card1 = document.createElement("div");
+        card1.className = "card";      
+
+        const cardbody = document.createElement("div");
+        cardbody.className = "card-body";
+
+        const row = document.createElement("div");
+        row.className = "row";  
+
+        const col = document.createElement("div");
+        col.className = "col-12 mt-4"; 
+
+        let col7 = document.createElement('span');
+        col7.className = 'h3 mt-4 mb-4';
+        col7.innerText = cards[i];
+        let col8 = document.createElement('span');
+        col8.className = 'h3 text-primary mt-4 mb-4';
+        col8.innerText = value[i];
+        let col9 = document.createElement('span');
+        col9.className = 'h3 text-muted mt-4 mb-4';
+        col9.innerText = "            " + text[i];
+
+
+        col.appendChild(col7)
+        col.appendChild(col8);
+        col.appendChild(col9);
+        row.appendChild(col);
+
+        cardbody.appendChild(row);
+
+        card1.appendChild(cardbody);
+        newDiv2.appendChild(card1);
+        newDiv0.appendChild(newDiv2);
+    }
+    newDiv1.appendChild(newDiv0);
+
+    const currentDiv = document.getElementById("head");
+    let parentDiv = currentDiv.parentNode
+
+    parentDiv.insertBefore(newDiv1, currentDiv);        
+}  
+function addcard1(header,size){
+
+    const newDiv2 = document.createElement("div");
+    newDiv2.className = "col-12 col-sm-12" + " col-md" + size + " col-xl-" + size; 
+
+    const card = document.createElement("div");
+    card.className = "card";
+
+    const cardjeader = document.createElement("div");
+    cardjeader.className = "card-header h5";
+    cardjeader.innerText = header;
+    card.appendChild(cardjeader);
+
+
+    const cardbody = document.createElement("div");
+    cardbody.className = "card-body";
+    cardbody.id = header;            
+
+    
+    card.appendChild(cardbody);
+    newDiv2.appendChild(card);
+       
+
+    const currentDiv = document.getElementById("head");
+    let parentDiv = currentDiv.parentNode
+
+    parentDiv.insertBefore(newDiv2, currentDiv);        
+}      
 // function irrigchart(c,irrig){
 //     var d = [];
 //     // var index = 0;
@@ -382,8 +463,14 @@ function sensorchart(c,sensor){
                         var sensornames = <?php echo json_encode($sensornames,JSON_INVALID_UTF8_IGNORE); ?>;
                         // console.log(valvevalues);
                         var irrigation = [];
+                        var noirrigation = [];
+                        var totalirrigation = [];
+                        var totalhours = [];
+                        var totalrainfall = 0;
                         for (let i=0;i<valvevalues.length;i++){
                             irrigation[i] = [];
+                            totalirrigation[i] = 0;
+                            totalhours[i] = 0;
                             var index = 0;
                             for (let j=0;j<Object.keys(valvevalues[i]).length;j++){
                                 irrigation[i][index] = [];           
@@ -396,11 +483,15 @@ function sensorchart(c,sensor){
                                     irrigation[i][index][1] = Object.values(valvevalues[i])[j][5];
                                     irrigation[i][index][2] = Object.values(valvevalues[i])[j][3];
                                     irrigation[i][index][3] = ttdate.toUTCString();
+                                    totalirrigation[i] += Number(irrigation[i][index][1]);
+                                    // totalirrigation[i] = totalirrigation[i];
+                                    totalhours[i] += Number(irrigation[i][index][2].substring(0,2));
                                     index ++;
                                 }                    
                             }
+                            noirrigation[i] = Object.keys(valvevalues[i]).length;
                         }         
-                        // console.log(irrigation);
+                        console.log(totalhours);
 
                         function sumSecondValuesByFirstValue(arr) {
                             var result = {};
@@ -438,20 +529,26 @@ function sensorchart(c,sensor){
                         }      
 
                         // console.log(irrigduration);
-                        console.log(irrigdepth);
+                        // console.log(irrigdepth);
                         var rainfalldata = [];
                         for (let i=0;i<rainfall.length;i++){
                             rainfalldata[i] = [];
                             var dd = new Date(Date.UTC(rainfall[i][0].split("/")[2],rainfall[i][0].split("/")[0],rainfall[i][0].split("/")[1]));
                             rainfalldata[i][0] = dd;
                             rainfalldata[i][1] = Number(rainfall[i][1]);
+                            totalrainfall += rainfalldata[i][1];
                         } 
                         
                         // console.log(rainfalldata);
-
+                        var cards = ["Number of Irrigation: ","Total irrigation depth: ","Total rainfall: ","Total hours of irrigation: "];
+                        var units = ["","mm","mm","h"];
                         for (let i=0;i<valvenames.length;i++){
-                            addcard(valvenames[i],12,1);  
-                            irrigchart1(valvenames[i]+"body0",irrigdepth[i],rainfalldata);                
+                            addcard1(valvenames[i],10);  
+                            // var text = "Number of Irrigation: " + noirrigation[i] + ", Total irrigation depth: " + totalirrigation[i] + " mm, Total rainfall: " + totalrainfall + " mm, Total hours of irrigation: " + totalhours[i] + " h"
+                            irrigchart1(valvenames[i],irrigdepth[i],rainfalldata,"");  
+                            // addcard("cc",2,1);
+                            addgroup1("ccbody0",2,cards,[noirrigation[i],totalirrigation[i].toFixed(0),totalrainfall,totalhours[i]],units);
+                            // irrigchart1(valvenames[i]+"body1",irrigdepth[i],rainfalldata);            
                         }  
                         // addcard("rainfall",12,1);  
                         // rainfallchart("rainfallbody0",rainfalldata); 
