@@ -66,6 +66,46 @@
 
                         <div class="col-12 col-md-12 col-lg-3 d-flex align-items-stretch">
                             <div class="card">
+                                <img class="card-img-top" src="img/highinput.png" alt="Unsplash">
+                                <div class="card-header">
+                                    <h2 class="mb-0">High-input Sites</h2>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text h4">View the irrigation record for high-input sites.</p>
+                                </div>
+                                <a href="farmmanagement.php" class="btn btn-primary btn-lg">View high-input sites</a>
+                            </div>
+                        </div>
+
+
+                        <div class="col-12 col-md-12 col-lg-3 d-flex align-items-stretch">
+                            <!-- <div class="card">
+                                <img class="card-img-top" src="img/data.png" alt="Unsplash">
+                                <div class="card-header">
+                                    <h2 class="mb-0">Baseline Data</h2>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text h4">View the raw baseline data  .</p>
+                                </div>
+                                <a href="farmmanagement.php" class="btn btn-primary btn-lg">View raw baseline data</a>
+                            </div> -->
+                        </div>
+                        <div class="col-12 col-md-12 col-lg-3 d-flex align-items-stretch">
+                            <div class="card">
+                                <img class="card-img-top" src="img/waterlevel.png" alt="Unsplash">
+                                <div class="card-header">
+                                    <h2 class="mb-0">Water Level</h2>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text h4">View the water level trial data.</p>
+                                </div>
+                                <a href="farmmanagement.php" class="btn btn-primary btn-lg">View water level</a>
+                            </div>
+                        </div>
+
+
+                        <div class="col-12 col-md-12 col-lg-3 d-flex align-items-stretch">
+                            <div class="card">
                                 <img class="card-img-top" src="img/data.png" alt="Unsplash">
                                 <div class="card-header">
                                     <h2 class="mb-0">Baseline Data</h2>
@@ -76,7 +116,7 @@
                                 <a href="farmmanagement.php" class="btn btn-primary btn-lg">View raw baseline data</a>
                             </div>
                         </div>
-
+                        
                         <hr />
                         <div class="text-center my-4">
                             <h1 class="card-text h1 text-danger">Frequently asked questions</h1>

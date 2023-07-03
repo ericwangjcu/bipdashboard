@@ -6,6 +6,34 @@
 <?php include('comp/header.php')?>
 </head>
 <script> 
+function sumSecondValuesByFirstValue(arr) {
+    var result = {};
+
+    // Iterate over the array
+    for (var i = 0; i < arr.length; i++) {
+        var currentArray = arr[i];
+        var firstValue = currentArray[3];
+        var secondValue = Number(currentArray[1]);
+
+        // Add the second value to the corresponding first value in the result object
+        if (result[firstValue] === undefined) {
+            result[firstValue] = secondValue;
+        } else {
+            result[firstValue] += secondValue;
+        }
+    }
+
+    return result;
+}
+function calculateCumulativeSum(numbers) {
+    var cumulativeSum = 0;
+
+    return numbers.reduce(function(acc, currentNumber) {
+        cumulativeSum += currentNumber;
+        acc.push(cumulativeSum);
+        return acc;
+    }, []);
+}    
 function irrigchart(c,irrig,rainfall,text){
 
     var index = 0;
@@ -36,7 +64,6 @@ function irrigchart(c,irrig,rainfall,text){
     var index = 0;
     var startdate = new Date(newirrig[0][0]);
     var enddate = new Date(newirrig[newirrig.length-1][0]);
-    // console.log(new Date(enddate));
 
     var newdateAndTimeArray = [];
     var newdateAndTimeArraystring = [];
@@ -50,44 +77,44 @@ function irrigchart(c,irrig,rainfall,text){
         var datestring = newdateAndTimeArray[i].getDate() + "/" + (newdateAndTimeArray[i].getMonth() + 1) +
                                                  "/" + newdateAndTimeArray[i].getFullYear(); 
         newdateAndTimeArraystring[i] = datestring
-        // console.log(newdateAndTimeArray[i]);
         if (newdateAndTimeArray[i].getTime() < new Date(enddate).getTime()){
 
-            // console.log(newdateAndTimeArray[i]);
             newdepth[i] = 0;
             newrainfall[i] = 0;
             for (let j=0;j<newirrig.length;j++){
-                // console.log(newdateAndTimeArray[i]);
-                // console.log(new Date(newirrig[j][0]));
                 if (newdateAndTimeArray[i].getTime() == new Date(newirrig[j][0]).getTime()){
                     newdepth[i] = newirrig[j][1];
-                    // console.log(newirrig[j][1]);
                 }
             } 
             for (let j=0;j<rainfall.length;j++){
-                // console.log(rainfall[j][0]);
-                // console.log(newdateAndTimeArray[i]);
                 if (newdateAndTimeArray[i].getTime() == new Date(rainfall[j][0]).getTime()){
                     newrainfall[i] = rainfall[j][1];
-                    // console.log(rainfall[j][1]);
                 }
             } 
         }
     }
+    var accnewdepth = calculateCumulativeSum(newdepth);
+    var accnewrainfall = calculateCumulativeSum(newrainfall);
     // console.log(newrainfall);
     Highcharts.chart(c, {
-        chart: {
-            type: 'column',
-        },
+        // chart: {
+        //     type: 'column',
+        // },
         title: {
-            text: "Irrigation Chart",
+            text: "",
         },
-        yAxis:{
+        yAxis:[{
             title: {
                 text: "mm",
             },
             visible: true,
-        },
+        },{
+            title: {
+                text: "Cumulative (mm)",
+            },
+            visible: true,
+            opposite: true            
+        }],
         xAxis: {
             title: {
                 text: 'Date'
@@ -103,7 +130,8 @@ function irrigchart(c,irrig,rainfall,text){
             },
         },
         plotOptions: {
-            series: {               
+            series: {        
+                cumulative: true,       
                 animation: false,
                 dataLabels: {
                     enabled: false,
@@ -119,16 +147,187 @@ function irrigchart(c,irrig,rainfall,text){
             enabled: true
         },
         series: [{
+            type: 'column',
             name: "Rainfall (mm)",
             data: newrainfall,
         },{
+            type: 'column',
             name: "Irrigation Amount (mm)",
             data: newdepth,
+        },{
+            type: 'spline',
+            name: "Cumulative Irrigation (mm)",
+            data: accnewdepth,
+            yAxis: 1,
+            marker: {
+                enabled: false
+            },
+        },{
+            type: 'spline',
+            name: "Cumulative Rainfall (mm)",
+            data: accnewrainfall,
+            yAxis: 1,
+            marker: {
+                enabled: false
+            },
         }],
 
 
         });
 
+}
+function durationchart(c,duration){
+    var dur = [];
+    for (let i=0;i<duration.length;i++){
+        dur[i] = [];
+        // var datestring = new Date(duration[i][0]).getDate() + "/" + (new Date(duration[i][0]).getMonth() + 1) +
+        //                                          "/" + new Date(duration[i][0]).getFullYear();
+        dur[i][0] = new Date(Date.UTC(new Date(duration[i][0]).getFullYear(),new Date(duration[i][0]).getMonth(),new Date(duration[i][0]).getDate()-1));
+        dur[i][1] = Number(duration[i][1].substring(0,2)) + Number(duration[i][1].substring(3,5))/60;
+    }      
+    console.log(duration,dur);
+
+    function sumss(arr) {
+        var result = {};
+
+        for (var i = 0; i < arr.length; i++) {
+            var currentArray = arr[i];
+            var firstValue = currentArray[0];
+            var secondValue = currentArray[1];
+            if (result[firstValue] === undefined) {
+                result[firstValue] = secondValue;
+            } else {
+                result[firstValue] += secondValue;
+            }
+        }
+        return result;
+    }
+
+    var irrigdur = sumss(dur);    
+
+
+    var index = 0;
+    var d = [];
+    for (let key in irrigdur) {
+        d[index] = [];
+        if (irrigdur.hasOwnProperty(key)) { // Check if the property belongs to the object itself
+            d[index][0] = key;
+            d[index][1] = irrigdur[key];
+        }
+        index ++;
+    }
+
+    var newirrig = [];
+    newirrig = d.sort(function(a,b){
+        return new Date(a[0]) - new Date(b[0]);
+    });
+
+    var dateAndTimeArray = [];
+    var depth = [];
+    for (let i=0;i<newirrig.length;i++){
+        var datestring = new Date(newirrig[i][0]).getDate() + "/" + (new Date(newirrig[i][0]).getMonth() + 1) +
+                                                 "/" + new Date(newirrig[i][0]).getFullYear();
+        dateAndTimeArray[i] = datestring;
+        depth[i] = newirrig[i][1];
+    }        
+
+    var index = 0;
+    var startdate = new Date(newirrig[0][0]);
+    console.log(startdate);
+    var enddate = new Date(newirrig[newirrig.length-1][0]);
+
+    var newdateAndTimeArray = [];
+    var newdateAndTimeArraystring = [];
+
+    var newdepth = [];
+    
+    for (let i=0;i<300;i++){
+        newdateAndTimeArray[i] = new Date(startdate);
+        newdateAndTimeArray[i].setDate(startdate.getDate() + i); 
+        var datestring = newdateAndTimeArray[i].getDate() + "/" + (newdateAndTimeArray[i].getMonth() + 1) +
+                                                 "/" + newdateAndTimeArray[i].getFullYear(); 
+        newdateAndTimeArraystring[i] = datestring
+        if (newdateAndTimeArray[i].getTime() < new Date(enddate).getTime()){
+
+            newdepth[i] = 0;
+            for (let j=0;j<newirrig.length;j++){
+                if (newdateAndTimeArray[i].getTime() == new Date(newirrig[j][0]).getTime()){
+                    newdepth[i] = newirrig[j][1];
+                }
+            } 
+        }
+    }
+
+
+    var accnewdepth = calculateCumulativeSum(newdepth);
+
+
+    Highcharts.chart(c, {
+        // chart: {
+        //     type: 'column',
+        // },
+        title: {
+            text: "",
+        },
+        yAxis:[{
+            title: {
+                text: "Hour",
+            },
+            visible: true,
+        },{
+            title: {
+                text: "Cumulative Hour",
+            },
+            visible: true,
+            opposite: true
+        }],
+        xAxis: {
+            title: {
+                text: 'Date'
+            },
+            type: 'datetime',
+            visible: true,
+            categories: newdateAndTimeArraystring,
+            tickInterval: 15,
+            labels: {
+                formatter: function() {
+                    return this.value.toString();
+                },
+            },
+        },
+        plotOptions: {
+            series: {    
+                animation: false,
+                dataLabels: {
+                    enabled: false,
+                    style:{
+                        fontSize: '18px',
+                        fontWeight: 'thin',
+                    },
+                    
+                },
+            },
+        },
+        legend:{
+            enabled: true
+        },
+        series: [{
+            type: 'column',
+            name: "Duration",
+            data: newdepth,
+        },
+        {
+            type: 'spline',
+            name: "Cumulative Duration",
+            data: accnewdepth,
+            yAxis: 1,
+            marker: {
+                enabled: false
+            },
+        }],
+
+
+        });    
 }
 function addgroup1(header,size,cards,value,text){
     const newDiv1 = document.createElement("div");
@@ -151,24 +350,22 @@ function addgroup1(header,size,cards,value,text){
         const row = document.createElement("div");
         row.className = "row";  
 
-        const col = document.createElement("div");
-        col.className = "col-12 mt-4"; 
+        // const col = document.createElement("div");
+        // col.className = "col-12 mt-4"; 
 
         let col7 = document.createElement('span');
-        col7.className = 'h3 mt-4 mb-4';
+        col7.className = 'h3 mt-1 mb-1';
         col7.innerText = cards[i];
         let col8 = document.createElement('span');
-        col8.className = 'h3 text-primary mt-4 mb-4';
-        col8.innerText = value[i];
-        let col9 = document.createElement('span');
-        col9.className = 'h3 text-muted mt-4 mb-4';
-        col9.innerText = "            " + text[i];
+        col8.className = 'h1 text-primary mt-1 mb-1';
+        col8.innerText = value[i] + "            " + text[i];
 
 
-        col.appendChild(col7)
-        col.appendChild(col8);
-        col.appendChild(col9);
-        row.appendChild(col);
+
+        row.appendChild(col7)
+        row.appendChild(col8);
+        // row.appendChild(col9);
+        // row.appendChild(col);
 
         cardbody.appendChild(row);
 
@@ -183,7 +380,7 @@ function addgroup1(header,size,cards,value,text){
 
     parentDiv.insertBefore(newDiv1, currentDiv);        
 }  
-function addcard1(header,size){
+function addcard1(header,size,id){
 
     const newDiv2 = document.createElement("div");
     newDiv2.className = "col-12 col-sm-12" + " col-md" + size + " col-xl-" + size; 
@@ -193,13 +390,13 @@ function addcard1(header,size){
 
     const cardjeader = document.createElement("div");
     cardjeader.className = "card-header h2";
-    cardjeader.innerText = "Set: " + header;
+    cardjeader.innerText = header;
     card.appendChild(cardjeader);
 
 
     const cardbody = document.createElement("div");
     cardbody.className = "card-body";
-    cardbody.id = header;            
+    cardbody.id = id;            
 
     
     card.appendChild(cardbody);
@@ -305,7 +502,7 @@ function sensorchart(c,sensor){
                         var rainfall = <?php echo json_encode($rainfall,JSON_INVALID_UTF8_IGNORE); ?>;
                         var sensor = <?php echo json_encode($sensor,JSON_INVALID_UTF8_IGNORE); ?>;
                         var sensornames = <?php echo json_encode($sensornames,JSON_INVALID_UTF8_IGNORE); ?>;
-                        // console.log(valvevalues);
+                        console.log(valvevalues);
                         var irrigation = [];
                         var noirrigation = [];
                         var totalirrigation = [];
@@ -335,27 +532,9 @@ function sensorchart(c,sensor){
                             }
                             noirrigation[i] = Object.keys(valvevalues[i]).length;
                         }         
-                        console.log(totalhours);
+                        // console.log(totalhours);
 
-                        function sumSecondValuesByFirstValue(arr) {
-                            var result = {};
 
-                            // Iterate over the array
-                            for (var i = 0; i < arr.length; i++) {
-                                var currentArray = arr[i];
-                                var firstValue = currentArray[3];
-                                var secondValue = Number(currentArray[1]);
-
-                                // Add the second value to the corresponding first value in the result object
-                                if (result[firstValue] === undefined) {
-                                    result[firstValue] = secondValue;
-                                } else {
-                                    result[firstValue] += secondValue;
-                                }
-                            }
-
-                            return result;
-                        }
 
                         var irrigdepth = [];
                         for (let i=0;i<irrigation.length;i++){
@@ -372,7 +551,7 @@ function sensorchart(c,sensor){
                             }
                         }      
 
-                        // console.log(irrigduration);
+                        console.log(irrigduration);
                         // console.log(irrigdepth);
                         var rainfalldata = [];
                         for (let i=0;i<rainfall.length;i++){
@@ -384,14 +563,18 @@ function sensorchart(c,sensor){
                         } 
                         
                         // console.log(rainfalldata);
-                        var cards = ["Number of Irrigation: ","Total irrigation depth: ","Total rainfall: ","Total hours of irrigation: "];
+                        var cards = ["Number of Irrigation","Total irrigation depth","Total rainfall","Total hours of irrigation"];
                         var units = ["","mm","mm","h"];
                         for (let i=0;i<valvenames.length;i++){
-                            addcard1(valvenames[i],10);  
+                            addtext(valvenames[i]);
+                            addcard1("Irrigation",10, valvenames[i]);  
                             // var text = "Number of Irrigation: " + noirrigation[i] + ", Total irrigation depth: " + totalirrigation[i] + " mm, Total rainfall: " + totalrainfall + " mm, Total hours of irrigation: " + totalhours[i] + " h"
                             irrigchart(valvenames[i],irrigdepth[i],rainfalldata,"");  
                             // addcard("cc",2,1);
                             addgroup1("ccbody0",2,cards,[noirrigation[i],totalirrigation[i].toFixed(0),totalrainfall,totalhours[i]],units);
+                            addcard1("Duration",10,valvenames[i]+ "Duration");  
+                            durationchart(valvenames[i]+ "Duration",irrigduration[i]);  
+
                             // irrigchart(valvenames[i]+"body1",irrigdepth[i],rainfalldata);            
                         }  
                         // addcard("rainfall",12,1);  
